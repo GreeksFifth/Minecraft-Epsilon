@@ -87,10 +87,8 @@ public class TitleScreen extends Screen
         this.buttons.add(this.multiplayerButton = new Button(2, this.width / 2 - 100, topPos + spacing, language.getElement("menu.multiplayer")));
         this.buttons.add(new Button(3, this.width / 2 - 100, topPos + spacing * 2, language.getElement("menu.mods")));
 
-
-            this.buttons.add(new Button(0, this.width / 2 - 100, topPos + spacing * 3 + 12, 98, 20, language.getElement("menu.options")));
-            this.buttons.add(new Button(4, this.width / 2 + 2, topPos + spacing * 3 + 12, 98, 20, language.getElement("menu.quit")));
-
+        this.buttons.add(new Button(0, this.width / 2 - 100, topPos + spacing * 3 + 12, 98, 20, language.getElement("menu.options")));
+        this.buttons.add(new Button(4, this.width / 2 + 2, topPos + spacing * 3 + 12, 98, 20, language.getElement("menu.quit")));
 
         if (this.minecraft.user == null) {
             this.multiplayerButton.active = false;
