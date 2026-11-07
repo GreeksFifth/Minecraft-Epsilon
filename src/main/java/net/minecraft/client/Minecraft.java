@@ -4,6 +4,7 @@
 
 package net.minecraft.client;
 
+import link.e4steam.E4steamClient;
 import net.minecraft.SharedConstants;
 import net.minecraft.client.Options.Option;
 import net.minecraft.client.gamemode.SurvivalMode;
@@ -47,6 +48,7 @@ import net.minecraft.client.renderer.Tesselator;
 import net.minecraft.client.gui.ScreenSizeCalculator;
 import net.minecraft.client.title.TitleScreen;
 import net.minecraft.client.multiplayer.ConnectScreen;
+import net.minecraft.client.multiplayer.DisconnectedScreen;
 import net.minecraft.client.renderer.ptexture.FireTexture;
 import net.minecraft.client.renderer.ptexture.LavaSideTexture;
 import net.minecraft.client.renderer.ptexture.WaterSideTexture;
@@ -222,6 +224,7 @@ public abstract class Minecraft implements Runnable
         // glClearColor(0.2f, 0.2f, 0.2f, 1);
 
         this.workingDirectory = getWorkingDirectory();
+        E4steamClient.startClient(this.workingDirectory.toPath());
         this.levelSource = new McRegionLevelStorageSource(new File(this.workingDirectory, "saves"));
         this.options = new Options(this, this.workingDirectory);
         this.skins = new TexturePackRepository(this, this.workingDirectory);
@@ -468,6 +471,11 @@ public abstract class Minecraft implements Runnable
 
             try {
                 MemoryTracker.release();
+            }
+            catch (final Throwable e) {}
+
+            try {
+                E4steamClient.shutdown();
             }
             catch (final Throwable e) {}
 
@@ -1063,6 +1071,23 @@ public abstract class Minecraft implements Runnable
         this.stats.tick();
         this.gui.tick();
         this.gameRenderer.pick(1.0f);
+
+        final String steamInvite = E4steamClient.pollInvite();
+        if (steamInvite != null) {
+            if (this.isClientSide()) {
+                this.level.disconnect();
+            }
+            this.setScreen(new ConnectScreen(this, steamInvite, 25565));
+        }
+        final String steamFailure = E4steamClient.pollFailure();
+        if (steamFailure != null) {
+            if (this.level == null) {
+                this.setScreen(new DisconnectedScreen("connect.failed", "disconnect.genericReason", steamFailure));
+            }
+            else {
+                this.gui.addMessage("Steam: " + steamFailure);
+            }
+        }
 
         if (this.player != null) {
             final ChunkSource cs = this.level.getChunkSource();

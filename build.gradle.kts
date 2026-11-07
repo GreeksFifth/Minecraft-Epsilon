@@ -56,6 +56,8 @@ dependencies {
     implementation("com.paulscode:codecwav:20101023")?.let { clientInclude(it) }
 //    implementation("com.paulscode:codecjorbis:20101023") // Is copied into project since b173 uses a very slightly modified version to faciliate CodecMus
     implementation("net.sourceforge.argo:argo:3.4")?.let { clientInclude(it) } // newer than what would've been in b173, but the older version on maven don't work properly, think b173 used 2.10 or 2.11 but thats not on maven
+    implementation("com.code-disaster.steamworks4j:steamworks4j:1.10.0")?.let { clientInclude(it); serverInclude(it) }
+    implementation("net.java.dev.jna:jna:5.17.0")?.let { clientInclude(it); serverInclude(it) }
 
     implementation(platform("org.lwjgl:lwjgl-bom:$lwjglVersion"))
 
@@ -89,7 +91,7 @@ tasks.register("runServer", JavaExec::class.java, {
     workingDir = mpDir
     mainClass.set("net.minecraft.server.MinecraftServer")
     classpath = sourceSets["main"].runtimeClasspath
-    jvmArgs = listOf("-Dhttp.proxyHost=betacraft.ee", "-Dhttp.proxyPort=11705", "-Djava.util.Arrays.useLegacyMergeSort=true") // Betacraft proxy for online fixes
+    jvmArgs = listOf("-Dhttp.proxyHost=betacraft.ee", "-Dhttp.proxyPort=11705", "-Djava.util.Arrays.useLegacyMergeSort=true", "--enable-native-access=ALL-UNNAMED") // Betacraft proxy for online fixes
 })
 
 tasks.register("buildServer", Jar::class) {
@@ -123,7 +125,7 @@ tasks.register("runClient", JavaExec::class.java, {
     dependsOn("copyNatives"/*, "downloadAssets"*/)
     mainClass.set("net.minecraft.client.Minecraft")
     classpath = sourceSets["main"].runtimeClasspath
-    jvmArgs = listOf("-Dhttp.proxyHost=betacraft.ee", "-Dhttp.proxyPort=11705", "-Djava.util.Arrays.useLegacyMergeSort=true") // Betacraft proxy for online fixes
+    jvmArgs = listOf("-Dhttp.proxyHost=betacraft.ee", "-Dhttp.proxyPort=11705", "-Djava.util.Arrays.useLegacyMergeSort=true", "--enable-native-access=ALL-UNNAMED") // Betacraft proxy for online fixes
 
     systemProperty("java.library.path", layout.buildDirectory.dir("natives").get().asFile.absolutePath)
 })
@@ -144,11 +146,11 @@ tasks.register("buildClient", Jar::class) {
         "net/minecraft/server/**",
         "org/lwjgl/**",
         "net/java/**",
-        "**/*.so",
-        "**/*.dll",
-        "**/*.jnilib",
-        "**/*.dylib",
         )
+    exclude {
+        val native = it.name.endsWith(".so") || it.name.endsWith(".dll") || it.name.endsWith(".jnilib") || it.name.endsWith(".dylib")
+        native && !it.path.startsWith("com/sun/jna/") && !it.name.contains("steam")
+    }
 
     archiveFileName = "client.jar"
     manifest {

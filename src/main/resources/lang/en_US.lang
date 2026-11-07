@@ -59,6 +59,17 @@ connect.connecting=Connecting to the server...
 connect.authorizing=Logging in...
 connect.failed=Failed to connect to the server
 
+text.e4steam_minecraft.joinLobbyTimeout=Steam did not answer the lobby invitation in time
+text.e4steam_minecraft.joinConnectTimeout=The invitation expired before Minecraft connected
+text.e4steam_minecraft.joinCurrentSession=Disconnect from the current Steam server before joining another
+text.e4steam_minecraft.joinRejected=Steam rejected the lobby invitation request
+text.e4steam_minecraft.joinLobbyEnterFailed=Could not enter the Steam lobby: %s
+text.e4steam_minecraft.joinOwnerNotFriend=The host is not one of your Steam friends
+text.e4steam_minecraft.joinIncompatible=The host is running a different version
+text.e4steam_minecraft.joinInvalidAddress=The invitation contains an invalid address
+text.e4steam_minecraft.joinLobbyClosed=The Steam lobby was closed or you no longer have access
+text.e4steam_minecraft.joinCancelPending=Steam is still cancelling the last attempt, try again in a moment
+
 disconnect.genericReason=%s
 disconnect.disconnected=Disconnected by Server
 disconnect.lost=Connection Lost

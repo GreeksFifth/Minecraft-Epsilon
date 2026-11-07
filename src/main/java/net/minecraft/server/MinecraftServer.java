@@ -4,6 +4,8 @@
 
 package net.minecraft.server;
 
+import link.e4steam.E4steamClient;
+import link.e4steam.steam.SteamAccessMode;
 import net.minecraft.SharedConstants;
 import net.minecraft.server.gui.MinecraftServerGui;
 import java.awt.GraphicsEnvironment;
@@ -160,6 +162,11 @@ public class MinecraftServer implements Runnable, ConsoleInputSource
         MinecraftServer.logger.info("Preparing level \"" + levelName + "\"");
         this.loadLevel(new McRegionLevelStorageSource(new File(".")), levelName, seed);
         MinecraftServer.logger.info("Done (" + (System.nanoTime() - levelNanoTime) + "ns)! For help, type \"help\" or \"?\"");
+
+        if (this.settings.getBoolean("steam-tunnel", false)) {
+            final SteamAccessMode accessMode = this.settings.getString("steam-access", "friends").equalsIgnoreCase("invite") ? SteamAccessMode.INVITE_ONLY : SteamAccessMode.FRIENDS_ONLY;
+            E4steamClient.startServer(new File(".").getAbsoluteFile().toPath(), port, accessMode);
+        }
         return true;
     }
     
@@ -246,6 +253,7 @@ public class MinecraftServer implements Runnable, ConsoleInputSource
     
     private void stopServer() {
         MinecraftServer.logger.info("Stopping server");
+        E4steamClient.shutdown();
         if (this.players != null) {
             this.players.saveAll();
         }
@@ -372,6 +380,7 @@ public class MinecraftServer implements Runnable, ConsoleInputSource
         for (int i = 0; i < this.tickables.size(); ++i) {
             this.tickables.get(i).tick();
         }
+        E4steamClient.tickServer(VERSION, SharedConstants.NETWORK_PROTOCOL_VERSION, this.players.players.size(), this.settings.getInt("max-players", 20));
         try {
             this.handleConsoleInputs();
         }

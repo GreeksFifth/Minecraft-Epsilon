@@ -55,7 +55,7 @@ public class EditBox extends GuiComponent
         if (ch == '\u0016') {
             String msg = Screen.getClipboard();
             if (msg == null) msg = "";
-            int toAdd = 32 - this.value.length();
+            int toAdd = Math.max(32, this.maxLength) - this.value.length();
             if (toAdd > msg.length()) toAdd = msg.length();
             if (toAdd > 0) {
                 this.value += msg.substring(0, toAdd);
