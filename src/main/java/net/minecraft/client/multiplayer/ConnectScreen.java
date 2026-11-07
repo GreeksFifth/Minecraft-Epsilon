@@ -4,6 +4,8 @@
 
 package net.minecraft.client.multiplayer;
 
+import link.e4steam.E4steamClient;
+import link.e4steam.steam.SteamConnectionProgress;
 import net.minecraft.client.title.TitleScreen;
 import net.minecraft.client.gui.Button;
 import net.minecraft.locale.language.Language;
@@ -12,19 +14,29 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Screen;
 
 import java.net.ConnectException;
+import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
 
 public class ConnectScreen extends Screen
 {
     private ClientConnection connection;
     private boolean aborted = false;
+    private final boolean steam;
     
     public ConnectScreen(final Minecraft minecraft, final String ip, final int port) {
         System.out.println("Connecting to " + ip + ", " + port);
         minecraft.setLevel(null);
+        this.steam = E4steamClient.isSteamAddress(ip);
         new Thread(() -> {
             try {
-                this.connection = new ClientConnection(minecraft, ip, port);
+                if (this.steam) {
+                    final InetSocketAddress local = E4steamClient.connect(Minecraft.getWorkingDirectory().toPath(), ip);
+                    if (this.aborted) return;
+                    this.connection = new ClientConnection(minecraft, local.getHostString(), local.getPort());
+                }
+                else {
+                    this.connection = new ClientConnection(minecraft, ip, port);
+                }
                 if (this.aborted) return;
                 this.connection.send(new PreLoginPacket(minecraft.user.name));
             }
@@ -68,6 +80,7 @@ public class ConnectScreen extends Screen
         if (button.id == 0) {
             this.aborted = true;
             if (this.connection != null) this.connection.close();
+            if (this.steam) E4steamClient.cancelConnect();
             this.minecraft.setScreen(new TitleScreen());
         }
     }
@@ -79,7 +92,7 @@ public class ConnectScreen extends Screen
 
         if (this.connection == null) {
             this.drawCenteredString(this.font, language.getElement("connect.connecting"), this.width / 2, this.height / 2 - 50, 0xffffff);
-            this.drawCenteredString(this.font, "", this.width / 2, this.height / 2 - 10, 0xffffff);
+            this.drawCenteredString(this.font, this.steam ? SteamConnectionProgress.message() : "", this.width / 2, this.height / 2 - 10, 0xffffff);
         }
         else {
             this.drawCenteredString(this.font, language.getElement("connect.authorizing"), this.width / 2, this.height / 2 - 50, 0xffffff);
