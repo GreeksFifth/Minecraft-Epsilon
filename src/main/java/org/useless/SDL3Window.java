@@ -1,5 +1,6 @@
 package org.useless;
 
+import net.minecraft.client.Minecraft;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -11,6 +12,10 @@ import org.lwjgl.system.Callback;
 import org.lwjgl.system.Configuration;
 import org.lwjgl.system.MemoryUtil;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
@@ -25,6 +30,7 @@ public class SDL3Window {
     private final Callback debugCallback;
     private EventHandler eventHandler;
     private SDL3InputImplementation inputImplementation;
+    private SDL_Surface iconSurface = null;
     public SDL3Window(CharSequence title, int width, int height, EventHandler eventHandler) throws SDLException {
         this.eventHandler = eventHandler;
         inputImplementation = new SDL3InputImplementation(this);
@@ -63,9 +69,18 @@ public class SDL3Window {
         GL.createCapabilities(null);
 
         debugCallback = GLUtil.setupDebugMessageCallback();
-
+        try {
+            setIcons(ImageIO.read(Minecraft.class.getResource("/system/icon_16.png")),
+                    ImageIO.read(Minecraft.class.getResource("/system/icon_32.png")),
+                    ImageIO.read(Minecraft.class.getResource("/system/icon_128.png")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         checkSdlError(SDL_GL_SetSwapInterval(1));
         checkSdlError(SDL_ShowWindow(SDL_Window_Handle));
+        /*
+        TODO: Figure out why the fuck the app icon isn't being set in the taskbar.
+         */
     }
 
     public SDL3InputImplementation getInputImplementation() {
@@ -115,6 +130,37 @@ public class SDL3Window {
         checkSdlError(SDLVideo.SDL_SetWindowTitle(SDL_Window_Handle, title));
     }
 
+    private static <T> T checkSdlError(T result) {
+        if (result == null) throw new SDLRuntimeException("SDL error encountered: " + SDL_GetError());
+        return result;
+    }
+
+    /**
+     * @param iconImages Icon images to use, should be ordered from smallest to largest resolution
+     */
+    public void setIcons(BufferedImage... iconImages) {
+        SDL_Surface surface = null;
+        for (int i = 0; i < iconImages.length; i++) {
+            var img = iconImages[i];
+            int w = img.getWidth();
+            int h = img.getHeight();
+
+            int[] pixels = new int[w * h];
+            img.getRGB(0, 0, w, h, pixels, 0, w);
+            var pixelBuffer = BufferUtils.createByteBuffer(pixels.length * 4);
+            for (int j = 0; j < pixels.length; j++) pixelBuffer.putInt(j * 4, pixels[j]);
+
+            if (surface == null) {
+                surface = checkSdlError(SDLSurface.SDL_CreateSurfaceFrom(w, h, SDLPixels.SDL_PIXELFORMAT_BGRA32, pixelBuffer, w * 4));
+            } else {
+                checkSdlError(SDLSurface.SDL_AddSurfaceAlternateImage(surface, SDLSurface.SDL_CreateSurfaceFrom(w, h, SDLPixels.SDL_PIXELFORMAT_BGRA32, pixelBuffer, w * 4)));
+            }
+        }
+        if (surface != null) checkSdlError(SDLVideo.SDL_SetWindowIcon(SDL_Window_Handle, surface));
+        if (iconSurface != null) SDLSurface.SDL_DestroySurface(iconSurface);
+        this.iconSurface = surface;
+    }
+
     public void setFullscreen(boolean fullscreen) {
         checkSdlError(SDL_SetWindowFullscreen(SDL_Window_Handle, fullscreen));
     }
@@ -145,6 +191,7 @@ public class SDL3Window {
 
         SDL_GL_DestroyContext(SDL_GLContext_Handle);
         SDL_DestroyWindow(SDL_Window_Handle);
+        if (iconSurface != null) SDLSurface.SDL_DestroySurface(iconSurface);
         SDL_Quit();
     }
 
