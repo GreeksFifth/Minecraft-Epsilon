@@ -353,7 +353,7 @@ public abstract class Minecraft implements Runnable
     }
     
     public static File getWorkingDirectory() {
-        if (Minecraft.workDir == null) Minecraft.workDir = getWorkingDirectory("minecraft");
+        if (Minecraft.workDir == null) Minecraft.workDir = getWorkingDirectory("minecraft-epsilon");
         return Minecraft.workDir;
     }
     

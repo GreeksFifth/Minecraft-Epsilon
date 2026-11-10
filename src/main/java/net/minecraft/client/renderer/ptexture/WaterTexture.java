@@ -55,8 +55,8 @@ public class WaterTexture extends DynamicTexture
             if (pow < 0.0f) pow = 0.0f;
 
             final float pp = pow * pow;
-            int r = (int)(32.0f + pp * 32.0f);
-            int g = (int)(50.0f + pp * 64.0f);
+            int r = (int)(78.0f + pp * 32.0f);
+            int g = (int)(159.0f + pp * 64.0f);
             int b = 255;
             final int a = (int)(146.0f + pp * 50.0f);
             if (this.anaglyph3d) {
