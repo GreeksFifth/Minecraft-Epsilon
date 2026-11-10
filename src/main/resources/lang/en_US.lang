@@ -124,6 +124,7 @@ key.chat=Chat
 key.fog=Toggle Fog
 key.sneak=Sneak
 key.playerlist=List players
+key.debug=Open Debug Menu
 
 texturePack.openFolder=Open texture pack folder
 texturePack.title=Select Texture Pack

@@ -28,7 +28,7 @@ import static org.lwjgl.opengl.GL12.*;
 public class Gui extends GuiComponent
 {
     private static final int MAX_MESSAGE_WIDTH = 320;
-    private static ItemRenderer itemRenderer = new ItemRenderer();
+    public static ItemRenderer itemRenderer = new ItemRenderer();
     private List<GuiMessage> guiMessages = new ArrayList<>();
     private Random random = new Random();
     private Minecraft minecraft;

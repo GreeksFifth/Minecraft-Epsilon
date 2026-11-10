@@ -128,7 +128,9 @@ public class TitleScreen extends Screen
         glScalef(sss, sss, sss);
         this.drawCenteredString(this.font, this.splash, 0, -8, 0xffff00);
         glPopMatrix();
-
+        if (Minecraft.DEBUG_MODE){
+            this.drawString(this.font,"Running in developer mode!",2,10,0x00F00F);
+        }
         this.drawString(this.font, Minecraft.VERSION_STRING, 2, 2, 0x505050);
         final String msg = "Copyright Mojang AB. Do not distribute.";
         this.drawString(this.font, msg, this.width - this.font.width(msg) - 2, this.height - 10, 0xffffff);

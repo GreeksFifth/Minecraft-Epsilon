@@ -1,0 +1,106 @@
+package net.minecraft.client.gui.inventory;
+
+import net.minecraft.client.Lighting;
+import net.minecraft.client.gui.Button;
+import net.minecraft.client.gui.achievement.AchievementScreen;
+import net.minecraft.client.gui.achievement.StatsScreen;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.stats.Achievements;
+import net.minecraft.world.entity.player.Player;
+
+import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.glDisable;
+import static org.lwjgl.opengl.GL11.glPopMatrix;
+import static org.lwjgl.opengl.GL11.glPushMatrix;
+import static org.lwjgl.opengl.GL11.glRotatef;
+import static org.lwjgl.opengl.GL11.glScalef;
+import static org.lwjgl.opengl.GL11.glTranslatef;
+import static org.lwjgl.opengl.GL12.GL_RESCALE_NORMAL;
+
+public class InventoryScreen_OLD extends AbstractContainerScreen
+{
+    private float xMouse;
+    private float yMouse;
+
+    public InventoryScreen_OLD(final Player player) {
+        super(player.inventoryMenu);
+
+        this.passEvents = true;
+        player.awardStat(Achievements.openInventory, 1);
+    }
+
+    @Override
+    public void init() {
+        this.buttons.clear();
+    }
+
+    @Override
+    protected void renderLabels() {
+        this.font.draw("Crafting", 84 + 2, 8 * 2, 0x404040);
+    }
+
+    @Override
+    public void render(final int xm, final int ym, final float a) {
+        super.render(xm, ym, a);
+        this.xMouse = (float)xm;
+        this.yMouse = (float)ym;
+    }
+
+    @Override
+    protected void renderBg(final float a) {
+        final int tex = this.minecraft.textures.loadTexture("/gui/inventory.png");
+        glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+        this.minecraft.textures.bind(tex);
+        final int xo = (this.width - this.imageWidth) / 2;
+        final int yo = (this.height - this.imageHeight) / 2;
+        this.blit(xo, yo, 0, 0, this.imageWidth, this.imageHeight);
+
+        glEnable(GL_RESCALE_NORMAL);
+        glEnable(GL_COLOR_MATERIAL);
+
+        glPushMatrix();
+        glTranslatef((float)(xo + 51), (float)(yo + 75), 50.0f);
+        final float ss = 30.0f;
+        glScalef(-ss, ss, ss);
+        glRotatef(180.0f, 0.0f, 0.0f, 1.0f);
+
+        final float oybr = this.minecraft.player.yBodyRot;
+        final float oyr = this.minecraft.player.yRot;
+        final float oxr = this.minecraft.player.xRot;
+
+        final float xd = xo + 51 - this.xMouse;
+        final float yd = yo + 75 - 50 - this.yMouse;
+
+        glRotatef(45 + 90, 0.0f, 1.0f, 0.0f);
+        Lighting.turnOn();
+        glRotatef(-45 - 90, 0.0f, 1.0f, 0.0f);
+
+        glRotatef(-(float)Math.atan(yd / 40.0f) * 20.0f, 1.0f, 0.0f, 0.0f);
+
+        this.minecraft.player.yBodyRot = (float)Math.atan(xd / 40.0f) * 20.0f;
+        this.minecraft.player.yRot = (float)Math.atan(xd / 40.0f) * 40.0f;
+        this.minecraft.player.xRot = -(float)Math.atan(yd / 40.0f) * 20.0f;
+        this.minecraft.player.emission = 1.0f;
+        glTranslatef(0.0f, this.minecraft.player.heightOffset, 0.0f);
+        EntityRenderDispatcher.instance.playerRotY = 180.0f;
+        EntityRenderDispatcher.instance.render(this.minecraft.player, 0.0, 0.0, 0.0, 0.0f, 1.0f);
+        this.minecraft.player.emission = 0.0f;
+        this.minecraft.player.yBodyRot = oybr;
+        this.minecraft.player.yRot = oyr;
+        this.minecraft.player.xRot = oxr;
+        glPopMatrix();
+        Lighting.turnOff();
+        glDisable(GL_RESCALE_NORMAL);
+    }
+
+    @Override
+    protected void buttonClicked(final Button button) {
+        if (button.id == 0) {
+            this.minecraft.setScreen(new AchievementScreen(this.minecraft.stats));
+        }
+        if (button.id == 1) {
+            this.minecraft.setScreen(new StatsScreen(this, this.minecraft.stats));
+        }
+    }
+
+}
