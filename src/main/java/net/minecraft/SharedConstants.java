@@ -4,12 +4,14 @@
 
 package net.minecraft;
 
+import net.minecraft.client.Minecraft;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class SharedConstants
 {
-    public static final String VERSION_STRING = "Beta 1.7.3";
+    public static final String VERSION_STRING = "Epsilon Indev";
     public static final int NETWORK_PROTOCOL_VERSION = 14;
     public static final int maxChatLength = 100;
     public static final String acceptableLetters = readAcceptableChars();
@@ -29,6 +31,7 @@ public class SharedConstants
             br.close();
         } catch (final Exception ignored) {}
         return result.toString();
+
     }
 
 }
