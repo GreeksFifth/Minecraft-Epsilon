@@ -69,7 +69,11 @@ public class InventoryScreen extends AbstractContainerScreen
         int pageOffset = (((this.height-20)/16)*8);
         boolean drawing = true;
         for (int i = (currentPage-1)*(pageOffset); i < allItemsInGame.size(); i++) {
-            if (drawing) Gui.itemRenderer.renderGuiItem(this.minecraft.font, this.minecraft.textures, allItemsInGame.get(i), (this.width - 128) + (drawingColumn * 16), 20 + (drawingRow * 16));
+            if (drawing){
+                Lighting.turnOff();
+                Gui.itemRenderer.renderGuiItem(this.minecraft.font, this.minecraft.textures, allItemsInGame.get(i), (this.width - 128) + (drawingColumn * 16), 20 + (drawingRow * 16));
+                Lighting.turnOn();
+            }
             drawingColumn++;
             if (drawingColumn == 8) {
                 drawingRow++;
@@ -154,6 +158,7 @@ public class InventoryScreen extends AbstractContainerScreen
             }
 
         }
+
 
 
     }
