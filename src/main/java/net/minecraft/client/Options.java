@@ -69,6 +69,7 @@ public class Options
     public float flySpeed = 1.0f;
     public float cameraSpeed = 1.0f;
     public int guiScale = 0;
+    public boolean enableEIV = true;
     
     public Options(final Minecraft minecraft, final File parent) {
         this.minecraft = minecraft;
@@ -117,6 +118,9 @@ public class Options
             this.anaglyph3d = !this.anaglyph3d;
             this.minecraft.textures.reloadAll();
         }
+        if (option == Option.ENABLE_EIV){
+            this.enableEIV = !this.enableEIV;
+        }
         if (option == Option.FRAMERATE_LIMIT) this.limitFramerate = (this.limitFramerate + dir + 3) % 3;
         if (option == Option.DIFFICULTY) this.difficulty = (this.difficulty + dir & 0x3);
         if (option == Option.GRAPHICS) {
@@ -145,6 +149,7 @@ public class Options
             case ANAGLYPH -> this.anaglyph3d;
             case ADVANCED_OPENGL -> this.advancedOpengl;
             case AMBIENT_OCCLUSION -> this.ambientOcclusion;
+            case ENABLE_EIV -> this.enableEIV;
             default -> false;
         };
     }
@@ -204,6 +209,7 @@ public class Options
                     if (split[0].equals("ao")) this.ambientOcclusion = split[1].equals("true");
                     if (split[0].equals("skin")) this.skin = split[1];
                     if (split[0].equals("lastServer") && split.length >= 2) this.lastMpIp = split[1];
+                    if (split[0].equals("enableEIV")) this.enableEIV = split[1].equals("true");
 
                     for (int i = 0; i < this.keyMappings.length; ++i) {
                         if (split[0].equals("key_" + this.keyMappings[i].name)) {
@@ -248,6 +254,7 @@ public class Options
             pw.println("ao:" + this.ambientOcclusion);
             pw.println("skin:" + this.skin);
             pw.println("lastServer:" + this.lastMpIp);
+            pw.println("enableEIV:"+this.enableEIV);
 
             for (int i = 0; i < this.keyMappings.length; ++i) {
                 pw.println("key_" + this.keyMappings[i].name + ":" + this.keyMappings[i].key);
@@ -275,7 +282,8 @@ public class Options
         DIFFICULTY("options.difficulty", false, false),
         GRAPHICS("options.graphics", false, false),
         AMBIENT_OCCLUSION("options.ao", false, true),
-        GUI_SCALE("options.guiScale", false, false);
+        GUI_SCALE("options.guiScale", false, false),
+        ENABLE_EIV("options.enableEIV",false,true);
 
         private final boolean isProgress;
         private final boolean isBoolean;

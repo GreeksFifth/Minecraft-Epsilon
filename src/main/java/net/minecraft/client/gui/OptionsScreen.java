@@ -15,7 +15,7 @@ public class OptionsScreen extends Screen
     private Screen lastScreen;
     protected String title = "Options";
     private Options options;
-    private static Option[] OPTIONS = new Option[] { Option.MUSIC, Option.SOUND, Option.INVERT_MOUSE, Option.SENSITIVITY, Option.DIFFICULTY };
+    private static Option[] OPTIONS = new Option[] { Option.MUSIC, Option.SOUND, Option.INVERT_MOUSE, Option.SENSITIVITY, Option.DIFFICULTY, Option.ENABLE_EIV};
     
     public OptionsScreen(final Screen lastScreen, final Options options) {
         this.lastScreen = lastScreen;

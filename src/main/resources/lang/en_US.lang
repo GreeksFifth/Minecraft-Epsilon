@@ -106,6 +106,7 @@ options.guiScale.small=Small
 options.guiScale.normal=Normal
 options.guiScale.large=Large
 options.advancedOpengl=Advanced OpenGL
+options.enableEIV=Epsilon Item Viewer
 
 performance.max=Max FPS
 performance.balanced=Balanced

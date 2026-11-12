@@ -4,10 +4,12 @@
 
 package net.minecraft.client.gui.inventory;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.achievement.StatsScreen;
 import net.minecraft.client.gui.achievement.AchievementScreen;
 import net.minecraft.client.gui.Button;
+import net.minecraft.client.renderer.Tesselator;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.Lighting;
 import net.minecraft.stats.Achievements;
@@ -15,6 +17,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemInstance;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
 
 import java.util.LinkedList;
 
@@ -27,6 +31,7 @@ public class InventoryScreen extends AbstractContainerScreen
     private float yMouse;
     int BUTTON_PREVIOUS_PAGE = 2;
     int BUTTON_NEXT_PAGE = 3;
+    int BUTTON_INVCLEAR = 4;
     int currentPage = 1;
     int pagesTotal = 1;
 
@@ -45,6 +50,9 @@ public class InventoryScreen extends AbstractContainerScreen
         pollAndPopulateGameItems();
         this.buttons.add(new Button(BUTTON_PREVIOUS_PAGE,(this.width-128),0,32,20,"Prev."));
         this.buttons.add(new Button(BUTTON_NEXT_PAGE,(this.width-32),0,32,20,"Next"));
+        if (Minecraft.DEBUG_MODE){
+            this.buttons.add(new Button(BUTTON_INVCLEAR,0,0,96,20,"Clear Inventory"));
+        }
         pagesTotal = ((int)(Math.round(allItemsInGame.size()/(((this.height-20.0)/16)*8))));
     }
     
@@ -55,11 +63,15 @@ public class InventoryScreen extends AbstractContainerScreen
     
     @Override
     public void render(final int xm, final int ym, final float a) {
+        glPushMatrix();
+        glTranslatef(0,0,1);
         this.drawCenteredString(this.font,"Page:"+currentPage+"/"+ pagesTotal,(this.width-64),6,0xFFFFFF);
+        glPopMatrix();
         super.render(xm, ym, a);
         this.xMouse = (float)xm;
         this.yMouse = (float)ym;
         renderFEI();
+
 
     }
 
@@ -148,6 +160,11 @@ public class InventoryScreen extends AbstractContainerScreen
         if (button.id == BUTTON_PREVIOUS_PAGE){
             if (currentPage <= pagesTotal && currentPage != 1) currentPage--;
         }
+        if (button.id == BUTTON_INVCLEAR){
+            for (int i = 0; i < Minecraft.instance.player.inventory.getContainerSize(); i++) {
+                Minecraft.instance.player.inventory.removeItem(i,256);
+            }
+        }
     }
 
     protected void pollAndPopulateGameItems(){
@@ -156,11 +173,16 @@ public class InventoryScreen extends AbstractContainerScreen
             if (Item.items[i] != null){
                 allItemsInGame.add(new ItemInstance(Item.items[i]));
             }
+            Minecraft.instance.isRaining = !minecraft.isRaining;
 
         }
 
-
-
     }
+
+    @Override
+    protected void mouseClicked(final int x, final int y, final int buttonNum) {
+        super.mouseClicked(x,y,buttonNum);
+            }
+
 
 }
