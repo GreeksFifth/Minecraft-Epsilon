@@ -34,7 +34,7 @@ public class DispenserTile extends EntityTile
     
     @Override
     public int getTickDelay() {
-        return 4;
+        return 0;
     }
     
     @Override
@@ -105,7 +105,7 @@ public class DispenserTile extends EntityTile
         else xd = -1;
 
         DispenserTileEntity trap = (DispenserTileEntity) level.getTileEntity(x, y, z);
-        final ItemInstance item = trap.removeRandomItem();
+        final ItemInstance item = trap.removeSequentialItem(); // Argent - Was formerly removeRandomItem()
 
         final double xp = x + xd * 0.6 + 0.5;
         final double yp = y + 0.5;
