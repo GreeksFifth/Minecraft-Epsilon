@@ -6,12 +6,11 @@ package net.minecraft.world.level.tile.entity;
 
 import net.minecraft.SharedConstants;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.item.crafting.FurnaceRecipes;
-import net.minecraft.world.level.tile.FurnaceTile;
-import com.mojang.nbt.Tag;
+import net.minecraft.world.level.tile.BlockLogicFurnace;
 import com.mojang.nbt.ListTag;
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.world.item.ItemInstance;
@@ -146,7 +145,7 @@ public class FurnaceTileEntity extends TileEntity implements Container
 
             if (wasLit != this.litTime > 0) {
                 changed = true;
-                FurnaceTile.setLit(this.litTime > 0, this.level, this.x, this.y, this.z);
+                BlockLogicFurnace.setLit(this.litTime > 0, this.level, this.x, this.y, this.z);
             }
         }
 
@@ -178,11 +177,11 @@ public class FurnaceTileEntity extends TileEntity implements Container
     private int getBurnDuration(final ItemInstance itemInstance) {
         if (itemInstance == null) return 0;
         final int id = itemInstance.getItem().id;
-        if (id < 256 && Tile.tiles[id].material == Material.wood) return BURN_INTERVAL * 3 / 2;
-        if (id == Item.stick.id) return BURN_INTERVAL / 2;
-        if (id == Item.coal.id) return BURN_INTERVAL * 8;
-        if (id == Item.bucket_lava.id) return BURN_INTERVAL * 100;
-        if (id == Tile.sapling.id) return BURN_INTERVAL / 2;
+        if (id < 256 && Block.BLOCKS[id].material == Material.wood) return BURN_INTERVAL * 3 / 2;
+        if (id == Items.stick.id) return BURN_INTERVAL / 2;
+        if (id == Items.coal.id) return BURN_INTERVAL * 8;
+        if (id == Items.bucket_lava.id) return BURN_INTERVAL * 100;
+        if (id == Block.sapling.id) return BURN_INTERVAL / 2;
         return 0;
     }
     

@@ -7,7 +7,7 @@ package net.minecraft.world.level.tile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Material;
 
-public class Sponge extends Tile
+public class Sponge extends Block
 {
     public static final int RANGE = 2;
     protected Sponge(final int id) {

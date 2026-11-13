@@ -11,7 +11,7 @@ import java.util.HashSet;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.pathfinder.Node;
 import net.minecraft.world.level.pathfinder.Path;
-import net.minecraft.world.level.tile.BedTile;
+import net.minecraft.world.level.tile.BlockLogicBed;
 import net.minecraft.world.level.pathfinder.PathFinder;
 import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.monster.Skeleton;
@@ -19,7 +19,6 @@ import net.minecraft.world.entity.monster.Spider;
 import net.minecraft.world.level.material.Material;
 
 import java.util.List;
-import java.util.Iterator;
 
 import net.minecraft.Pos;
 import net.minecraft.world.entity.Mob;
@@ -228,7 +227,7 @@ public final class MobSpawner {
                     if (Math.abs(last.x - player.x) < 1.5 && Math.abs(last.z - player.z) < 1.5 && Math.abs(last.y - player.y) < 1.5) {
                         // System.out.println("Found path!");
 
-                        Pos bedPos = BedTile.findStandUpPosition(level, Mth.floor(player.x), Mth.floor(player.y), Mth.floor(player.z), 1);
+                        Pos bedPos = BlockLogicBed.findStandUpPosition(level, Mth.floor(player.x), Mth.floor(player.y), Mth.floor(player.z), 1);
                         if (bedPos == null) {
                             // an unlikely case where the bed is
                             // completely blocked

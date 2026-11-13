@@ -4,7 +4,7 @@
 
 package net.minecraft.world.level.chunk;
 
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 
 public class BlockReplacements
 {
@@ -20,7 +20,7 @@ public class BlockReplacements
         try {
             for (int i = 0; i < 256; ++i) {
                 byte b = (byte)i;
-                if (b != 0 && Tile.tiles[b & 0xFF] == null) {
+                if (b != 0 && Block.BLOCKS[b & 0xFF] == null) {
                     b = 0;
                 }
                 BlockReplacements.replacements[i] = b;

@@ -7,7 +7,7 @@ package net.minecraft.world.level.tile;
 import java.util.Random;
 import net.minecraft.world.level.Level;
 
-public class Mushroom extends Bush
+public class Mushroom extends BlockLogicBush
 {
     protected Mushroom(final int id, final int tex) {
         super(id, tex);
@@ -34,7 +34,7 @@ public class Mushroom extends Bush
     
     @Override
     protected boolean mayPlaceOn(final int tile) {
-        return Tile.solid[tile];
+        return Block.solid[tile];
     }
     
     @Override

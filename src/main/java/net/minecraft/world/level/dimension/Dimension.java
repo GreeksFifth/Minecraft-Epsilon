@@ -8,7 +8,7 @@ import net.minecraft.world.level.chunk.storage.ChunkStorage;
 import net.minecraft.world.level.chunk.storage.OldChunkStorage;
 import net.minecraft.world.phys.Vec3;
 import util.Mth;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.level.levelgen.RandomLevelSource;
 import net.minecraft.world.level.chunk.ChunkSource;
 import net.minecraft.world.level.biome.BiomeSource;
@@ -56,7 +56,7 @@ public abstract class Dimension
     
     public boolean isValidSpawn(final int x, final int z) {
         int topTile = this.level.getTopTile(x, z);
-        return topTile == Tile.sand.id;
+        return topTile == Block.sand.id;
     }
     
     public float getTimeOfDay(final long time, final float a) {

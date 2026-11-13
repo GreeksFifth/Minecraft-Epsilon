@@ -11,7 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import java.util.List;
 import net.minecraft.world.phys.AABB;
 import com.mojang.nbt.CompoundTag;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import util.Mth;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.Vec3;
@@ -408,7 +408,7 @@ public abstract class Mob extends Entity
             this.hurt(null, dmg);
             final int t = this.level.getTile(Mth.floor(this.x), Mth.floor(this.y - 0.2f - this.heightOffset), Mth.floor(this.z));
             if (t > 0) {
-                final Tile.SoundType soundType = Tile.tiles[t].soundType;
+                final Block.SoundType soundType = Block.BLOCKS[t].soundType;
                 this.level.playSound(this, soundType.getStepSound(), soundType.getVolume() * 0.5f, soundType.getPitch() * 0.75f);
             }
         }
@@ -448,7 +448,7 @@ public abstract class Mob extends Entity
                 friction = 0.546f;
                 final int t = this.level.getTile(Mth.floor(this.x), Mth.floor(this.bb.y0) - 1, Mth.floor(this.z));
                 if (t > 0) {
-                    friction = Tile.tiles[t].friction * 0.91f;
+                    friction = Block.BLOCKS[t].friction * 0.91f;
                 }
             }
 
@@ -461,7 +461,7 @@ public abstract class Mob extends Entity
                 friction = 0.6f * 0.91f;
                 final int t = this.level.getTile(Mth.floor(this.x), Mth.floor(this.bb.y0) - 1, Mth.floor(this.z));
                 if (t > 0) {
-                    friction = Tile.tiles[t].friction * 0.91f;
+                    friction = Block.BLOCKS[t].friction * 0.91f;
                 }
             }
             if (this.onLadder()) {
@@ -501,7 +501,7 @@ public abstract class Mob extends Entity
         int yt = Mth.floor(this.bb.y0);
         int zt = Mth.floor(this.z);
 
-        return this.level.getTile(xt, yt, zt) == Tile.ladder.id;
+        return this.level.getTile(xt, yt, zt) == Block.ladder.id;
     }
 
     @Override

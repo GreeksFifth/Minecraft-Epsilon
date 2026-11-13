@@ -8,7 +8,7 @@ import net.minecraft.world.item.ItemInstance;
 import net.minecraft.network.packet.TileUpdatePacket;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelEvent;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.entity.player.Player;
 
 public class ServerPlayerGameMode
@@ -36,8 +36,8 @@ public class ServerPlayerGameMode
             if (t == 0) {
                 this.hasDelayedDestroy = false;
             } else {
-                Tile tile = Tile.tiles[t];
-                float destroyProgress = tile.getDestroyProgress(this.player) * (ticksSpentDestroying + 1);
+                Block block = Block.BLOCKS[t];
+                float destroyProgress = block.getDestroyProgress(this.player) * (ticksSpentDestroying + 1);
 
                 if (destroyProgress >= 1.0f) {
                     this.hasDelayedDestroy = false;
@@ -52,10 +52,10 @@ public class ServerPlayerGameMode
         this.destroyProgressStart = this.gameTicks;
         final int t = this.level.getTile(x, y, z);
         if (t > 0) {
-            Tile.tiles[t].attack(this.level, x, y, z, this.player);
+            Block.BLOCKS[t].attack(this.level, x, y, z, this.player);
         }
 
-        if (t > 0 && Tile.tiles[t].getDestroyProgress(this.player) >= 1.0f) {
+        if (t > 0 && Block.BLOCKS[t].getDestroyProgress(this.player) >= 1.0f) {
             this.destroyBlock(x, y, z);
         }
         else {
@@ -71,8 +71,8 @@ public class ServerPlayerGameMode
 
             final int t = this.level.getTile(x, y, z);
             if (t != 0) {
-                Tile tile = Tile.tiles[t];
-                float destroyProgress = tile.getDestroyProgress(this.player) * (ticksSpentDestroying + 1);
+                Block block = Block.BLOCKS[t];
+                float destroyProgress = block.getDestroyProgress(this.player) * (ticksSpentDestroying + 1);
                 if (destroyProgress >= 0.7f) {
                     this.destroyBlock(x, y, z);
                 }
@@ -89,12 +89,12 @@ public class ServerPlayerGameMode
     }
 
     public boolean superDestroyBlock(final int x, final int y, final int z) {
-        final Tile oldTile = Tile.tiles[this.level.getTile(x, y, z)];
+        final Block oldBlock = Block.BLOCKS[this.level.getTile(x, y, z)];
         final int data = this.level.getData(x, y, z);
 
         final boolean changed = this.level.setTile(x, y, z, 0);
-        if (oldTile != null && changed) {
-            oldTile.destroy(this.level, x, y, z, data);
+        if (oldBlock != null && changed) {
+            oldBlock.destroy(this.level, x, y, z, data);
         }
         return changed;
     }
@@ -103,7 +103,7 @@ public class ServerPlayerGameMode
         final int t = this.level.getTile(x, y, z);
         final int data = this.level.getData(x, y, z);
 
-        this.level.levelEvent(this.player, LevelEvent.PARTICLES_DESTROY_BLOCK, x, y, z, t + this.level.getData(x, y, z) * Tile.TILE_NUM_COUNT);
+        this.level.levelEvent(this.player, LevelEvent.PARTICLES_DESTROY_BLOCK, x, y, z, t + this.level.getData(x, y, z) * Block.TILE_NUM_COUNT);
 
         final boolean changed = this.superDestroyBlock(x, y, z);
 
@@ -115,9 +115,9 @@ public class ServerPlayerGameMode
                 this.player.removeSelectedItem();
             }
         }
-        boolean canDestroy = this.player.canDestroy(Tile.tiles[t]);
+        boolean canDestroy = this.player.canDestroy(Block.BLOCKS[t]);
         if (changed && canDestroy) {
-            Tile.tiles[t].playerDestroy(this.level, this.player, x, y, z, data);
+            Block.BLOCKS[t].playerDestroy(this.level, this.player, x, y, z, data);
             ((ServerPlayer)this.player).connection.send(new TileUpdatePacket(x, y, z, this.level));
         }
         return changed;
@@ -138,6 +138,6 @@ public class ServerPlayerGameMode
     
     public boolean useItemOn(final Player player, final Level level, final ItemInstance item, final int x, final int y, final int z, final int face) {
         final int t = level.getTile(x, y, z);
-        return (t > 0 && Tile.tiles[t].use(level, x, y, z, player)) || (item != null && item.useOn(player, level, x, y, z, face));
+        return (t > 0 && Block.BLOCKS[t].use(level, x, y, z, player)) || (item != null && item.useOn(player, level, x, y, z, face));
     }
 }

@@ -6,7 +6,7 @@ package net.minecraft.client.renderer.entity;
 
 import net.minecraft.world.level.Level;
 import util.Mth;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.entity.item.FallingTile;
 import net.minecraft.client.renderer.TileRenderer;
 
@@ -25,7 +25,7 @@ public class FallingTileRenderer extends EntityRenderer<FallingTile>
         glTranslatef((float)x, (float)y, (float)z);
 
         this.bindTexture("/terrain.png");
-        final Tile tt = Tile.tiles[fallingTile.tile];
+        final Block tt = Block.BLOCKS[fallingTile.tile];
 
         final Level level = fallingTile.getLevel();
         glDisable(GL_LIGHTING);

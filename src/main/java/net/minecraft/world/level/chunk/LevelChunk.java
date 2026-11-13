@@ -9,13 +9,13 @@ import java.util.Random;
 import net.minecraft.SharedConstants;
 import net.minecraft.world.phys.AABB;
 
-import net.minecraft.world.level.tile.EntityTile;
+import net.minecraft.world.level.tile.EntityBlock;
 import net.minecraft.world.level.TilePos;
 import net.minecraft.world.level.tile.entity.TileEntity;
 import util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.LightLayer;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -81,7 +81,7 @@ public class LevelChunk
                 int y = Level.MAX_HEIGHT - 1;
 
                 int p = x << 11 | z << 7;
-                while (y > 0 && Tile.lightBlock[this.blocks[p + y - 1] & 0xFF] == 0) {
+                while (y > 0 && Block.lightBlock[this.blocks[p + y - 1] & 0xFF] == 0) {
                     y--;
                 }
                 this.heightmap[z << 4 | x] = (byte)y;
@@ -100,7 +100,7 @@ public class LevelChunk
                 int y = Level.MAX_HEIGHT - 1;
 
                 int p = (x << 11 | z << 7);
-                while (y > 0 && Tile.lightBlock[this.blocks[p + y - 1] & 0xFF] == 0) {
+                while (y > 0 && Block.lightBlock[this.blocks[p + y - 1] & 0xFF] == 0) {
                     --y;
                 }
                 this.heightmap[z << 4 | x] = (byte)y;
@@ -110,7 +110,7 @@ public class LevelChunk
                     int br = Level.MAX_BRIGHTNESS;
                     int yy = Level.MAX_HEIGHT - 1;
                     do {
-                        br -= Tile.lightBlock[this.blocks[p + yy] & 0xFF];
+                        br -= Block.lightBlock[this.blocks[p + yy] & 0xFF];
                         if (br > 0) {
                             this.skyLight.set(x, yy, z, br);
                         }
@@ -198,7 +198,7 @@ public class LevelChunk
         if (yStart > yOld) y = yStart;
 
         int p = x << 11 | z << 7;
-        while (y > 0 && Tile.lightBlock[this.blocks[p + y - 1] & 0xFF] == 0) {
+        while (y > 0 && Block.lightBlock[this.blocks[p + y - 1] & 0xFF] == 0) {
             y--;
         }
         if (y == yOld) return;
@@ -238,13 +238,13 @@ public class LevelChunk
         final int y1 = y;
         while (y > 0 && br > 0) {
             y--;
-            int block = Tile.lightBlock[this.getTile(x, y, z)];
+            int block = Block.lightBlock[this.getTile(x, y, z)];
             if (block == 0) block = 1;
             br -= block;
             if (br < 0) br = 0;
             this.skyLight.set(x, y, z, br);
         }
-        while (y > 0 && Tile.lightBlock[this.getTile(x, y - 1, z)] == 0) {
+        while (y > 0 && Block.lightBlock[this.getTile(x, y - 1, z)] == 0) {
             --y;
         }
         if (y != y1) {
@@ -271,13 +271,13 @@ public class LevelChunk
         this.blocks[x << 11 | z << 7 | y] = (byte)(tile & 0xFF);
         if (old != 0) {
             if (!this.level.isClientSide) {
-                Tile.tiles[old].onRemove(this.level, xOffs, y, zOffs);
+                Block.BLOCKS[old].onRemove(this.level, xOffs, y, zOffs);
             }
         }
         this.data.set(x, y, z, _data);
 
         if (!this.level.dimension.hasCeiling) {
-            if (Tile.lightBlock[tile & 0xFF] != 0) {
+            if (Block.lightBlock[tile & 0xFF] != 0) {
                 if (y >= oldHeight) {
                     this.recalcHeight(x, y + 1, z);
                 }
@@ -294,7 +294,7 @@ public class LevelChunk
         this.lightGaps(x, z);
         this.data.set(x, y, z, _data);
         if (_tile != 0) {
-            Tile.tiles[_tile].onPlace(this.level, xOffs, y, zOffs);
+            Block.BLOCKS[_tile].onPlace(this.level, xOffs, y, zOffs);
         }
         return this.unsaved = true;
     }
@@ -311,10 +311,10 @@ public class LevelChunk
         final int zOffs = this.z * 16 + z;
         this.blocks[x << 11 | z << 7 | y] = (byte)(tile & 0xFF);
         if (old != 0) {
-            Tile.tiles[old].onRemove(this.level, xOffs, y, zOffs);
+            Block.BLOCKS[old].onRemove(this.level, xOffs, y, zOffs);
         }
         this.data.set(x, y, z, 0);
-        if (Tile.lightBlock[tile & 0xFF] != 0) {
+        if (Block.lightBlock[tile & 0xFF] != 0) {
             if (y >= oldHeight) {
                 this.recalcHeight(x, y + 1, z);
             }
@@ -327,7 +327,7 @@ public class LevelChunk
         this.level.updateLight(LightLayer.Block, xOffs, y, zOffs, xOffs, y, zOffs);
         this.lightGaps(x, z);
         if (_tile != 0 && !this.level.isClientSide) {
-            Tile.tiles[_tile].onPlace(this.level, xOffs, y, zOffs);
+            Block.BLOCKS[_tile].onPlace(this.level, xOffs, y, zOffs);
         }
         return this.unsaved = true;
     }
@@ -426,9 +426,9 @@ public class LevelChunk
         TileEntity tileEntity = this.tileEntities.get(pos);
         if (tileEntity == null) {
             final int t = this.getTile(x, y, z);
-            if (!Tile.isEntityTile[t]) return null;
+            if (!Block.isEntityTile[t]) return null;
 
-            EntityTile et = (EntityTile) Tile.tiles[t];
+            EntityBlock et = (EntityBlock) Block.BLOCKS[t];
             et.onPlace(this.level, this.x * 16 + x, y, this.z * 16 + z);
 
             tileEntity = this.tileEntities.get(pos);
@@ -458,7 +458,7 @@ public class LevelChunk
         tileEntity.y = y;
         tileEntity.z = this.z * 16 + z;
 
-        if (this.getTile(x, y, z) == 0 || !(Tile.tiles[this.getTile(x, y, z)] instanceof EntityTile)) {
+        if (this.getTile(x, y, z) == 0 || !(Block.BLOCKS[this.getTile(x, y, z)] instanceof EntityBlock)) {
             System.out.println("Attempted to place a tile entity where there was no entity tile!");
             return;
         }

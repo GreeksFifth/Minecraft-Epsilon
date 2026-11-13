@@ -7,8 +7,8 @@ package net.minecraft.world.item;
 import net.minecraft.Direction;
 import net.minecraft.Facing;
 import util.Mth;
-import net.minecraft.world.level.tile.Tile;
-import net.minecraft.world.level.tile.BedTile;
+import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.tile.BlockLogicBed;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.player.Player;
 
@@ -25,7 +25,7 @@ public class BedItem extends Item
         // place on top of tile
         y = y + 1;
 
-        final BedTile tile = (BedTile)Tile.bed;
+        final BlockLogicBed tile = (BlockLogicBed) Block.bed;
 
         final int dir = Mth.floor(player.yRot * 4.0f / 360.0f + 0.5) & 0x3;
         int xra = 0;
@@ -38,7 +38,7 @@ public class BedItem extends Item
 
         if (level.isEmptyTile(x, y, z) && level.isEmptyTile(x + xra, y, z + zra) && level.isSolidBlockingTile(x, y - 1, z) && level.isSolidBlockingTile(x + xra, y - 1, z + zra)) {
             level.setTileAndData(x, y, z, tile.id, dir);
-            level.setTileAndData(x + xra, y, z + zra, tile.id, dir + BedTile.HEAD_PIECE_DATA);
+            level.setTileAndData(x + xra, y, z + zra, tile.id, dir + BlockLogicBed.HEAD_PIECE_DATA);
             itemInstance.count--;
             return true;
         }

@@ -4,11 +4,11 @@
 
 package net.minecraft.world.entity.monster;
 
-import net.minecraft.world.item.Item;
 import java.util.List;
 import net.minecraft.world.entity.player.Player;
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.item.ItemInstance;
 
@@ -16,7 +16,7 @@ public class PigZombie extends Zombie
 {
     private int angryTime = 0;
     private int playAngrySoundIn = 0;
-    private static final ItemInstance sword = new ItemInstance(Item.sword_gold, 1);
+    private static final ItemInstance sword = new ItemInstance(Items.sword_gold, 1);
     
     public PigZombie(final Level level) {
         super(level);
@@ -103,7 +103,7 @@ public class PigZombie extends Zombie
     
     @Override
     protected int getDeathLoot() {
-        return Item.porkChop_cooked.id;
+        return Items.porkChop_cooked.id;
     }
     
     @Override

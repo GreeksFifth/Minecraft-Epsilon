@@ -5,7 +5,7 @@
 package net.minecraft.world.entity.item;
 
 import com.mojang.nbt.CompoundTag;
-import net.minecraft.world.level.tile.SandTile;
+import net.minecraft.world.level.tile.SandBlock;
 import util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.Entity;
@@ -82,7 +82,7 @@ public class FallingTile extends Entity
             this.yd *= -0.5;
 
             this.remove();
-            if (!this.level.mayPlace(this.tile, xt, yt, zt, true, 1) || SandTile.isFree(this.level, xt, yt - 1, zt) || !this.level.setTile(xt, yt, zt, this.tile)) {
+            if (!this.level.mayPlace(this.tile, xt, yt, zt, true, 1) || SandBlock.isFree(this.level, xt, yt - 1, zt) || !this.level.setTile(xt, yt, zt, this.tile)) {
                 if (!this.level.isClientSide) {
                     this.spawnAtLocation(this.tile, 1);
                 }

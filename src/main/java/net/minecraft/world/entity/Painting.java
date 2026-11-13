@@ -8,11 +8,12 @@ import com.mojang.nbt.CompoundTag;
 import java.util.List;
 
 import net.minecraft.SharedConstants;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.Material;
 import util.Mth;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemInstance;
-import net.minecraft.world.item.Item;
+
 import java.util.ArrayList;
 import net.minecraft.world.level.Level;
 
@@ -129,7 +130,7 @@ public class Painting extends Entity
             this.checkInterval = 0;
             if (!this.survives()) {
                 this.remove();
-                this.level.addEntity(new ItemEntity(this.level, this.x, this.y, this.z, new ItemInstance(Item.painting)));
+                this.level.addEntity(new ItemEntity(this.level, this.x, this.y, this.z, new ItemInstance(Items.painting)));
             }
         }
     }
@@ -184,7 +185,7 @@ public class Painting extends Entity
         if (!this.removed && !this.level.isClientSide) {
             this.remove();
             this.markHurt();
-            this.level.addEntity(new ItemEntity(this.level, this.x, this.y, this.z, new ItemInstance(Item.painting)));
+            this.level.addEntity(new ItemEntity(this.level, this.x, this.y, this.z, new ItemInstance(Items.painting)));
         }
         return true;
     }
@@ -216,7 +217,7 @@ public class Painting extends Entity
     public void move(final double xa, final double ya, final double za) {
         if (!this.level.isClientSide && xa * xa + ya * ya + za * za > 0.0) {
             this.remove();
-            this.level.addEntity(new ItemEntity(this.level, this.x, this.y, this.z, new ItemInstance(Item.painting)));
+            this.level.addEntity(new ItemEntity(this.level, this.x, this.y, this.z, new ItemInstance(Items.painting)));
         }
     }
     
@@ -224,7 +225,7 @@ public class Painting extends Entity
     public void push(final double xa, final double ya, final double za) {
         if (!this.level.isClientSide && xa * xa + ya * ya + za * za > 0.0) {
             this.remove();
-            this.level.addEntity(new ItemEntity(this.level, this.x, this.y, this.z, new ItemInstance(Item.painting)));
+            this.level.addEntity(new ItemEntity(this.level, this.x, this.y, this.z, new ItemInstance(Items.painting)));
         }
     }
 

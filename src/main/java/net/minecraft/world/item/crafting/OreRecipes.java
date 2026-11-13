@@ -6,24 +6,24 @@ package net.minecraft.world.item.crafting;
 
 import net.minecraft.world.item.DyePowderItem;
 import net.minecraft.world.item.ItemInstance;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.tile.Block;
 
 public class OreRecipes
 {
     private Object[][] map = new Object[][]
             {
-                    { Tile.goldBlock, new ItemInstance(Item.goldIngot, 9) },
-                    { Tile.ironBlock, new ItemInstance(Item.ironIngot, 9) },
-                    { Tile.diamondBlock, new ItemInstance(Item.diamond, 9) },
-                    { Tile.lapisBlock, new ItemInstance(Item.dye_powder, 9, DyePowderItem.BLUE) }
+                    { Block.goldBlock, new ItemInstance(Items.goldIngot, 9) },
+                    { Block.ironBlock, new ItemInstance(Items.ironIngot, 9) },
+                    { Block.diamondBlock, new ItemInstance(Items.diamond, 9) },
+                    { Block.lapisBlock, new ItemInstance(Items.dye_powder, 9, DyePowderItem.BLUE) }
             };
     
     public void addRecipes(final Recipes recipes) {
         for (int i = 0; i < this.map.length; ++i) {
-            final Tile tile = (Tile)this.map[i][0];
+            final Block block = (Block)this.map[i][0];
             final ItemInstance result = (ItemInstance)this.map[i][1];
-            recipes.addShapedRecipe(new ItemInstance(tile),
+            recipes.addShapedRecipe(new ItemInstance(block),
                     "###",
                     "###",
                     "###",
@@ -32,7 +32,7 @@ public class OreRecipes
             recipes.addShapedRecipe(result,
                     "#",
 
-                    '#', tile);
+                    '#', block);
         }
     }
 }

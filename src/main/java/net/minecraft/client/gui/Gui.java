@@ -14,7 +14,7 @@ import java.awt.Color;
 import util.Mth;
 import net.minecraft.client.Lighting;
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 
 import java.util.ArrayList;
 import net.minecraft.client.Minecraft;
@@ -61,7 +61,7 @@ public class Gui extends GuiComponent
         }
 
         final ItemInstance headGear = this.minecraft.player.inventory.getArmor(3);
-        if (!this.minecraft.options.thirdPersonView && headGear != null && headGear.id == Tile.pumpkin.id) {
+        if (!this.minecraft.options.thirdPersonView && headGear != null && headGear.id == Block.pumpkin.id) {
             this.renderPumpkin(screenWidth, screenHeight);
         }
 
@@ -319,10 +319,10 @@ public class Gui extends GuiComponent
         glColor4f(1.0f, 1.0f, 1.0f, br);
         glBindTexture(GL_TEXTURE_2D, this.minecraft.textures.loadTexture("/terrain.png"));
 
-        final float u0 = Tile.portalTile.tex % 16 / 16.0f;
-        final float v0 = Tile.portalTile.tex / 16 / 16.0f;
-        final float u1 = (Tile.portalTile.tex % 16 + 1) / 16.0f;
-        final float v1 = (Tile.portalTile.tex / 16 + 1) / 16.0f;
+        final float u0 = Block.portalTile.tex % 16 / 16.0f;
+        final float v0 = Block.portalTile.tex / 16 / 16.0f;
+        final float u1 = (Block.portalTile.tex % 16 + 1) / 16.0f;
+        final float v1 = (Block.portalTile.tex / 16 + 1) / 16.0f;
         final Tesselator t = Tesselator.instance;
         t.begin();
         t.vertexUV(0.0, h, -90.0, u0, v1);

@@ -9,8 +9,8 @@ import net.minecraft.network.packet.AwardStatPacket;
 import net.minecraft.network.packet.LevelEventPacket;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.MapItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.network.packet.ComplexItemDataPacket;
 import net.minecraft.network.packet.GameEventPacket;
 import net.minecraft.network.packet.TileEventPacket;
@@ -74,7 +74,7 @@ import net.minecraft.network.packet.AddPaintingPacket;
 import net.minecraft.world.entity.global.LightningBolt;
 import net.minecraft.network.packet.AddGlobalEntityPacketPacket;
 import net.minecraft.world.entity.item.FallingTile;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.entity.item.PrimedTnt;
 import net.minecraft.world.entity.item.Boat;
 import net.minecraft.world.entity.projectile.ThrownEgg;
@@ -162,8 +162,8 @@ public class ClientConnection extends PacketListener
         if (packet.type == AddEntityPacket.EGG) e = new ThrownEgg(this.level, x, y, z);
         if (packet.type == AddEntityPacket.BOAT) e = new Boat(this.level, x, y, z);
         if (packet.type == AddEntityPacket.PRIMED_TNT) e = new PrimedTnt(this.level, x, y, z);
-        if (packet.type == AddEntityPacket.FALLING_SAND) e = new FallingTile(this.level, x, y, z, Tile.sand.id);
-        if (packet.type == AddEntityPacket.FALLING_GRAVEL) e = new FallingTile(this.level, x, y, z, Tile.gravel.id);
+        if (packet.type == AddEntityPacket.FALLING_SAND) e = new FallingTile(this.level, x, y, z, Block.sand.id);
+        if (packet.type == AddEntityPacket.FALLING_GRAVEL) e = new FallingTile(this.level, x, y, z, Block.gravel.id);
 
         if (e != null) {
             e.xp = packet.x;
@@ -692,7 +692,7 @@ public class ClientConnection extends PacketListener
     
     @Override
     public void handleComplexItemData(final ComplexItemDataPacket packet) {
-        if (packet.itemType == Item.map.id) {
+        if (packet.itemType == Items.map.id) {
             MapItem.getSavedData(packet.itemId, this.minecraft.level).handleComplexItemData(packet.data);
         }
         else {

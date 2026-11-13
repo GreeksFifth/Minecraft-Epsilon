@@ -4,7 +4,7 @@
 
 package net.minecraft.client.renderer.ptexture;
 
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 
 public class FireTexture extends DynamicTexture
 {
@@ -12,7 +12,7 @@ public class FireTexture extends DynamicTexture
     protected float[] next = new float[20 * 16];
     
     public FireTexture(final int id) {
-        super(Tile.fire.tex + id * 16);
+        super(Block.fire.tex + id * 16);
     }
     
     @Override

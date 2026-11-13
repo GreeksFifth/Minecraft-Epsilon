@@ -13,9 +13,9 @@ import net.minecraft.stats.Achievements;
 import net.minecraft.world.entity.item.Minecart;
 import net.minecraft.stats.Stat;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.DyePowderItem;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.chunk.ChunkSource;
-import net.minecraft.world.level.tile.BedTile;
+import net.minecraft.world.level.tile.BlockLogicBed;
 import net.minecraft.world.level.tile.entity.SignTileEntity;
 import net.minecraft.world.level.tile.entity.DispenserTileEntity;
 import net.minecraft.world.level.tile.entity.FurnaceTileEntity;
@@ -29,10 +29,10 @@ import net.minecraft.world.Container;
 import com.mojang.nbt.ListTag;
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemInstance;
-import net.minecraft.world.item.Item;
+
 import java.util.List;
 import net.minecraft.world.entity.Entity;
 import util.Mth;
@@ -263,7 +263,7 @@ public abstract class Player extends Mob
         this.yd = 0.1f;
 
         if (this.name.equals("Notch")) {
-            this.drop(new ItemInstance(Item.apple, 1), true);
+            this.drop(new ItemInstance(Items.apple, 1), true);
         }
         this.inventory.dropAll();
 
@@ -343,8 +343,8 @@ public abstract class Player extends Mob
         this.level.addEntity(itemEntity);
     }
     
-    public float getDestroySpeed(final Tile tile) {
-        float speed = this.inventory.getDestroySpeed(tile);
+    public float getDestroySpeed(final Block block) {
+        float speed = this.inventory.getDestroySpeed(block);
 
         if (this.isUnderLiquid(Material.water)) speed /= 5.0f;
         if (!this.onGround) speed /= 5.0f;
@@ -352,8 +352,8 @@ public abstract class Player extends Mob
         return speed;
     }
     
-    public boolean canDestroy(final Tile tile) {
-        return this.inventory.canDestroy(tile);
+    public boolean canDestroy(final Block block) {
+        return this.inventory.canDestroy(block);
     }
     
     @Override
@@ -606,7 +606,7 @@ public abstract class Player extends Mob
         this.heightOffset = 0.2f;
         if (this.level.hasChunkAt(x, y, z)) {
             int data = this.level.getData(x, y, z);
-            final int direction = BedTile.getDirection(data);
+            final int direction = BlockLogicBed.getDirection(data);
             float xo = 0.5f, zo = 0.5f;
 
             switch (direction) {
@@ -675,10 +675,10 @@ public abstract class Player extends Mob
 
         Pos pos = this.bedPosition;
         Pos standUp = this.bedPosition;
-        if (pos != null && this.level.getTile(pos.x, pos.y, pos.z) == Tile.bed.id) {
-            BedTile.setOccupied(this.level, pos.x, pos.y, pos.z, false);
+        if (pos != null && this.level.getTile(pos.x, pos.y, pos.z) == Block.bed.id) {
+            BlockLogicBed.setOccupied(this.level, pos.x, pos.y, pos.z, false);
 
-            standUp = BedTile.findStandUpPosition(this.level, pos.x, pos.y, pos.z, 0);
+            standUp = BlockLogicBed.findStandUpPosition(this.level, pos.x, pos.y, pos.z, 0);
             if (standUp == null) {
                 standUp = new Pos(pos.x, pos.y + 1, pos.z);
             }
@@ -701,7 +701,7 @@ public abstract class Player extends Mob
     }
     
     private boolean checkBed() {
-        return this.level.getTile(this.bedPosition.x, this.bedPosition.y, this.bedPosition.z) == Tile.bed.id;
+        return this.level.getTile(this.bedPosition.x, this.bedPosition.y, this.bedPosition.z) == Block.bed.id;
     }
     
     public static Pos checkBedValidRespawnPosition(final Level level, final Pos pos) {
@@ -713,17 +713,17 @@ public abstract class Player extends Mob
         chunkSource.create(pos.x + 3 >> 4, pos.z + 3 >> 4);
 
         // make sure the bed is still standing
-        if (level.getTile(pos.x, pos.y, pos.z) != Tile.bed.id) {
+        if (level.getTile(pos.x, pos.y, pos.z) != Block.bed.id) {
             return null;
         }
         // make sure the bed still has a stand-up position
-        return BedTile.findStandUpPosition(level, pos.x, pos.y, pos.z, 0);
+        return BlockLogicBed.findStandUpPosition(level, pos.x, pos.y, pos.z, 0);
     }
     
     public float getSleepRotation() {
         if (this.bedPosition != null) {
             int data = this.level.getData(this.bedPosition.x, this.bedPosition.y, this.bedPosition.z);
-            int direction = BedTile.getDirection(data);
+            int direction = BlockLogicBed.getDirection(data);
             switch (direction) {
                 case Direction.SOUTH: return 90.0f;
                 case Direction.WEST: return 0.0f;
@@ -860,7 +860,7 @@ public abstract class Player extends Mob
     @Override
     public int getItemInHandIcon(final ItemInstance item) {
         int icon = super.getItemInHandIcon(item);
-        if (item.id == Item.fishingRod.id && this.fishing != null) {
+        if (item.id == Items.fishingRod.id && this.fishing != null) {
             icon = item.getIcon() + 16;
         }
         return icon;

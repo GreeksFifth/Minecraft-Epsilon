@@ -7,7 +7,7 @@ package net.minecraft.client.gui.achievement;
 import net.minecraft.client.Lighting;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.stats.Achievement;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import java.util.Random;
 import util.Mth;
 import org.lwjgl.input.Mouse;
@@ -200,24 +200,24 @@ public class AchievementScreen extends Screen
                     random.setSeed(1234 + leftTile + tileX);
                     random.nextInt();
                     final int heightValue = random.nextInt(1 + topTile + tileY) + (topTile + tileY) / 2;
-                    int tileType = Tile.sand.tex;
+                    int tileType = Block.sand.tex;
 
                     if (heightValue > bedrockLevel || topTile + tileY == MAX_BG_TILE_Y) {
-                        tileType = Tile.unbreakable.tex;
+                        tileType = Block.unbreakable.tex;
                     } else if (heightValue == diamondLevel) {
                         if (random.nextInt(2) == 0) {
-                            tileType = Tile.diamondOre.tex;
+                            tileType = Block.diamondOre.tex;
                         } else {
-                            tileType = Tile.redStoneOre.tex;
+                            tileType = Block.redStoneOre.tex;
                         }
                     } else if (heightValue == ironLevel) {
-                        tileType = Tile.ironOre.tex;
+                        tileType = Block.ironOre.tex;
                     } else if (heightValue == coalLevel) {
-                        tileType = Tile.coalOre.tex;
+                        tileType = Block.coalOre.tex;
                     } else if (heightValue > rockLevel) {
-                        tileType = Tile.rock.tex;
+                        tileType = Block.rock.tex;
                     } else if (heightValue > 0) {
-                        tileType = Tile.dirt.tex;
+                        tileType = Block.dirt.tex;
                     }
                     this.blit(xBigMap + tileX * 16 - xMob, yBigMap + tileY * 16 - yMod, tileType % 16 << 4, tileType >> 4 << 4, 16, 16);
                 }

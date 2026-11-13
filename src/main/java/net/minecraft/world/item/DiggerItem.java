@@ -6,19 +6,19 @@ package net.minecraft.world.item;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 
 public class DiggerItem extends Item
 {
-    private Tile[] tiles;
+    private Block[] blocks;
     private float speed = 4.0f;
     private int attackDamage;
     protected Tier tier;
     
-    protected DiggerItem(final int id, final int attackDamage, final Tier tier, final Tile[] tiles) {
+    protected DiggerItem(final int id, final int attackDamage, final Tier tier, final Block[] blocks) {
         super(id);
         this.tier = tier;
-        this.tiles = tiles;
+        this.blocks = blocks;
         this.maxStackSize = 1;
         this.setMaxDamage(tier.getUses());
         this.speed = tier.getSpeed();
@@ -26,9 +26,9 @@ public class DiggerItem extends Item
     }
     
     @Override
-    public float getDestroySpeed(final ItemInstance itemInstance, final Tile tile) {
-        for (int i = 0; i < this.tiles.length; ++i) {
-            if (this.tiles[i] == tile) return this.speed;
+    public float getDestroySpeed(final ItemInstance itemInstance, final Block block) {
+        for (int i = 0; i < this.blocks.length; ++i) {
+            if (this.blocks[i] == block) return this.speed;
         }
         return 1.0f;
     }

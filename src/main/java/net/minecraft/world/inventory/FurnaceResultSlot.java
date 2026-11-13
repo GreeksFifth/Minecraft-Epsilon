@@ -5,10 +5,10 @@
 package net.minecraft.world.inventory;
 
 import net.minecraft.stats.Achievements;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Items;
 
 public class FurnaceResultSlot extends Slot
 {
@@ -27,8 +27,8 @@ public class FurnaceResultSlot extends Slot
     @Override
     public void onTake(final ItemInstance carried) {
         carried.onCraftedBy(this.player.level, this.player);
-        if (carried.id == Item.ironIngot.id) this.player.awardStat(Achievements.acquireIron, 1);
-        if (carried.id == Item.fish_cooked.id) this.player.awardStat(Achievements.cookFish, 1);
+        if (carried.id == Items.ironIngot.id) this.player.awardStat(Achievements.acquireIron, 1);
+        if (carried.id == Items.fish_cooked.id) this.player.awardStat(Achievements.cookFish, 1);
         super.onTake(carried);
     }
 }

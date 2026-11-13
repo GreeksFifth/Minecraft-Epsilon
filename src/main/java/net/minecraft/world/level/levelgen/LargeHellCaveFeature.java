@@ -5,7 +5,7 @@
 package net.minecraft.world.level.levelgen;
 
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import util.Mth;
 import java.util.Random;
 
@@ -104,7 +104,7 @@ public class LargeHellCaveFeature extends LargeFeature
                     for (int yy = y1 + 1; !detectedWater && yy >= y0 - 1; --yy) {
                         final int p = (xx * 16 + zz) * Level.MAX_HEIGHT + yy;
                         if (yy < Level.MIN_HEIGHT || yy >= Level.MAX_HEIGHT) continue;
-                        if (blocks[p] == Tile.lava.id || blocks[p] == Tile.calmLava.id) {
+                        if (blocks[p] == Block.lava.id || blocks[p] == Block.calmLava.id) {
                             detectedWater = true;
                         }
                         if (yy != y0 - 1 && xx != x0 && xx != x1 - 1 && zz != z0 && zz != z1 - 1) {
@@ -125,7 +125,7 @@ public class LargeHellCaveFeature extends LargeFeature
                         final double yd = (yy + 0.5 - yCave) / yRad;
                         if (yd > -0.7 && xd * xd + yd * yd + zd * zd < 1.0) {
                             final byte block = blocks[p];
-                            if (block == Tile.hellRock.id || block == Tile.dirt.id || block == Tile.grass.id) {
+                            if (block == Block.hellRock.id || block == Block.dirt.id || block == Block.grass.id) {
                                 blocks[p] = 0;
                             }
                         }

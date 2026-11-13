@@ -22,7 +22,7 @@ import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.monster.Spider;
 import java.util.ArrayList;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import java.util.List;
 
 public class Biome
@@ -42,8 +42,8 @@ public class Biome
     public static final Biome sky = new SkyBiome().setColor(0x8080ff).setName("Sky").setNoRain();
     public String name;
     public int color;
-    public byte topMaterial = (byte)Tile.grass.id;
-    public byte material = (byte)Tile.dirt.id;
+    public byte topMaterial = (byte) Block.grass.id;
+    public byte material = (byte) Block.dirt.id;
     public int leafColor = 0x4ee031;
     protected List<MobSpawnerData> enemies = new ArrayList<>();
     protected List<MobSpawnerData> friendlies = new ArrayList<>();
@@ -85,8 +85,8 @@ public class Biome
             }
         }
 
-        Biome.desert.topMaterial = Biome.desert.material = (byte)Tile.sand.id;
-        Biome.iceDesert.topMaterial = Biome.iceDesert.material = (byte)Tile.sand.id;
+        Biome.desert.topMaterial = Biome.desert.material = (byte) Block.sand.id;
+        Biome.iceDesert.topMaterial = Biome.iceDesert.material = (byte) Block.sand.id;
     }
 
     public Feature getTreeFeature(final Random random) {

@@ -20,7 +20,7 @@ import org.lwjgl.input.Mouse;
 import net.minecraft.client.gui.ScreenSizeCalculator;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.NVFogDistance;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.material.Material;
@@ -281,7 +281,7 @@ public class GameRenderer
             glTranslatef(0.0f, 0.3f, 0.0f);
             if (!this.mc.options.fixedCamera) {
                 int t = this.mc.level.getTile(Mth.floor(player.x), Mth.floor(player.y), Mth.floor(player.z));
-                if (t == Tile.bed.id) {
+                if (t == Block.bed.id) {
                     int data = this.mc.level.getData(Mth.floor(player.x), Mth.floor(player.y), Mth.floor(player.z));
 
                     int direction = data & 0x3;
@@ -724,16 +724,16 @@ public class GameRenderer
                 final float xa = this.random.nextFloat();
                 final float za = this.random.nextFloat();
                 if (t > 0) {
-                    if (Tile.tiles[t].material == Material.lava) {
-                        this.mc.particleEngine.add(new SmokeParticle(level, x + xa, y + 0.1f - Tile.tiles[t].yy0, z + za, 0.0, 0.0, 0.0));
+                    if (Block.BLOCKS[t].material == Material.lava) {
+                        this.mc.particleEngine.add(new SmokeParticle(level, x + xa, y + 0.1f - Block.BLOCKS[t].yy0, z + za, 0.0, 0.0, 0.0));
                     }
                     else {
                         if (this.random.nextInt(++rainPosSamples) == 0) {
                             rainPosX = x + xa;
-                            rainPosY = y + 0.1f - Tile.tiles[t].yy0;
+                            rainPosY = y + 0.1f - Block.BLOCKS[t].yy0;
                             rainPosZ = z + za;
                         }
-                        this.mc.particleEngine.add(new WaterDropParticle(level, x + xa, y + 0.1f - Tile.tiles[t].yy0, z + za));
+                        this.mc.particleEngine.add(new WaterDropParticle(level, x + xa, y + 0.1f - Block.BLOCKS[t].yy0, z + za));
                     }
                 }
             }

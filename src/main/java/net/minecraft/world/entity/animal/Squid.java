@@ -5,12 +5,11 @@
 package net.minecraft.world.entity.animal;
 
 import net.minecraft.world.item.DyePowderItem;
+import net.minecraft.world.item.Items;
 import util.Mth;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemInstance;
-import net.minecraft.world.item.Item;
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
 
@@ -73,7 +72,7 @@ public class Squid extends WaterAnimal
     protected void dropDeathLoot() {
         int count = this.random.nextInt(3) + 1;
         for (int i = 0; i < count; ++i) {
-            this.spawnAtLocation(new ItemInstance(Item.dye_powder, 1, DyePowderItem.BLACK), 0.0f);
+            this.spawnAtLocation(new ItemInstance(Items.dye_powder, 1, DyePowderItem.BLACK), 0.0f);
         }
     }
     

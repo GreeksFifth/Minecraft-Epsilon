@@ -4,11 +4,8 @@
 
 package net.minecraft.world.item.crafting;
 
-import net.minecraft.world.item.CoalItem;
-import net.minecraft.world.item.DyePowderItem;
-import net.minecraft.world.item.ItemInstance;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.item.*;
+import net.minecraft.world.level.tile.Block;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,16 +19,16 @@ public class FurnaceRecipes
     }
     
     private FurnaceRecipes() {
-        this.addFurnaceRecipe(Tile.ironOre.id, new ItemInstance(Item.ironIngot));
-        this.addFurnaceRecipe(Tile.goldOre.id, new ItemInstance(Item.goldIngot));
-        this.addFurnaceRecipe(Tile.diamondOre.id, new ItemInstance(Item.diamond));
-        this.addFurnaceRecipe(Tile.sand.id, new ItemInstance(Tile.glass));
-        this.addFurnaceRecipe(Item.porkChop_raw.id, new ItemInstance(Item.porkChop_cooked));
-        this.addFurnaceRecipe(Item.fish_raw.id, new ItemInstance(Item.fish_cooked));
-        this.addFurnaceRecipe(Tile.stoneBrick.id, new ItemInstance(Tile.rock));
-        this.addFurnaceRecipe(Item.clay.id, new ItemInstance(Item.brick));
-        this.addFurnaceRecipe(Tile.cactus.id, new ItemInstance(Item.dye_powder, 1, DyePowderItem.GREEN));
-        this.addFurnaceRecipe(Tile.treeTrunk.id, new ItemInstance(Item.coal, 1, CoalItem.CHAR_COAL));
+        this.addFurnaceRecipe(Block.ironOre.id, new ItemInstance(Items.ironIngot));
+        this.addFurnaceRecipe(Block.goldOre.id, new ItemInstance(Items.goldIngot));
+        this.addFurnaceRecipe(Block.diamondOre.id, new ItemInstance(Items.diamond));
+        this.addFurnaceRecipe(Block.sand.id, new ItemInstance(Block.glass));
+        this.addFurnaceRecipe(Items.porkChop_raw.id, new ItemInstance(Items.porkChop_cooked));
+        this.addFurnaceRecipe(Items.fish_raw.id, new ItemInstance(Items.fish_cooked));
+        this.addFurnaceRecipe(Block.stoneBrick.id, new ItemInstance(Block.rock));
+        this.addFurnaceRecipe(Items.clay.id, new ItemInstance(Items.brick));
+        this.addFurnaceRecipe(Block.cactus.id, new ItemInstance(Items.dye_powder, 1, DyePowderItem.GREEN));
+        this.addFurnaceRecipe(Block.treeTrunk.id, new ItemInstance(Items.coal, 1, CoalItem.CHAR_COAL));
     }
     
     public void addFurnaceRecipe(final int itemId, final ItemInstance result) {

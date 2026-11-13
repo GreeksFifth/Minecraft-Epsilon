@@ -5,17 +5,17 @@
 package net.minecraft.world.entity.monster;
 
 import net.minecraft.SharedConstants;
-import net.minecraft.world.item.Item;
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.Items;
 import util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.item.ItemInstance;
 
 public class Skeleton extends Monster
 {
-    private static final ItemInstance bow = new ItemInstance(Item.bow, 1);
+    private static final ItemInstance bow = new ItemInstance(Items.bow, 1);
     
     public Skeleton(final Level level) {
         super(level);
@@ -87,7 +87,7 @@ public class Skeleton extends Monster
     
     @Override
     protected int getDeathLoot() {
-        return Item.arrow.id;
+        return Items.arrow.id;
     }
     
     @Override
@@ -95,12 +95,12 @@ public class Skeleton extends Monster
         // drop some arrows
         int count = this.random.nextInt(3);
         for (int i = 0; i < count; ++i) {
-            this.spawnAtLocation(Item.arrow.id, 1);
+            this.spawnAtLocation(Items.arrow.id, 1);
         }
         // and some bones
         count = this.random.nextInt(3);
         for (int i = 0; i < count; ++i) {
-            this.spawnAtLocation(Item.bone.id, 1);
+            this.spawnAtLocation(Items.bone.id, 1);
         }
     }
     

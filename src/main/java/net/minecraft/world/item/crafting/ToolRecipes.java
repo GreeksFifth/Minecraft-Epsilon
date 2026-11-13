@@ -6,7 +6,8 @@ package net.minecraft.world.item.crafting;
 
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.tile.Block;
 
 public class ToolRecipes
 {
@@ -27,11 +28,11 @@ public class ToolRecipes
               " #",
               " #" } };
     private Object[][] map = new Object[][] {
-            { Tile.wood, Tile.stoneBrick, Item.ironIngot, Item.diamond, Item.goldIngot },
-            { Item.pickAxe_wood, Item.pickAxe_stone, Item.pickAxe_iron, Item.pickAxe_diamond, Item.pickAxe_gold },
-            { Item.shovel_wood, Item.shovel_stone, Item.shovel_iron, Item.shovel_diamond, Item.shovel_gold },
-            { Item.hatchet_wood, Item.hatchet_stone, Item.hatchet_iron, Item.hatchet_diamond, Item.hatchet_gold },
-            { Item.hoe_wood, Item.hoe_stone, Item.hoe_iron, Item.hoe_diamond, Item.hoe_gold }
+            { Block.wood, Block.stoneBrick, Items.ironIngot, Items.diamond, Items.goldIngot },
+            { Items.pickAxe_wood, Items.pickAxe_stone, Items.pickAxe_iron, Items.pickAxe_diamond, Items.pickAxe_gold },
+            { Items.shovel_wood, Items.shovel_stone, Items.shovel_iron, Items.shovel_diamond, Items.shovel_gold },
+            { Items.hatchet_wood, Items.hatchet_stone, Items.hatchet_iron, Items.hatchet_diamond, Items.hatchet_gold },
+            { Items.hoe_wood, Items.hoe_stone, Items.hoe_iron, Items.hoe_diamond, Items.hoe_gold }
     };
     
     public void addRecipes(final Recipes recipes) {
@@ -40,14 +41,14 @@ public class ToolRecipes
 
             for (int t = 0; t < this.map.length - 1; ++t) {
                 recipes.addShapedRecipe(new ItemInstance((Item)this.map[t + 1][m]), this.shapes[t],
-                        '#', Item.stick, 'X', objMaterial);
+                        '#', Items.stick, 'X', objMaterial);
             }
         }
 
-        recipes.addShapedRecipe(new ItemInstance(Item.shears),
+        recipes.addShapedRecipe(new ItemInstance(Items.shears),
                 " #",
                 "# ",
 
-                '#', Item.ironIngot);
+                '#', Items.ironIngot);
     }
 }

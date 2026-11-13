@@ -4,7 +4,7 @@
 
 package net.minecraft.world.entity;
 
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import util.Mth;
 import net.minecraft.world.level.Level;
 
@@ -40,7 +40,7 @@ public class FlyingMob extends Mob
                 friction = 0.6f * 0.91f;
                 final int t = this.level.getTile(Mth.floor(this.x), Mth.floor(this.bb.y0) - 1, Mth.floor(this.z));
                 if (t > 0) {
-                    friction = Tile.tiles[t].friction * 0.91f;
+                    friction = Block.BLOCKS[t].friction * 0.91f;
                 }
             }
 
@@ -52,7 +52,7 @@ public class FlyingMob extends Mob
                 friction = 0.6f * 0.91f;
                 final int t = this.level.getTile(Mth.floor(this.x), Mth.floor(this.bb.y0) - 1, Mth.floor(this.z));
                 if (t > 0) {
-                    friction = Tile.tiles[t].friction * 0.91f;
+                    friction = Block.BLOCKS[t].friction * 0.91f;
                 }
             }
 

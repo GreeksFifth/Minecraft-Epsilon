@@ -9,7 +9,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.level.Level;
 import util.Mth;
 import net.minecraft.client.renderer.Tesselator;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.client.renderer.Textures;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.client.model.HumanoidModel;
@@ -47,7 +47,7 @@ public abstract class EntityRenderer<T extends Entity>
     private void renderFlame(final Entity e, final double x, final double y, final double z, final float a) {
         glDisable(GL_LIGHTING);
 
-        final int tex = Tile.fire.tex;
+        final int tex = Block.fire.tex;
         final int xt = (tex & 0xF) << 4;
         final int yt = tex & 0xF0;
         float u0 = xt / 256.0f;
@@ -142,7 +142,7 @@ public abstract class EntityRenderer<T extends Entity>
                 for (int zt = z0; zt <= z1; ++zt) {
                     final int t = level.getTile(xt, yt - 1, zt);
                     if (t > 0 && level.getRawBrightness(xt, yt, zt) > 3) {
-                        this.renderTileShadow(Tile.tiles[t], x, y + e.getShadowHeightOffs(), z, xt, yt, zt, pow, r, xo, n3 + e.getShadowHeightOffs(), zo);
+                        this.renderTileShadow(Block.BLOCKS[t], x, y + e.getShadowHeightOffs(), z, xt, yt, zt, pow, r, xo, n3 + e.getShadowHeightOffs(), zo);
                     }
                 }
             }
@@ -158,7 +158,7 @@ public abstract class EntityRenderer<T extends Entity>
         return this.entityRenderDispatcher.level;
     }
     
-    private void renderTileShadow(final Tile tt, final double x, final double y, final double z, final int xt, final int yt, final int zt, final float pow, final float r, final double xo, final double yo, final double zo) {
+    private void renderTileShadow(final Block tt, final double x, final double y, final double z, final int xt, final int yt, final int zt, final float pow, final float r, final double xo, final double yo, final double zo) {
         final Tesselator t = Tesselator.instance;
         if (!tt.isCubeShaped()) return;
 

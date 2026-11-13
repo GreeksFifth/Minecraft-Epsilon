@@ -17,7 +17,7 @@ public class BowItem extends Item
     
     @Override
     public ItemInstance use(final ItemInstance itemInstance, final Level level, final Player player) {
-        if (player.inventory.removeResource(Item.arrow.id)) {
+        if (player.inventory.removeResource(Items.arrow.id)) {
             level.playSound(player, "random.bow", 1.0f, 1.0f / (BowItem.random.nextFloat() * 0.4f + 0.8f));
             if (!level.isClientSide) {
                 level.addEntity(new Arrow(level, player));

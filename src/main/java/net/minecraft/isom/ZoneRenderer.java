@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 
 // Useless - Isom package was pulled straight from the Beta 1.9-pre6 jar as it had source for this package, thanks @genericpnpmonit0r for telling me this
 public class ZoneRenderer {
@@ -58,10 +58,10 @@ public class ZoneRenderer {
         }
 
         for (int i = 0; i < 256; i++) {
-            if (Tile.tiles[i] != null) {
-                textures[i * 3 + 0] = Tile.tiles[i].getTexture(1);
-                textures[i * 3 + 1] = Tile.tiles[i].getTexture(2);
-                textures[i * 3 + 2] = Tile.tiles[i].getTexture(3);
+            if (Block.BLOCKS[i] != null) {
+                textures[i * 3 + 0] = Block.BLOCKS[i].getTexture(1);
+                textures[i * 3 + 1] = Block.BLOCKS[i].getTexture(2);
+                textures[i * 3 + 2] = Block.BLOCKS[i].getTexture(3);
             }
         }
     }
@@ -105,13 +105,13 @@ public class ZoneRenderer {
                     if (yp >= yBuf[xp] && yp >= yBuf[xp + 1]) continue;
 
 
-                    Tile t = Tile.tiles[level.getTile(x, y, z)];
+                    Block t = Block.BLOCKS[level.getTile(x, y, z)];
                     if (t == null) {
                         solid = false;
                     } else {
                         if (t.material == Material.water) {
                             int ta = level.getTile(x, y + 1, z);
-                            if (ta == 0 || Tile.tiles[ta].material != Material.water) {
+                            if (ta == 0 || Block.BLOCKS[ta].material != Material.water) {
                                 float hh = (y / (Level.MAX_HEIGHT /*Useless - was level.depth in b1.9-pre6*/ - 1.0f)) * 0.6f + 0.4f;
                                 float br = level.getBrightness(x, y + 1, z) * hh;
 

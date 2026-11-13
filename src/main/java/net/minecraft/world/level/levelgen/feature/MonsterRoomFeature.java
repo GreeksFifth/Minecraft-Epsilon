@@ -7,10 +7,11 @@ package net.minecraft.world.level.levelgen.feature;
 import net.minecraft.world.item.DyePowderItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemInstance;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.tile.entity.MobSpawnerTileEntity;
 import net.minecraft.world.level.tile.entity.ChestTileEntity;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import java.util.Random;
 import net.minecraft.world.level.Level;
 
@@ -50,10 +51,10 @@ public class MonsterRoomFeature extends Feature
                         }
                         else if (level.getMaterial(xx, yy, zz).isSolid()) {
                             if (yy == y - 1 && random.nextInt(4) != 0) {
-                                level.setTile(xx, yy, zz, Tile.mossStone.id);
+                                level.setTile(xx, yy, zz, Block.mossStone.id);
                             }
                             else {
-                                level.setTile(xx, yy, zz, Tile.stoneBrick.id);
+                                level.setTile(xx, yy, zz, Block.stoneBrick.id);
                             }
                         }
                     }
@@ -79,7 +80,7 @@ public class MonsterRoomFeature extends Feature
 
                 if (count != 1) continue;
 
-                level.setTile(xc, yc, zc, Tile.chest.id);
+                level.setTile(xc, yc, zc, Block.chest.id);
                 final ChestTileEntity chest = (ChestTileEntity)level.getTileEntity(xc, yc, zc);
                 for (int j = 0; j < 8; ++j) {
                     final ItemInstance item = this.randomItem(random);
@@ -89,7 +90,7 @@ public class MonsterRoomFeature extends Feature
                 break;
             }
         }
-        level.setTile(x, y, z, Tile.mobSpawner.id);
+        level.setTile(x, y, z, Block.mobSpawner.id);
         MobSpawnerTileEntity entity = ((MobSpawnerTileEntity)level.getTileEntity(x, y, z));
         entity.setEntityId(this.randomEntityId(random));
         return true;
@@ -97,17 +98,17 @@ public class MonsterRoomFeature extends Feature
     
     private ItemInstance randomItem(final Random random) {
         final int type = random.nextInt(11);
-        if (type == 0) return new ItemInstance(Item.saddle);
-        if (type == 1) return new ItemInstance(Item.ironIngot, random.nextInt(4) + 1);
-        if (type == 2) return new ItemInstance(Item.bread);
-        if (type == 3) return new ItemInstance(Item.wheat, random.nextInt(4) + 1);
-        if (type == 4) return new ItemInstance(Item.sulphur, random.nextInt(4) + 1);
-        if (type == 5) return new ItemInstance(Item.string, random.nextInt(4) + 1);
-        if (type == 6) return new ItemInstance(Item.bucket_empty);
-        if (type == 7 && random.nextInt(100) == 0) return new ItemInstance(Item.apple_gold);
-        if (type == 8 && random.nextInt(2) == 0) return new ItemInstance(Item.redStone, random.nextInt(4) + 1);
-        if (type == 9 && random.nextInt(10) == 0) return new ItemInstance(Item.items[Item.record_01.id + random.nextInt(2)]);
-        if (type == 10) return new ItemInstance(Item.dye_powder, 1, DyePowderItem.BROWN);
+        if (type == 0) return new ItemInstance(Items.saddle);
+        if (type == 1) return new ItemInstance(Items.ironIngot, random.nextInt(4) + 1);
+        if (type == 2) return new ItemInstance(Items.bread);
+        if (type == 3) return new ItemInstance(Items.wheat, random.nextInt(4) + 1);
+        if (type == 4) return new ItemInstance(Items.sulphur, random.nextInt(4) + 1);
+        if (type == 5) return new ItemInstance(Items.string, random.nextInt(4) + 1);
+        if (type == 6) return new ItemInstance(Items.bucket_empty);
+        if (type == 7 && random.nextInt(100) == 0) return new ItemInstance(Items.apple_gold);
+        if (type == 8 && random.nextInt(2) == 0) return new ItemInstance(Items.redStone, random.nextInt(4) + 1);
+        if (type == 9 && random.nextInt(10) == 0) return new ItemInstance(Item.items[Items.record_01.id + random.nextInt(2)]);
+        if (type == 10) return new ItemInstance(Items.dye_powder, 1, DyePowderItem.BROWN);
 
         return null;
     }

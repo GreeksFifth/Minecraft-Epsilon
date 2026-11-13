@@ -5,8 +5,8 @@
 package net.minecraft.world.item;
 
 import net.minecraft.Facing;
-import net.minecraft.world.level.tile.StoneSlabTile;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.StoneSlabBlock;
+import net.minecraft.world.level.tile.Block;
 
 public class StoneSlabTileItem extends TileItem
 {
@@ -18,7 +18,7 @@ public class StoneSlabTileItem extends TileItem
     
     @Override
     public int getIcon(final int auxValue) {
-        return Tile.stoneSlabHalf.getTexture(Facing.NORTH, auxValue);
+        return Block.stoneSlabHalf.getTexture(Facing.NORTH, auxValue);
     }
     
     @Override
@@ -28,6 +28,6 @@ public class StoneSlabTileItem extends TileItem
     
     @Override
     public String getDescriptionId(final ItemInstance itemInstance) {
-        return super.getDescriptionId() + "." + StoneSlabTile.SLAB_NAMES[itemInstance.getAuxValue()];
+        return super.getDescriptionId() + "." + StoneSlabBlock.SLAB_NAMES[itemInstance.getAuxValue()];
     }
 }

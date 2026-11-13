@@ -5,43 +5,43 @@
 package net.minecraft.world.item;
 
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 
 public class PickaxeItem extends DiggerItem
 {
-    private static Tile[] diggables = new Tile[] {
-            Tile.stoneBrick,
-            Tile.stoneSlab,
-            Tile.stoneSlabHalf,
-            Tile.rock,
-            Tile.sandStone,
-            Tile.mossStone,
-            Tile.ironOre,
-            Tile.ironBlock,
-            Tile.coalOre,
-            Tile.goldBlock,
-            Tile.goldOre,
-            Tile.diamondOre,
-            Tile.diamondBlock,
-            Tile.ice,
-            Tile.hellRock,
-            Tile.lapisOre,
-            Tile.lapisBlock };
+    private static Block[] diggables = new Block[] {
+            Block.stoneBrick,
+            Block.stoneSlab,
+            Block.stoneSlabHalf,
+            Block.rock,
+            Block.sandStone,
+            Block.mossStone,
+            Block.ironOre,
+            Block.ironBlock,
+            Block.coalOre,
+            Block.goldBlock,
+            Block.goldOre,
+            Block.diamondOre,
+            Block.diamondBlock,
+            Block.ice,
+            Block.hellRock,
+            Block.lapisOre,
+            Block.lapisBlock };
     
     protected PickaxeItem(final int id, final Tier tier) {
         super(id, 2, tier, PickaxeItem.diggables);
     }
     
     @Override
-    public boolean canDestroySpecial(final Tile tile) {
-        if (tile == Tile.obsidian) return this.tier.getLevel() == 3;
-        if (tile == Tile.diamondBlock || tile == Tile.diamondOre) return this.tier.getLevel() >= 2;
-        if (tile == Tile.goldBlock || tile == Tile.goldOre) return this.tier.getLevel() >= 2;
-        if (tile == Tile.ironBlock || tile == Tile.ironOre) return this.tier.getLevel() >= 1;
-        if (tile == Tile.lapisBlock || tile == Tile.lapisOre) return this.tier.getLevel() >= 1;
-        if (tile == Tile.redStoneOre || tile == Tile.redStoneOre_lit) return this.tier.getLevel() >= 2;
-        if (tile.material == Material.stone) return true;
-        if (tile.material == Material.metal) return true;
+    public boolean canDestroySpecial(final Block block) {
+        if (block == Block.obsidian) return this.tier.getLevel() == 3;
+        if (block == Block.diamondBlock || block == Block.diamondOre) return this.tier.getLevel() >= 2;
+        if (block == Block.goldBlock || block == Block.goldOre) return this.tier.getLevel() >= 2;
+        if (block == Block.ironBlock || block == Block.ironOre) return this.tier.getLevel() >= 1;
+        if (block == Block.lapisBlock || block == Block.lapisOre) return this.tier.getLevel() >= 1;
+        if (block == Block.redStoneOre || block == Block.redStoneOre_lit) return this.tier.getLevel() >= 2;
+        if (block.material == Material.stone) return true;
+        if (block.material == Material.metal) return true;
         return false;
     }
 

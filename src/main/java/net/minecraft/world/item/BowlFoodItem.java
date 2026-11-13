@@ -17,6 +17,6 @@ public class BowlFoodItem extends FoodItem
     public ItemInstance use(final ItemInstance itemInstance, final Level level, final Player player) {
         super.use(itemInstance, level, player);
 
-        return new ItemInstance(Item.bowl);
+        return new ItemInstance(Items.bowl);
     }
 }

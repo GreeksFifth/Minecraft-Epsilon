@@ -5,8 +5,8 @@
 package net.minecraft.world.level.pathfinder;
 
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.tile.DoorTile;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.BlockLogicDoor;
+import net.minecraft.world.level.tile.Block;
 import util.Mth;
 import net.minecraft.world.entity.Entity;
 import util.IntHashMap;
@@ -155,11 +155,11 @@ public class PathFinder
                 for (int zz = z; zz < z + size.z; ++zz) {
                     final int tileId = this.level.getTile(xx, yy, zz);
                     if (tileId <= 0) continue;
-                    if (tileId == Tile.door_iron.id || tileId == Tile.door_wood.id) {
-                        if (!DoorTile.isOpen(this.level.getData(xx, yy, zz))) return TYPE_BLOCKED;
+                    if (tileId == Block.door_iron.id || tileId == Block.door_wood.id) {
+                        if (!BlockLogicDoor.isOpen(this.level.getData(xx, yy, zz))) return TYPE_BLOCKED;
                     }
                     else {
-                        final Material m = Tile.tiles[tileId].material;
+                        final Material m = Block.BLOCKS[tileId].material;
                         if (m.blocksMotion()) return TYPE_BLOCKED;
                         if (m == Material.water) return TYPE_WATER;
                         if (m == Material.lava) return TYPE_LAVA;

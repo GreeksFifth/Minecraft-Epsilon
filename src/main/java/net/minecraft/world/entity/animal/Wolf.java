@@ -7,6 +7,7 @@ package net.minecraft.world.entity.animal;
 import net.minecraft.world.entity.EntityEvent;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.projectile.Arrow;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.pathfinder.Path;
 import util.Mth;
 import net.minecraft.world.item.ItemInstance;
@@ -158,7 +159,7 @@ public class Wolf extends Animal
             if (looking instanceof Player) {
                 final ItemInstance item = ((Player)looking).inventory.getSelected();
                 if (item != null) {
-                    if (!this.isTame() && item.id == Item.bone.id) {
+                    if (!this.isTame() && item.id == Items.bone.id) {
                         this.isInterested = true;
                     }
                     else if (this.isTame() && Item.items[item.id] instanceof FoodItem) {
@@ -365,7 +366,7 @@ public class Wolf extends Animal
                             if (item.count <= 0) {
                                 player.inventory.setItem(player.inventory.selected, null);
                             }
-                            this.heal(((FoodItem) Item.porkChop_raw).getNutrition());
+                            this.heal(((FoodItem) Items.porkChop_raw).getNutrition());
                             return true;
                         }
                     }
@@ -380,7 +381,7 @@ public class Wolf extends Animal
                 return true;
             }
         } else {
-            if (item != null && item.id == Item.bone.id && !this.isAngry()) {
+            if (item != null && item.id == Items.bone.id && !this.isAngry()) {
                 item.count--;
                 if (item.count <= 0) {
                     player.inventory.setItem(player.inventory.selected, null);

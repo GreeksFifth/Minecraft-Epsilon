@@ -5,11 +5,11 @@
 package net.minecraft.world.entity.item;
 
 import net.minecraft.SharedConstants;
-import net.minecraft.world.item.Item;
 import net.minecraft.stats.Achievements;
 import net.minecraft.world.entity.player.Player;
 import com.mojang.nbt.CompoundTag;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.level.material.Material;
 import util.Mth;
 import net.minecraft.world.level.Level;
@@ -82,7 +82,7 @@ public class ItemEntity extends Entity
             friction = 0.6f * 0.98f;
             final int t = this.level.getTile(Mth.floor(this.x), Mth.floor(this.bb.y0) - 1, Mth.floor(this.z));
             if (t > 0) {
-                friction = Tile.tiles[t].friction * 0.98f;
+                friction = Block.BLOCKS[t].friction * 0.98f;
             }
         }
 
@@ -139,8 +139,8 @@ public class ItemEntity extends Entity
 
         final int orgCount = this.item.count;
         if (this.throwTime == 0 && player.inventory.add(this.item)) {
-            if (this.item.id == Tile.treeTrunk.id) player.awardStat(Achievements.mineWood);
-            if (this.item.id == Item.leather.id) player.awardStat(Achievements.killCow);
+            if (this.item.id == Block.treeTrunk.id) player.awardStat(Achievements.mineWood);
+            if (this.item.id == Items.leather.id) player.awardStat(Achievements.killCow);
 
             this.level.playSound(this, "random.pop", 0.2f, ((this.random.nextFloat() - this.random.nextFloat()) * 0.7f + 1.0f) * 2.0f);
             player.take(this, orgCount);

@@ -25,11 +25,10 @@ import org.lwjgl.opengl.*;
 import org.lwjgl.sdl.SDLEvents;
 import org.lwjgl.system.Configuration;
 import org.lwjgl.util.glu.GLU;
-import org.useless.SDL3InputImplementation;
 import org.useless.SDL3Window;
 import util.Mth;
 import net.minecraft.world.level.chunk.ChunkCache;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.client.gamemode.CreativeMode;
@@ -1034,9 +1033,9 @@ public abstract class Minecraft implements Runnable
     private void handleGrabTexture() {
         if (this.hitResult != null) {
             int id = this.level.getTile(this.hitResult.x, this.hitResult.y, this.hitResult.z);
-            if (id == Tile.grass.id) id = Tile.dirt.id;
-            if (id == Tile.stoneSlab.id) id = Tile.stoneSlabHalf.id;
-            if (id == Tile.unbreakable.id) id = Tile.rock.id;
+            if (id == Block.grass.id) id = Block.dirt.id;
+            if (id == Block.stoneSlab.id) id = Block.stoneSlabHalf.id;
+            if (id == Block.unbreakable.id) id = Block.rock.id;
             this.player.inventory.grabTexture(id, this.gameMode instanceof CreativeMode);
         }
     }

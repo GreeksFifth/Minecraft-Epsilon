@@ -4,10 +4,9 @@
 
 package net.minecraft.world.entity.monster;
 
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.projectile.Fireball;
 import util.Mth;
 import net.minecraft.world.level.Level;
@@ -158,7 +157,7 @@ public class Ghast extends FlyingMob implements Enemy
     
     @Override
     protected int getDeathLoot() {
-        return Item.sulphur.id;
+        return Items.sulphur.id;
     }
     
     @Override

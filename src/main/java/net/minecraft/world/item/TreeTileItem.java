@@ -5,7 +5,7 @@
 package net.minecraft.world.item;
 
 import net.minecraft.Facing;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 
 public class TreeTileItem extends TileItem
 {
@@ -17,7 +17,7 @@ public class TreeTileItem extends TileItem
     
     @Override
     public int getIcon(final int auxValue) {
-        return Tile.treeTrunk.getTexture(Facing.NORTH, auxValue);
+        return Block.treeTrunk.getTexture(Facing.NORTH, auxValue);
     }
     
     @Override

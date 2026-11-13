@@ -14,7 +14,7 @@ import net.minecraft.world.item.crafting.FurnaceRecipes;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.Recipes;
 import java.util.HashSet;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import java.util.List;
 import java.util.Map;
 
@@ -68,15 +68,15 @@ public class Stats
     }
 
     public static void buildBlockStats() {
-        Stats.itemUsed = getUsedStats(Stats.itemUsed, "stat.useItem", ITEMS_USED_OFFSET, 0, Tile.tiles.length);
-        Stats.itemBroke = getBreakStats(Stats.itemBroke, "stat.breakItem", ITEMS_BROKEN_OFFSET, 0, Tile.tiles.length);
+        Stats.itemUsed = getUsedStats(Stats.itemUsed, "stat.useItem", ITEMS_USED_OFFSET, 0, Block.BLOCKS.length);
+        Stats.itemBroke = getBreakStats(Stats.itemBroke, "stat.breakItem", ITEMS_BROKEN_OFFSET, 0, Block.BLOCKS.length);
         Stats.blockStatsLoaded = true;
         buildCraftableStats();
     }
 
     public static void buildItemStats() {
-        Stats.itemUsed = getUsedStats(Stats.itemUsed, "stat.useItem", ITEMS_USED_OFFSET, Tile.tiles.length, Item.ITEM_NUM_COUNT);
-        Stats.itemBroke = getBreakStats(Stats.itemBroke, "stat.breakItem", ITEMS_BROKEN_OFFSET, Tile.tiles.length, Item.ITEM_NUM_COUNT);
+        Stats.itemUsed = getUsedStats(Stats.itemUsed, "stat.useItem", ITEMS_USED_OFFSET, Block.BLOCKS.length, Item.ITEM_NUM_COUNT);
+        Stats.itemBroke = getBreakStats(Stats.itemBroke, "stat.breakItem", ITEMS_BROKEN_OFFSET, Block.BLOCKS.length, Item.ITEM_NUM_COUNT);
         Stats.itemStatsLoaded = true;
         buildCraftableStats();
     }
@@ -105,10 +105,10 @@ public class Stats
     }
 
     private static Stat[] getMinedStats(final String nameKey, final int idOff) {
-        final Stat[] stats = new Stat[Tile.TILE_NUM_COUNT];
-        for (int i = 0; i < Tile.TILE_NUM_COUNT; ++i) {
-            if (Tile.tiles[i] != null && Tile.tiles[i].isCollectStatistics()) {
-                stats[i] = new ItemStat(idOff + i, I18n.get(nameKey, Tile.tiles[i].getName()), i).postConstruct();
+        final Stat[] stats = new Stat[Block.TILE_NUM_COUNT];
+        for (int i = 0; i < Block.TILE_NUM_COUNT; ++i) {
+            if (Block.BLOCKS[i] != null && Block.BLOCKS[i].isCollectStatistics()) {
+                stats[i] = new ItemStat(idOff + i, I18n.get(nameKey, Block.BLOCKS[i].getName()), i).postConstruct();
                 Stats.blocksStats.add((ItemStat) stats[i]);
             }
         }
@@ -123,7 +123,7 @@ public class Stats
         for (int i = start; i < end; ++i) {
             if (Item.items[i] != null) {
                 result[i] = new ItemStat(idOff + i, I18n.get(nameKey, Item.items[i].getName()), i).postConstruct();
-                if (i >= Tile.tiles.length) {
+                if (i >= Block.BLOCKS.length) {
                     Stats.itemStats.add((ItemStat) result[i]);
                 }
             }
@@ -146,17 +146,17 @@ public class Stats
     }
 
     private static void remapIds(final Stat[] stats) {
-        remapId(stats, Tile.calmWater.id, Tile.water.id);
-        remapId(stats, Tile.calmLava.id, Tile.calmLava.id);
-        remapId(stats, Tile.litPumpkin.id, Tile.pumpkin.id);
-        remapId(stats, Tile.furnace_lit.id, Tile.furnace.id);
-        remapId(stats, Tile.redStoneOre_lit.id, Tile.redStoneOre.id);
-        remapId(stats, Tile.diode_on.id, Tile.diode_off.id);
-        remapId(stats, Tile.notGate_on.id, Tile.notGate_off.id);
-        remapId(stats, Tile.mushroom2.id, Tile.mushroom1.id);
-        remapId(stats, Tile.stoneSlab.id, Tile.stoneSlabHalf.id);
-        remapId(stats, Tile.grass.id, Tile.dirt.id);
-        remapId(stats, Tile.farmland.id, Tile.dirt.id);
+        remapId(stats, Block.calmWater.id, Block.water.id);
+        remapId(stats, Block.calmLava.id, Block.calmLava.id);
+        remapId(stats, Block.litPumpkin.id, Block.pumpkin.id);
+        remapId(stats, Block.furnace_lit.id, Block.furnace.id);
+        remapId(stats, Block.redStoneOre_lit.id, Block.redStoneOre.id);
+        remapId(stats, Block.diode_on.id, Block.diode_off.id);
+        remapId(stats, Block.notGate_on.id, Block.notGate_off.id);
+        remapId(stats, Block.mushroom2.id, Block.mushroom1.id);
+        remapId(stats, Block.stoneSlab.id, Block.stoneSlabHalf.id);
+        remapId(stats, Block.grass.id, Block.dirt.id);
+        remapId(stats, Block.farmland.id, Block.dirt.id);
     }
 
     private static void remapId(final Stat[] stats, final int id1, final int id2) {

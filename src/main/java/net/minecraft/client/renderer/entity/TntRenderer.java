@@ -4,7 +4,7 @@
 
 package net.minecraft.client.renderer.entity;
 
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.entity.item.PrimedTnt;
 import net.minecraft.client.renderer.TileRenderer;
 
@@ -33,14 +33,14 @@ public class TntRenderer extends EntityRenderer<PrimedTnt>
 
         final float br = (1.0f - (tnt.life - a + 1.0f) / 100.0f) * 0.8f;
         this.bindTexture("/terrain.png");
-        this.tileRenderer.renderTile(Tile.tnt, 0, tnt.getBrightness(a));
+        this.tileRenderer.renderTile(Block.tnt, 0, tnt.getBrightness(a));
         if (tnt.life / 5 % 2 == 0) {
             glDisable(GL_TEXTURE_2D);
             glDisable(GL_LIGHTING);
             glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_DST_ALPHA);
             glColor4f(1.0f, 1.0f, 1.0f, br);
-            this.tileRenderer.renderTile(Tile.tnt, 0, 1.0f);
+            this.tileRenderer.renderTile(Block.tnt, 0, 1.0f);
             glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
             glDisable(GL_BLEND);
             glEnable(GL_LIGHTING);

@@ -7,7 +7,7 @@ package net.minecraft.world.entity.player;
 import net.minecraft.world.item.ArmorItem;
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.ListTag;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.Container;
@@ -185,9 +185,9 @@ public class Inventory implements Container
         pile[slot] = item;
     }
     
-    public float getDestroySpeed(final Tile tile) {
+    public float getDestroySpeed(final Block block) {
         float speed = 1.0f;
-        if (this.items[this.selected] != null) speed *= this.items[this.selected].getDestroySpeed(tile);
+        if (this.items[this.selected] != null) speed *= this.items[this.selected].getDestroySpeed(block);
         return speed;
     }
     
@@ -252,11 +252,11 @@ public class Inventory implements Container
         return 1;
     }
     
-    public boolean canDestroy(final Tile tile) {
-        if (tile.material.isAlwaysDestroyable()) return true;
+    public boolean canDestroy(final Block block) {
+        if (block.material.isAlwaysDestroyable()) return true;
 
         final ItemInstance item = this.getItem(this.selected);
-        if (item != null) return item.canDestroySpecial(tile);
+        if (item != null) return item.canDestroySpecial(block);
         return false;
     }
     

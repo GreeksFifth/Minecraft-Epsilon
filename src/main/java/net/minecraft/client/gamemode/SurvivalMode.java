@@ -6,7 +6,7 @@ package net.minecraft.client.gamemode;
 
 import net.minecraft.world.level.Level;
 import net.minecraft.world.item.ItemInstance;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.client.Minecraft;
 
@@ -36,7 +36,7 @@ public class SurvivalMode extends GameMode
         final boolean changed = super.destroyBlock(x, y, z, face);
 
         final ItemInstance item = this.minecraft.player.getSelectedItem();
-        final boolean couldDestroy = this.minecraft.player.canDestroy(Tile.tiles[t]);
+        final boolean couldDestroy = this.minecraft.player.canDestroy(Block.BLOCKS[t]);
         if (item != null) {
             item.mineBlock(t, x, y, z, this.minecraft.player);
             if (item.count == 0) {
@@ -45,7 +45,7 @@ public class SurvivalMode extends GameMode
             }
         }
         if (changed && couldDestroy) {
-            Tile.tiles[t].playerDestroy(this.minecraft.level, this.minecraft.player, x, y, z, data);
+            Block.BLOCKS[t].playerDestroy(this.minecraft.level, this.minecraft.player, x, y, z, data);
         }
         return changed;
     }
@@ -54,8 +54,8 @@ public class SurvivalMode extends GameMode
     public void startDestroyBlock(final int x, final int y, final int z, final int face) {
         this.minecraft.level.extinguishFire(this.minecraft.player, x, y, z, face);
         final int t = this.minecraft.level.getTile(x, y, z);
-        if (t > 0 && this.destroyProgress == 0.0f) Tile.tiles[t].attack(this.minecraft.level, x, y, z, this.minecraft.player);
-        if (t > 0 && Tile.tiles[t].getDestroyProgress(this.minecraft.player) >= 1.0f) {
+        if (t > 0 && this.destroyProgress == 0.0f) Block.BLOCKS[t].attack(this.minecraft.level, x, y, z, this.minecraft.player);
+        if (t > 0 && Block.BLOCKS[t].getDestroyProgress(this.minecraft.player) >= 1.0f) {
             this.destroyBlock(x, y, z, face);
         }
     }
@@ -76,13 +76,13 @@ public class SurvivalMode extends GameMode
         if (x == this.xDestroyBlock && y == this.yDestroyBlock && z == this.zDestroyBlock) {
             final int t = this.minecraft.level.getTile(x, y, z);
             if (t == 0) return;
-            final Tile tile = Tile.tiles[t];
+            final Block block = Block.BLOCKS[t];
 
-            this.destroyProgress += tile.getDestroyProgress(this.minecraft.player);
+            this.destroyProgress += block.getDestroyProgress(this.minecraft.player);
 
             if (this.destroyTicks % 4.0f == 0.0f) {
-                if (tile != null) {
-                    this.minecraft.soundEngine.play(tile.soundType.getStepSound(), x + 0.5f, y + 0.5f, z + 0.5f, (tile.soundType.getVolume() + 1.0f) / 8.0f, tile.soundType.getPitch() * 0.5f);
+                if (block != null) {
+                    this.minecraft.soundEngine.play(block.soundType.getStepSound(), x + 0.5f, y + 0.5f, z + 0.5f, (block.soundType.getVolume() + 1.0f) / 8.0f, block.soundType.getPitch() * 0.5f);
                 }
             }
 

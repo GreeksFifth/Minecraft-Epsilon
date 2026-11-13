@@ -5,7 +5,8 @@
 package net.minecraft.world.item.crafting;
 
 import net.minecraft.world.item.ItemInstance;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.item.Item;
 
 public class ArmorRecipes
@@ -28,11 +29,11 @@ public class ArmorRecipes
             };
     private Object[][] map = new Object[][]
             {
-                    { Item.leather, Tile.fire, Item.ironIngot, Item.diamond, Item.goldIngot },
-                    { Item.helmet_cloth, Item.helmet_chain, Item.helmet_iron, Item.helmet_diamond, Item.helmet_gold },
-                    { Item.chestplate_cloth, Item.chestplate_chain, Item.chestplate_iron, Item.chestplate_diamond, Item.chestplate_gold },
-                    { Item.leggings_cloth, Item.leggings_chain, Item.leggings_iron, Item.leggings_diamond, Item.leggings_gold },
-                    { Item.boots_cloth, Item.boots_chain, Item.boots_iron, Item.boots_diamond, Item.boots_gold }
+                    { Items.leather, Block.fire, Items.ironIngot, Items.diamond, Items.goldIngot },
+                    { Items.helmet_cloth, Items.helmet_chain, Items.helmet_iron, Items.helmet_diamond, Items.helmet_gold },
+                    { Items.chestplate_cloth, Items.chestplate_chain, Items.chestplate_iron, Items.chestplate_diamond, Items.chestplate_gold },
+                    { Items.leggings_cloth, Items.leggings_chain, Items.leggings_iron, Items.leggings_diamond, Items.leggings_gold },
+                    { Items.boots_cloth, Items.boots_chain, Items.boots_iron, Items.boots_diamond, Items.boots_gold }
             };
     
     public void addRecipes(final Recipes recipes) {

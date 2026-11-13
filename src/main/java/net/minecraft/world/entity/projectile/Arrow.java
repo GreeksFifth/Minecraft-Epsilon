@@ -6,15 +6,15 @@ package net.minecraft.world.entity.projectile;
 
 import net.minecraft.SharedConstants;
 import net.minecraft.world.item.ItemInstance;
-import net.minecraft.world.item.Item;
 import com.mojang.nbt.CompoundTag;
 
 import java.util.List;
 
+import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -124,8 +124,8 @@ public class Arrow extends Entity {
         {
             final int t = this.level.getTile(this.xTile, this.yTile, this.zTile);
             if (t > 0) {
-                Tile.tiles[t].updateShape(this.level, this.xTile, this.yTile, this.zTile);
-                final AABB aabb = Tile.tiles[t].getAABB(this.level, this.xTile, this.yTile, this.zTile);
+                Block.BLOCKS[t].updateShape(this.level, this.xTile, this.yTile, this.zTile);
+                final AABB aabb = Block.BLOCKS[t].getAABB(this.level, this.xTile, this.yTile, this.zTile);
                 if (aabb != null && aabb.contains(Vec3.newTemp(this.x, this.y, this.z))) {
                     this.inGround = true;
                 }
@@ -283,7 +283,7 @@ public class Arrow extends Entity {
     public void playerTouch(final Player player) {
         if (this.level.isClientSide || !this.inGround || !this.pickup || this.shakeTime > 0) return;
 
-        if (player.inventory.add(new ItemInstance(Item.arrow, 1))) {
+        if (player.inventory.add(new ItemInstance(Items.arrow, 1))) {
             this.level.playSound(this, "random.pop", 0.2f, ((this.random.nextFloat() - this.random.nextFloat()) * 0.7f + 1.0f) * 2.0f);
             player.take(this, 1);
             this.remove();

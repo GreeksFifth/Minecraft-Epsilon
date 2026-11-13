@@ -14,7 +14,7 @@ import net.minecraft.server.level.ServerLevel;
 import java.util.ArrayList;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.level.tile.entity.TileEntity;
 import util.LongHashMap;
 import java.util.List;
@@ -268,7 +268,7 @@ public class PlayerChunkMap
                 final int y = this.yChangeMin;
                 final int z = this.z * 16 + this.zChangeMin;
                 this.broadcast(new TileUpdatePacket(x, y, z, level));
-                if (Tile.isEntityTile[level.getTile(x, y, z)]) {
+                if (Block.isEntityTile[level.getTile(x, y, z)]) {
                     this.broadcast(level.getTileEntity(x, y, z));
                 }
             }
@@ -295,7 +295,7 @@ public class PlayerChunkMap
                     final int y = this.changes & 0xFF;
                     final int z = this.z * 16 + (this.changes >> 8 & 0xF);
 
-                    if (Tile.isEntityTile[level.getTile(x, y, z)]) {
+                    if (Block.isEntityTile[level.getTile(x, y, z)]) {
                         System.out.println("Sending!");
                         this.broadcast(level.getTileEntity(x, y, z));
                     }

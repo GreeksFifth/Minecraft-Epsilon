@@ -6,7 +6,8 @@ package net.minecraft.world.item.crafting;
 
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.tile.Block;
 
 public class WeaponRecipes
 {
@@ -16,8 +17,8 @@ public class WeaponRecipes
               "#" }
     };
     private Object[][] map = new Object[][] {
-            { Tile.wood, Tile.stoneBrick, Item.ironIngot, Item.diamond, Item.goldIngot },
-            { Item.sword_wood, Item.sword_stone, Item.sword_iron, Item.sword_diamond, Item.sword_gold }
+            { Block.wood, Block.stoneBrick, Items.ironIngot, Items.diamond, Items.goldIngot },
+            { Items.sword_wood, Items.sword_stone, Items.sword_iron, Items.sword_diamond, Items.sword_gold }
     };
     
     public void addRecipes(final Recipes recipes) {
@@ -25,22 +26,22 @@ public class WeaponRecipes
             final Object o = this.map[0][i];
             for (int j = 0; j < this.map.length - 1; ++j) {
                 recipes.addShapedRecipe(new ItemInstance((Item)this.map[j + 1][i]), this.shapes[j],
-                        '#', Item.stick, 'X', o);
+                        '#', Items.stick, 'X', o);
             }
         }
-        recipes.addShapedRecipe(new ItemInstance(Item.bow, 1),
+        recipes.addShapedRecipe(new ItemInstance(Items.bow, 1),
                 " #X",
                 "# X",
                 " #X",
 
-                'X', Item.string, '#', Item.stick);
+                'X', Items.string, '#', Items.stick);
 
-        recipes.addShapedRecipe(new ItemInstance(Item.arrow, 4),
+        recipes.addShapedRecipe(new ItemInstance(Items.arrow, 4),
                 "X",
                 "#",
                 "Y",
 
-                'Y', Item.feather, 'X', Item.flint,
-                '#', Item.stick);
+                'Y', Items.feather, 'X', Items.flint,
+                '#', Items.stick);
     }
 }

@@ -12,11 +12,11 @@ import net.minecraft.world.level.levelgen.feature.SpruceFeature;
 import java.util.Random;
 import net.minecraft.world.level.Level;
 
-public class Sapling extends Bush
+public class Sapling extends BlockLogicBush
 {
-    public static final int TYPE_DEFAULT = LeafTile.NORMAL_LEAF;
-    public static final int TYPE_EVERGREEN = LeafTile.EVERGREEN_LEAF;
-    public static final int TYPE_BIRCH = LeafTile.BIRCH_LEAF;
+    public static final int TYPE_DEFAULT = BlockLogicLeaves.NORMAL_LEAF;
+    public static final int TYPE_EVERGREEN = BlockLogicLeaves.EVERGREEN_LEAF;
+    public static final int TYPE_BIRCH = BlockLogicLeaves.BIRCH_LEAF;
     private static final int TYPE_MASK = 0x3;
     private static final int AGE_BIT = 0x8;
     protected Sapling(final int id, final int tex) {

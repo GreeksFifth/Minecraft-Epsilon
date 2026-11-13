@@ -8,8 +8,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.level.LevelEvent;
-import net.minecraft.world.level.LevelListener;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.client.Minecraft;
@@ -33,14 +32,14 @@ public class GameMode
     
     public boolean destroyBlock(final int x, final int y, final int z, final int face) {
         final Level level = this.minecraft.level;
-        final Tile oldTile = Tile.tiles[level.getTile(x, y, z)];
+        final Block oldBlock = Block.BLOCKS[level.getTile(x, y, z)];
 
-        level.levelEvent(LevelEvent.PARTICLES_DESTROY_BLOCK, x, y, z, oldTile.id + (level.getData(x, y, z) << Tile.TILE_NUM_SHIFT));
+        level.levelEvent(LevelEvent.PARTICLES_DESTROY_BLOCK, x, y, z, oldBlock.id + (level.getData(x, y, z) << Block.TILE_NUM_SHIFT));
         final int data = level.getData(x, y, z);
         final boolean changed = level.setTile(x, y, z, 0);
 
-        if (oldTile != null && changed) {
-            oldTile.destroy(level, x, y, z, data);
+        if (oldBlock != null && changed) {
+            oldBlock.destroy(level, x, y, z, data);
         }
         return changed;
     }
@@ -87,7 +86,7 @@ public class GameMode
     public boolean useItemOn(final Player player, final Level level, final ItemInstance item, final int x, final int y, final int z, final int face) {
         final int t = level.getTile(x, y, z);
         if (t > 0) {
-            if (Tile.tiles[t].use(level, x, y, z, player)) {
+            if (Block.BLOCKS[t].use(level, x, y, z, player)) {
                 return true;
             }
         }

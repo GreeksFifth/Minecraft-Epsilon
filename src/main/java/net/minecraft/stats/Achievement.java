@@ -5,7 +5,7 @@
 package net.minecraft.stats;
 
 import net.minecraft.locale.language.I18n;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.client.DescFormatter;
@@ -23,7 +23,7 @@ public class Achievement extends Stat
         this(id, name, x, y, new ItemInstance(icon), requires);
     }
     
-    public Achievement(final int id, final String name, final int x, final int y, final Tile icon, final Achievement requires) {
+    public Achievement(final int id, final String name, final int x, final int y, final Block icon, final Achievement requires) {
         this(id, name, x, y, new ItemInstance(icon), requires);
     }
     

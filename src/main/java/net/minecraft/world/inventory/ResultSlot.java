@@ -4,10 +4,9 @@
 
 package net.minecraft.world.inventory;
 
-import net.minecraft.world.item.Item;
-import net.minecraft.stats.Stat;
 import net.minecraft.stats.Achievements;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.Container;
@@ -32,14 +31,14 @@ public class ResultSlot extends Slot
     public void onTake(final ItemInstance carried) {
         carried.onCraftedBy(this.player.level, this.player);
 
-        if (carried.id == Tile.workBench.id) this.player.awardStat(Achievements.buildWorkbench, 1);
-        else if (carried.id == Item.pickAxe_wood.id) this.player.awardStat(Achievements.buildPickaxe, 1);
-        else if (carried.id == Tile.furnace.id) this.player.awardStat(Achievements.buildFurnace, 1);
-        else if (carried.id == Item.hoe_wood.id) this.player.awardStat(Achievements.buildHoe, 1);
-        else if (carried.id == Item.bread.id) this.player.awardStat(Achievements.makeBread, 1);
-        else if (carried.id == Item.cake.id) this.player.awardStat(Achievements.bakeCake, 1);
-        else if (carried.id == Item.pickAxe_stone.id) this.player.awardStat(Achievements.buildBetterPickaxe, 1);
-        else if (carried.id == Item.sword_wood.id) this.player.awardStat(Achievements.buildSword, 1);
+        if (carried.id == Block.workBench.id) this.player.awardStat(Achievements.buildWorkbench, 1);
+        else if (carried.id == Items.pickAxe_wood.id) this.player.awardStat(Achievements.buildPickaxe, 1);
+        else if (carried.id == Block.furnace.id) this.player.awardStat(Achievements.buildFurnace, 1);
+        else if (carried.id == Items.hoe_wood.id) this.player.awardStat(Achievements.buildHoe, 1);
+        else if (carried.id == Items.bread.id) this.player.awardStat(Achievements.makeBread, 1);
+        else if (carried.id == Items.cake.id) this.player.awardStat(Achievements.bakeCake, 1);
+        else if (carried.id == Items.pickAxe_stone.id) this.player.awardStat(Achievements.buildBetterPickaxe, 1);
+        else if (carried.id == Items.sword_wood.id) this.player.awardStat(Achievements.buildSword, 1);
 
         for (int i = 0; i < this.craftSlots.getContainerSize(); ++i) {
             final ItemInstance item = this.craftSlots.getItem(i);

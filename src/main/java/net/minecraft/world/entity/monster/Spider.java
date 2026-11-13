@@ -4,8 +4,8 @@
 
 package net.minecraft.world.entity.monster;
 
-import net.minecraft.world.item.Item;
 import com.mojang.nbt.CompoundTag;
+import net.minecraft.world.item.Items;
 import util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
@@ -89,7 +89,7 @@ public class Spider extends Monster
     
     @Override
     protected int getDeathLoot() {
-        return Item.string.id;
+        return Items.string.id;
     }
     
     @Override

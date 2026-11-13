@@ -5,7 +5,7 @@
 package net.minecraft.client.renderer.tileentity;
 
 import net.minecraft.client.gui.Font;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.level.tile.entity.SignTileEntity;
 import net.minecraft.client.model.SignModel;
 
@@ -16,11 +16,11 @@ public class SignRenderer extends TileEntityRenderer<SignTileEntity>
     private SignModel signModel = new SignModel();
     
     public void render(final SignTileEntity sign, final double x, final double y, final double z, final float a) {
-        final Tile tile = sign.getTile();
+        final Block block = sign.getTile();
 
         glPushMatrix();
         final float size = 16 / 24.0f;
-        if (tile == Tile.sign) {
+        if (block == Block.sign) {
             glTranslatef((float)x + 0.5f, (float)y + 0.75f * size, (float)z + 0.5f);
             glRotatef(-(sign.getData() * 360 / 16.0f), 0.0f, 1.0f, 0.0f);
             this.signModel.cube2.visible = true;

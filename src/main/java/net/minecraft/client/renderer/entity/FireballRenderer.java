@@ -5,8 +5,8 @@
 package net.minecraft.client.renderer.entity;
 
 import net.minecraft.client.renderer.Tesselator;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.entity.projectile.Fireball;
+import net.minecraft.world.item.Items;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL12.*;
@@ -20,7 +20,7 @@ public class FireballRenderer extends EntityRenderer<Fireball>
         glEnable(GL_RESCALE_NORMAL);
         final float s = 2.0f;
         glScalef(s / 1.0f, s / 1.0f, s / 1.0f);
-        final int icon = Item.snowBall.getIcon(0);
+        final int icon = Items.snowBall.getIcon(0);
         this.bindTexture("/gui/items.png");
         final Tesselator t = Tesselator.instance;
 

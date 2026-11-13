@@ -9,8 +9,9 @@ import java.util.HashMap;
 import java.util.Collections;
 
 import net.minecraft.world.item.CoalItem;
-import net.minecraft.world.level.tile.StoneSlabTile;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.tile.StoneSlabBlock;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.Item;
 import java.util.ArrayList;
@@ -35,368 +36,368 @@ public class Recipes
         new ArmorRecipes().addRecipes(this);
         new ClothDyeRecipes().addRecipes(this);
 
-        this.addShapedRecipe(new ItemInstance(Item.paper, 3),
+        this.addShapedRecipe(new ItemInstance(Items.paper, 3),
                 "###",
 
-                '#', Item.reeds);
+                '#', Items.reeds);
 
-        this.addShapedRecipe(new ItemInstance(Item.book, 1),
+        this.addShapedRecipe(new ItemInstance(Items.book, 1),
                 "#",
                 "#",
                 "#",
 
-                '#', Item.paper);
+                '#', Items.paper);
 
-        this.addShapedRecipe(new ItemInstance(Tile.fence, 2),
+        this.addShapedRecipe(new ItemInstance(Block.fence, 2),
                 "###",
                 "###",
 
-                '#', Item.stick);
+                '#', Items.stick);
 
-        this.addShapedRecipe(new ItemInstance(Tile.recordPlayer, 1),
+        this.addShapedRecipe(new ItemInstance(Block.recordPlayer, 1),
                 "###",
                 "#X#",
                 "###",
 
-                '#', Tile.wood, 'X', Item.diamond);
+                '#', Block.wood, 'X', Items.diamond);
 
-        this.addShapedRecipe(new ItemInstance(Tile.musicBlock, 1),
+        this.addShapedRecipe(new ItemInstance(Block.musicBlock, 1),
                 "###",
                 "#X#",
                 "###",
 
-                '#', Tile.wood, 'X', Item.redStone);
+                '#', Block.wood, 'X', Items.redStone);
 
-        this.addShapedRecipe(new ItemInstance(Tile.bookshelf, 1),
+        this.addShapedRecipe(new ItemInstance(Block.bookshelf, 1),
                 "###",
                 "XXX",
                 "###",
 
-                '#', Tile.wood, 'X', Item.book);
+                '#', Block.wood, 'X', Items.book);
 
-        this.addShapedRecipe(new ItemInstance(Tile.snow, 1),
+        this.addShapedRecipe(new ItemInstance(Block.snow, 1),
                 "##",
                 "##",
 
-                '#', Item.snowBall);
+                '#', Items.snowBall);
 
-        this.addShapedRecipe(new ItemInstance(Tile.clay, 1),
+        this.addShapedRecipe(new ItemInstance(Block.clay, 1),
                 "##",
                 "##",
 
-                '#', Item.clay);
+                '#', Items.clay);
 
-        this.addShapedRecipe(new ItemInstance(Tile.redBrick, 1),
+        this.addShapedRecipe(new ItemInstance(Block.redBrick, 1),
                 "##",
                 "##",
 
-                '#', Item.brick);
+                '#', Items.brick);
 
-        this.addShapedRecipe(new ItemInstance(Tile.lightGem, 1),
+        this.addShapedRecipe(new ItemInstance(Block.lightGem, 1),
                 "##",
                 "##",
 
-                '#', Item.yellowDust);
+                '#', Items.yellowDust);
 
-        this.addShapedRecipe(new ItemInstance(Tile.cloth, 1),
+        this.addShapedRecipe(new ItemInstance(Block.cloth, 1),
                 "##",
                 "##",
 
-                '#', Item.string);
+                '#', Items.string);
 
-        this.addShapedRecipe(new ItemInstance(Tile.tnt, 1),
+        this.addShapedRecipe(new ItemInstance(Block.tnt, 1),
                 "X#X",
                 "#X#",
                 "X#X",
 
-                'X', Item.sulphur, '#', Tile.sand);
+                'X', Items.sulphur, '#', Block.sand);
 
-        this.addShapedRecipe(new ItemInstance(Tile.stoneSlabHalf, 3, StoneSlabTile.COBBLESTONE_SLAB),
+        this.addShapedRecipe(new ItemInstance(Block.stoneSlabHalf, 3, StoneSlabBlock.COBBLESTONE_SLAB),
                 "###",
 
-                '#', Tile.stoneBrick);
+                '#', Block.stoneBrick);
 
-        this.addShapedRecipe(new ItemInstance(Tile.stoneSlabHalf, 3, StoneSlabTile.STONE_SLAB),
+        this.addShapedRecipe(new ItemInstance(Block.stoneSlabHalf, 3, StoneSlabBlock.STONE_SLAB),
                 "###",
 
-                '#', Tile.rock);
+                '#', Block.rock);
 
-        this.addShapedRecipe(new ItemInstance(Tile.stoneSlabHalf, 3, StoneSlabTile.SAND_SLAB),
+        this.addShapedRecipe(new ItemInstance(Block.stoneSlabHalf, 3, StoneSlabBlock.SAND_SLAB),
                 "###",
 
-                '#', Tile.sandStone);
+                '#', Block.sandStone);
 
-        this.addShapedRecipe(new ItemInstance(Tile.stoneSlabHalf, 3, StoneSlabTile.WOOD_SLAB),
+        this.addShapedRecipe(new ItemInstance(Block.stoneSlabHalf, 3, StoneSlabBlock.WOOD_SLAB),
                 "###",
 
-                '#', Tile.wood);
+                '#', Block.wood);
 
-        this.addShapedRecipe(new ItemInstance(Tile.ladder, 2),
+        this.addShapedRecipe(new ItemInstance(Block.ladder, 2),
                 "# #",
                 "###",
                 "# #",
 
-                '#', Item.stick);
+                '#', Items.stick);
 
-        this.addShapedRecipe(new ItemInstance(Item.door_wood, 1),
+        this.addShapedRecipe(new ItemInstance(Items.door_wood, 1),
                 "##",
                 "##",
                 "##",
 
-                '#', Tile.wood);
+                '#', Block.wood);
 
-        this.addShapedRecipe(new ItemInstance(Tile.trapdoor, 2),
+        this.addShapedRecipe(new ItemInstance(Block.trapdoor, 2),
                 "###",
                 "###",
 
-                '#', Tile.wood);
+                '#', Block.wood);
 
-        this.addShapedRecipe(new ItemInstance(Item.door_iron, 1),
+        this.addShapedRecipe(new ItemInstance(Items.door_iron, 1),
                 "##",
                 "##",
                 "##",
 
-                '#', Item.ironIngot);
+                '#', Items.ironIngot);
 
-        this.addShapedRecipe(new ItemInstance(Item.sign, 1),
+        this.addShapedRecipe(new ItemInstance(Items.sign, 1),
                 "###",
                 "###",
                 " X ",
 
-                '#', Tile.wood,
-                'X', Item.stick);
+                '#', Block.wood,
+                'X', Items.stick);
 
-        this.addShapedRecipe(new ItemInstance(Item.cake, 1),
+        this.addShapedRecipe(new ItemInstance(Items.cake, 1),
                 "AAA",
                 "BEB",
                 "CCC",
 
-                'A', Item.milk, 'B', Item.sugar,
-                'C', Item.wheat, 'E', Item.egg);
+                'A', Items.milk, 'B', Items.sugar,
+                'C', Items.wheat, 'E', Items.egg);
 
-        this.addShapedRecipe(new ItemInstance(Item.sugar, 1),
+        this.addShapedRecipe(new ItemInstance(Items.sugar, 1),
                 "#",
 
-                '#', Item.reeds);
+                '#', Items.reeds);
 
-        this.addShapedRecipe(new ItemInstance(Tile.wood, 4),
+        this.addShapedRecipe(new ItemInstance(Block.wood, 4),
                 "#",
 
-                '#', Tile.treeTrunk);
+                '#', Block.treeTrunk);
 
-        this.addShapedRecipe(new ItemInstance(Item.stick, 4),
+        this.addShapedRecipe(new ItemInstance(Items.stick, 4),
                 "#",
                 "#",
 
-                '#', Tile.wood);
+                '#', Block.wood);
 
-        this.addShapedRecipe(new ItemInstance(Tile.torch, 4),
+        this.addShapedRecipe(new ItemInstance(Block.torch, 4),
                 "X",
                 "#",
 
-                'X', Item.coal, '#', Item.stick);
+                'X', Items.coal, '#', Items.stick);
 
-        this.addShapedRecipe(new ItemInstance(Tile.torch, 4),
+        this.addShapedRecipe(new ItemInstance(Block.torch, 4),
                 "X",
                 "#",
 
-                'X', new ItemInstance(Item.coal, 1, CoalItem.CHAR_COAL),
-                '#', Item.stick);
+                'X', new ItemInstance(Items.coal, 1, CoalItem.CHAR_COAL),
+                '#', Items.stick);
 
-        this.addShapedRecipe(new ItemInstance(Item.bowl, 4),
+        this.addShapedRecipe(new ItemInstance(Items.bowl, 4),
                 "# #",
                 " # ",
 
-                '#', Tile.wood);
+                '#', Block.wood);
 
-        this.addShapedRecipe(new ItemInstance(Tile.rail, 16),
+        this.addShapedRecipe(new ItemInstance(Block.rail, 16),
                 "X X",
                 "X#X",
                 "X X",
 
-                'X', Item.ironIngot, '#', Item.stick);
+                'X', Items.ironIngot, '#', Items.stick);
 
-        this.addShapedRecipe(new ItemInstance(Tile.goldenRail, 6),
+        this.addShapedRecipe(new ItemInstance(Block.goldenRail, 6),
                 "X X",
                 "X#X",
                 "XRX",
 
-                'X', Item.goldIngot, 'R', Item.redStone,
-                '#', Item.stick);
+                'X', Items.goldIngot, 'R', Items.redStone,
+                '#', Items.stick);
 
-        this.addShapedRecipe(new ItemInstance(Tile.detectorRail, 6),
+        this.addShapedRecipe(new ItemInstance(Block.detectorRail, 6),
                 "X X",
                 "X#X",
                 "XRX",
 
-                'X', Item.ironIngot, 'R', Item.redStone,
-                '#', Tile.pressurePlate_stone);
+                'X', Items.ironIngot, 'R', Items.redStone,
+                '#', Block.pressurePlate_stone);
 
-        this.addShapedRecipe(new ItemInstance(Item.minecart, 1),
+        this.addShapedRecipe(new ItemInstance(Items.minecart, 1),
                 "# #",
                 "###",
 
-                '#', Item.ironIngot);
+                '#', Items.ironIngot);
 
-        this.addShapedRecipe(new ItemInstance(Tile.litPumpkin, 1),
+        this.addShapedRecipe(new ItemInstance(Block.litPumpkin, 1),
                 "A",
                 "B",
 
-                'A', Tile.pumpkin, 'B', Tile.torch);
+                'A', Block.pumpkin, 'B', Block.torch);
 
-        this.addShapedRecipe(new ItemInstance(Item.minecart_chest, 1),
+        this.addShapedRecipe(new ItemInstance(Items.minecart_chest, 1),
                 "A",
                 "B",
 
-                'A', Tile.chest, 'B', Item.minecart);
+                'A', Block.chest, 'B', Items.minecart);
 
-        this.addShapedRecipe(new ItemInstance(Item.minecart_furnace, 1),
+        this.addShapedRecipe(new ItemInstance(Items.minecart_furnace, 1),
                 "A",
                 "B",
 
-                'A', Tile.furnace, 'B', Item.minecart);
+                'A', Block.furnace, 'B', Items.minecart);
 
-        this.addShapedRecipe(new ItemInstance(Item.boat, 1),
+        this.addShapedRecipe(new ItemInstance(Items.boat, 1),
                 "# #",
                 "###",
 
-                '#', Tile.wood);
+                '#', Block.wood);
 
-        this.addShapedRecipe(new ItemInstance(Item.bucket_empty, 1),
+        this.addShapedRecipe(new ItemInstance(Items.bucket_empty, 1),
                 "# #",
                 " # ",
 
-                '#', Item.ironIngot);
+                '#', Items.ironIngot);
 
-        this.addShapedRecipe(new ItemInstance(Item.flintAndSteel, 1),
+        this.addShapedRecipe(new ItemInstance(Items.flintAndSteel, 1),
                 "A ",
                 " B",
 
-                'A', Item.ironIngot, 'B', Item.flint);
+                'A', Items.ironIngot, 'B', Items.flint);
 
-        this.addShapedRecipe(new ItemInstance(Item.bread, 1),
+        this.addShapedRecipe(new ItemInstance(Items.bread, 1),
                 "###",
 
-                '#', Item.wheat);
+                '#', Items.wheat);
 
-        this.addShapedRecipe(new ItemInstance(Tile.stairs_wood, 4),
+        this.addShapedRecipe(new ItemInstance(Block.stairs_wood, 4),
                 "#  ",
                 "## ",
                 "###",
 
-                '#', Tile.wood);
+                '#', Block.wood);
 
-        this.addShapedRecipe(new ItemInstance(Item.fishingRod, 1),
+        this.addShapedRecipe(new ItemInstance(Items.fishingRod, 1),
                 "  #",
                 " #X",
                 "# X",
 
-                '#', Item.stick, 'X', Item.string);
+                '#', Items.stick, 'X', Items.string);
 
-        this.addShapedRecipe(new ItemInstance(Tile.stairs_stone, 4),
+        this.addShapedRecipe(new ItemInstance(Block.stairs_stone, 4),
                 "#  ",
                 "## ",
                 "###",
 
-                '#', Tile.stoneBrick);
+                '#', Block.stoneBrick);
 
-        this.addShapedRecipe(new ItemInstance(Item.painting, 1),
+        this.addShapedRecipe(new ItemInstance(Items.painting, 1),
                 "###",
                 "#X#",
                 "###",
 
-                '#', Item.stick, 'X', Tile.cloth);
+                '#', Items.stick, 'X', Block.cloth);
 
-        this.addShapedRecipe(new ItemInstance(Item.apple_gold, 1),
+        this.addShapedRecipe(new ItemInstance(Items.apple_gold, 1),
                 "###",
                 "#X#",
                 "###",
 
-                '#', Tile.goldBlock, 'X', Item.apple);
+                '#', Block.goldBlock, 'X', Items.apple);
 
-        this.addShapedRecipe(new ItemInstance(Tile.lever, 1),
+        this.addShapedRecipe(new ItemInstance(Block.lever, 1),
                 "X",
                 "#",
 
-                '#', Tile.stoneBrick, 'X', Item.stick);
+                '#', Block.stoneBrick, 'X', Items.stick);
 
-        this.addShapedRecipe(new ItemInstance(Tile.notGate_on, 1),
+        this.addShapedRecipe(new ItemInstance(Block.notGate_on, 1),
                 "X",
                 "#",
 
-                '#', Item.stick, 'X', Item.redStone);
+                '#', Items.stick, 'X', Items.redStone);
 
-        this.addShapedRecipe(new ItemInstance(Item.diode, 1),
+        this.addShapedRecipe(new ItemInstance(Items.diode, 1),
                 "#X#",
                 "III",
 
-                '#', Tile.notGate_on, 'X', Item.redStone,
-                'I', Tile.rock);
+                '#', Block.notGate_on, 'X', Items.redStone,
+                'I', Block.rock);
 
-        this.addShapedRecipe(new ItemInstance(Item.clock, 1),
+        this.addShapedRecipe(new ItemInstance(Items.clock, 1),
                 " # ",
                 "#X#",
                 " # ",
 
-                '#', Item.goldIngot, 'X', Item.redStone);
+                '#', Items.goldIngot, 'X', Items.redStone);
 
-        this.addShapedRecipe(new ItemInstance(Item.compass, 1),
+        this.addShapedRecipe(new ItemInstance(Items.compass, 1),
                 " # ",
                 "#X#",
                 " # ",
 
-                '#', Item.ironIngot, 'X', Item.redStone);
+                '#', Items.ironIngot, 'X', Items.redStone);
 
-        this.addShapedRecipe(new ItemInstance(Item.map, 1),
+        this.addShapedRecipe(new ItemInstance(Items.map, 1),
                 "###",
                 "#X#",
                 "###",
 
-                '#', Item.paper, 'X', Item.compass);
+                '#', Items.paper, 'X', Items.compass);
 
-        this.addShapedRecipe(new ItemInstance(Tile.button, 1),
+        this.addShapedRecipe(new ItemInstance(Block.button, 1),
                 "#",
                 "#",
 
-                '#', Tile.rock);
+                '#', Block.rock);
 
-        this.addShapedRecipe(new ItemInstance(Tile.pressurePlate_stone, 1),
+        this.addShapedRecipe(new ItemInstance(Block.pressurePlate_stone, 1),
                 "##",
 
-                '#', Tile.rock);
+                '#', Block.rock);
 
-        this.addShapedRecipe(new ItemInstance(Tile.pressurePlate_wood, 1),
+        this.addShapedRecipe(new ItemInstance(Block.pressurePlate_wood, 1),
                 "##",
 
-                '#', Tile.wood);
+                '#', Block.wood);
 
-        this.addShapedRecipe(new ItemInstance(Tile.dispenser, 1),
+        this.addShapedRecipe(new ItemInstance(Block.dispenser, 1),
                 "###",
                 "#X#",
                 "#R#",
 
-                '#', Tile.stoneBrick, 'X', Item.bow,
-                'R', Item.redStone);
+                '#', Block.stoneBrick, 'X', Items.bow,
+                'R', Items.redStone);
 
-        this.addShapedRecipe(new ItemInstance(Tile.pistonBase, 1),
+        this.addShapedRecipe(new ItemInstance(Block.pistonBase, 1),
                 "TTT",
                 "#X#",
                 "#R#",
 
-                '#', Tile.stoneBrick, 'X', Item.ironIngot,
-                'R', Item.redStone, 'T', Tile.wood);
+                '#', Block.stoneBrick, 'X', Items.ironIngot,
+                'R', Items.redStone, 'T', Block.wood);
 
-        this.addShapedRecipe(new ItemInstance(Tile.pistonStickyBase, 1),
+        this.addShapedRecipe(new ItemInstance(Block.pistonStickyBase, 1),
                 "S",
                 "P",
 
-                'S', Item.slimeBall, 'P', Tile.pistonBase);
+                'S', Items.slimeBall, 'P', Block.pistonBase);
 
-        this.addShapedRecipe(new ItemInstance(Item.bed, 1),
+        this.addShapedRecipe(new ItemInstance(Items.bed, 1),
                 "###",
                 "XXX",
 
-                '#', Tile.cloth, 'X', Tile.wood);
+                '#', Block.cloth, 'X', Block.wood);
 
         Collections.sort(this.recipes, (r0, r1) -> {
             if (r0 instanceof ShapelessRecipe && r1 instanceof ShapedRecipe) return 1;
@@ -442,8 +443,8 @@ public class Recipes
             if (args[p + 1] instanceof Item) {
                 to = new ItemInstance((Item)args[p + 1]);
             }
-            else if (args[p + 1] instanceof Tile) {
-                to = new ItemInstance((Tile)args[p + 1], 1, -1);
+            else if (args[p + 1] instanceof Block) {
+                to = new ItemInstance((Block)args[p + 1], 1, -1);
             }
             else if (args[p + 1] instanceof ItemInstance) {
                 to = args[p + 1];
@@ -476,8 +477,8 @@ public class Recipes
                 ingredients.add(((ItemInstance)o).copy());
             } else if (o instanceof Item) {
                 ingredients.add(new ItemInstance((Item) o));
-            } else if (o instanceof Tile) {
-                ingredients.add(new ItemInstance((Tile) o));
+            } else if (o instanceof Block) {
+                ingredients.add(new ItemInstance((Block) o));
             } else {
                 throw new RuntimeException("Invalid shapeless recipy!");
             }

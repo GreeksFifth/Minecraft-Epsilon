@@ -6,8 +6,8 @@ package net.minecraft.world.entity.animal;
 
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import com.mojang.nbt.CompoundTag;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
 public class Cow extends Animal
@@ -50,14 +50,14 @@ public class Cow extends Animal
     
     @Override
     protected int getDeathLoot() {
-        return Item.leather.id;
+        return Items.leather.id;
     }
     
     @Override
     public boolean interact(final Player player) {
         final ItemInstance item = player.inventory.getSelected();
-        if (item != null && item.id == Item.bucket_empty.id) {
-            player.inventory.setItem(player.inventory.selected, new ItemInstance(Item.milk));
+        if (item != null && item.id == Items.bucket_empty.id) {
+            player.inventory.setItem(player.inventory.selected, new ItemInstance(Items.milk));
             return true;
         }
         return false;

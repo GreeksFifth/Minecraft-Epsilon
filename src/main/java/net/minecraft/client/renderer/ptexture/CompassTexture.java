@@ -9,8 +9,9 @@ import net.minecraft.Pos;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import net.minecraft.world.item.Item;
+
 import net.minecraft.client.Minecraft;
+import net.minecraft.world.item.Items;
 
 public class CompassTexture extends DynamicTexture
 {
@@ -19,7 +20,7 @@ public class CompassTexture extends DynamicTexture
     private double rot, rota;
     
     public CompassTexture(final Minecraft mc) {
-        super(Item.compass.getIcon(0));
+        super(Items.compass.getIcon(0));
         this.mc = mc;
         this.textureId = TEXTURE_ITEMS;
         try {

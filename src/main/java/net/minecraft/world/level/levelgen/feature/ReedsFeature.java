@@ -4,7 +4,7 @@
 
 package net.minecraft.world.level.levelgen.feature;
 
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.level.material.Material;
 import java.util.Random;
 import net.minecraft.world.level.Level;
@@ -26,8 +26,8 @@ public class ReedsFeature extends Feature
                 {
                     int h = 2 + random.nextInt(random.nextInt(3) + 1);
                     for (int yy = 0; yy < h; ++yy) {
-                        if (Tile.reeds.canSurvive(level, x2, y2 + yy, z2)) {
-                            level.setTileNoUpdate(x2, y2 + yy, z2, Tile.reeds.id);
+                        if (Block.reeds.canSurvive(level, x2, y2 + yy, z2)) {
+                            level.setTileNoUpdate(x2, y2 + yy, z2, Block.reeds.id);
                         }
                     }
                 }

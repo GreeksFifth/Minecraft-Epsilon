@@ -6,7 +6,7 @@ package net.minecraft.client.renderer.ptexture;
 
 import util.Mth;
 import java.util.Random;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 
 public class PortalTexture extends DynamicTexture
 {
@@ -14,7 +14,7 @@ public class PortalTexture extends DynamicTexture
     private byte[][] frames = new byte[32][16 * 16 * 4];
     
     public PortalTexture() {
-        super(Tile.portalTile.tex);
+        super(Block.portalTile.tex);
         final Random random = new Random(100L);
         for (int time = 0; time < 32; ++time) {
             for (int x = 0; x < 16; ++x) {

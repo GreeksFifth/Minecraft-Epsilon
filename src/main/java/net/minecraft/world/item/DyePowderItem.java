@@ -4,12 +4,12 @@
 
 package net.minecraft.world.item;
 
-import net.minecraft.world.level.tile.ClothTile;
+import net.minecraft.world.level.tile.BlockLogicWool;
 import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.level.tile.CropTile;
+import net.minecraft.world.level.tile.BlockLogicWheatCrop;
 import net.minecraft.world.level.tile.Sapling;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.player.Player;
 
@@ -90,21 +90,21 @@ public class DyePowderItem extends Item
         if (itemInstance.getAuxValue() == WHITE) {
             // bone meal is a fertilizer, so instantly grow trees and stuff
             final int tile = level.getTile(x, y, z);
-            if (tile == Tile.sapling.id) {
+            if (tile == Block.sapling.id) {
                 if (!level.isClientSide) {
-                    ((Sapling)Tile.sapling).growTree(level, x, y, z, level.random);
+                    ((Sapling) Block.sapling).growTree(level, x, y, z, level.random);
                     itemInstance.count--;
                 }
                 return true;
             }
-            if (tile == Tile.crops.id) {
+            if (tile == Block.crops.id) {
                 if (!level.isClientSide) {
-                    ((CropTile)Tile.crops).growCropsToMax(level, x, y, z);
+                    ((BlockLogicWheatCrop) Block.crops).growCropsToMax(level, x, y, z);
                     itemInstance.count--;
                 }
                 return true;
             }
-            if (tile == Tile.grass.id) {
+            if (tile == Block.grass.id) {
                 if (!level.isClientSide) {
                     itemInstance.count--;
                     mainLoop:
@@ -116,19 +116,19 @@ public class DyePowderItem extends Item
                             xx += DyePowderItem.random.nextInt(3) - 1;
                             yy += (DyePowderItem.random.nextInt(3) - 1) * DyePowderItem.random.nextInt(3) / 2;
                             zz += DyePowderItem.random.nextInt(3) - 1;
-                            if (level.getTile(xx, yy - 1, zz) != Tile.grass.id || level.isSolidBlockingTile(xx, yy, zz)) {
+                            if (level.getTile(xx, yy - 1, zz) != Block.grass.id || level.isSolidBlockingTile(xx, yy, zz)) {
                                 continue mainLoop;
                             }
                         }
 
                         if (level.getTile(xx, yy, zz) == 0) {
                             if (DyePowderItem.random.nextInt(10) != 0) {
-                                level.setTileAndData(xx, yy, zz, Tile.tallgrass.id, 1);
+                                level.setTileAndData(xx, yy, zz, Block.tallgrass.id, 1);
                             }
                             else if (DyePowderItem.random.nextInt(3) != 0) {
-                                level.setTile(xx, yy, zz, Tile.flower.id);
+                                level.setTile(xx, yy, zz, Block.flower.id);
                             } else {
-                                level.setTile(xx, yy, zz, Tile.rose.id);
+                                level.setTile(xx, yy, zz, Block.rose.id);
                             }
                         }
                     }
@@ -144,7 +144,7 @@ public class DyePowderItem extends Item
         if (mob instanceof Sheep) {
             final Sheep sheep = (Sheep)mob;
             // convert to tile-based color value (0 is white instead of black)
-            final int newColor = ClothTile.getTileDataForItemAuxValue(itemInstance.getAuxValue());
+            final int newColor = BlockLogicWool.getTileDataForItemAuxValue(itemInstance.getAuxValue());
             if (!sheep.isSheared() && sheep.getColor() != newColor) {
                 sheep.setColor(newColor);
                 itemInstance.count--;

@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.culling.Culler;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.tile.entity.TileEntity;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderDispatcher;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.level.Region;
 
 import java.util.HashSet;
@@ -143,20 +143,20 @@ public class Chunk
                                 Chunk.t.offset(-this.x, -this.y, -this.z);
                             }
 
-                            if (currentLayer == 0 && Tile.isEntityTile[tileId]) {
+                            if (currentLayer == 0 && Block.isEntityTile[tileId]) {
                                 final TileEntity te = level.getTileEntity(x, y, z);
                                 if (TileEntityRenderDispatcher.instance.hasRenderer(te)) {
                                     this.renderableTileEntities.add(te);
                                 }
                             }
 
-                            final Tile tile = Tile.tiles[tileId];
-                            final int renderLayer = tile.getRenderLayer();
+                            final Block block = Block.BLOCKS[tileId];
+                            final int renderLayer = block.getRenderLayer();
                             if (renderLayer != currentLayer) {
                                 renderNextLayer = true;
                             }
                             else if (renderLayer == currentLayer) {
-                                rendered |= tileRenderer.tesselateInWorld(tile, x, y, z);
+                                rendered |= tileRenderer.tesselateInWorld(block, x, y, z);
                             }
                         }
                     }

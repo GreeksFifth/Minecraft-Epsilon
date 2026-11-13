@@ -7,7 +7,7 @@ package net.minecraft.world.item;
 import net.minecraft.Facing;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.entity.animal.Cow;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.level.material.Material;
 import util.Mth;
 import net.minecraft.world.phys.Vec3;
@@ -62,15 +62,15 @@ public class BucketItem extends Item
             if (this.content == 0) {
                 if (level.getMaterial(xt, yt, zt) == Material.water && level.getData(xt, yt, zt) == 0) {
                     level.setTile(xt, yt, zt, 0);
-                    return new ItemInstance(Item.bucket_water);
+                    return new ItemInstance(Items.bucket_water);
                 }
                 if (level.getMaterial(xt, yt, zt) == Material.lava && level.getData(xt, yt, zt) == 0) {
                     level.setTile(xt, yt, zt, 0);
-                    return new ItemInstance(Item.bucket_lava);
+                    return new ItemInstance(Items.bucket_lava);
                 }
             }
             else {
-                if (this.content < 0) return new ItemInstance(Item.bucket_empty);
+                if (this.content < 0) return new ItemInstance(Items.bucket_empty);
 
                 if (hr.f == Facing.DOWN) --yt;
                 if (hr.f == Facing.UP) ++yt;
@@ -80,7 +80,7 @@ public class BucketItem extends Item
                 if (hr.f == Facing.EAST) ++xt;
 
                 if (level.isEmptyTile(xt, yt, zt) || !level.getMaterial(xt, yt, zt).isSolid()) {
-                    if (level.dimension.ultraWarm && this.content == Tile.water.id) {
+                    if (level.dimension.ultraWarm && this.content == Block.water.id) {
                         level.playSound(x + 0.5, y + 0.5, z + 0.5, "random.fizz", 0.5f, 2.6f + (level.random.nextFloat() - level.random.nextFloat()) * 0.8f);
 
                         for (int i = 0; i < 8; ++i) {
@@ -91,14 +91,14 @@ public class BucketItem extends Item
                         level.setTileAndData(xt, yt, zt, this.content, 0);
                     }
 
-                    return new ItemInstance(Item.bucket_empty);
+                    return new ItemInstance(Items.bucket_empty);
                 }
             }
         }
         else {
             if (this.content == 0) {
                 if (hr.entity instanceof Cow) {
-                    return new ItemInstance(Item.milk);
+                    return new ItemInstance(Items.milk);
                 }
             }
         }

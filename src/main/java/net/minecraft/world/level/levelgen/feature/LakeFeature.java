@@ -6,7 +6,7 @@ package net.minecraft.world.level.levelgen.feature;
 
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.LightLayer;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import java.util.Random;
 import net.minecraft.world.level.Level;
 
@@ -86,15 +86,15 @@ public class LakeFeature extends Feature
             for (int zz = 0; zz < 16; ++zz) {
                 for (int yy = 4; yy < 8; ++yy) {
                     if (grid[(xx * 16 + zz) * 8 + yy]) {
-                        if (level.getTile(x + xx, y + yy - 1, z + zz) == Tile.dirt.id && level.getBrightness(LightLayer.Sky, x + xx, y + yy, z + zz) > 0) {
-                            level.setTileNoUpdate(x + xx, y + yy - 1, z + zz, Tile.grass.id);
+                        if (level.getTile(x + xx, y + yy - 1, z + zz) == Block.dirt.id && level.getBrightness(LightLayer.Sky, x + xx, y + yy, z + zz) > 0) {
+                            level.setTileNoUpdate(x + xx, y + yy - 1, z + zz, Block.grass.id);
                         }
                     }
                 }
             }
         }
 
-        if (Tile.tiles[this.tile].material == Material.lava) {
+        if (Block.BLOCKS[this.tile].material == Material.lava) {
             for (int xx = 0; xx < 16; ++xx) {
                 for (int zz = 0; zz < 16; ++zz) {
                     for (int yy = 0; yy < 8; ++yy) {
@@ -108,7 +108,7 @@ public class LakeFeature extends Feature
 
                         if (check) {
                             if ((yy < 4 || random.nextInt(2) != 0) && level.getMaterial(x + xx, y + yy, z + zz).isSolid()) {
-                                level.setTileNoUpdate(x + xx, y + yy, z + zz, Tile.rock.id);
+                                level.setTileNoUpdate(x + xx, y + yy, z + zz, Block.rock.id);
                             }
                         }
                     }

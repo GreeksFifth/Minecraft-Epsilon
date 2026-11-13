@@ -5,10 +5,9 @@
 package net.minecraft.world.entity.monster;
 
 import net.minecraft.world.Difficulty;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.chunk.LevelChunk;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.Entity;
 import util.Mth;
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
@@ -149,7 +148,7 @@ public class Slime extends Mob implements Enemy
     
     @Override
     protected int getDeathLoot() {
-        if (this.getSize() == 1) return Item.slimeBall.id;
+        if (this.getSize() == 1) return Items.slimeBall.id;
         return 0;
     }
     

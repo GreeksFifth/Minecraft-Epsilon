@@ -14,11 +14,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.tile.entity.TileEntity;
 import net.minecraft.world.level.material.Material;
 
-public class PistonMovingPiece extends EntityTile
+public class PistonMovingPiece extends EntityBlock
 {
     public PistonMovingPiece(final int id) {
         super(id, Material.piston);
-        this.setDestroyTime(Tile.INDESTRUCTIBLE_DESTROY_TIME);
+        this.setDestroyTime(Block.INDESTRUCTIBLE_DESTROY_TIME);
     }
     
     @Override
@@ -53,7 +53,7 @@ public class PistonMovingPiece extends EntityTile
     
     @Override
     public int getRenderShape() {
-        return Tile.SHAPE_INVISIBLE;
+        return Block.SHAPE_INVISIBLE;
     }
     
     @Override
@@ -91,7 +91,7 @@ public class PistonMovingPiece extends EntityTile
             return;
         }
 
-        Tile.tiles[entity.getId()].spawnResources(level, x, y, z, entity.getData());
+        Block.BLOCKS[entity.getId()].spawnResources(level, x, y, z, entity.getData());
     }
     
     @Override
@@ -123,23 +123,23 @@ public class PistonMovingPiece extends EntityTile
     public void updateShape(final LevelSource level, final int x, final int y, final int z) {
         final PistonPieceEntity entity = this.getEntity(level, x, y, z);
         if (entity != null) {
-            final Tile tile = Tile.tiles[entity.getId()];
-            if (tile == null || tile == this) {
+            final Block block = Block.BLOCKS[entity.getId()];
+            if (block == null || block == this) {
                 return;
             }
-            tile.updateShape(level, x, y, z);
+            block.updateShape(level, x, y, z);
 
             float progress = entity.getProgress(0.0f);
             if (entity.isExtending()) {
                 progress = 1.0f - progress;
             }
             final int facing = entity.getFacing();
-            this.xx0 = tile.xx0 - Facing.STEP_X[facing] * progress;
-            this.yy0 = tile.yy0 - Facing.STEP_Y[facing] * progress;
-            this.zz0 = tile.zz0 - Facing.STEP_Z[facing] * progress;
-            this.xx1 = tile.xx1 - Facing.STEP_X[facing] * progress;
-            this.yy1 = tile.yy1 - Facing.STEP_Y[facing] * progress;
-            this.zz1 = tile.zz1 - Facing.STEP_Z[facing] * progress;
+            this.xx0 = block.xx0 - Facing.STEP_X[facing] * progress;
+            this.yy0 = block.yy0 - Facing.STEP_Y[facing] * progress;
+            this.zz0 = block.zz0 - Facing.STEP_Z[facing] * progress;
+            this.xx1 = block.xx1 - Facing.STEP_X[facing] * progress;
+            this.yy1 = block.yy1 - Facing.STEP_Y[facing] * progress;
+            this.zz1 = block.zz1 - Facing.STEP_Z[facing] * progress;
         }
     }
     
@@ -147,7 +147,7 @@ public class PistonMovingPiece extends EntityTile
         if (tile == 0 || tile == this.id) {
             return null;
         }
-        final AABB aabb = Tile.tiles[tile].getAABB(level, x, y, z);
+        final AABB aabb = Block.BLOCKS[tile].getAABB(level, x, y, z);
 
         if (aabb == null) {
             return null;

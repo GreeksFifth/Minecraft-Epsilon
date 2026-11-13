@@ -4,7 +4,7 @@
 
 package net.minecraft.client.renderer.ptexture;
 
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 
 public class WaterSideTexture extends DynamicTexture
 {
@@ -15,7 +15,7 @@ public class WaterSideTexture extends DynamicTexture
     private int tickCount = 0;
     
     public WaterSideTexture() {
-        super(Tile.water.tex + 1);
+        super(Block.water.tex + 1);
         this.replicate = 2;
     }
     

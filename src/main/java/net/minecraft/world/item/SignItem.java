@@ -7,7 +7,7 @@ package net.minecraft.world.item;
 import net.minecraft.Facing;
 import net.minecraft.world.level.tile.entity.SignTileEntity;
 import util.Mth;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.player.Player;
 
@@ -29,14 +29,14 @@ public class SignItem extends Item
         if (face == Facing.WEST) --x;
         if (face == Facing.EAST) ++x;
 
-        if (!Tile.sign.mayPlace(level, x, y, z)) return false;
+        if (!Block.sign.mayPlace(level, x, y, z)) return false;
 
         if (face == 1) {
             int rot = Mth.floor((player.yRot + 180.0f) * 16.0f / 360.0f + 0.5) & 0xF;
-            level.setTileAndData(x, y, z, Tile.sign.id, rot);
+            level.setTileAndData(x, y, z, Block.sign.id, rot);
         }
         else {
-            level.setTileAndData(x, y, z, Tile.wallSign.id, face);
+            level.setTileAndData(x, y, z, Block.wallSign.id, face);
         }
 
         itemInstance.count--;

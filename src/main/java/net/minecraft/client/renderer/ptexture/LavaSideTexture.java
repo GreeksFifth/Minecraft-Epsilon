@@ -5,7 +5,7 @@
 package net.minecraft.client.renderer.ptexture;
 
 import util.Mth;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 
 public class LavaSideTexture extends DynamicTexture
 {
@@ -16,7 +16,7 @@ public class LavaSideTexture extends DynamicTexture
     int tickCount = 0;
     
     public LavaSideTexture() {
-        super(Tile.lava.tex + 1);
+        super(Block.lava.tex + 1);
         this.replicate = 2;
     }
     

@@ -4,15 +4,15 @@
 
 package net.minecraft.world.item;
 
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 
 public class HatchetItem extends DiggerItem
 {
-    private static Tile[] diggables = new Tile[] {
-            Tile.wood,
-            Tile.bookshelf,
-            Tile.treeTrunk,
-            Tile.chest
+    private static Block[] diggables = new Block[] {
+            Block.wood,
+            Block.bookshelf,
+            Block.treeTrunk,
+            Block.chest
     };
     
     protected HatchetItem(final int id, final Tier tier) {

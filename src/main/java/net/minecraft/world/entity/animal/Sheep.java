@@ -8,10 +8,10 @@ import java.util.Random;
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.DyePowderItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemInstance;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 
@@ -60,24 +60,24 @@ public class Sheep extends Animal
     protected void dropDeathLoot() {
         if (!this.isSheared()) {
             // killing a non-sheared sheep will drop a single block of cloth
-            this.spawnAtLocation(new ItemInstance(Tile.cloth.id, 1, this.getColor()), 0.0f);
+            this.spawnAtLocation(new ItemInstance(Block.cloth.id, 1, this.getColor()), 0.0f);
         }
     }
     
     @Override
     protected int getDeathLoot() {
-        return Tile.cloth.id;
+        return Block.cloth.id;
     }
     
     @Override
     public boolean interact(final Player player) {
         final ItemInstance item = player.inventory.getSelected();
-        if (item != null && item.id == Item.shears.id && !this.isSheared()) {
+        if (item != null && item.id == Items.shears.id && !this.isSheared()) {
             if (!this.level.isClientSide) {
                 this.setSheared(true);
                 int count = 2 + this.random.nextInt(3);
                 for (int i = 0; i < count; ++i) {
-                    final ItemEntity ie = this.spawnAtLocation(new ItemInstance(Tile.cloth.id, 1, this.getColor()), 1.0f);
+                    final ItemEntity ie = this.spawnAtLocation(new ItemInstance(Block.cloth.id, 1, this.getColor()), 1.0f);
                     ie.yd += this.random.nextFloat() * 0.05f;
                     ie.xd += (this.random.nextFloat() - this.random.nextFloat()) * 0.1f;
                     ie.zd += (this.random.nextFloat() - this.random.nextFloat()) * 0.1f;

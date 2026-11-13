@@ -5,8 +5,7 @@
 package net.minecraft.world.entity.animal;
 
 import com.mojang.nbt.CompoundTag;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
 public class Chicken extends Animal
@@ -49,7 +48,7 @@ public class Chicken extends Animal
 
         if (!this.level.isClientSide && --this.eggTime <= 0) {
             this.level.playSound(this, "mob.chickenplop", 1.0f, (this.random.nextFloat() - this.random.nextFloat()) * 0.2f + 1.0f);
-            this.spawnAtLocation(Item.egg.id, 1);
+            this.spawnAtLocation(Items.egg.id, 1);
             this.eggTime = this.random.nextInt(20 * 60 * 5) + 20 * 60 * 5;
         }
     }
@@ -85,6 +84,6 @@ public class Chicken extends Animal
     
     @Override
     protected int getDeathLoot() {
-        return Item.feather.id;
+        return Items.feather.id;
     }
 }

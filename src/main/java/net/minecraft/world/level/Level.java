@@ -13,14 +13,14 @@ import net.minecraft.Pos;
 import net.minecraft.world.level.pathfinder.PathFinder;
 import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.entity.global.LightningBolt;
-import net.minecraft.world.level.tile.LiquidTile;
+import net.minecraft.world.level.tile.BlockLogicFluid;
 import java.util.Iterator;
 import net.minecraft.world.level.tile.entity.TileEntity;
 import java.util.Collection;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.chunk.LevelChunk;
 import util.ProgressListener;
@@ -330,7 +330,7 @@ public class Level implements LevelSource
     public Material getMaterial(final int x, final int y, final int z) {
         final int t = this.getTile(x, y, z);
         if (t == 0) return Material.air;
-        return Tile.tiles[t].material;
+        return Block.BLOCKS[t].material;
     }
     
     public int getData(int x, final int y, int z) {
@@ -346,7 +346,7 @@ public class Level implements LevelSource
     public void setData(final int x, final int y, final int z, final int data) {
         if (this.setDataNoUpdate(x, y, z, data)) {
             final int t = this.getTile(x, y, z);
-            if (Tile.sendTileData[t & 0xFF]) {
+            if (Block.sendTileData[t & 0xFF]) {
                 this.tileUpdated(x, y, z, t);
             }
             else {
@@ -439,8 +439,8 @@ public class Level implements LevelSource
     
     private void neighborChanged(final int x, final int y, final int z, final int type) {
         if (this.noNeighborUpdate || this.isClientSide) return;
-        final Tile tile = Tile.tiles[this.getTile(x, y, z)];
-        if (tile != null) tile.neighborChanged(this, x, y, z, type);
+        final Block block = Block.BLOCKS[this.getTile(x, y, z)];
+        if (block != null) block.neighborChanged(this, x, y, z, type);
     }
     
     public boolean canSeeSky(final int x, final int y, final int z) {
@@ -462,7 +462,7 @@ public class Level implements LevelSource
 
         if (propagate) {
             final int id = this.getTile(x, y, z);
-            if (id == Tile.stoneSlabHalf.id || id == Tile.farmland.id || id == Tile.stairs_stone.id || id == Tile.stairs_wood.id) {
+            if (id == Block.stoneSlabHalf.id || id == Block.farmland.id || id == Block.stairs_stone.id || id == Block.stairs_wood.id) {
                 int br = this.getRawBrightness(x, y + 1, z, false);
                 final int br1 = this.getRawBrightness(x + 1, y, z, false);
                 final int br2 = this.getRawBrightness(x - 1, y, z, false);
@@ -517,7 +517,7 @@ public class Level implements LevelSource
         }
         else if (layer == LightLayer.Block) {
             final int t = this.getTile(x, y, z);
-            if (Tile.lightEmission[t] > expected) expected = Tile.lightEmission[t];
+            if (Block.lightEmission[t] > expected) expected = Block.lightEmission[t];
         }
 
         if (this.getBrightness(layer, x, y, z) != expected) {
@@ -589,11 +589,11 @@ public class Level implements LevelSource
         {
             final int t = this.getTile(xTile0, yTile0, zTile0);
             final int data = this.getData(xTile0, yTile0, zTile0);
-            final Tile tile = Tile.tiles[t];
-            if (solidOnly && tile != null && tile.getAABB(this, xTile0, yTile0, zTile0) == null) {
+            final Block block = Block.BLOCKS[t];
+            if (solidOnly && block != null && block.getAABB(this, xTile0, yTile0, zTile0) == null) {
                 // No collision
-            } else if (t > 0 && tile.mayPick(data, liquid)) {
-                final HitResult r = tile.clip(this, xTile0, yTile0, zTile0, a, b);
+            } else if (t > 0 && block.mayPick(data, liquid)) {
+                final HitResult r = block.clip(this, xTile0, yTile0, zTile0, a, b);
                 if (r != null) return r;
             }
         }
@@ -680,11 +680,11 @@ public class Level implements LevelSource
 
             final int t = this.getTile(xTile0, yTile0, zTile0);
             final int data = this.getData(xTile0, yTile0, zTile0);
-            final Tile tile = Tile.tiles[t];
-            if (solidOnly && tile != null && tile.getAABB(this, xTile0, yTile0, zTile0) == null) {
+            final Block block = Block.BLOCKS[t];
+            if (solidOnly && block != null && block.getAABB(this, xTile0, yTile0, zTile0) == null) {
                 // No collision
-            } else if (t > 0 && tile.mayPick(data, liquid)) {
-                final HitResult r = tile.clip(this, xTile0, yTile0, zTile0, a, b);
+            } else if (t > 0 && block.mayPick(data, liquid)) {
+                final HitResult r = block.clip(this, xTile0, yTile0, zTile0, a, b);
                 if (r != null) return r;
             }
         }
@@ -808,9 +808,9 @@ public class Level implements LevelSource
             for (int z = z0; z < z1; ++z) {
                 if (this.hasChunkAt(x, 64, z)) {
                     for (int y = y0 - 1; y < y1; ++y) {
-                        final Tile tile = Tile.tiles[this.getTile(x, y, z)];
-                        if (tile != null) {
-                            tile.addAABBs(this, x, y, z, box, this.boxes);
+                        final Block block = Block.BLOCKS[this.getTile(x, y, z)];
+                        if (block != null) {
+                            block.addAABBs(this, x, y, z, box, this.boxes);
                         }
                     }
                 }
@@ -961,7 +961,7 @@ public class Level implements LevelSource
         z &= 0xF;
         while (y > 0) {
             final int t = c.getTile(x, y, z);
-            final Material m = t == 0 ? Material.air : Tile.tiles[t].material;
+            final Material m = t == 0 ? Material.air : Block.BLOCKS[t].material;
             if (!m.blocksMotion() && !m.isLiquid()) {
                 y--;
             } else {
@@ -981,7 +981,7 @@ public class Level implements LevelSource
 
         while (y > 0) {
             final int t = c.getTile(x, y, z);
-            if (t == 0 || !Tile.tiles[t].material.blocksMotion()) {
+            if (t == 0 || !Block.BLOCKS[t].material.blocksMotion()) {
                 y--;
             } else {
                 return y + 1;
@@ -1007,7 +1007,7 @@ public class Level implements LevelSource
             if (this.hasChunksAt(td.x - r, td.y - r, td.z - r, td.x + r, td.y + r, td.z + r)) {
                 final int id = this.getTile(td.x, td.y, td.z);
                 if (id == td.tileId && id > 0) {
-                    Tile.tiles[id].tick(this, td.x, td.y, td.z, this.random);
+                    Block.BLOCKS[id].tick(this, td.x, td.y, td.z, this.random);
                 }
             }
             return;
@@ -1205,7 +1205,7 @@ public class Level implements LevelSource
         for (int x = x0; x < x1; ++x) {
             for (int y = y0; y < y1; ++y) {
                 for (int z = z0; z < z1; ++z) {
-                    if (Tile.tiles[this.getTile(x, y, z)] != null) {
+                    if (Block.BLOCKS[this.getTile(x, y, z)] != null) {
                         return true;
                     }
                 }
@@ -1229,8 +1229,8 @@ public class Level implements LevelSource
         for (int x = x0; x < x1; ++x) {
             for (int y = y0; y < y1; ++y) {
                 for (int z = z0; z < z1; ++z) {
-                    final Tile tile = Tile.tiles[this.getTile(x, y, z)];
-                    if (tile != null && tile.material.isLiquid()) {
+                    final Block block = Block.BLOCKS[this.getTile(x, y, z)];
+                    if (block != null && block.material.isLiquid()) {
                         return true;
                     }
                 }
@@ -1252,7 +1252,7 @@ public class Level implements LevelSource
                 for (int y = y0; y < y1; ++y) {
                     for (int z = z0; z < z1; ++z) {
                         final int t = this.getTile(x, y, z);
-                        if (t == Tile.fire.id || t == Tile.lava.id || t == Tile.calmLava.id) return true;
+                        if (t == Block.fire.id || t == Block.lava.id || t == Block.calmLava.id) return true;
                     }
                 }
             }
@@ -1279,12 +1279,12 @@ public class Level implements LevelSource
         for (int x = x0; x < x1; ++x) {
             for (int y = y0; y < y1; ++y) {
                 for (int z = z0; z < z1; ++z) {
-                    final Tile tile = Tile.tiles[this.getTile(x, y, z)];
-                    if (tile != null && tile.material == material) {
-                        double yt0 = (y + 1 - LiquidTile.getHeight(this.getData(x, y, z)));
+                    final Block block = Block.BLOCKS[this.getTile(x, y, z)];
+                    if (block != null && block.material == material) {
+                        double yt0 = (y + 1 - BlockLogicFluid.getHeight(this.getData(x, y, z)));
                         if (y1 >= yt0) {
                             ok = true;
-                            tile.handleEntityInside(this, x, y, z, e, current);
+                            block.handleEntityInside(this, x, y, z, e, current);
                         }
                     }
                 }
@@ -1311,8 +1311,8 @@ public class Level implements LevelSource
         for (int x = x0; x < x1; ++x) {
             for (int y = y0; y < y1; ++y) {
                 for (int z = z0; z < z1; ++z) {
-                    final Tile tile = Tile.tiles[this.getTile(x, y, z)];
-                    if (tile != null && tile.material == material) {
+                    final Block block = Block.BLOCKS[this.getTile(x, y, z)];
+                    if (block != null && block.material == material) {
                         return true;
                     }
                 }
@@ -1332,8 +1332,8 @@ public class Level implements LevelSource
         for (int x = x0; x < x1; ++x) {
             for (int y = y0; y < y1; ++y) {
                 for (int z = z0; z < z1; ++z) {
-                    final Tile tile = Tile.tiles[this.getTile(x, y, z)];
-                    if (tile != null && tile.material == material) {
+                    final Block block = Block.BLOCKS[this.getTile(x, y, z)];
+                    if (block != null && block.material == material) {
                         final int data = this.getData(x, y, z);
                         double yh1 = y + 1;
                         if (data < 8) {
@@ -1390,7 +1390,7 @@ public class Level implements LevelSource
         if (face == 4) x--;
         if (face == 5) x++;
 
-        if (this.getTile(x, y, z) == Tile.fire.id) {
+        if (this.getTile(x, y, z) == Block.fire.id) {
             this.levelEvent(player, LevelEvent.SOUND_FIZZ, x, y, z, 0);
             this.setTile(x, y, z, 0);
         }
@@ -1446,13 +1446,13 @@ public class Level implements LevelSource
     }
     
     public boolean isSolidRenderTile(final int x, final int y, final int z) {
-        final Tile tile = Tile.tiles[this.getTile(x, y, z)];
-        return tile != null && tile.isSolidRender();
+        final Block block = Block.BLOCKS[this.getTile(x, y, z)];
+        return block != null && block.isSolidRender();
     }
     
     public boolean isSolidBlockingTile(final int x, final int y, final int z) {
-        final Tile tile = Tile.tiles[this.getTile(x, y, z)];
-        return tile != null && tile.material.isSolidBlocking() && tile.isCubeShaped();
+        final Block block = Block.BLOCKS[this.getTile(x, y, z)];
+        return block != null && block.material.isSolidBlocking() && block.isCubeShaped();
     }
     
     public void forceSave(final ProgressListener listener) {
@@ -1713,12 +1713,12 @@ public class Level implements LevelSource
                 if (cold) {
                     final int below = lc.getTile(x, yy - 1, z);
                     final int current = lc.getTile(x, yy, z);
-                    boolean shouldSnow = current == 0 && Tile.topSnow.mayPlace(this, x + xo, yy, z + zo) && below != 0 && below != Tile.ice.id && Tile.tiles[below].material.blocksMotion();
+                    boolean shouldSnow = current == 0 && Block.topSnow.mayPlace(this, x + xo, yy, z + zo) && below != 0 && below != Block.ice.id && Block.BLOCKS[below].material.blocksMotion();
                     if (this.isRaining() && shouldSnow) {
-                        this.setTile(x + xo, yy, z + zo, Tile.topSnow.id);
+                        this.setTile(x + xo, yy, z + zo, Block.topSnow.id);
                     }
-                    if (below == Tile.calmWater.id && lc.getData(x, yy - 1, z) == 0) {
-                        this.setTile(x + xo, yy - 1, z + zo, Tile.ice.id);
+                    if (below == Block.calmWater.id && lc.getData(x, yy - 1, z) == 0) {
+                        this.setTile(x + xo, yy - 1, z + zo, Block.ice.id);
                     }
                 }
             }
@@ -1730,8 +1730,8 @@ public class Level implements LevelSource
                 final int z = val >> 8 & 0xF;
                 final int y = val >> 16 & 0x7F;
                 final int id = lc.blocks[x << 11 | z << 7 | y] & 0xFF;
-                if (Tile.shouldTick[id]) {
-                    Tile.tiles[id].tick(this, x + xo, y, z + zo, this.random);
+                if (Block.shouldTick[id]) {
+                    Block.BLOCKS[id].tick(this, x + xo, y, z + zo, this.random);
                 }
             }
         }
@@ -1756,7 +1756,7 @@ public class Level implements LevelSource
             if (this.hasChunksAt(td.x - r, td.y - r, td.z - r, td.x + r, td.y + r, td.z + r)) {
                 final int id = this.getTile(td.x, td.y, td.z);
                 if (id == td.tileId && id > 0) {
-                    Tile.tiles[id].tick(this, td.x, td.y, td.z, this.random);
+                    Block.BLOCKS[id].tick(this, td.x, td.y, td.z, this.random);
                 }
             }
         }
@@ -1772,7 +1772,7 @@ public class Level implements LevelSource
             final int z = zt + this.random.nextInt(ticksPerChunk) - this.random.nextInt(ticksPerChunk);
             final int t = this.getTile(x, y, z);
             if (t > 0) {
-                Tile.tiles[t].animateTick(this, x, y, z, animateRandom);
+                Block.BLOCKS[t].animateTick(this, x, y, z, animateRandom);
             }
         }
     }
@@ -1848,16 +1848,16 @@ public class Level implements LevelSource
     
     public boolean mayPlace(final int tileId, final int x, final int y, final int z, final boolean ignoreEntities, final int face) {
         int targetType = this.getTile(x, y, z);
-        Tile targetTile = Tile.tiles[targetType];
+        Block targetBlock = Block.BLOCKS[targetType];
 
-        final Tile tile = Tile.tiles[tileId];
+        final Block block = Block.BLOCKS[tileId];
 
-        AABB aabb = tile.getAABB(this, x, y, z);
+        AABB aabb = block.getAABB(this, x, y, z);
         if (ignoreEntities) aabb = null;
         if (aabb != null && !this.isUnobstructed(aabb)) return false;
-        if (targetTile == Tile.water || targetTile == Tile.calmWater || targetTile == Tile.lava || targetTile == Tile.calmLava || targetTile == Tile.fire || targetTile == Tile.topSnow) targetTile = null;
-        if (tileId > 0 && targetTile == null) {
-            if (tile.mayPlace(this, x, y, z, face)) {
+        if (targetBlock == Block.water || targetBlock == Block.calmWater || targetBlock == Block.lava || targetBlock == Block.calmLava || targetBlock == Block.fire || targetBlock == Block.topSnow) targetBlock = null;
+        if (tileId > 0 && targetBlock == null) {
+            if (block.mayPlace(this, x, y, z, face)) {
                 return true;
             }
         }
@@ -1905,7 +1905,7 @@ public class Level implements LevelSource
     public boolean getDirectSignal(final int x, final int y, final int z, final int dir) {
         final int t = this.getTile(x, y, z);
         if (t == 0) return false;
-        return Tile.tiles[t].getDirectSignal(this, x, y, z, dir);
+        return Block.BLOCKS[t].getDirectSignal(this, x, y, z, dir);
     }
     
     public boolean hasDirectSignal(final int x, final int y, final int z) {
@@ -1924,7 +1924,7 @@ public class Level implements LevelSource
         }
         final int t = this.getTile(x, y, z);
         if (t == 0) return false;
-        return Tile.tiles[t].getSignal(this, x, y, z, dir);
+        return Block.BLOCKS[t].getSignal(this, x, y, z, dir);
     }
     
     public boolean hasNeighborSignal(final int x, final int y, final int z) {
@@ -2125,7 +2125,7 @@ public class Level implements LevelSource
     
     public void tileEvent(final int x, final int y, final int z, final int b0, final int b1) {
         final int tile = this.getTile(x, y, z);
-        if (tile > 0) Tile.tiles[tile].triggerEvent(this, x, y, z, b0, b1);
+        if (tile > 0) Block.BLOCKS[tile].triggerEvent(this, x, y, z, b0, b1);
     }
 
     public LevelStorage getLevelStorage() {

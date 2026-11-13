@@ -6,7 +6,7 @@ package net.minecraft.client.gui.inventory;
 
 import net.minecraft.SharedConstants;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderDispatcher;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.network.packet.SignUpdatePacket;
 import net.minecraft.client.gui.Button;
 import org.lwjgl.input.Keyboard;
@@ -85,9 +85,9 @@ public class TextEditScreen extends Screen
         glScalef(-ss, -ss, -ss);
         glRotatef(180.0f, 0.0f, 1.0f, 0.0f);
 
-        Tile tile = this.sign.getTile();
+        Block block = this.sign.getTile();
 
-        if (tile == Tile.sign) {
+        if (block == Block.sign) {
             final float rot = (this.sign.getData() * 360) / 16.0f;
             glRotatef(rot, 0.0f, 1.0f, 0.0f);
             glTranslatef(0.0f, -17.0f / 16.0f, 0.0f);

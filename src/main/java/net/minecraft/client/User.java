@@ -4,42 +4,42 @@
 
 package net.minecraft.client;
 
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import java.util.ArrayList;
 import java.util.List;
 
 public class User
 {
-    public static List<Tile> allowedTiles = new ArrayList<>();
+    public static List<Block> allowedBlocks = new ArrayList<>();
     static {
-        User.allowedTiles.add(Tile.rock);
-        User.allowedTiles.add(Tile.stoneBrick);
-        User.allowedTiles.add(Tile.redBrick);
-        User.allowedTiles.add(Tile.dirt);
-        User.allowedTiles.add(Tile.wood);
-        User.allowedTiles.add(Tile.treeTrunk);
-        User.allowedTiles.add(Tile.leaves);
-        User.allowedTiles.add(Tile.torch);
-        User.allowedTiles.add(Tile.stoneSlabHalf);
-        User.allowedTiles.add(Tile.glass);
-        User.allowedTiles.add(Tile.mossStone);
-        User.allowedTiles.add(Tile.sapling);
-        User.allowedTiles.add(Tile.flower);
-        User.allowedTiles.add(Tile.rose);
-        User.allowedTiles.add(Tile.mushroom1);
-        User.allowedTiles.add(Tile.mushroom2);
-        User.allowedTiles.add(Tile.sand);
-        User.allowedTiles.add(Tile.gravel);
-        User.allowedTiles.add(Tile.sponge);
-        User.allowedTiles.add(Tile.cloth);
-        User.allowedTiles.add(Tile.coalOre);
-        User.allowedTiles.add(Tile.ironOre);
-        User.allowedTiles.add(Tile.goldOre);
-        User.allowedTiles.add(Tile.ironBlock);
-        User.allowedTiles.add(Tile.goldBlock);
-        User.allowedTiles.add(Tile.bookshelf);
-        User.allowedTiles.add(Tile.tnt);
-        User.allowedTiles.add(Tile.obsidian);
+        User.allowedBlocks.add(Block.rock);
+        User.allowedBlocks.add(Block.stoneBrick);
+        User.allowedBlocks.add(Block.redBrick);
+        User.allowedBlocks.add(Block.dirt);
+        User.allowedBlocks.add(Block.wood);
+        User.allowedBlocks.add(Block.treeTrunk);
+        User.allowedBlocks.add(Block.leaves);
+        User.allowedBlocks.add(Block.torch);
+        User.allowedBlocks.add(Block.stoneSlabHalf);
+        User.allowedBlocks.add(Block.glass);
+        User.allowedBlocks.add(Block.mossStone);
+        User.allowedBlocks.add(Block.sapling);
+        User.allowedBlocks.add(Block.flower);
+        User.allowedBlocks.add(Block.rose);
+        User.allowedBlocks.add(Block.mushroom1);
+        User.allowedBlocks.add(Block.mushroom2);
+        User.allowedBlocks.add(Block.sand);
+        User.allowedBlocks.add(Block.gravel);
+        User.allowedBlocks.add(Block.sponge);
+        User.allowedBlocks.add(Block.cloth);
+        User.allowedBlocks.add(Block.coalOre);
+        User.allowedBlocks.add(Block.ironOre);
+        User.allowedBlocks.add(Block.goldOre);
+        User.allowedBlocks.add(Block.ironBlock);
+        User.allowedBlocks.add(Block.goldBlock);
+        User.allowedBlocks.add(Block.bookshelf);
+        User.allowedBlocks.add(Block.tnt);
+        User.allowedBlocks.add(Block.obsidian);
     }
     public String name;
     public String sessionId;

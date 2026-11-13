@@ -9,7 +9,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.Item;
 import net.minecraft.client.renderer.Tesselator;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import util.Mth;
 import net.minecraft.world.entity.item.ItemEntity;
 import java.util.Random;
@@ -48,12 +48,12 @@ public class ItemRenderer extends EntityRenderer<ItemEntity>
         glTranslatef((float)x, (float)y + bob, (float)z);
         glEnable(GL_RESCALE_NORMAL);
 
-        if (item.id < Tile.TILE_NUM_COUNT && TileRenderer.canRender(Tile.tiles[item.id].getRenderShape())) {
+        if (item.id < Block.TILE_NUM_COUNT && TileRenderer.canRender(Block.BLOCKS[item.id].getRenderShape())) {
             glRotatef(spin, 0.0f, 1.0f, 0.0f);
 
             this.bindTexture("/terrain.png");
             float s = 1 / 4.0f;
-            if (!Tile.tiles[item.id].isCubeShaped() && item.id != Tile.stoneSlabHalf.id && Tile.tiles[item.id].getRenderShape() != Tile.SHAPE_PISTON_BASE) {
+            if (!Block.BLOCKS[item.id].isCubeShaped() && item.id != Block.stoneSlabHalf.id && Block.BLOCKS[item.id].getRenderShape() != Block.SHAPE_PISTON_BASE) {
                 s = 0.5f;
             }
 
@@ -66,14 +66,14 @@ public class ItemRenderer extends EntityRenderer<ItemEntity>
                     float zo = (this.random.nextFloat() * 2.0f - 1.0f) * 0.2f / s;
                     glTranslatef(xo, yo, zo);
                 }
-                this.tileRenderer.renderTile(Tile.tiles[item.id], item.getAuxValue(), itemEntity.getBrightness(a));
+                this.tileRenderer.renderTile(Block.BLOCKS[item.id], item.getAuxValue(), itemEntity.getBrightness(a));
                 glPopMatrix();
             }
         }
         else {
             glScalef(1 / 2.0f, 1 / 2.0f, 1 / 2.0f);
             final int icon = item.getIcon();
-            if (item.id < Tile.TILE_NUM_COUNT) {
+            if (item.id < Block.TILE_NUM_COUNT) {
                 this.bindTexture("/terrain.png");
             }
             else {
@@ -125,9 +125,9 @@ public class ItemRenderer extends EntityRenderer<ItemEntity>
     }
     
     public void renderGuiItem(final Font font, final Textures textures, final int itemId, final int itemAuxValue, final int itemIcon, final int x, final int y) {
-        if (itemId < Tile.TILE_NUM_COUNT && TileRenderer.canRender(Tile.tiles[itemId].getRenderShape())) {
+        if (itemId < Block.TILE_NUM_COUNT && TileRenderer.canRender(Block.BLOCKS[itemId].getRenderShape())) {
             textures.bind(textures.loadTexture("/terrain.png"));
-            final Tile tile = Tile.tiles[itemId];
+            final Block block = Block.BLOCKS[itemId];
             glPushMatrix();
 
             glTranslatef((float)(x - 2), (float)(y + 3), -3.0f);
@@ -145,13 +145,13 @@ public class ItemRenderer extends EntityRenderer<ItemEntity>
             }
             glRotatef(-90.0f, 0.0f, 1.0f, 0.0f);
             this.tileRenderer.setColor = this.setColor;
-            this.tileRenderer.renderTile(tile, itemAuxValue, 1.0f);
+            this.tileRenderer.renderTile(block, itemAuxValue, 1.0f);
             this.tileRenderer.setColor = true;
             glPopMatrix();
         }
         else if (itemIcon >= 0) {
             glDisable(GL_LIGHTING);
-            if (itemId < Tile.TILE_NUM_COUNT) {
+            if (itemId < Block.TILE_NUM_COUNT) {
                 textures.bind(textures.loadTexture("/terrain.png"));
             }
             else {

@@ -4,11 +4,11 @@
 
 package net.minecraft.world.level.levelgen.feature;
 
-import net.minecraft.world.level.tile.LeafTile;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.BlockLogicLeaves;
+import net.minecraft.world.level.tile.Block;
 import java.util.Random;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.tile.TreeTile;
+import net.minecraft.world.level.tile.TreeBlock;
 
 public class SpruceFeature extends Feature
 {
@@ -39,7 +39,7 @@ public class SpruceFeature extends Feature
                 for (int zz = z - r; zz <= z + r && free; ++zz) {
                     if (yy >= 0 && yy < Level.MAX_HEIGHT) {
                         final int tt = level.getTile(xx, yy, zz);
-                        if (tt != 0 && tt != Tile.leaves.id) free = false;
+                        if (tt != 0 && tt != Block.leaves.id) free = false;
                     }
                     else {
                         free = false;
@@ -52,9 +52,9 @@ public class SpruceFeature extends Feature
 
         // must stand on ground
         final int belowTile = level.getTile(x, y - 1, z);
-        if ((belowTile != Tile.grass.id && belowTile != Tile.dirt.id) || y >= Level.MAX_HEIGHT - treeHeight - 1) return false;
+        if ((belowTile != Block.grass.id && belowTile != Block.dirt.id) || y >= Level.MAX_HEIGHT - treeHeight - 1) return false;
 
-        level.setTileNoUpdate(x, y - 1, z, Tile.dirt.id);
+        level.setTileNoUpdate(x, y - 1, z, Block.dirt.id);
 
         // place leaf top
         int currentRadius = random.nextInt(2);
@@ -67,7 +67,7 @@ public class SpruceFeature extends Feature
                 for (int zz = z - currentRadius; zz <= z + currentRadius; ++zz) {
                     final int zo = zz - z;
                     if (Math.abs(xo) == currentRadius && Math.abs(zo) == currentRadius && currentRadius > 0) continue;
-                    if (!Tile.solid[level.getTile(xx, yy, zz)]) level.setTileAndDataNoUpdate(xx, yy, zz, Tile.leaves.id, LeafTile.EVERGREEN_LEAF);
+                    if (!Block.solid[level.getTile(xx, yy, zz)]) level.setTileAndDataNoUpdate(xx, yy, zz, Block.leaves.id, BlockLogicLeaves.EVERGREEN_LEAF);
                 }
             }
 
@@ -86,7 +86,7 @@ public class SpruceFeature extends Feature
         int topOffset = random.nextInt(3);
         for (int hh = 0; hh < treeHeight - topOffset; ++hh) {
             final int t = level.getTile(x, y + hh, z);
-            if (t == 0 || t == Tile.leaves.id) level.setTileAndDataNoUpdate(x, y + hh, z, Tile.treeTrunk.id, TreeTile.DARK_TRUNK);
+            if (t == 0 || t == Block.leaves.id) level.setTileAndDataNoUpdate(x, y + hh, z, Block.treeTrunk.id, TreeBlock.DARK_TRUNK);
         }
         return true;
     }

@@ -6,7 +6,7 @@ package net.minecraft.world.item;
 
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.entity.item.Boat;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import util.Mth;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.entity.player.Player;
@@ -51,7 +51,7 @@ public class BoatItem extends Item
             int zt = hr.z;
 
             if (!level.isClientSide) {
-                if (level.getTile(xt, yt, zt) == Tile.topSnow.id) yt--;
+                if (level.getTile(xt, yt, zt) == Block.topSnow.id) yt--;
                 level.addEntity(new Boat(level, xt + 0.5f, yt + 1.0f, zt + 0.5f));
             }
             itemInstance.count--;

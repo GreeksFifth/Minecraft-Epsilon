@@ -7,7 +7,7 @@ package net.minecraft.client.renderer.entity;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.Item;
 import net.minecraft.client.renderer.TileRenderer;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.client.model.HumanoidModel;
 
@@ -31,7 +31,7 @@ public class HumanoidMobRenderer<T extends Mob> extends MobRenderer<T>
             this.humanoidModel.arm0.translateTo(1 / 16.0f);
             glTranslatef(-1 / 16.0f, 7 / 16.0f, 1 / 16.0f);
 
-            if (item.id < Tile.TILE_NUM_COUNT && TileRenderer.canRender(Tile.tiles[item.id].getRenderShape())) {
+            if (item.id < Block.TILE_NUM_COUNT && TileRenderer.canRender(Block.BLOCKS[item.id].getRenderShape())) {
                 float s = 8 / 16.0f;
                 glTranslatef(0 / 16.0f, 3 / 16.0f, -5 / 16.0f);
                 s *= 0.75f;

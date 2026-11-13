@@ -4,7 +4,7 @@
 
 package net.minecraft.world.level.dimension;
 
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import util.Mth;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.levelgen.SkyIslandRandomLevelSource;
@@ -63,6 +63,6 @@ public class SkyIslandDimension extends Dimension
     @Override
     public boolean isValidSpawn(final int x, final int z) {
         final int topTile = this.level.getTopTile(x, z);
-        return topTile != 0 && Tile.tiles[topTile].material.blocksMotion();
+        return topTile != 0 && Block.BLOCKS[topTile].material.blocksMotion();
     }
 }

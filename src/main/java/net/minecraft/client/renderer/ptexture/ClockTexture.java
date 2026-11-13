@@ -7,8 +7,9 @@ package net.minecraft.client.renderer.ptexture;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import net.minecraft.world.item.Item;
+
 import net.minecraft.client.Minecraft;
+import net.minecraft.world.item.Items;
 import util.Mth;
 
 public class ClockTexture extends DynamicTexture
@@ -19,7 +20,7 @@ public class ClockTexture extends DynamicTexture
     private double rot, rota;
     
     public ClockTexture(final Minecraft mc) {
-        super(Item.clock.getIcon(0));
+        super(Items.clock.getIcon(0));
         this.mc = mc;
         this.textureId = TEXTURE_ITEMS;
 

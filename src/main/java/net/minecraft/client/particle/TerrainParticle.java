@@ -6,26 +6,26 @@ package net.minecraft.client.particle;
 
 import net.minecraft.client.renderer.Tesselator;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 
 public class TerrainParticle extends Particle
 {
-    private Tile tile;
+    private Block block;
     private int face = 0;
     
-    public TerrainParticle(final Level level, final double x, final double y, final double z, final double xa, final double ya, final double za, final Tile tile, final int face, final int data) {
+    public TerrainParticle(final Level level, final double x, final double y, final double z, final double xa, final double ya, final double za, final Block block, final int face, final int data) {
         super(level, x, y, z, xa, ya, za);
-        this.tile = tile;
-        this.tex = tile.getTexture(0, data);
-        this.gravity = tile.gravity;
+        this.block = block;
+        this.tex = block.getTexture(0, data);
+        this.gravity = block.gravity;
         this.rCol = this.gCol = this.bCol = 0.6f;
         this.size /= 2.0f;
         this.face = face;
     }
     
     public TerrainParticle init(final int x, final int y, final int z) {
-        if (this.tile == Tile.grass) return this;
-        final int col = this.tile.getColor(this.level, x, y, z);
+        if (this.block == Block.grass) return this;
+        final int col = this.block.getColor(this.level, x, y, z);
         this.rCol *= (col >> 16 & 0xFF) / 255.0f;
         this.gCol *= (col >> 8 & 0xFF) / 255.0f;
         this.bCol *= (col & 0xFF) / 255.0f;

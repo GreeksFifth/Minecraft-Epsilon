@@ -4,7 +4,7 @@
 
 package net.minecraft.world.item;
 
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.player.Player;
 
@@ -21,12 +21,12 @@ public class HoeItem extends Item
         final int targetType = level.getTile(x, y, z);
         final int above = level.getTile(x, y + 1, z);
 
-        if ((face != 0 && above == 0 && targetType == Tile.grass.id) || targetType == Tile.dirt.id) {
-            final Tile tile = Tile.farmland;
-            level.playSound(x + 0.5f, y + 0.5f, z + 0.5f, tile.soundType.getStepSound(), (tile.soundType.getVolume() + 1.0f) / 2.0f, tile.soundType.getPitch() * 0.8f);
+        if ((face != 0 && above == 0 && targetType == Block.grass.id) || targetType == Block.dirt.id) {
+            final Block block = Block.farmland;
+            level.playSound(x + 0.5f, y + 0.5f, z + 0.5f, block.soundType.getStepSound(), (block.soundType.getVolume() + 1.0f) / 2.0f, block.soundType.getPitch() * 0.8f);
 
             if (level.isClientSide) return true;
-            level.setTile(x, y, z, tile.id);
+            level.setTile(x, y, z, block.id);
             itemInstance.hurt(1, player);
             return true;
         }

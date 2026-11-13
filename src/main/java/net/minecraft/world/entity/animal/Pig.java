@@ -7,9 +7,9 @@ package net.minecraft.world.entity.animal;
 import net.minecraft.stats.Achievements;
 import net.minecraft.world.entity.monster.PigZombie;
 import net.minecraft.world.entity.global.LightningBolt;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.entity.player.Player;
 import com.mojang.nbt.CompoundTag;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
 public class Pig extends Animal
@@ -64,8 +64,8 @@ public class Pig extends Animal
     
     @Override
     protected int getDeathLoot() {
-        if (this.onFire > 0) return Item.porkChop_cooked.id;
-        return Item.porkChop_raw.id;
+        if (this.onFire > 0) return Items.porkChop_cooked.id;
+        return Items.porkChop_raw.id;
     }
     
     public boolean hasSaddle() {

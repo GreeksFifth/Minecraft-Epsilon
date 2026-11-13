@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.ArrayList;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import util.Mth;
 import java.util.HashSet;
 import java.util.Set;
@@ -64,7 +64,7 @@ public class Explosion
                         final int zt = Mth.floor(zp);
                         final int t = this.level.getTile(xt, yt, zt);
                         if (t > 0) {
-                            remainingPower -= (Tile.tiles[t].getExplosionResistance(this.source) + 0.3f) * stepSize;
+                            remainingPower -= (Block.BLOCKS[t].getExplosionResistance(this.source) + 0.3f) * stepSize;
                         }
                         if (remainingPower > 0.0f) {
                             this.toBlow.add(new TilePos(xt, yt, zt));
@@ -128,8 +128,8 @@ public class Explosion
                 final int zt = tp.z;
                 final int t = this.level.getTile(xt, yt, zt);
                 final int b = this.level.getTile(xt, yt - 1, zt);
-                if (t == 0 && Tile.solid[b] && this.random.nextInt(3) == 0) {
-                    this.level.setTile(xt, yt, zt, Tile.fire.id);
+                if (t == 0 && Block.solid[b] && this.random.nextInt(3) == 0) {
+                    this.level.setTile(xt, yt, zt, Block.fire.id);
                 }
             }
         }
@@ -173,9 +173,9 @@ public class Explosion
             }
 
             if (t > 0) {
-                Tile.tiles[t].spawnResources(this.level, xt, yt, zt, this.level.getData(xt, yt, zt), 0.3f);
+                Block.BLOCKS[t].spawnResources(this.level, xt, yt, zt, this.level.getData(xt, yt, zt), 0.3f);
                 this.level.setTile(xt, yt, zt, 0);
-                Tile.tiles[t].wasExploded(this.level, xt, yt, zt);
+                Block.BLOCKS[t].wasExploded(this.level, xt, yt, zt);
             }
         }
     }

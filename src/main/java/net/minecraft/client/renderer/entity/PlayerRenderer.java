@@ -4,9 +4,10 @@
 
 package net.minecraft.client.renderer.entity;
 
+import net.minecraft.world.item.Items;
 import util.Mth;
 import net.minecraft.client.renderer.TileRenderer;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.Tesselator;
 import net.minecraft.client.Minecraft;
@@ -133,10 +134,10 @@ public class PlayerRenderer extends MobRenderer<Player>
     protected void additionalRendering(final Player player, final float a) {
         final ItemInstance headGear = player.inventory.getArmor(3);
         if (headGear != null) {
-            if (headGear.getItem().id < Tile.TILE_NUM_COUNT) {
+            if (headGear.getItem().id < Block.TILE_NUM_COUNT) {
                 glPushMatrix();
                 this.humanoidModel.head.translateTo(1 / 16.0f);
-                if (TileRenderer.canRender(Tile.tiles[headGear.id].getRenderShape())) {
+                if (TileRenderer.canRender(Block.BLOCKS[headGear.id].getRenderShape())) {
                     final float s = 10 / 16.0f;
                     glTranslatef(0 / 16.0f, -4 / 16.0f, 0 / 16.0f);
                     glRotatef(180.0f, 0.0f, 1.0f, 0.0f);
@@ -207,10 +208,10 @@ public class PlayerRenderer extends MobRenderer<Player>
             glTranslatef(-1 / 16.0f, 7 / 16.0f, 1 / 16.0f);
 
             if (player.fishing != null) {
-                item = new ItemInstance(Item.stick);
+                item = new ItemInstance(Items.stick);
             }
 
-            if (item.id < Tile.TILE_NUM_COUNT && TileRenderer.canRender(Tile.tiles[item.id].getRenderShape())) {
+            if (item.id < Block.TILE_NUM_COUNT && TileRenderer.canRender(Block.BLOCKS[item.id].getRenderShape())) {
                 float s = 8 / 16.0f;
                 glTranslatef(0 / 16.0f, 3 / 16.0f, -5 / 16.0f);
                 s *= 0.75f;

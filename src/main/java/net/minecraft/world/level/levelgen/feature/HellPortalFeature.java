@@ -4,7 +4,7 @@
 
 package net.minecraft.world.level.levelgen.feature;
 
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import java.util.Random;
 import net.minecraft.world.level.Level;
 
@@ -13,8 +13,8 @@ public class HellPortalFeature extends Feature
     @Override
     public boolean place(final Level level, final Random random, final int x, final int y, final int z) {
         if (!level.isEmptyTile(x, y, z)) return false;
-        if (level.getTile(x, y + 1, z) != Tile.hellRock.id) return false;
-        level.setTile(x, y, z, Tile.lightGem.id);
+        if (level.getTile(x, y + 1, z) != Block.hellRock.id) return false;
+        level.setTile(x, y, z, Block.lightGem.id);
 
         for (int i = 0; i < 1500; ++i) {
             final int x2 = x + random.nextInt(8) - random.nextInt(8);
@@ -32,10 +32,10 @@ public class HellPortalFeature extends Feature
                 if (t == 4) tile = level.getTile(x2, y2, z2 - 1);
                 if (t == 5) tile = level.getTile(x2, y2, z2 + 1);
 
-                if (tile == Tile.lightGem.id) count++;
+                if (tile == Block.lightGem.id) count++;
             }
 
-            if (count == 1) level.setTile(x2, y2, z2, Tile.lightGem.id);
+            if (count == 1) level.setTile(x2, y2, z2, Block.lightGem.id);
         }
         return true;
     }

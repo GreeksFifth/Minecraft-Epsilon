@@ -7,10 +7,11 @@ package net.minecraft.world.entity.item;
 import net.minecraft.world.entity.player.Player;
 import com.mojang.nbt.CompoundTag;
 import java.util.List;
+
+import net.minecraft.world.item.Items;
 import util.Mth;
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.Entity;
@@ -86,10 +87,10 @@ public class Boat extends Entity
         if (this.damage > 20 * 2) {
             if (this.rider != null) this.rider.ride(this);
             for (int i = 0; i < 3; ++i) {
-                this.spawnAtLocation(Tile.wood.id, 1, 0.0f);
+                this.spawnAtLocation(Block.wood.id, 1, 0.0f);
             }
             for (int j = 0; j < 2; ++j) {
-                this.spawnAtLocation(Item.stick.id, 1, 0.0f);
+                this.spawnAtLocation(Items.stick.id, 1, 0.0f);
             }
             this.remove();
         }
@@ -238,10 +239,10 @@ public class Boat extends Entity
             if (!this.level.isClientSide) {
                 this.remove();
                 for (int i = 0; i < 3; ++i) {
-                    this.spawnAtLocation(Tile.wood.id, 1, 0.0f);
+                    this.spawnAtLocation(Block.wood.id, 1, 0.0f);
                 }
                 for (int i = 0; i < 2; ++i) {
-                    this.spawnAtLocation(Item.stick.id, 1, 0.0f);
+                    this.spawnAtLocation(Items.stick.id, 1, 0.0f);
                 }
             }
         }
@@ -283,7 +284,7 @@ public class Boat extends Entity
             final int yy = Mth.floor(this.y);
             final int zz = Mth.floor(this.z + (i / 2 - 0.5) * 0.8);
 
-            if (this.level.getTile(xx, yy, zz) == Tile.topSnow.id) {
+            if (this.level.getTile(xx, yy, zz) == Block.topSnow.id) {
                 this.level.setTile(xx, yy, zz, 0);
             }
         }

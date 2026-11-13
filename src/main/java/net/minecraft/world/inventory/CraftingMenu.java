@@ -4,7 +4,7 @@
 
 package net.minecraft.world.inventory;
 
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.crafting.Recipes;
@@ -70,7 +70,7 @@ public class CraftingMenu extends AbstractContainerMenu
     
     @Override
     public boolean stillValid(final Player player) {
-        if (this.level.getTile(this.x, this.y, this.z) != Tile.workBench.id) return false;
+        if (this.level.getTile(this.x, this.y, this.z) != Block.workBench.id) return false;
         if (player.distanceToSqr(this.x + 0.5, this.y + 0.5, this.z + 0.5) <= 8 * 8) return true;
         return false;
     }

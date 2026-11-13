@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.Facing;
 import java.util.List;
 
@@ -91,7 +91,7 @@ public class PistonPieceEntity extends TileEntity
             progress = 1.0f - progress;
         }
 
-        final AABB aabb = Tile.pistonMovingPiece.getAABB(this.level, this.x, this.y, this.z, this.id, progress, this.facing);
+        final AABB aabb = Block.pistonMovingPiece.getAABB(this.level, this.x, this.y, this.z, this.id, progress, this.facing);
         if (aabb != null) {
             final List<Entity> entities = this.level.getEntities(null, aabb);
             if (!entities.isEmpty()) {
@@ -111,7 +111,7 @@ public class PistonPieceEntity extends TileEntity
             this.progressO = this.progress = 1.0f;
             this.level.removeTileEntity(this.x, this.y, this.z);
             this.setRemoved();
-            if (this.level.getTile(this.x, this.y, this.z) == Tile.pistonMovingPiece.id)
+            if (this.level.getTile(this.x, this.y, this.z) == Block.pistonMovingPiece.id)
                 this.level.setTileAndData(this.x, this.y, this.z, this.id, this.data);
         }
     }
@@ -124,7 +124,7 @@ public class PistonPieceEntity extends TileEntity
             this.moveCollidedEntities(1.0f, 4 / 16f);
             this.level.removeTileEntity(this.x, this.y, this.z);
             this.setRemoved();
-            if (this.level.getTile(this.x, this.y, this.z) == Tile.pistonMovingPiece.id)
+            if (this.level.getTile(this.x, this.y, this.z) == Block.pistonMovingPiece.id)
                 this.level.setTileAndData(this.x, this.y, this.z, this.id, this.data);
             return;
         }

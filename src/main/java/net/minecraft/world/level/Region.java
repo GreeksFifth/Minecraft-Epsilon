@@ -6,7 +6,7 @@ package net.minecraft.world.level;
 
 import net.minecraft.world.level.biome.BiomeSource;
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.level.tile.entity.TileEntity;
 import net.minecraft.world.level.chunk.LevelChunk;
 
@@ -77,7 +77,7 @@ public class Region implements LevelSource
 
         if (propagate) {
             final int id = this.getTile(x, y, z);
-            if (id == Tile.stoneSlabHalf.id || id == Tile.farmland.id || id == Tile.stairs_wood.id || id == Tile.stairs_stone.id) {
+            if (id == Block.stoneSlabHalf.id || id == Block.farmland.id || id == Block.stairs_wood.id || id == Block.stairs_stone.id) {
                 int br = this.getRawBrightness(x, y + 1, z, false);
                 final int br1 = this.getRawBrightness(x + 1, y, z, false);
                 final int br2 = this.getRawBrightness(x - 1, y, z, false);
@@ -116,7 +116,7 @@ public class Region implements LevelSource
     public Material getMaterial(final int x, final int y, final int z) {
         final int t = this.getTile(x, y, z);
         if (t == 0) return Material.air;
-        return Tile.tiles[t].material;
+        return Block.BLOCKS[t].material;
     }
     
     public BiomeSource getBiomeSource() {
@@ -124,14 +124,14 @@ public class Region implements LevelSource
     }
     
     public boolean isSolidRenderTile(final int x, final int y, final int z) {
-        final Tile tile = Tile.tiles[this.getTile(x, y, z)];
-        if (tile == null) return false;
-        return tile.isSolidRender();
+        final Block block = Block.BLOCKS[this.getTile(x, y, z)];
+        if (block == null) return false;
+        return block.isSolidRender();
     }
     
     public boolean isSolidBlockingTile(final int x, final int y, final int z) {
-        final Tile tile = Tile.tiles[this.getTile(x, y, z)];
-        if (tile == null) return false;
-        return tile.material.blocksMotion() && tile.isCubeShaped();
+        final Block block = Block.BLOCKS[this.getTile(x, y, z)];
+        if (block == null) return false;
+        return block.material.blocksMotion() && block.isCubeShaped();
     }
 }

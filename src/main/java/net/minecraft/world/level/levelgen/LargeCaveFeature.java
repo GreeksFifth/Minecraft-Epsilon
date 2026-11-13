@@ -5,7 +5,7 @@
 package net.minecraft.world.level.levelgen;
 
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import util.Mth;
 import java.util.Random;
 
@@ -104,7 +104,7 @@ public class LargeCaveFeature extends LargeFeature
                     for (int yy = y1 + 1; !detectedWater && yy >= y0 - 1; --yy) {
                         final int p = (xx * 16 + zz) * Level.MAX_HEIGHT + yy;
                         if (yy < Level.MIN_HEIGHT || yy >= Level.MAX_HEIGHT) continue;
-                        if (blocks[p] == Tile.water.id || blocks[p] == Tile.calmWater.id) {
+                        if (blocks[p] == Block.water.id || blocks[p] == Block.calmWater.id) {
                             detectedWater = true;
                         }
                         if (yy != y0 - 1 && xx != x0 && xx != x1 - 1 && zz != z0 && zz != z1 - 1) {
@@ -127,13 +127,13 @@ public class LargeCaveFeature extends LargeFeature
                             final double yd = (yy + 0.5 - yCave) / yRad;
                             if (yd > -0.7 && xd * xd + yd * yd + zd * zd < 1.0) {
                                 int block = blocks[p];
-                                if (block == Tile.grass.id) hasGrass = true;
-                                if (block == Tile.rock.id || block == Tile.dirt.id || block == Tile.grass.id) {
+                                if (block == Block.grass.id) hasGrass = true;
+                                if (block == Block.rock.id || block == Block.dirt.id || block == Block.grass.id) {
                                     if (yy < 10) {
-                                        blocks[p] = (byte) Tile.lava.id;
+                                        blocks[p] = (byte) Block.lava.id;
                                     } else {
                                         blocks[p] = 0;
-                                        if (hasGrass && blocks[p - 1] == Tile.dirt.id) blocks[p - 1] = (byte) Tile.grass.id;
+                                        if (hasGrass && blocks[p - 1] == Block.dirt.id) blocks[p - 1] = (byte) Block.grass.id;
                                     }
                                 }
                             }

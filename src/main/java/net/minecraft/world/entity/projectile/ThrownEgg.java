@@ -6,11 +6,11 @@ package net.minecraft.world.entity.projectile;
 
 import net.minecraft.SharedConstants;
 import net.minecraft.world.item.ItemInstance;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.entity.player.Player;
 import com.mojang.nbt.CompoundTag;
 import java.util.List;
 import net.minecraft.world.entity.animal.Chicken;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -254,7 +254,7 @@ public class ThrownEgg extends Entity
     public void playerTouch(final Player player) {
         if (!this.inGround || this.owner != player || this.shakeTime > 0) return;
 
-        if (player.inventory.add(new ItemInstance(Item.arrow, 1))) {
+        if (player.inventory.add(new ItemInstance(Items.arrow, 1))) {
             this.level.playSound(this, "random.pop", 0.2f, ((this.random.nextFloat() - this.random.nextFloat()) * 0.7f + 1.0f) * 2.0f);
             player.take(this, 1);
             this.remove();

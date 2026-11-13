@@ -5,6 +5,7 @@
 package net.minecraft.client.renderer;
 
 import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -13,7 +14,7 @@ import net.minecraft.client.renderer.entity.PlayerRenderer;
 import net.minecraft.world.item.Item;
 import util.Mth;
 import net.minecraft.client.Lighting;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.client.Minecraft;
@@ -38,12 +39,12 @@ public class ItemInHandRenderer
     
     public void renderItem(final Mob mob, final ItemInstance item) {
         glPushMatrix();
-        if (item.id < Tile.TILE_NUM_COUNT && TileRenderer.canRender(Tile.tiles[item.id].getRenderShape())) {
+        if (item.id < Block.TILE_NUM_COUNT && TileRenderer.canRender(Block.BLOCKS[item.id].getRenderShape())) {
             glBindTexture(GL_TEXTURE_2D, this.mc.textures.loadTexture("/terrain.png"));
-            this.tileRenderer.renderTile(Tile.tiles[item.id], item.getAuxValue(), mob.getBrightness(1.0f));
+            this.tileRenderer.renderTile(Block.BLOCKS[item.id], item.getAuxValue(), mob.getBrightness(1.0f));
         }
         else {
-            if (item.id < Tile.TILE_NUM_COUNT) {
+            if (item.id < Block.TILE_NUM_COUNT) {
                 glBindTexture(GL_TEXTURE_2D, this.mc.textures.loadTexture("/terrain.png"));
             }
             else {
@@ -173,7 +174,7 @@ public class ItemInHandRenderer
             glColor4f(br, br, br, 1.0f);
         }
 
-        if (item != null && item.id == Item.map.id) {
+        if (item != null && item.id == Items.map.id) {
             glPushMatrix();
             final float d = 0.8f;
 
@@ -250,7 +251,7 @@ public class ItemInHandRenderer
             t.vertexUV(0 - vo, 0 - vo, 0.0, 0.0, 0.0);
             t.end();
 
-            this.minimap.render(this.mc.player, this.mc.textures, Item.map.getSavedData(item, this.mc.level));
+            this.minimap.render(this.mc.player, this.mc.textures, Items.map.getSavedData(item, this.mc.level));
             glPopMatrix();
         }
         else if (item != null) {
@@ -345,7 +346,7 @@ public class ItemInHandRenderer
             glBindTexture(GL_TEXTURE_2D, this.mc.textures.loadTexture("/terrain.png"));
             int tile = this.mc.level.getTile(x, y, z);
             if (this.mc.level.isSolidBlockingTile(x, y, z)) {
-                this.renderTex(a, Tile.tiles[tile].getTexture(2));
+                this.renderTex(a, Block.BLOCKS[tile].getTexture(2));
             }
             else {
                 for (int i = 0; i < 8; ++i) {
@@ -361,7 +362,7 @@ public class ItemInHandRenderer
                 }
             }
 
-            if (Tile.tiles[tile] != null) this.renderTex(a, Tile.tiles[tile].getTexture(2));
+            if (Block.BLOCKS[tile] != null) this.renderTex(a, Block.BLOCKS[tile].getTexture(2));
         }
 
         if (this.mc.player.isUnderLiquid(Material.water)) {
@@ -444,7 +445,7 @@ public class ItemInHandRenderer
         final float size = 1.0f;
         for (int i = 0; i < 2; ++i) {
             glPushMatrix();
-            final int tex = Tile.fire.tex + i * 16;
+            final int tex = Block.fire.tex + i * 16;
             final int texX = (tex & 0xF) << 4;
             final int texY = tex & 0xF0;
 

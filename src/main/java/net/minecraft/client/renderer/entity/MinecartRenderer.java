@@ -5,7 +5,7 @@
 package net.minecraft.client.renderer.entity;
 
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.client.renderer.TileRenderer;
 import util.Mth;
 import net.minecraft.world.entity.item.Minecart;
@@ -74,10 +74,10 @@ public class MinecartRenderer extends EntityRenderer<Minecart>
             glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
 
             if (minecart.type == Minecart.CHEST) {
-                new TileRenderer().renderTile(Tile.chest, 0, minecart.getBrightness(a));
+                new TileRenderer().renderTile(Block.chest, 0, minecart.getBrightness(a));
             }
             else if (minecart.type == Minecart.FURNACE) {
-                new TileRenderer().renderTile(Tile.furnace, 0, minecart.getBrightness(a));
+                new TileRenderer().renderTile(Block.furnace, 0, minecart.getBrightness(a));
             }
             glRotatef(-90.0f, 0.0f, 1.0f, 0.0f);
             glTranslatef(0.0f, -5.0f / 16.0f, 0.0f);

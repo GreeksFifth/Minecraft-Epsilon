@@ -10,11 +10,11 @@ import net.minecraft.world.entity.item.ItemEntity;
 import com.mojang.nbt.CompoundTag;
 import java.util.List;
 import net.minecraft.world.item.ItemInstance;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.item.Item;
 import util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.player.Player;
@@ -155,7 +155,7 @@ public class FishingHook extends Entity
 
         if (!this.level.isClientSide) {
             final ItemInstance selectedItem = this.owner.getSelectedItem();
-            if (this.owner.removed || !this.owner.isAlive() || selectedItem == null || selectedItem.getItem() != Item.fishingRod || this.distanceToSqr(this.owner) > 1024.0) {
+            if (this.owner.removed || !this.owner.isAlive() || selectedItem == null || selectedItem.getItem() != Items.fishingRod || this.distanceToSqr(this.owner) > 1024.0) {
                 this.remove();
                 this.owner.fishing = null;
                 return;
@@ -354,7 +354,7 @@ public class FishingHook extends Entity
             dmg = 3;
         }
         else if (this.nibble > 0) {
-            final ItemEntity ie = new ItemEntity(this.level, this.x, this.y, this.z, new ItemInstance(Item.fish_raw));
+            final ItemEntity ie = new ItemEntity(this.level, this.x, this.y, this.z, new ItemInstance(Items.fish_raw));
             final double xa = this.owner.x - this.x;
             final double ya = this.owner.y - this.y;
             final double za = this.owner.z - this.z;

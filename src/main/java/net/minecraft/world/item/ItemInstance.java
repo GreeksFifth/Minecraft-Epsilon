@@ -11,7 +11,7 @@ import net.minecraft.stats.Stats;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.player.Player;
 import com.mojang.nbt.CompoundTag;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 
 public final class ItemInstance implements Descriptive<ItemInstance>
 {
@@ -20,16 +20,16 @@ public final class ItemInstance implements Descriptive<ItemInstance>
     public int id;
     private int auxValue;
     
-    public ItemInstance(final Tile tile) {
-        this(tile, 1);
+    public ItemInstance(final Block block) {
+        this(block, 1);
     }
     
-    public ItemInstance(final Tile tile, final int count) {
-        this(tile.id, count, 0);
+    public ItemInstance(final Block block, final int count) {
+        this(block.id, count, 0);
     }
     
-    public ItemInstance(final Tile tile, final int count, final int auxValue) {
-        this(tile.id, count, auxValue);
+    public ItemInstance(final Block block, final int count, final int auxValue) {
+        this(block.id, count, auxValue);
     }
     
     public ItemInstance(final Item item) {
@@ -73,8 +73,8 @@ public final class ItemInstance implements Descriptive<ItemInstance>
         return useOn;
     }
     
-    public float getDestroySpeed(final Tile tile) {
-        return this.getItem().getDestroySpeed(this, tile);
+    public float getDestroySpeed(final Block block) {
+        return this.getItem().getDestroySpeed(this, block);
     }
     
     public ItemInstance use(final Level level, final Player player) {
@@ -169,8 +169,8 @@ public final class ItemInstance implements Descriptive<ItemInstance>
         return Item.items[this.id].getAttackDamage(entity);
     }
     
-    public boolean canDestroySpecial(final Tile tile) {
-        return Item.items[this.id].canDestroySpecial(tile);
+    public boolean canDestroySpecial(final Block block) {
+        return Item.items[this.id].canDestroySpecial(block);
     }
     
     public void snap(final Player player) {

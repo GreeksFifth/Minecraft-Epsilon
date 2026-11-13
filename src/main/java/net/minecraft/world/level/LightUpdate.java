@@ -4,7 +4,7 @@
 
 package net.minecraft.world.level;
 
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 
 // Useless - This class has no clear source avaiable. local var names and structure are largely guesswork
 public class LightUpdate
@@ -45,7 +45,7 @@ public class LightUpdate
                         final int currentBr = level.getBrightness(this.layer, x, y, z);
                         final int tile = level.getTile(x, y, z);
 
-                        int block = Tile.lightBlock[tile];
+                        int block = Block.lightBlock[tile];
                         if (block == 0) {
                             block = 1;
                         }
@@ -55,7 +55,7 @@ public class LightUpdate
                             if (level.isSkyLit(x, y, z)) emit = 15;
                         }
                         else if (this.layer == LightLayer.Block) {
-                            emit = Tile.lightEmission[tile];
+                            emit = Block.lightEmission[tile];
                         }
 
                         int nextBr;

@@ -4,12 +4,13 @@
 
 package net.minecraft.world.level.tile;
 
-import net.minecraft.world.item.Item;
 import java.util.Random;
+
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GrassColor;
 import net.minecraft.world.level.LevelSource;
 
-public class TallGrass extends Bush
+public class TallGrass extends BlockLogicBush
 {
     public static final int DEAD_SHRUB = 0;
     public static final int TALL_GRASS = 1;
@@ -48,7 +49,7 @@ public class TallGrass extends Bush
     @Override
     public int getResource(final int data, final Random random) {
         if (random.nextInt(8) == 0) {
-            return Item.seeds.id;
+            return Items.seeds.id;
         }
         return -1;
     }

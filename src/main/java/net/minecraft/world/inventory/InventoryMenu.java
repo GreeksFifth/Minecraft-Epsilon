@@ -10,7 +10,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.crafting.Recipes;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.Container;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 
 public class InventoryMenu extends AbstractContainerMenu
 {
@@ -55,7 +55,7 @@ public class InventoryMenu extends AbstractContainerMenu
                     if (item.getItem() instanceof ArmorItem) {
                         return ((ArmorItem)item.getItem()).slot == slotNum;
                     }
-                    return item.getItem().id == Tile.pumpkin.id && slotNum == 0;
+                    return item.getItem().id == Block.pumpkin.id && slotNum == 0;
                 }
             });
         }

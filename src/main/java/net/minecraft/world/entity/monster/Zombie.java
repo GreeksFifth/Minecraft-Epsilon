@@ -5,7 +5,7 @@
 package net.minecraft.world.entity.monster;
 
 import net.minecraft.SharedConstants;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import util.Mth;
 import net.minecraft.world.level.Level;
 
@@ -46,6 +46,6 @@ public class Zombie extends Monster
     
     @Override
     protected int getDeathLoot() {
-        return Item.feather.id;
+        return Items.feather.id;
     }
 }

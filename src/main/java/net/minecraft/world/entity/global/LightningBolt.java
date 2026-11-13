@@ -9,7 +9,7 @@ import com.mojang.nbt.CompoundTag;
 import java.util.List;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import util.Mth;
 import net.minecraft.world.level.Level;
 
@@ -34,7 +34,7 @@ public class LightningBolt extends GlobalEntity
                 final int yt = Mth.floor(y);
                 final int zt = Mth.floor(z);
 
-                if (level.getTile(xt, yt, zt) == 0 && Tile.fire.mayPlace(level, xt, yt, zt)) level.setTile(xt, yt, zt, Tile.fire.id);
+                if (level.getTile(xt, yt, zt) == 0 && Block.fire.mayPlace(level, xt, yt, zt)) level.setTile(xt, yt, zt, Block.fire.id);
             }
 
             for (int i = 0; i < 4; ++i) {
@@ -42,7 +42,7 @@ public class LightningBolt extends GlobalEntity
                 final int yt = Mth.floor(y) + this.random.nextInt(3) - 1;
                 final int zt = Mth.floor(z) + this.random.nextInt(3) - 1;
 
-                if (level.getTile(xt, yt, zt) == 0 && Tile.fire.mayPlace(level, xt, yt, zt)) level.setTile(xt, yt, zt, Tile.fire.id);
+                if (level.getTile(xt, yt, zt) == 0 && Block.fire.mayPlace(level, xt, yt, zt)) level.setTile(xt, yt, zt, Block.fire.id);
             }
         }
     }
@@ -70,7 +70,7 @@ public class LightningBolt extends GlobalEntity
                     final int yt = Mth.floor(this.y);
                     final int zt = Mth.floor(this.z);
 
-                    if (this.level.getTile(xt, yt, zt) == 0 && Tile.fire.mayPlace(this.level, xt, yt, zt)) this.level.setTile(xt, yt, zt, Tile.fire.id);
+                    if (this.level.getTile(xt, yt, zt) == 0 && Block.fire.mayPlace(this.level, xt, yt, zt)) this.level.setTile(xt, yt, zt, Block.fire.id);
                 }
             }
         }

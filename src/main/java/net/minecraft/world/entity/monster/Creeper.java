@@ -5,9 +5,9 @@
 package net.minecraft.world.entity.monster;
 
 import net.minecraft.world.entity.global.LightningBolt;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.entity.Entity;
 import com.mojang.nbt.CompoundTag;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
 public class Creeper extends Monster
@@ -92,7 +92,7 @@ public class Creeper extends Monster
         super.die(source);
 
         if (source instanceof Skeleton) {
-            this.spawnAtLocation(Item.record_01.id + this.random.nextInt(2), 1);
+            this.spawnAtLocation(Items.record_01.id + this.random.nextInt(2), 1);
         }
     }
     
@@ -132,7 +132,7 @@ public class Creeper extends Monster
     
     @Override
     protected int getDeathLoot() {
-        return Item.sulphur.id;
+        return Items.sulphur.id;
     }
     
     private int getSwellDir() {

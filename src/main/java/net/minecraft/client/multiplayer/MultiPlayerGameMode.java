@@ -10,7 +10,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.network.packet.UseItemPacket;
 import net.minecraft.network.packet.SetCarriedItemPacket;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.network.packet.PlayerActionPacket;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.entity.player.Player;
@@ -63,8 +63,8 @@ public class MultiPlayerGameMode extends GameMode
         if (!this.isDestroying || x != this.xDestroyBlock || y != this.yDestroyBlock || z != this.zDestroyBlock) {
             this.connection.send(new PlayerActionPacket(PlayerActionPacket.START_DESTROY_BLOCK, x, y, z, face));
             final int t = this.minecraft.level.getTile(x, y, z);
-            if (t > 0 && this.destroyProgress == 0.0f) Tile.tiles[t].attack(this.minecraft.level, x, y, z, this.minecraft.player);
-            if (t > 0 && Tile.tiles[t].getDestroyProgress(this.minecraft.player) >= 1.0f) {
+            if (t > 0 && this.destroyProgress == 0.0f) Block.BLOCKS[t].attack(this.minecraft.level, x, y, z, this.minecraft.player);
+            if (t > 0 && Block.BLOCKS[t].getDestroyProgress(this.minecraft.player) >= 1.0f) {
                 this.destroyBlock(x, y, z, face);
             }
             else {
@@ -101,12 +101,12 @@ public class MultiPlayerGameMode extends GameMode
                 this.isDestroying = false;
                 return;
             }
-            final Tile tile = Tile.tiles[t];
+            final Block block = Block.BLOCKS[t];
 
-            this.destroyProgress += tile.getDestroyProgress(this.minecraft.player);
+            this.destroyProgress += block.getDestroyProgress(this.minecraft.player);
             if (this.destroyTicks % 4.0f == 0.0f) {
-                if (tile != null) {
-                    this.minecraft.soundEngine.play(tile.soundType.getStepSound(), x + 0.5f, y + 0.5f, z + 0.5f, (tile.soundType.getVolume() + 1.0f) / 8.0f, tile.soundType.getPitch() * 0.5f);
+                if (block != null) {
+                    this.minecraft.soundEngine.play(block.soundType.getStepSound(), x + 0.5f, y + 0.5f, z + 0.5f, (block.soundType.getVolume() + 1.0f) / 8.0f, block.soundType.getPitch() * 0.5f);
                 }
             }
 

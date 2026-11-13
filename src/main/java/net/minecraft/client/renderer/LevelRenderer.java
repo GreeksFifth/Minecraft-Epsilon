@@ -4,6 +4,7 @@
 
 package net.minecraft.client.renderer;
 
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.RecordingItem;
 import net.minecraft.client.particle.HeartParticle;
 import net.minecraft.client.particle.SnowShovelParticle;
@@ -35,7 +36,7 @@ import net.minecraft.world.entity.Mob;
 import java.util.Arrays;
 import net.minecraft.world.entity.Entity;
 import util.Mth;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import java.util.Random;
 import org.lwjgl.opengl.ARBOcclusionQuery;
@@ -226,7 +227,7 @@ public class LevelRenderer implements LevelListener
 
     @Override
     public void allChanged() {
-        Tile.leaves.setFancy(this.mc.options.fancyGraphics);
+        Block.leaves.setFancy(this.mc.options.fancyGraphics);
         this.lastViewDistance = this.mc.options.viewDistance;
 
         if (this.chunks != null) {
@@ -1098,7 +1099,7 @@ public class LevelRenderer implements LevelListener
                 glPushMatrix();
 
                 final int tileId = this.level.getTile(h.x, h.y, h.z);
-                Tile tile = (tileId > 0) ? Tile.tiles[tileId] : null;
+                Block block = (tileId > 0) ? Block.BLOCKS[tileId] : null;
                 glDisable(GL_ALPHA_TEST);
                 glPolygonOffset(-3.0f, -3.0f);
                 glEnable(GL_POLYGON_OFFSET_FILL);
@@ -1106,13 +1107,13 @@ public class LevelRenderer implements LevelListener
                 final double xo = player.xOld + (player.x - player.xOld) * a;
                 final double yo = player.yOld + (player.y - player.yOld) * a;
                 final double zo = player.zOld + (player.z - player.zOld) * a;
-                if (tile == null) tile = Tile.rock;
+                if (block == null) block = Block.rock;
 
                 glEnable(GL_ALPHA_TEST);
                 t.begin();
                 t.offset(-xo, -yo, -zo);
                 t.noColor();
-                this.tileRenderer.tesselateInWorld(tile, h.x, h.y, h.z, 240 + (int)(this.destroyProgress * 10.0f));
+                this.tileRenderer.tesselateInWorld(block, h.x, h.y, h.z, 240 + (int)(this.destroyProgress * 10.0f));
                 t.end();
                 t.offset(0.0, 0.0, 0.0);
                 glDisable(GL_ALPHA_TEST);
@@ -1157,11 +1158,11 @@ public class LevelRenderer implements LevelListener
             final int tileId = this.level.getTile(h.x, h.y, h.z);
 
             if (tileId > 0) {
-                Tile.tiles[tileId].updateShape(this.level, h.x, h.y, h.z);
+                Block.BLOCKS[tileId].updateShape(this.level, h.x, h.y, h.z);
                 double xo = (player.xOld + (player.x - player.xOld) * a);
                 double yo = (player.yOld + (player.y - player.yOld) * a);
                 double zo = (player.zOld + (player.z - player.zOld) * a);
-                this.render(Tile.tiles[tileId].getTileAABB(this.level, h.x, h.y, h.z).grow(ss, ss, ss).cloneMove(-xo, -yo, -zo));
+                this.render(Block.BLOCKS[tileId].getTileAABB(this.level, h.x, h.y, h.z).grow(ss, ss, ss).cloneMove(-xo, -yo, -zo));
             }
             glDepthMask(true);
             glEnable(GL_TEXTURE_2D);
@@ -1285,9 +1286,9 @@ public class LevelRenderer implements LevelListener
         else if (name.equals("splash")) this.mc.particleEngine.add(new SplashParticle(this.level, x, y, z, xa, ya, za));
         else if (name.equals("largesmoke")) this.mc.particleEngine.add(new SmokeParticle(this.level, x, y, z, xa, ya, za, 2.5f));
         else if (name.equals("reddust")) this.mc.particleEngine.add(new RedDustParticle(this.level, x, y, z, (float) xa, (float) ya, (float) za));
-        else if (name.equals("snowballpoof")) this.mc.particleEngine.add(new BreakingItemParticle(this.level, x, y, z, Item.snowBall));
+        else if (name.equals("snowballpoof")) this.mc.particleEngine.add(new BreakingItemParticle(this.level, x, y, z, Items.snowBall));
         else if (name.equals("snowshovel")) this.mc.particleEngine.add(new SnowShovelParticle(this.level, x, y, z, xa, ya, za));
-        else if (name.equals("slime")) this.mc.particleEngine.add(new BreakingItemParticle(this.level, x, y, z, Item.slimeBall));
+        else if (name.equals("slime")) this.mc.particleEngine.add(new BreakingItemParticle(this.level, x, y, z, Items.slimeBall));
         else if (name.equals("heart")) this.mc.particleEngine.add(new HeartParticle(this.level, x, y, z, xa, ya, za));
     }
     
@@ -1353,9 +1354,9 @@ public class LevelRenderer implements LevelListener
                 break;
             }
             case LevelEvent.PARTICLES_DESTROY_BLOCK: {
-                final int t = data & Tile.TILE_NUM_MASK;
+                final int t = data & Block.TILE_NUM_MASK;
                 if (t > 0) {
-                    final Tile oldTIle = Tile.tiles[t];
+                    final Block oldTIle = Block.BLOCKS[t];
                     this.mc.soundEngine.play(oldTIle.soundType.getBreakSound(), x + 0.5f, y + 0.5f, z + 0.5f, (oldTIle.soundType.getVolume() + 1.0f) / 2.0f, oldTIle.soundType.getPitch() * 0.8f);
                 }
                 this.mc.particleEngine.destroy(x, y, z, data & 0xFF, data >> 8 & 0xFF);

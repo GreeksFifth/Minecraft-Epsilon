@@ -4,7 +4,7 @@
 
 package net.minecraft.world.level.levelgen.feature;
 
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import util.Mth;
 import net.minecraft.world.level.Level;
 import java.util.Random;
@@ -156,7 +156,7 @@ public class BasicTree extends Feature
                 }
                 position[secidx2] = center[secidx2] + offset2;
                 thismat = this.thisLevel.getTile(position[0], position[1], position[2]);
-                if (!(thismat == 0 || thismat == Tile.leaves.id)) {
+                if (!(thismat == 0 || thismat == Block.leaves.id)) {
                     // If the material of the checked block is anything other than
                     // air or foliage, skip this tile.
                     offset2++;
@@ -210,7 +210,7 @@ public class BasicTree extends Feature
         float radius;
         while (cury < topy) {
             radius = this.foliageShape(cury - y);
-            this.crossection(x, cury, z, radius, (byte)1, Tile.leaves.id);
+            this.crossection(x, cury, z, radius, (byte)1, Block.leaves.id);
             cury++;
         }
     }
@@ -293,17 +293,17 @@ public class BasicTree extends Feature
         final int z = this.origin[2];
         final int[] startCoord = { x, startY, z };
         final int[] endCoord = { x, topY, z };
-        this.limb(startCoord, endCoord, Tile.treeTrunk.id);
+        this.limb(startCoord, endCoord, Block.treeTrunk.id);
         if (this.trunkWidth == 2) {
             startCoord[0] += 1;
             endCoord[0] += 1;
-            this.limb(startCoord, endCoord, Tile.treeTrunk.id);
+            this.limb(startCoord, endCoord, Block.treeTrunk.id);
             startCoord[0] += 1;
             endCoord[0] += 1;
-            this.limb(startCoord, endCoord, Tile.treeTrunk.id);
+            this.limb(startCoord, endCoord, Block.treeTrunk.id);
             startCoord[0] -= 1;
             endCoord[0] -= 1;
-            this.limb(startCoord, endCoord, Tile.treeTrunk.id);
+            this.limb(startCoord, endCoord, Block.treeTrunk.id);
         }
     }
     
@@ -320,7 +320,7 @@ public class BasicTree extends Feature
             baseCoord[1] = coordValues[3];
             int localY = baseCoord[1] - this.origin[1];
             if (this.trimBranches(localY)) {
-                this.limb(baseCoord, endCoord, Tile.treeTrunk.id);
+                this.limb(baseCoord, endCoord, Block.treeTrunk.id);
             }
             idx++;
         }
@@ -368,7 +368,7 @@ public class BasicTree extends Feature
             coordinate[secidx1] = Mth.floor(start[secidx1] + primoffset * secfac1);
             coordinate[secidx2] = Mth.floor(start[secidx2] + primoffset * secfac2);
             thismat = this.thisLevel.getTile(coordinate[0], coordinate[1], coordinate[2]);
-            if (thismat != 0 && thismat != Tile.leaves.id) {
+            if (thismat != 0 && thismat != Block.leaves.id) {
                 // If the material of the checked block is anything other than
                 // air or foliage, stop looking.
                 break;
@@ -400,7 +400,7 @@ public class BasicTree extends Feature
 
         // Check the location it is resting on
         final int baseMaterial = this.thisLevel.getTile(this.origin[0], this.origin[1] - 1, this.origin[2]);
-        if (baseMaterial != Tile.grass.id && baseMaterial != Tile.dirt.id) {
+        if (baseMaterial != Block.grass.id && baseMaterial != Block.dirt.id) {
             return false;
         }
         final int allowedHeight = this.checkLine(startPosition, endPosition);

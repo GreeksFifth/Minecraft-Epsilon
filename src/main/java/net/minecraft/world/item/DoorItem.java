@@ -6,7 +6,7 @@ package net.minecraft.world.item;
 
 import net.minecraft.Facing;
 import util.Mth;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.material.Material;
@@ -26,12 +26,12 @@ public class DoorItem extends Item
         if (face != Facing.UP) return false;
         y++;
 
-        Tile tile;
+        Block block;
 
-        if (this.material == Material.wood) tile = Tile.door_wood;
-        else tile = Tile.door_iron;
+        if (this.material == Material.wood) block = Block.door_wood;
+        else block = Block.door_iron;
 
-        if (!tile.mayPlace(level, x, y, z)) return false;
+        if (!block.mayPlace(level, x, y, z)) return false;
 
         int dir = Mth.floor((player.yRot + 180.0f) * 4.0f / 360.0f - 0.5) & 0x3;
 
@@ -45,8 +45,8 @@ public class DoorItem extends Item
         final int solidLeft = (level.isSolidBlockingTile(x - xra, y, z - zra) ? 1 : 0) + (level.isSolidBlockingTile(x - xra, y + 1, z - zra) ? 1 : 0);
         final int solidRight = (level.isSolidBlockingTile(x + xra, y, z + zra) ? 1 : 0) + (level.isSolidBlockingTile(x + xra, y + 1, z + zra) ? 1 : 0);
 
-        final boolean doorLeft = level.getTile(x - xra, y, z - zra) == tile.id || level.getTile(x - xra, y + 1, z - zra) == tile.id;
-        final boolean doorRight = level.getTile(x + xra, y, z + zra) == tile.id || level.getTile(x + xra, y + 1, z + zra) == tile.id;
+        final boolean doorLeft = level.getTile(x - xra, y, z - zra) == block.id || level.getTile(x - xra, y + 1, z - zra) == block.id;
+        final boolean doorRight = level.getTile(x + xra, y, z + zra) == block.id || level.getTile(x + xra, y + 1, z + zra) == block.id;
 
         boolean flip = false;
         if (doorLeft && !doorRight) flip = true;
@@ -58,11 +58,11 @@ public class DoorItem extends Item
         }
 
         level.noNeighborUpdate = true;
-        level.setTileAndData(x, y, z, tile.id, dir);
-        level.setTileAndData(x, y + 1, z, tile.id, dir + 8);
+        level.setTileAndData(x, y, z, block.id, dir);
+        level.setTileAndData(x, y + 1, z, block.id, dir + 8);
         level.noNeighborUpdate = false;
-        level.updateNeighborsAt(x, y, z, tile.id);
-        level.updateNeighborsAt(x, y + 1, z, tile.id);
+        level.updateNeighborsAt(x, y, z, block.id);
+        level.updateNeighborsAt(x, y + 1, z, block.id);
         itemInstance.count--;
         return true;
     }

@@ -4,7 +4,7 @@
 
 package net.minecraft.client.particle;
 
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.client.renderer.Tesselator;
 import util.Mth;
 import net.minecraft.world.entity.Entity;
@@ -107,7 +107,7 @@ public class ParticleEngine
     public void destroy(final int x, final int y, final int z, final int tid, final int data) {
         if (tid == 0) return;
 
-        final Tile tile = Tile.tiles[tid];
+        final Block block = Block.BLOCKS[tid];
         int SD = 4;
         for (int xx = 0; xx < SD; ++xx) {
             for (int yy = 0; yy < SD; ++yy) {
@@ -116,7 +116,7 @@ public class ParticleEngine
                     final double yp = y + (yy + 0.5) / SD;
                     final double zp = z + (zz + 0.5) / SD;
                     final int face = this.random.nextInt(6);
-                    this.add(new TerrainParticle(this.level, xp, yp, zp, xp - x - 0.5, yp - y - 0.5, zp - z - 0.5, tile, face, data).init(x, y, z));
+                    this.add(new TerrainParticle(this.level, xp, yp, zp, xp - x - 0.5, yp - y - 0.5, zp - z - 0.5, block, face, data).init(x, y, z));
                 }
             }
         }
@@ -125,18 +125,18 @@ public class ParticleEngine
     public void crack(final int x, final int y, final int z, final int face) {
         final int tid = this.level.getTile(x, y, z);
         if (tid == 0) return;
-        final Tile tile = Tile.tiles[tid];
+        final Block block = Block.BLOCKS[tid];
         final float r = 0.1f;
-        double xp = x + this.random.nextDouble() * (tile.xx1 - tile.xx0 - r * 2.0f) + r + tile.xx0;
-        double yp = y + this.random.nextDouble() * (tile.yy1 - tile.yy0 - r * 2.0f) + r + tile.yy0;
-        double zp = z + this.random.nextDouble() * (tile.zz1 - tile.zz0 - r * 2.0f) + r + tile.zz0;
-        if (face == 0) yp = y + tile.yy0 - r;
-        if (face == 1) yp = y + tile.yy1 + r;
-        if (face == 2) zp = z + tile.zz0 - r;
-        if (face == 3) zp = z + tile.zz1 + r;
-        if (face == 4) xp = x + tile.xx0 - r;
-        if (face == 5) xp = x + tile.xx1 + r;
-        this.add(new TerrainParticle(this.level, xp, yp, zp, 0.0, 0.0, 0.0, tile, face, this.level.getData(x, y, z)).init(x, y, z).setPower(0.2f).scale(0.6f));
+        double xp = x + this.random.nextDouble() * (block.xx1 - block.xx0 - r * 2.0f) + r + block.xx0;
+        double yp = y + this.random.nextDouble() * (block.yy1 - block.yy0 - r * 2.0f) + r + block.yy0;
+        double zp = z + this.random.nextDouble() * (block.zz1 - block.zz0 - r * 2.0f) + r + block.zz0;
+        if (face == 0) yp = y + block.yy0 - r;
+        if (face == 1) yp = y + block.yy1 + r;
+        if (face == 2) zp = z + block.zz0 - r;
+        if (face == 3) zp = z + block.zz1 + r;
+        if (face == 4) xp = x + block.xx0 - r;
+        if (face == 5) xp = x + block.xx1 + r;
+        this.add(new TerrainParticle(this.level, xp, yp, zp, 0.0, 0.0, 0.0, block, face, this.level.getData(x, y, z)).init(x, y, z).setPower(0.2f).scale(0.6f));
     }
     
     public String countParticles() {

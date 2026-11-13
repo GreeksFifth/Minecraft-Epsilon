@@ -7,8 +7,8 @@ package net.minecraft.world.level.tile.entity;
 import java.util.HashMap;
 
 import net.minecraft.network.packet.Packet;
-import net.minecraft.world.level.tile.RecordPlayerTile;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.RecordPlayerBlock;
+import net.minecraft.world.level.tile.Block;
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
 import java.util.Map;
@@ -20,7 +20,7 @@ public class TileEntity
     static {
         setId(FurnaceTileEntity.class, "Furnace");
         setId(ChestTileEntity.class, "Chest");
-        setId(RecordPlayerTile.Entity.class, "RecordPlayer");
+        setId(RecordPlayerBlock.Entity.class, "RecordPlayer");
         setId(DispenserTileEntity.class, "Trap");
         setId(SignTileEntity.class, "Sign");
         setId(MobSpawnerTileEntity.class, "MobSpawner");
@@ -96,8 +96,8 @@ public class TileEntity
         return xd * xd + yd * yd + zd * zd;
     }
 
-    public Tile getTile() {
-        return Tile.tiles[this.level.getTile(this.x, this.y, this.z)];
+    public Block getTile() {
+        return Block.BLOCKS[this.level.getTile(this.x, this.y, this.z)];
     }
 
     public Packet getUpdatePacket() {

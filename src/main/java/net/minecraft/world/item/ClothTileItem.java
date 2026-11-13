@@ -5,8 +5,8 @@
 package net.minecraft.world.item;
 
 import net.minecraft.Facing;
-import net.minecraft.world.level.tile.ClothTile;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.BlockLogicWool;
+import net.minecraft.world.level.tile.Block;
 
 public class ClothTileItem extends TileItem
 {
@@ -18,7 +18,7 @@ public class ClothTileItem extends TileItem
     
     @Override
     public int getIcon(final int auxValue) {
-        return Tile.cloth.getTexture(Facing.NORTH, ClothTile.getTileDataForItemAuxValue(auxValue));
+        return Block.cloth.getTexture(Facing.NORTH, BlockLogicWool.getTileDataForItemAuxValue(auxValue));
     }
     
     @Override
@@ -28,6 +28,6 @@ public class ClothTileItem extends TileItem
     
     @Override
     public String getDescriptionId(final ItemInstance itemInstance) {
-        return super.getDescriptionId() + "." + DyePowderItem.COLOR_DESCS[ClothTile.getTileDataForItemAuxValue(itemInstance.getAuxValue())];
+        return super.getDescriptionId() + "." + DyePowderItem.COLOR_DESCS[BlockLogicWool.getTileDataForItemAuxValue(itemInstance.getAuxValue())];
     }
 }

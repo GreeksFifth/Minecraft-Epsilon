@@ -4,7 +4,7 @@
 
 package net.minecraft.world.item;
 
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 
 public class SaplingTileItem extends TileItem
 {
@@ -21,6 +21,6 @@ public class SaplingTileItem extends TileItem
     
     @Override
     public int getIcon(final int auxValue) {
-        return Tile.sapling.getTexture(0, auxValue);
+        return Block.sapling.getTexture(0, auxValue);
     }
 }

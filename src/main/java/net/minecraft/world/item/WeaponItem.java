@@ -6,7 +6,7 @@ package net.minecraft.world.item;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 
 public class WeaponItem extends Item
 {
@@ -21,8 +21,8 @@ public class WeaponItem extends Item
     }
     
     @Override
-    public float getDestroySpeed(final ItemInstance itemInstance, final Tile tile) {
-        if (tile.id == Tile.web.id) {
+    public float getDestroySpeed(final ItemInstance itemInstance, final Block block) {
+        if (block.id == Block.web.id) {
             // swords can quickly cut web
             return 15.0f;
         }
@@ -52,7 +52,7 @@ public class WeaponItem extends Item
     }
     
     @Override
-    public boolean canDestroySpecial(final Tile tile) {
-        return tile.id == Tile.web.id;
+    public boolean canDestroySpecial(final Block block) {
+        return block.id == Block.web.id;
     }
 }

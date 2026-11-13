@@ -4,7 +4,7 @@
 
 package net.minecraft.world.level.levelgen.feature;
 
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import util.Mth;
 import java.util.Random;
 import net.minecraft.world.level.Level;
@@ -57,7 +57,7 @@ public class OreFeature extends Feature
                             for (int z2 = zt0; z2 <= zt1; ++z2) {
                                 final double zd = (z2 + 0.5 - zz) / (r / 2.0);
                                 if (xd * xd + yd * yd + zd * zd < 1.0) {
-                                    if (level.getTile(x2, y2, z2) == Tile.rock.id) {
+                                    if (level.getTile(x2, y2, z2) == Block.rock.id) {
                                         level.setTileNoUpdate(x2, y2, z2, this.tile);
                                     }
                                 }

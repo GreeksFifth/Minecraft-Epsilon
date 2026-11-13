@@ -9,10 +9,9 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.material.MaterialColor;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import util.Mth;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.saveddata.MapItemSavedData;
 import net.minecraft.world.level.Level;
 
@@ -106,7 +105,7 @@ public class MapItem extends ComplexItem
                 int g = 0;
                 int b = 0;
 
-                final int[] count = new int[Tile.TILE_NUM_COUNT];
+                final int[] count = new int[Block.TILE_NUM_COUNT];
 
                 final LevelChunk lc = level.getChunkAt(xx, zz);
                 final int xso = xx & 0xF;
@@ -118,8 +117,8 @@ public class MapItem extends ComplexItem
                     int ss = xx + zz * 231871;
                     ss = ss * ss * 31287121 + ss * 11;
 
-                    if ((ss >> 20 & 0x1) == 0x0) count[Tile.dirt.id] += 10;
-                    else count[Tile.rock.id] += 10;
+                    if ((ss >> 20 & 0x1) == 0x0) count[Block.dirt.id] += 10;
+                    else count[Block.rock.id] += 10;
                     hh = 100.0;
                 }
                 else {
@@ -134,7 +133,7 @@ public class MapItem extends ComplexItem
                                     ok = true;
                                     t = lc.getTile(xs + xso, yy - 1, zs + zso);
                                     if (t == 0) ok = false;
-                                    else if (yy > 0 && t > 0 && Tile.tiles[t].material.color == MaterialColor.none) {
+                                    else if (yy > 0 && t > 0 && Block.BLOCKS[t].material.color == MaterialColor.none) {
                                         ok = false;
                                     }
 
@@ -144,13 +143,13 @@ public class MapItem extends ComplexItem
                                     }
                                 } while (!ok);
 
-                                if (t != 0 && Tile.tiles[t].material.isLiquid()) {
+                                if (t != 0 && Block.BLOCKS[t].material.isLiquid()) {
                                     int y = yy - 1;
                                     int below;
                                     do {
                                         below = lc.getTile(xs + xso, y--, zs + zso);
                                         liquidDepth++;
-                                    } while (y > 0 && below != 0 && Tile.tiles[below].material.isLiquid());
+                                    } while (y > 0 && below != 0 && Block.BLOCKS[below].material.isLiquid());
                                 }
                             }
                             hh += yy / (double)(scale * scale);
@@ -180,7 +179,7 @@ public class MapItem extends ComplexItem
 
                 int col = 0;
                 if (tBest > 0) {
-                    final MaterialColor mc = Tile.tiles[tBest].material.color;
+                    final MaterialColor mc = Block.BLOCKS[tBest].material.color;
                     if (mc == MaterialColor.water) {
                         diff = liquidDepth * 0.1 + (x + z & 0x1) * 0.2;
                         br = 1;
@@ -244,6 +243,6 @@ public class MapItem extends ComplexItem
     public Packet getUpdatePacket(final ItemInstance itemInstance, final Level level, final Player player) {
         final byte[] data = this.getSavedData(itemInstance, level).getUpdatePacket(itemInstance, level, player);
         if (data == null) return null;
-        return new ComplexItemDataPacket((short)Item.map.id, (short)itemInstance.getAuxValue(), data);
+        return new ComplexItemDataPacket((short) Items.map.id, (short)itemInstance.getAuxValue(), data);
     }
 }

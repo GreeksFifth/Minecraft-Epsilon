@@ -14,15 +14,13 @@ import com.mojang.nbt.DoubleTag;
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.tile.LiquidTile;
+import net.minecraft.world.level.tile.BlockLogicFluid;
 import net.minecraft.world.level.material.Material;
 
-import java.util.Arrays;
 import java.util.List;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import util.Mth;
 import java.util.Random;
-import java.util.stream.IntStream;
 
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.level.Level;
@@ -418,23 +416,23 @@ public abstract class Entity
             final int yt = Mth.floor(this.y - 0.2f - this.heightOffset);
             final int zt = Mth.floor(this.z);
             int t = this.level.getTile(xt, yt, zt);
-            if (this.level.getTile(xt, yt - 1, zt) == Tile.fence.id) {
+            if (this.level.getTile(xt, yt - 1, zt) == Block.fence.id) {
                 t = this.level.getTile(xt, yt - 1, zt);
             }
 
             if (this.walkDist > this.nextStep && t > 0) {
                 this.nextStep++;
 
-                Tile.SoundType soundType = Tile.tiles[t].soundType;
-                if (this.level.getTile(xt, yt + 1, zt) == Tile.topSnow.id) {
-                    soundType = Tile.topSnow.soundType;
+                Block.SoundType soundType = Block.BLOCKS[t].soundType;
+                if (this.level.getTile(xt, yt + 1, zt) == Block.topSnow.id) {
+                    soundType = Block.topSnow.soundType;
                     this.level.playSound(this, soundType.getStepSound(), soundType.getVolume() * 0.15f, soundType.getPitch());
                 }
-                else if (!Tile.tiles[t].material.isLiquid()) {
+                else if (!Block.BLOCKS[t].material.isLiquid()) {
                     this.level.playSound(this, soundType.getStepSound(), soundType.getVolume() * 0.15f, soundType.getPitch());
                 }
 
-                Tile.tiles[t].stepOn(this.level, xt, yt, zt, this);
+                Block.BLOCKS[t].stepOn(this.level, xt, yt, zt, this);
             }
         }
 
@@ -451,7 +449,7 @@ public abstract class Entity
                     for (int z = z0; z <= z1; ++z) {
                         final int t = this.level.getTile(x, y, z);
                         if (t > 0) {
-                            Tile.tiles[t].entityInside(this.level, x, y, z, this);
+                            Block.BLOCKS[t].entityInside(this.level, x, y, z, this);
                         }
                     }
                 }
@@ -526,8 +524,8 @@ public abstract class Entity
         final int yt = Mth.floor((float)Mth.floor(yp));
         final int zt = Mth.floor(this.z);
         final int t = this.level.getTile(xt, yt, zt);
-        if (t != 0 && Tile.tiles[t].material == material) {
-            float hh = LiquidTile.getHeight(this.level.getData(xt, yt, zt)) - 1 / 9.0f;
+        if (t != 0 && Block.BLOCKS[t].material == material) {
+            float hh = BlockLogicFluid.getHeight(this.level.getData(xt, yt, zt)) - 1 / 9.0f;
             float h = yt + 1 - hh;
             return yp < h;
         }

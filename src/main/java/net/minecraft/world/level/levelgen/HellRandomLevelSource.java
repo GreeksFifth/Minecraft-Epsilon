@@ -10,9 +10,9 @@ import net.minecraft.world.level.levelgen.feature.LightGemFeature;
 import net.minecraft.world.level.levelgen.feature.HellPortalFeature;
 import net.minecraft.world.level.levelgen.feature.HellFireFeature;
 import net.minecraft.world.level.levelgen.feature.HellSpringFeature;
-import net.minecraft.world.level.tile.SandTile;
+import net.minecraft.world.level.tile.SandBlock;
 import net.minecraft.world.level.chunk.LevelChunk;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.synth.PerlinNoise;
 import java.util.Random;
@@ -93,10 +93,10 @@ public class HellRandomLevelSource implements ChunkSource
                             for (int z = 0; z < CHUNK_WIDTH; ++z) {
                                 int tileId = 0;
                                 if (yc * CHUNK_HEIGHT + y < waterHeight) {
-                                    tileId = Tile.calmLava.id;
+                                    tileId = Block.calmLava.id;
                                 }
                                 if (val > 0.0) {
-                                    tileId = Tile.hellRock.id;
+                                    tileId = Block.hellRock.id;
                                 }
 
                                 blocks[offs] = (byte)tileId;
@@ -134,39 +134,39 @@ public class HellRandomLevelSource implements ChunkSource
 
                 int run = -1;
 
-                byte top = (byte)Tile.hellRock.id;
-                byte material = (byte)Tile.hellRock.id;
+                byte top = (byte) Block.hellRock.id;
+                byte material = (byte) Block.hellRock.id;
 
                 for (int y = Level.MAX_HEIGHT - 1; y >= 0; --y) {
                     final int offs = (z * 16 + x) * Level.MAX_HEIGHT + y;
 
                     if (y >= (Level.MAX_HEIGHT - 1) - this.random.nextInt(5)) {
-                        blocks[offs] = (byte)Tile.unbreakable.id;
+                        blocks[offs] = (byte) Block.unbreakable.id;
                     }
                     else if (y <= 0 + this.random.nextInt(5)) {
-                        blocks[offs] = (byte)Tile.unbreakable.id;
+                        blocks[offs] = (byte) Block.unbreakable.id;
                     }
                     else {
                         final byte old = blocks[offs];
                         if (old == 0) {
                             run = -1;
                         }
-                        else if (old == Tile.hellRock.id) {
+                        else if (old == Block.hellRock.id) {
                             if (run == -1) {
                                 if (runDepth <= 0) {
                                     top = 0;
-                                    material = (byte)Tile.hellRock.id;
+                                    material = (byte) Block.hellRock.id;
                                 }
                                 else if (y >= waterHeight - 4 && y <= waterHeight + 1) {
-                                    top = (byte)Tile.hellRock.id;
-                                    material = (byte)Tile.hellRock.id;
-                                    if (gravel) top = (byte) Tile.gravel.id;
-                                    if (gravel) material = (byte) Tile.hellRock.id;
-                                    if (sand) top = (byte) Tile.hellSand.id;
-                                    if (sand) material = (byte) Tile.hellSand.id;
+                                    top = (byte) Block.hellRock.id;
+                                    material = (byte) Block.hellRock.id;
+                                    if (gravel) top = (byte) Block.gravel.id;
+                                    if (gravel) material = (byte) Block.hellRock.id;
+                                    if (sand) top = (byte) Block.hellSand.id;
+                                    if (sand) material = (byte) Block.hellSand.id;
                                 }
 
-                                if (y < waterHeight && top == 0) top = (byte) Tile.calmLava.id;
+                                if (y < waterHeight && top == 0) top = (byte) Block.calmLava.id;
 
                                 run = runDepth;
                                 if (y >= waterHeight - 1) blocks[offs] = top;
@@ -294,7 +294,7 @@ public class HellRandomLevelSource implements ChunkSource
     }
     
     public void postProcess(final ChunkSource parent, final int xt, final int zt) {
-        SandTile.instaFall = true;
+        SandBlock.instaFall = true;
         final int xo = xt * 16;
         final int zo = zt * 16;
 
@@ -302,7 +302,7 @@ public class HellRandomLevelSource implements ChunkSource
             int x = xo + this.random.nextInt(16) + 8;
             int y = this.random.nextInt(Level.MAX_HEIGHT - 8) + 4;
             int z = zo + this.random.nextInt(16) + 8;
-            new HellSpringFeature(Tile.lava.id).place(this.level, this.random, x, y, z);
+            new HellSpringFeature(Block.lava.id).place(this.level, this.random, x, y, z);
         }
 
         int count = this.random.nextInt(this.random.nextInt(10) + 1) + 1;
@@ -333,16 +333,16 @@ public class HellRandomLevelSource implements ChunkSource
             int x = xo + this.random.nextInt(16) + 8;
             int y = this.random.nextInt(Level.MAX_HEIGHT);
             int z = zo + this.random.nextInt(16) + 8;
-            new FlowerFeature(Tile.mushroom1.id).place(this.level, this.random, x, y, z);
+            new FlowerFeature(Block.mushroom1.id).place(this.level, this.random, x, y, z);
         }
         if (this.random.nextInt(1) == 0) {
             int x = xo + this.random.nextInt(16) + 8;
             int y = this.random.nextInt(Level.MAX_HEIGHT);
             int z = zo + this.random.nextInt(16) + 8;
-            new FlowerFeature(Tile.mushroom2.id).place(this.level, this.random, x, y, z);
+            new FlowerFeature(Block.mushroom2.id).place(this.level, this.random, x, y, z);
         }
 
-        SandTile.instaFall = false;
+        SandBlock.instaFall = false;
     }
     
     public boolean save(final boolean force, final ProgressListener progressListener) {

@@ -7,7 +7,7 @@ package net.minecraft.server;
 import net.minecraft.network.packet.AddPaintingPacket;
 import net.minecraft.network.packet.MoveEntityPacket;
 import net.minecraft.world.entity.Painting;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.entity.item.FallingTile;
 import net.minecraft.world.entity.item.PrimedTnt;
 import net.minecraft.world.entity.projectile.ThrownEgg;
@@ -29,7 +29,6 @@ import net.minecraft.network.packet.EntityActionAtPositionPacket;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.network.packet.SetEquippedItemPacket;
 import net.minecraft.network.packet.RemoveEntityPacket;
-import java.util.Iterator;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.SynchedEntityData;
 import net.minecraft.network.packet.SetEntityDataPacket;
@@ -286,8 +285,8 @@ public class TrackedEntity
         }
         if (this.e instanceof FallingTile) {
             final FallingTile ft = (FallingTile)this.e;
-            if (ft.tile == Tile.sand.id) return new AddEntityPacket(this.e, AddEntityPacket.FALLING_SAND);
-            if (ft.tile == Tile.gravel.id) return new AddEntityPacket(this.e, AddEntityPacket.FALLING_GRAVEL);
+            if (ft.tile == Block.sand.id) return new AddEntityPacket(this.e, AddEntityPacket.FALLING_SAND);
+            if (ft.tile == Block.gravel.id) return new AddEntityPacket(this.e, AddEntityPacket.FALLING_GRAVEL);
         }
         if (this.e instanceof Painting) {
             return new AddPaintingPacket((Painting)this.e);

@@ -4,7 +4,8 @@
 
 package net.minecraft.client.renderer.entity;
 
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.tile.Block;
 import util.Mth;
 import net.minecraft.world.entity.global.LightningBolt;
 import net.minecraft.world.entity.projectile.FishingHook;
@@ -15,7 +16,6 @@ import net.minecraft.world.entity.item.PrimedTnt;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.projectile.Fireball;
 import net.minecraft.world.entity.projectile.ThrownEgg;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.entity.projectile.Snowball;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.Painting;
@@ -94,8 +94,8 @@ public class EntityRenderDispatcher
         this.renderers.put(Entity.class, new DefaultRenderer());
         this.renderers.put(Painting.class, new PaintingRenderer());
         this.renderers.put(Arrow.class, new ArrowRenderer());
-        this.renderers.put(Snowball.class, new ItemSpriteRenderer(Item.snowBall.getIcon(0)));
-        this.renderers.put(ThrownEgg.class, new ItemSpriteRenderer(Item.egg.getIcon(0)));
+        this.renderers.put(Snowball.class, new ItemSpriteRenderer(Items.snowBall.getIcon(0)));
+        this.renderers.put(ThrownEgg.class, new ItemSpriteRenderer(Items.egg.getIcon(0)));
         this.renderers.put(Fireball.class, new FireballRenderer());
         this.renderers.put(ItemEntity.class, new ItemRenderer());
         this.renderers.put(PrimedTnt.class, new TntRenderer());
@@ -132,7 +132,7 @@ public class EntityRenderDispatcher
 
         if (player.isSleeping()) {
             int t = level.getTile(Mth.floor(player.x), Mth.floor(player.y), Mth.floor(player.z));
-            if (t == Tile.bed.id) {
+            if (t == Block.bed.id) {
                 int data = level.getData(Mth.floor(player.x), Mth.floor(player.y), Mth.floor(player.z));
 
                 int direction = data & 0x3;

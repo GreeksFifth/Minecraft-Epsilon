@@ -5,7 +5,7 @@
 package net.minecraft.world.level.dimension;
 
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.tile.Tile;
+import net.minecraft.world.level.tile.Block;
 import net.minecraft.world.level.levelgen.HellRandomLevelSource;
 import net.minecraft.world.level.chunk.ChunkSource;
 import net.minecraft.world.phys.Vec3;
@@ -44,7 +44,7 @@ public class HellDimension extends Dimension
     @Override
     public boolean isValidSpawn(final int x, final int z) {
         final int topTile = this.level.getTopTile(x, z);
-        return topTile != Tile.unbreakable.id && topTile != 0 && Tile.solid[topTile];
+        return topTile != Block.unbreakable.id && topTile != 0 && Block.solid[topTile];
     }
     
     @Override
