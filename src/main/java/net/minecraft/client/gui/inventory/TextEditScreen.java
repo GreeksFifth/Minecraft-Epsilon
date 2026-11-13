@@ -6,11 +6,11 @@ package net.minecraft.client.gui.inventory;
 
 import net.minecraft.SharedConstants;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderDispatcher;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.network.packet.SignUpdatePacket;
 import net.minecraft.client.gui.Button;
 import org.lwjgl.input.Keyboard;
-import net.minecraft.world.level.tile.entity.SignTileEntity;
+import net.minecraft.world.level.block.entity.SignTileEntity;
 import net.minecraft.client.gui.Screen;
 
 import static org.lwjgl.opengl.GL11.*;

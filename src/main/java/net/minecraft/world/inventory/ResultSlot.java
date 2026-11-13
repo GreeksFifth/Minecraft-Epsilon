@@ -6,7 +6,7 @@ package net.minecraft.world.inventory;
 
 import net.minecraft.stats.Achievements;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.Container;

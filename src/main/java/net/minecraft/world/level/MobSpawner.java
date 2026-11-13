@@ -11,7 +11,7 @@ import java.util.HashSet;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.pathfinder.Node;
 import net.minecraft.world.level.pathfinder.Path;
-import net.minecraft.world.level.tile.BlockLogicBed;
+import net.minecraft.world.level.block.BlockLogicBed;
 import net.minecraft.world.level.pathfinder.PathFinder;
 import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.monster.Skeleton;

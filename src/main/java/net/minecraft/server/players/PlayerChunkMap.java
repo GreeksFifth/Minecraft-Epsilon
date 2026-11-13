@@ -14,8 +14,8 @@ import net.minecraft.server.level.ServerLevel;
 import java.util.ArrayList;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.tile.Block;
-import net.minecraft.world.level.tile.entity.TileEntity;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.TileEntity;
 import util.LongHashMap;
 import java.util.List;
 

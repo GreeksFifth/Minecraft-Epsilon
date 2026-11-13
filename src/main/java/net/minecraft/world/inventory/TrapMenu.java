@@ -6,7 +6,7 @@ package net.minecraft.world.inventory;
 
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.Container;
-import net.minecraft.world.level.tile.entity.DispenserTileEntity;
+import net.minecraft.world.level.block.entity.DispenserTileEntity;
 
 public class TrapMenu extends AbstractContainerMenu
 {

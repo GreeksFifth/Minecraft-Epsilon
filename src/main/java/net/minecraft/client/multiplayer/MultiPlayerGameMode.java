@@ -10,7 +10,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.network.packet.UseItemPacket;
 import net.minecraft.network.packet.SetCarriedItemPacket;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.network.packet.PlayerActionPacket;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.entity.player.Player;

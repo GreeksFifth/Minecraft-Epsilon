@@ -7,7 +7,7 @@ package net.minecraft.world.item;
 import net.minecraft.Facing;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.entity.animal.Cow;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Material;
 import util.Mth;
 import net.minecraft.world.phys.Vec3;

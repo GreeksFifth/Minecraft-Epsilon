@@ -28,7 +28,7 @@ import org.lwjgl.util.glu.GLU;
 import org.useless.SDL3Window;
 import util.Mth;
 import net.minecraft.world.level.chunk.ChunkCache;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.client.gamemode.CreativeMode;

@@ -6,7 +6,7 @@ package net.minecraft.client.particle;
 
 import net.minecraft.client.renderer.Tesselator;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 
 public class TerrainParticle extends Particle
 {

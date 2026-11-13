@@ -4,7 +4,7 @@
 
 package net.minecraft.world.item;
 
-import net.minecraft.world.level.tile.PistonBaseBlock;
+import net.minecraft.world.level.block.BlockLogicPistonBase;
 
 public class PistonTileItem extends TileItem
 {
@@ -14,6 +14,6 @@ public class PistonTileItem extends TileItem
     
     @Override
     public int getLevelDataForAuxValue(final int auxValue) {
-        return PistonBaseBlock.UNDEFINED_FACING;
+        return BlockLogicPistonBase.UNDEFINED_FACING;
     }
 }

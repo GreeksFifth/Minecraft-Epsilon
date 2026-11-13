@@ -4,7 +4,7 @@
 
 package net.minecraft.world.level.dimension;
 
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import util.Mth;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.levelgen.SkyIslandRandomLevelSource;

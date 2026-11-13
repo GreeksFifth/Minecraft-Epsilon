@@ -7,7 +7,7 @@ package net.minecraft.world.entity.player;
 import net.minecraft.world.item.ArmorItem;
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.ListTag;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.Container;

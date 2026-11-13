@@ -8,7 +8,7 @@ import net.minecraft.world.item.ItemInstance;
 import net.minecraft.network.packet.TileUpdatePacket;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelEvent;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.entity.player.Player;
 
 public class ServerPlayerGameMode

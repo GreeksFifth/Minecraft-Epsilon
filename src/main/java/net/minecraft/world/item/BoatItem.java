@@ -6,7 +6,7 @@ package net.minecraft.world.item;
 
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.entity.item.Boat;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import util.Mth;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.entity.player.Player;

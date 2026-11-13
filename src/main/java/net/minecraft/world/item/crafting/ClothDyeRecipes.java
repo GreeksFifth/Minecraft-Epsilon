@@ -8,8 +8,8 @@ import net.minecraft.world.item.DyePowderItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.tile.BlockLogicWool;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.BlockLogicWool;
+import net.minecraft.world.level.block.Block;
 
 public class ClothDyeRecipes
 {

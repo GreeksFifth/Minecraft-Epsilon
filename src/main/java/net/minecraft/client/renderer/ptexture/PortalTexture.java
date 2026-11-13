@@ -6,7 +6,7 @@ package net.minecraft.client.renderer.ptexture;
 
 import util.Mth;
 import java.util.Random;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 
 public class PortalTexture extends DynamicTexture
 {

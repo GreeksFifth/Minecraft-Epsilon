@@ -163,6 +163,7 @@ public class InventoryScreen extends AbstractContainerScreen
         if (button.id == BUTTON_INVCLEAR){
             for (int i = 0; i < Minecraft.instance.player.inventory.getContainerSize(); i++) {
                 Minecraft.instance.player.inventory.removeItem(i,256);
+
             }
         }
     }
@@ -173,7 +174,6 @@ public class InventoryScreen extends AbstractContainerScreen
             if (Item.items[i] != null){
                 allItemsInGame.add(new ItemInstance(Item.items[i]));
             }
-            Minecraft.instance.isRaining = !minecraft.isRaining;
 
         }
 

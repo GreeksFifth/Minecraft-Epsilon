@@ -14,11 +14,11 @@ import com.mojang.nbt.DoubleTag;
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.tile.BlockLogicFluid;
+import net.minecraft.world.level.block.BlockLogicFluid;
 import net.minecraft.world.level.material.Material;
 
 import java.util.List;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import util.Mth;
 import java.util.Random;
 

@@ -8,7 +8,7 @@ import util.Mth;
 import net.minecraft.world.level.material.Material;
 import java.util.Random;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 
 public class ClayFeature extends Feature
 {

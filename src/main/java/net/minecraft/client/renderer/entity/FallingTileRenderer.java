@@ -6,7 +6,7 @@ package net.minecraft.client.renderer.entity;
 
 import net.minecraft.world.level.Level;
 import util.Mth;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.entity.item.FallingTile;
 import net.minecraft.client.renderer.TileRenderer;
 

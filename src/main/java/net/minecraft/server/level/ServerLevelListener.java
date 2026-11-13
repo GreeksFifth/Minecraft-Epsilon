@@ -6,7 +6,7 @@ package net.minecraft.server.level;
 
 import net.minecraft.network.packet.LevelEventPacket;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.tile.entity.TileEntity;
+import net.minecraft.world.level.block.entity.TileEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.LevelListener;

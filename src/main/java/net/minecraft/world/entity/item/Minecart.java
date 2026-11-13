@@ -13,9 +13,9 @@ import java.util.List;
 
 import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.level.tile.RailBlock;
+import net.minecraft.world.level.block.BlockLogicRail;
 import util.Mth;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.item.ItemInstance;
@@ -225,7 +225,7 @@ public class Minecart extends Entity implements Container
         int xt = Mth.floor(this.x);
         int yt = Mth.floor(this.y);
         int zt = Mth.floor(this.z);
-        if (RailBlock.isRail(this.level, xt, yt - 1, zt)) {
+        if (BlockLogicRail.isRail(this.level, xt, yt - 1, zt)) {
             --yt;
         }
 
@@ -234,7 +234,7 @@ public class Minecart extends Entity implements Container
         boolean isFurnacePowered = false; // Useless - Name is a guess, but this is true when the cart is a furnace that is actively moving, used to determine when it should decrement the fuel counter
         final double slideSpeed = 1 / 128.0;
         final int tile = this.level.getTile(xt, yt, zt);
-        if (RailBlock.isRail(tile)) {
+        if (BlockLogicRail.isRail(tile)) {
             final Vec3 oldPos = this.getPos(this.x, this.y, this.z);
             int data = this.level.getData(xt, yt, zt);
             this.y = yt;
@@ -242,11 +242,11 @@ public class Minecart extends Entity implements Container
             boolean powerTrack = false;
             boolean haltTrack = false;
             if (tile == Block.goldenRail.id) {
-                powerTrack = (data & RailBlock.RAIL_DATA_BIT) != 0x0;
+                powerTrack = (data & BlockLogicRail.RAIL_DATA_BIT) != 0x0;
                 haltTrack = !powerTrack;
             }
-            if (((RailBlock) Block.BLOCKS[tile]).isUsesDataBit()) {
-                data &= RailBlock.RAIL_DIRECTION_MASK;
+            if (((BlockLogicRail) Block.BLOCKS[tile]).isUsesDataBit()) {
+                data &= BlockLogicRail.RAIL_DIRECTION_MASK;
             }
 
             if (data >= 2 && data <= 5) {
@@ -416,13 +416,13 @@ public class Minecart extends Entity implements Container
                 else {
                     // if the minecart is standing still, accelerate it away
                     // from potentional walls
-                    if (data == RailBlock.DIR_FLAT_X) {
+                    if (data == BlockLogicRail.DIR_FLAT_X) {
                         if (this.level.isSolidBlockingTile(xt - 1, yt, zt)) {
                             this.xd = 0.02;
                         } else if (this.level.isSolidBlockingTile(xt + 1, yt, zt)) {
                             this.xd = -0.02;
                         }
-                    } else if (data == RailBlock.DIR_FLAT_Z) {
+                    } else if (data == BlockLogicRail.DIR_FLAT_Z) {
                         if (this.level.isSolidBlockingTile(xt, yt, zt - 1)) {
                             this.zd = 0.02;
                         } else if (this.level.isSolidBlockingTile(xt, yt, zt + 1)) {
@@ -494,16 +494,16 @@ public class Minecart extends Entity implements Container
         int xt = Mth.floor(x);
         int yt = Mth.floor(y);
         int zt = Mth.floor(z);
-        if (RailBlock.isRail(this.level, xt, yt - 1, zt)) {
+        if (BlockLogicRail.isRail(this.level, xt, yt - 1, zt)) {
             --yt;
         }
 
         final int tile = this.level.getTile(xt, yt, zt);
-        if (RailBlock.isRail(tile)) {
+        if (BlockLogicRail.isRail(tile)) {
             int data = this.level.getData(xt, yt, zt);
 
-            if (((RailBlock) Block.BLOCKS[tile]).isUsesDataBit()) {
-                data &= RailBlock.RAIL_DIRECTION_MASK;
+            if (((BlockLogicRail) Block.BLOCKS[tile]).isUsesDataBit()) {
+                data &= BlockLogicRail.RAIL_DIRECTION_MASK;
             }
 
             y = yt;
@@ -537,17 +537,17 @@ public class Minecart extends Entity implements Container
         int xt = Mth.floor(x);
         int yt = Mth.floor(y);
         int zt = Mth.floor(z);
-        if (RailBlock.isRail(this.level, xt, yt - 1, zt)) {
+        if (BlockLogicRail.isRail(this.level, xt, yt - 1, zt)) {
             --yt;
         }
 
         final int tile = this.level.getTile(xt, yt, zt);
-        if (RailBlock.isRail(tile)) {
+        if (BlockLogicRail.isRail(tile)) {
             int data = this.level.getData(xt, yt, zt);
             y = yt;
 
-            if (((RailBlock) Block.BLOCKS[tile]).isUsesDataBit()) {
-                data &= RailBlock.RAIL_DIRECTION_MASK;
+            if (((BlockLogicRail) Block.BLOCKS[tile]).isUsesDataBit()) {
+                data &= BlockLogicRail.RAIL_DIRECTION_MASK;
             }
 
             if (data >= 2 && data <= 5) {

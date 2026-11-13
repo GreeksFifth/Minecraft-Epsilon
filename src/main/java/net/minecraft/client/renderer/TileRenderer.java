@@ -5,21 +5,21 @@
 package net.minecraft.client.renderer;
 
 import net.minecraft.Facing;
-import net.minecraft.world.level.tile.BlockLogicDoor;
+import net.minecraft.world.level.block.BlockLogicDoor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Material;
 import util.Mth;
-import net.minecraft.world.level.tile.BlockLogicFluid;
-import net.minecraft.world.level.tile.RedStoneDustBlock;
+import net.minecraft.world.level.block.BlockLogicFluid;
+import net.minecraft.world.level.block.BlockLogicRedstoneDust;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.level.tile.PistonExtensionBlock;
-import net.minecraft.world.level.tile.PistonBaseBlock;
-import net.minecraft.world.level.tile.BlockLogicRepeater;
+import net.minecraft.world.level.block.BlockLogicPistonHead;
+import net.minecraft.world.level.block.BlockLogicPistonBase;
+import net.minecraft.world.level.block.BlockLogicRepeater;
 import net.minecraft.Direction;
-import net.minecraft.world.level.tile.BlockLogicBed;
-import net.minecraft.world.level.tile.RailBlock;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.BlockLogicBed;
+import net.minecraft.world.level.block.BlockLogicRail;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.LevelSource;
 
 import static org.lwjgl.opengl.GL11.*;
@@ -84,7 +84,7 @@ public class TileRenderer
         if (shape == Block.SHAPE_RED_DUST) return this.tesselateDustInWorld(tt, x, y, z);
         if (shape == Block.SHAPE_LADDER) return this.tesselateLadderInWorld(tt, x, y, z);
         if (shape == Block.SHAPE_DOOR) return this.tesselateDoorInWorld(tt, x, y, z);
-        if (shape == Block.SHAPE_RAIL) return this.tesselateRailInWorld((RailBlock) tt, x, y, z);
+        if (shape == Block.SHAPE_RAIL) return this.tesselateRailInWorld((BlockLogicRail) tt, x, y, z);
         if (shape == Block.SHAPE_STAIRS) return this.tesselateStairsInWorld(tt, x, y, z);
         if (shape == Block.SHAPE_FENCE) return this.tesselateFenceInWorld(tt, x, y, z);
         if (shape == Block.SHAPE_LEVER) return this.tesselateLeverInWorld(tt, x, y, z);
@@ -403,10 +403,10 @@ public class TileRenderer
     
     private boolean tesselatePistonBaseInWorld(final Block tt, final int x, final int y, final int z, final boolean forceExtended) {
         final int data = this.level.getData(x, y, z);
-        final boolean extended = forceExtended || (data & PistonBaseBlock.EXTENDED_BIT) != 0;
-        final int facing = PistonBaseBlock.getFacing(data);
+        final boolean extended = forceExtended || (data & BlockLogicPistonBase.EXTENDED_BIT) != 0;
+        final int facing = BlockLogicPistonBase.getFacing(data);
 
-        final float thickness = PistonBaseBlock.PLATFORM_THICKNESS / 16.0f;
+        final float thickness = BlockLogicPistonBase.PLATFORM_THICKNESS / 16.0f;
 
         if (extended) {
             switch (facing) {
@@ -510,7 +510,7 @@ public class TileRenderer
     }
     
     private void renderPistonArmUpDown(final double x0, final double x1, final double y0, final double y1, final double z0, final double z1, final float br, final double armLengthPixels) {
-        int armTex = PistonBaseBlock.EDGE_TEX;
+        int armTex = BlockLogicPistonBase.EDGE_TEX;
         if (this.fixedTexture >= 0) armTex = this.fixedTexture;
 
         final int texX = (armTex & 0xF) << 4;
@@ -532,7 +532,7 @@ public class TileRenderer
     }
     
     private void renderPistonArmNorthSouth(final double x0, final double x1, final double y0, final double y1, final double z0, final double z1, final float br, final double armLengthPixels) {
-        int armTex = PistonBaseBlock.EDGE_TEX;
+        int armTex = BlockLogicPistonBase.EDGE_TEX;
         if (this.fixedTexture >= 0) armTex = this.fixedTexture;
 
         final int texX = (armTex & 0xF) << 4;
@@ -554,7 +554,7 @@ public class TileRenderer
     }
     
     private void renderPistonArmEastWest(final double x0, final double x1, final double y0, final double y1, final double z0, final double z1, final float br, final double armLengthPixels) {
-        int armTex = PistonBaseBlock.EDGE_TEX;
+        int armTex = BlockLogicPistonBase.EDGE_TEX;
         if (this.fixedTexture >= 0) armTex = this.fixedTexture;
 
         final int texX = (armTex & 0xF) << 4;
@@ -583,11 +583,11 @@ public class TileRenderer
     
     private boolean tesselatePistonExtensionInWorld(final Block tt, final int x, final int y, final int z, final boolean fullArm) {
         int data = this.level.getData(x, y, z);
-        int facing = PistonExtensionBlock.getFacing(data);
+        int facing = BlockLogicPistonHead.getFacing(data);
 
-        final float thickness = PistonBaseBlock.PLATFORM_THICKNESS / 16.0f;
-        final float leftEdge = (8.0f - (PistonBaseBlock.PLATFORM_THICKNESS / 2.0f)) / 16.0f;
-        final float rightEdge = (8.0f + (PistonBaseBlock.PLATFORM_THICKNESS / 2.0f)) / 16.0f;
+        final float thickness = BlockLogicPistonBase.PLATFORM_THICKNESS / 16.0f;
+        final float leftEdge = (8.0f - (BlockLogicPistonBase.PLATFORM_THICKNESS / 2.0f)) / 16.0f;
+        final float rightEdge = (8.0f + (BlockLogicPistonBase.PLATFORM_THICKNESS / 2.0f)) / 16.0f;
         float br = tt.getBrightness(this.level, x, y, z);
         float armLength = fullArm ? 1.0f : 0.5f;
         double armLengthPixels = fullArm ? 16.0 : 8.0;
@@ -1053,15 +1053,15 @@ public class TileRenderer
         float dustOffset = 0.25f / 16.0F;
         float overlayOffset = 0.25f / 16.0F;
 
-        boolean w = RedStoneDustBlock.shouldReceivePowerFrom(this.level, x - 1, y, z, Direction.WEST) || (!this.level.isSolidBlockingTile(x - 1, y, z) && RedStoneDustBlock.shouldReceivePowerFrom(this.level, x - 1, y - 1, z, Direction.UNDEFINED));
-        boolean e = RedStoneDustBlock.shouldReceivePowerFrom(this.level, x + 1, y, z, Direction.EAST) || (!this.level.isSolidBlockingTile(x + 1, y, z) && RedStoneDustBlock.shouldReceivePowerFrom(this.level, x + 1, y - 1, z, Direction.UNDEFINED));
-        boolean n = RedStoneDustBlock.shouldReceivePowerFrom(this.level, x, y, z - 1, Direction.NORTH) || (!this.level.isSolidBlockingTile(x, y, z - 1) && RedStoneDustBlock.shouldReceivePowerFrom(this.level, x, y - 1, z - 1, Direction.UNDEFINED));
-        boolean s = RedStoneDustBlock.shouldReceivePowerFrom(this.level, x, y, z + 1, Direction.SOUTH) || (!this.level.isSolidBlockingTile(x, y, z + 1) && RedStoneDustBlock.shouldReceivePowerFrom(this.level, x, y - 1, z + 1, Direction.UNDEFINED));
+        boolean w = BlockLogicRedstoneDust.shouldReceivePowerFrom(this.level, x - 1, y, z, Direction.WEST) || (!this.level.isSolidBlockingTile(x - 1, y, z) && BlockLogicRedstoneDust.shouldReceivePowerFrom(this.level, x - 1, y - 1, z, Direction.UNDEFINED));
+        boolean e = BlockLogicRedstoneDust.shouldReceivePowerFrom(this.level, x + 1, y, z, Direction.EAST) || (!this.level.isSolidBlockingTile(x + 1, y, z) && BlockLogicRedstoneDust.shouldReceivePowerFrom(this.level, x + 1, y - 1, z, Direction.UNDEFINED));
+        boolean n = BlockLogicRedstoneDust.shouldReceivePowerFrom(this.level, x, y, z - 1, Direction.NORTH) || (!this.level.isSolidBlockingTile(x, y, z - 1) && BlockLogicRedstoneDust.shouldReceivePowerFrom(this.level, x, y - 1, z - 1, Direction.UNDEFINED));
+        boolean s = BlockLogicRedstoneDust.shouldReceivePowerFrom(this.level, x, y, z + 1, Direction.SOUTH) || (!this.level.isSolidBlockingTile(x, y, z + 1) && BlockLogicRedstoneDust.shouldReceivePowerFrom(this.level, x, y - 1, z + 1, Direction.UNDEFINED));
         if (!this.level.isSolidBlockingTile(x, y + 1, z)) {
-            if (this.level.isSolidBlockingTile(x - 1, y, z) && RedStoneDustBlock.shouldReceivePowerFrom(this.level, x - 1, y + 1, z, Direction.UNDEFINED)) w = true;
-            if (this.level.isSolidBlockingTile(x + 1, y, z) && RedStoneDustBlock.shouldReceivePowerFrom(this.level, x + 1, y + 1, z, Direction.UNDEFINED)) e = true;
-            if (this.level.isSolidBlockingTile(x, y, z - 1) && RedStoneDustBlock.shouldReceivePowerFrom(this.level, x, y + 1, z - 1, Direction.UNDEFINED)) n = true;
-            if (this.level.isSolidBlockingTile(x, y, z + 1) && RedStoneDustBlock.shouldReceivePowerFrom(this.level, x, y + 1, z + 1, Direction.UNDEFINED)) s = true;
+            if (this.level.isSolidBlockingTile(x - 1, y, z) && BlockLogicRedstoneDust.shouldReceivePowerFrom(this.level, x - 1, y + 1, z, Direction.UNDEFINED)) w = true;
+            if (this.level.isSolidBlockingTile(x + 1, y, z) && BlockLogicRedstoneDust.shouldReceivePowerFrom(this.level, x + 1, y + 1, z, Direction.UNDEFINED)) e = true;
+            if (this.level.isSolidBlockingTile(x, y, z - 1) && BlockLogicRedstoneDust.shouldReceivePowerFrom(this.level, x, y + 1, z - 1, Direction.UNDEFINED)) n = true;
+            if (this.level.isSolidBlockingTile(x, y, z + 1) && BlockLogicRedstoneDust.shouldReceivePowerFrom(this.level, x, y + 1, z + 1, Direction.UNDEFINED)) s = true;
         }
         float d = 5.0f / 16.0f;
         float x0 = (float)(x + 0);
@@ -1190,14 +1190,14 @@ public class TileRenderer
         return true;
     }
     
-    public boolean tesselateRailInWorld(final RailBlock tt, final int x, final int y, final int z) {
+    public boolean tesselateRailInWorld(final BlockLogicRail tt, final int x, final int y, final int z) {
         final Tesselator t = Tesselator.instance;
         int data = this.level.getData(x, y, z);
 
         int tex = tt.getTexture(0, data);
         if (this.fixedTexture >= 0) tex = this.fixedTexture;
 
-        if (tt.isUsesDataBit()) data &= RailBlock.RAIL_DIRECTION_MASK;
+        if (tt.isUsesDataBit()) data &= BlockLogicRail.RAIL_DIRECTION_MASK;
 
         final float br = tt.getBrightness(this.level, x, y, z);
         t.color(br, br, br);

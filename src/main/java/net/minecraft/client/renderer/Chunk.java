@@ -6,9 +6,9 @@ package net.minecraft.client.renderer;
 
 import net.minecraft.client.renderer.culling.Culler;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.tile.entity.TileEntity;
+import net.minecraft.world.level.block.entity.TileEntity;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderDispatcher;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.Region;
 
 import java.util.HashSet;

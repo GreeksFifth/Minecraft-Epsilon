@@ -11,7 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import java.util.List;
 import net.minecraft.world.phys.AABB;
 import com.mojang.nbt.CompoundTag;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import util.Mth;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.Vec3;

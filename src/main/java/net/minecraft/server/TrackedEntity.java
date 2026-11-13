@@ -7,7 +7,7 @@ package net.minecraft.server;
 import net.minecraft.network.packet.AddPaintingPacket;
 import net.minecraft.network.packet.MoveEntityPacket;
 import net.minecraft.world.entity.Painting;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.entity.item.FallingTile;
 import net.minecraft.world.entity.item.PrimedTnt;
 import net.minecraft.world.entity.projectile.ThrownEgg;

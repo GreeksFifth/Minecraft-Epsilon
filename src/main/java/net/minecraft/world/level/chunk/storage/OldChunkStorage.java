@@ -9,7 +9,7 @@ import net.minecraft.world.level.chunk.DataLayer;
 
 import java.io.IOException;
 
-import net.minecraft.world.level.tile.entity.TileEntity;
+import net.minecraft.world.level.block.entity.TileEntity;
 import net.minecraft.world.entity.Entity;
 import com.mojang.nbt.ListTag;
 import net.minecraft.world.level.LevelData;

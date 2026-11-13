@@ -9,7 +9,7 @@ import com.mojang.nbt.CompoundTag;
 import java.util.List;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import util.Mth;
 import net.minecraft.world.level.Level;
 

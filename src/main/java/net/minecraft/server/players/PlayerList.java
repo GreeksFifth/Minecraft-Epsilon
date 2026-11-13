@@ -5,7 +5,7 @@
 package net.minecraft.server.players;
 
 import net.minecraft.network.packet.SetTimePacket;
-import net.minecraft.world.level.tile.entity.TileEntity;
+import net.minecraft.world.level.block.entity.TileEntity;
 import net.minecraft.network.packet.ChatPacket;
 
 import java.io.PrintWriter;

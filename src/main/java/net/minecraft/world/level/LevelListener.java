@@ -5,7 +5,7 @@
 package net.minecraft.world.level;
 
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.tile.entity.TileEntity;
+import net.minecraft.world.level.block.entity.TileEntity;
 import net.minecraft.world.entity.Entity;
 
 public interface LevelListener

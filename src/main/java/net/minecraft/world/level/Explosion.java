@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.ArrayList;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import util.Mth;
 import java.util.HashSet;
 import java.util.Set;

@@ -9,7 +9,7 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.material.MaterialColor;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.saveddata.MapItemSavedData;

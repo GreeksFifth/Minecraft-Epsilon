@@ -5,7 +5,7 @@
 package net.minecraft.world.item.crafting;
 
 import net.minecraft.world.item.ItemInstance;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 
 public class StructureRecipes
 {

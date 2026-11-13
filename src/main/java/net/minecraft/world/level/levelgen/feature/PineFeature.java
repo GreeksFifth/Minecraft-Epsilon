@@ -4,11 +4,11 @@
 
 package net.minecraft.world.level.levelgen.feature;
 
-import net.minecraft.world.level.tile.BlockLogicLeaves;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.BlockLogicLeaves;
+import net.minecraft.world.level.block.Block;
 import java.util.Random;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.tile.TreeBlock;
+import net.minecraft.world.level.block.BlockLogicLog;
 
 public class PineFeature extends Feature
 {
@@ -76,7 +76,7 @@ public class PineFeature extends Feature
         }
         for (int hh = 0; hh < treeHeight - 1; ++hh) {
             final int t = level.getTile(x, y + hh, z);
-            if (t == 0 || t == Block.leaves.id) level.setTileAndDataNoUpdate(x, y + hh, z, Block.treeTrunk.id, TreeBlock.DARK_TRUNK);
+            if (t == 0 || t == Block.leaves.id) level.setTileAndDataNoUpdate(x, y + hh, z, Block.treeTrunk.id, BlockLogicLog.DARK_TRUNK);
         }
 
         return true;

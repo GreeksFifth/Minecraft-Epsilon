@@ -7,7 +7,7 @@ package net.minecraft.client.renderer.tileentity;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.world.entity.EntityIO;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.tile.entity.MobSpawnerTileEntity;
+import net.minecraft.world.level.block.entity.MobSpawnerTileEntity;
 import java.util.HashMap;
 import java.util.Map;
 

@@ -10,7 +10,7 @@ import net.minecraft.world.Container;
 import net.minecraft.locale.language.I18n;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.player.Player;
 import java.util.Random;

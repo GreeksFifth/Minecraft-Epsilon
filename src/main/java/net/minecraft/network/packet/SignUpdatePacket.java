@@ -4,7 +4,7 @@
 
 package net.minecraft.network.packet;
 
-import net.minecraft.world.level.tile.entity.SignTileEntity;
+import net.minecraft.world.level.block.entity.SignTileEntity;
 
 import java.io.DataOutputStream;
 import java.io.DataInputStream;

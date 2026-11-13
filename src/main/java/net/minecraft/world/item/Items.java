@@ -2,7 +2,7 @@ package net.minecraft.world.item;
 
 import net.minecraft.world.entity.item.Minecart;
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 
 public class Items {
     public static Item shovel_iron = new ShovelItem(0, Item.Tier.IRON).setIcon(2, 5).setDescriptionId("shovelIron");

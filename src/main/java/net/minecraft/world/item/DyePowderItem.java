@@ -4,12 +4,12 @@
 
 package net.minecraft.world.item;
 
-import net.minecraft.world.level.tile.BlockLogicWool;
+import net.minecraft.world.level.block.BlockLogicWool;
 import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.level.tile.BlockLogicWheatCrop;
-import net.minecraft.world.level.tile.Sapling;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.BlockLogicWheatCrop;
+import net.minecraft.world.level.block.BlockLogicSapling;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.player.Player;
 
@@ -92,7 +92,7 @@ public class DyePowderItem extends Item
             final int tile = level.getTile(x, y, z);
             if (tile == Block.sapling.id) {
                 if (!level.isClientSide) {
-                    ((Sapling) Block.sapling).growTree(level, x, y, z, level.random);
+                    ((BlockLogicSapling) Block.sapling).growTree(level, x, y, z, level.random);
                     itemInstance.count--;
                 }
                 return true;

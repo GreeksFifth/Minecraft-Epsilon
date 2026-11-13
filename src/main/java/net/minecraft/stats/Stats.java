@@ -14,7 +14,7 @@ import net.minecraft.world.item.crafting.FurnaceRecipes;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.Recipes;
 import java.util.HashSet;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import java.util.List;
 import java.util.Map;
 

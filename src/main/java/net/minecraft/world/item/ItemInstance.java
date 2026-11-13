@@ -11,7 +11,7 @@ import net.minecraft.stats.Stats;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.player.Player;
 import com.mojang.nbt.CompoundTag;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 
 public final class ItemInstance implements Descriptive<ItemInstance>
 {

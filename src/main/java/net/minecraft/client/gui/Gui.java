@@ -14,7 +14,7 @@ import java.awt.Color;
 import util.Mth;
 import net.minecraft.client.Lighting;
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 
 import java.util.ArrayList;
 import net.minecraft.client.Minecraft;

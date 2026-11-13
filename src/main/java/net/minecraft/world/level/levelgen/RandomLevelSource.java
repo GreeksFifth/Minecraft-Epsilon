@@ -4,7 +4,7 @@
 
 package net.minecraft.world.level.levelgen;
 
-import net.minecraft.world.level.tile.TallGrass;
+import net.minecraft.world.level.block.BlockLogicGrass;
 import util.ProgressListener;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.material.Material;
@@ -19,9 +19,9 @@ import net.minecraft.world.level.levelgen.feature.OreFeature;
 import net.minecraft.world.level.levelgen.feature.ClayFeature;
 import net.minecraft.world.level.levelgen.feature.MonsterRoomFeature;
 import net.minecraft.world.level.levelgen.feature.LakeFeature;
-import net.minecraft.world.level.tile.SandBlock;
+import net.minecraft.world.level.block.BlockLogicSand;
 import net.minecraft.world.level.chunk.LevelChunk;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.synth.PerlinNoise;
@@ -413,7 +413,7 @@ public class RandomLevelSource implements ChunkSource
     }
     
     public void postProcess(final ChunkSource parent, final int xt, final int zt) {
-        SandBlock.instaFall = true;
+        BlockLogicSand.instaFall = true;
         final int xo = xt * 16;
         final int zo = zt * 16;
 
@@ -569,8 +569,8 @@ public class RandomLevelSource implements ChunkSource
         if (biome == Biome.taiga) grassCount = 1;
         if (biome == Biome.plains) grassCount = 10;
         for (int i = 0; i < grassCount; ++i) {
-            int grassType = TallGrass.TALL_GRASS;
-            if (biome == Biome.rainForest && this.random.nextInt(3) != 0) grassType = TallGrass.FERN;
+            int grassType = BlockLogicGrass.TALL_GRASS;
+            if (biome == Biome.rainForest && this.random.nextInt(3) != 0) grassType = BlockLogicGrass.FERN;
 
             int x = xo + this.random.nextInt(16) + 8;
             int y = this.random.nextInt(Level.MAX_HEIGHT);
@@ -672,7 +672,7 @@ public class RandomLevelSource implements ChunkSource
                 }
             }
         }
-        SandBlock.instaFall = false;
+        BlockLogicSand.instaFall = false;
     }
     
     public boolean save(final boolean force, final ProgressListener progressListener) {

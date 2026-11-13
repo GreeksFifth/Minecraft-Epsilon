@@ -5,8 +5,8 @@
 package net.minecraft.world.item;
 
 import net.minecraft.Facing;
-import net.minecraft.world.level.tile.BlockLogicWool;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.BlockLogicWool;
+import net.minecraft.world.level.block.Block;
 
 public class ClothTileItem extends TileItem
 {

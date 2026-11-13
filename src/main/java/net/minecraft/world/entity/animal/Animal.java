@@ -7,7 +7,7 @@ package net.minecraft.world.entity.animal;
 import net.minecraft.world.entity.Creature;
 import util.Mth;
 import com.mojang.nbt.CompoundTag;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.PathfinderMob;
 

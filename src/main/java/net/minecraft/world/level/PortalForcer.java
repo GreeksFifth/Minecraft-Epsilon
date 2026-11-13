@@ -4,7 +4,7 @@
 
 package net.minecraft.world.level;
 
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import util.Mth;
 import net.minecraft.world.entity.Entity;
 import java.util.Random;

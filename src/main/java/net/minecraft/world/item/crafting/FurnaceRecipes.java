@@ -5,7 +5,7 @@
 package net.minecraft.world.item.crafting;
 
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import java.util.HashMap;
 import java.util.Map;
 

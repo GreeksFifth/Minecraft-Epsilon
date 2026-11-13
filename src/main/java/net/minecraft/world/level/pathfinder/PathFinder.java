@@ -5,8 +5,8 @@
 package net.minecraft.world.level.pathfinder;
 
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.tile.BlockLogicDoor;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.BlockLogicDoor;
+import net.minecraft.world.level.block.Block;
 import util.Mth;
 import net.minecraft.world.entity.Entity;
 import util.IntHashMap;

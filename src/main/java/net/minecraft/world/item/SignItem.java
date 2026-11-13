@@ -5,9 +5,9 @@
 package net.minecraft.world.item;
 
 import net.minecraft.Facing;
-import net.minecraft.world.level.tile.entity.SignTileEntity;
+import net.minecraft.world.level.block.entity.SignTileEntity;
 import util.Mth;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.player.Player;
 

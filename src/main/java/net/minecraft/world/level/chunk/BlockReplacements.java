@@ -4,7 +4,7 @@
 
 package net.minecraft.world.level.chunk;
 
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 
 public class BlockReplacements
 {

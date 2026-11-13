@@ -8,7 +8,7 @@ import net.minecraft.world.level.chunk.storage.ChunkStorage;
 import net.minecraft.world.level.chunk.storage.OldChunkStorage;
 import net.minecraft.world.phys.Vec3;
 import util.Mth;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.RandomLevelSource;
 import net.minecraft.world.level.chunk.ChunkSource;
 import net.minecraft.world.level.biome.BiomeSource;

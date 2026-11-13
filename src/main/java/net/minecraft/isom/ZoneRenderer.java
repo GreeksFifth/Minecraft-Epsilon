@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 
 // Useless - Isom package was pulled straight from the Beta 1.9-pre6 jar as it had source for this package, thanks @genericpnpmonit0r for telling me this
 public class ZoneRenderer {

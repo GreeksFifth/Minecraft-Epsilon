@@ -5,8 +5,8 @@
 package net.minecraft.world.item;
 
 import net.minecraft.Facing;
-import net.minecraft.world.level.tile.StoneSlabBlock;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.BlockLogicSlab;
+import net.minecraft.world.level.block.Block;
 
 public class StoneSlabTileItem extends TileItem
 {
@@ -28,6 +28,6 @@ public class StoneSlabTileItem extends TileItem
     
     @Override
     public String getDescriptionId(final ItemInstance itemInstance) {
-        return super.getDescriptionId() + "." + StoneSlabBlock.SLAB_NAMES[itemInstance.getAuxValue()];
+        return super.getDescriptionId() + "." + BlockLogicSlab.SLAB_NAMES[itemInstance.getAuxValue()];
     }
 }

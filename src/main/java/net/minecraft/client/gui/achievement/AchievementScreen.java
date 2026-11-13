@@ -7,7 +7,7 @@ package net.minecraft.client.gui.achievement;
 import net.minecraft.client.Lighting;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.stats.Achievement;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import java.util.Random;
 import util.Mth;
 import org.lwjgl.input.Mouse;

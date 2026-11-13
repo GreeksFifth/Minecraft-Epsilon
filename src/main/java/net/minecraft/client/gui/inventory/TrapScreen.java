@@ -5,7 +5,7 @@
 package net.minecraft.client.gui.inventory;
 
 import net.minecraft.world.inventory.TrapMenu;
-import net.minecraft.world.level.tile.entity.DispenserTileEntity;
+import net.minecraft.world.level.block.entity.DispenserTileEntity;
 import net.minecraft.world.entity.player.Inventory;
 
 import static org.lwjgl.opengl.GL11.*;

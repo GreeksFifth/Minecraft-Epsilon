@@ -22,7 +22,7 @@ import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.monster.Spider;
 import java.util.ArrayList;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import java.util.List;
 
 public class Biome

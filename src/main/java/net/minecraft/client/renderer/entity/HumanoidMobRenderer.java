@@ -7,7 +7,7 @@ package net.minecraft.client.renderer.entity;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.Item;
 import net.minecraft.client.renderer.TileRenderer;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.client.model.HumanoidModel;
 

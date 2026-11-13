@@ -5,8 +5,8 @@
 package net.minecraft.world.item;
 
 import net.minecraft.world.level.LevelEvent;
-import net.minecraft.world.level.tile.RecordPlayerBlock;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.BlockLogicJukebox;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.player.Player;
 
@@ -25,7 +25,7 @@ public class RecordingItem extends Item
         if (level.getTile(x, y, z) == Block.recordPlayer.id && level.getData(x, y, z) == 0) {
             if (level.isClientSide) return true;
 
-            ((RecordPlayerBlock) Block.recordPlayer).setRecord(level, x, y, z, this.id);
+            ((BlockLogicJukebox) Block.recordPlayer).setRecord(level, x, y, z, this.id);
             level.levelEvent(null, LevelEvent.SOUND_PLAY_RECORDING, x, y, z, this.id);
             itemInstance.count--;
             return true;

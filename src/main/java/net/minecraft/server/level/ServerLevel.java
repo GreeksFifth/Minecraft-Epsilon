@@ -12,7 +12,7 @@ import net.minecraft.network.packet.EntityEventPacket;
 import net.minecraft.network.packet.AddGlobalEntityPacketPacket;
 import net.minecraft.world.level.chunk.storage.ChunkStorage;
 import util.Mth;
-import net.minecraft.world.level.tile.entity.TileEntity;
+import net.minecraft.world.level.block.entity.TileEntity;
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.world.level.chunk.ChunkSource;

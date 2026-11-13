@@ -4,7 +4,7 @@
 
 package net.minecraft.client.particle;
 
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.client.renderer.Tesselator;
 import util.Mth;
 import net.minecraft.world.entity.Entity;

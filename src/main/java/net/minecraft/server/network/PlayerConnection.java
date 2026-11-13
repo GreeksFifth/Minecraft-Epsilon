@@ -5,8 +5,8 @@
 package net.minecraft.server.network;
 
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.tile.entity.TileEntity;
-import net.minecraft.world.level.tile.entity.SignTileEntity;
+import net.minecraft.world.level.block.entity.TileEntity;
+import net.minecraft.world.level.block.entity.SignTileEntity;
 import net.minecraft.network.packet.SignUpdatePacket;
 
 import java.util.ArrayList;

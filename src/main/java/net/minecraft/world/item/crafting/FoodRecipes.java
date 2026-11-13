@@ -6,7 +6,7 @@ package net.minecraft.world.item.crafting;
 
 import net.minecraft.world.item.DyePowderItem;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.ItemInstance;
 
 public class FoodRecipes

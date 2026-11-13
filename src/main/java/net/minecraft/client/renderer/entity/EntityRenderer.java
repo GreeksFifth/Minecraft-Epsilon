@@ -9,7 +9,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.level.Level;
 import util.Mth;
 import net.minecraft.client.renderer.Tesselator;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.client.renderer.Textures;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.client.model.HumanoidModel;

@@ -10,9 +10,9 @@ import net.minecraft.world.level.levelgen.feature.LightGemFeature;
 import net.minecraft.world.level.levelgen.feature.HellPortalFeature;
 import net.minecraft.world.level.levelgen.feature.HellFireFeature;
 import net.minecraft.world.level.levelgen.feature.HellSpringFeature;
-import net.minecraft.world.level.tile.SandBlock;
+import net.minecraft.world.level.block.BlockLogicSand;
 import net.minecraft.world.level.chunk.LevelChunk;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.synth.PerlinNoise;
 import java.util.Random;
@@ -294,7 +294,7 @@ public class HellRandomLevelSource implements ChunkSource
     }
     
     public void postProcess(final ChunkSource parent, final int xt, final int zt) {
-        SandBlock.instaFall = true;
+        BlockLogicSand.instaFall = true;
         final int xo = xt * 16;
         final int zo = zt * 16;
 
@@ -342,7 +342,7 @@ public class HellRandomLevelSource implements ChunkSource
             new FlowerFeature(Block.mushroom2.id).place(this.level, this.random, x, y, z);
         }
 
-        SandBlock.instaFall = false;
+        BlockLogicSand.instaFall = false;
     }
     
     public boolean save(final boolean force, final ProgressListener progressListener) {

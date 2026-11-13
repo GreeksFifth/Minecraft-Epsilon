@@ -10,8 +10,8 @@ import java.util.Collections;
 
 import net.minecraft.world.item.CoalItem;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.tile.StoneSlabBlock;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.BlockLogicSlab;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.Item;
 import java.util.ArrayList;
@@ -112,22 +112,22 @@ public class Recipes
 
                 'X', Items.sulphur, '#', Block.sand);
 
-        this.addShapedRecipe(new ItemInstance(Block.stoneSlabHalf, 3, StoneSlabBlock.COBBLESTONE_SLAB),
+        this.addShapedRecipe(new ItemInstance(Block.stoneSlabHalf, 3, BlockLogicSlab.COBBLESTONE_SLAB),
                 "###",
 
                 '#', Block.stoneBrick);
 
-        this.addShapedRecipe(new ItemInstance(Block.stoneSlabHalf, 3, StoneSlabBlock.STONE_SLAB),
+        this.addShapedRecipe(new ItemInstance(Block.stoneSlabHalf, 3, BlockLogicSlab.STONE_SLAB),
                 "###",
 
                 '#', Block.rock);
 
-        this.addShapedRecipe(new ItemInstance(Block.stoneSlabHalf, 3, StoneSlabBlock.SAND_SLAB),
+        this.addShapedRecipe(new ItemInstance(Block.stoneSlabHalf, 3, BlockLogicSlab.SAND_SLAB),
                 "###",
 
                 '#', Block.sandStone);
 
-        this.addShapedRecipe(new ItemInstance(Block.stoneSlabHalf, 3, StoneSlabBlock.WOOD_SLAB),
+        this.addShapedRecipe(new ItemInstance(Block.stoneSlabHalf, 3, BlockLogicSlab.WOOD_SLAB),
                 "###",
 
                 '#', Block.wood);

@@ -5,7 +5,7 @@
 package net.minecraft.stats;
 
 import net.minecraft.locale.language.I18n;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.client.DescFormatter;

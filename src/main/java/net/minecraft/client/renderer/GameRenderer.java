@@ -20,7 +20,7 @@ import org.lwjgl.input.Mouse;
 import net.minecraft.client.gui.ScreenSizeCalculator;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.NVFogDistance;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.material.Material;

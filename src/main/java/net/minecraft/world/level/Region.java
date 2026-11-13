@@ -6,8 +6,8 @@ package net.minecraft.world.level;
 
 import net.minecraft.world.level.biome.BiomeSource;
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.tile.Block;
-import net.minecraft.world.level.tile.entity.TileEntity;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.TileEntity;
 import net.minecraft.world.level.chunk.LevelChunk;
 
 public class Region implements LevelSource

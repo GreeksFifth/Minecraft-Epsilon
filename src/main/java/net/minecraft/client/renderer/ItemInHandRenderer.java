@@ -14,7 +14,7 @@ import net.minecraft.client.renderer.entity.PlayerRenderer;
 import net.minecraft.world.item.Item;
 import util.Mth;
 import net.minecraft.client.Lighting;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.client.Minecraft;

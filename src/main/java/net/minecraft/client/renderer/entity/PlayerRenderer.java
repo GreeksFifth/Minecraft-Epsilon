@@ -7,7 +7,7 @@ package net.minecraft.client.renderer.entity;
 import net.minecraft.world.item.Items;
 import util.Mth;
 import net.minecraft.client.renderer.TileRenderer;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.Tesselator;
 import net.minecraft.client.Minecraft;

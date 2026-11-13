@@ -6,7 +6,7 @@ package net.minecraft.world.item;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 
 public class WeaponItem extends Item
 {

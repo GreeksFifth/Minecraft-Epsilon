@@ -5,7 +5,7 @@
 package net.minecraft.client.particle;
 
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.tile.BlockLogicFluid;
+import net.minecraft.world.level.block.BlockLogicFluid;
 import util.Mth;
 import net.minecraft.client.renderer.Tesselator;
 import net.minecraft.world.level.Level;

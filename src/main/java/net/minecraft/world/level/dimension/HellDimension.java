@@ -5,7 +5,7 @@
 package net.minecraft.world.level.dimension;
 
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.HellRandomLevelSource;
 import net.minecraft.world.level.chunk.ChunkSource;
 import net.minecraft.world.phys.Vec3;

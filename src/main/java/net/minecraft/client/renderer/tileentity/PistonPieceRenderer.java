@@ -5,12 +5,12 @@
 package net.minecraft.client.renderer.tileentity;
 
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.tile.PistonBaseBlock;
+import net.minecraft.world.level.block.BlockLogicPistonBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Lighting;
 import net.minecraft.client.renderer.Tesselator;
-import net.minecraft.world.level.tile.Block;
-import net.minecraft.world.level.tile.entity.PistonPieceEntity;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.PistonPieceEntity;
 import net.minecraft.client.renderer.TileRenderer;
 
 import static org.lwjgl.opengl.GL11.*;
@@ -46,7 +46,7 @@ public class PistonPieceRenderer extends TileEntityRenderer<PistonPieceEntity>
             }
             else if (entity.isSourcePiston() && !entity.isExtending()) {
                 // special case for withdrawing the arm back into the base
-                Block.pistonExtension.setOverrideTopTexture(((PistonBaseBlock) block).getPlatformTexture());
+                Block.pistonExtension.setOverrideTopTexture(((BlockLogicPistonBase) block).getPlatformTexture());
                 this.tileRenderer.tesselatePistonArmNoCulling(Block.pistonExtension, entity.x, entity.y, entity.z, entity.getProgress(a) < 0.5f);
                 Block.pistonExtension.clearOverrideTopTexture();
 

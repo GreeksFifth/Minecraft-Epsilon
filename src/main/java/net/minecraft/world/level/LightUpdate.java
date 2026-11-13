@@ -4,7 +4,7 @@
 
 package net.minecraft.world.level;
 
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 
 // Useless - This class has no clear source avaiable. local var names and structure are largely guesswork
 public class LightUpdate

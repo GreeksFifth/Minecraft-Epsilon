@@ -4,7 +4,7 @@
 
 package net.minecraft.client.renderer.entity;
 
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.entity.item.PrimedTnt;
 import net.minecraft.client.renderer.TileRenderer;
 

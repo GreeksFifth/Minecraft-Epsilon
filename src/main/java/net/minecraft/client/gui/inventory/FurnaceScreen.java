@@ -6,7 +6,7 @@ package net.minecraft.client.gui.inventory;
 
 import net.minecraft.world.inventory.FurnaceMenu;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.level.tile.entity.FurnaceTileEntity;
+import net.minecraft.world.level.block.entity.FurnaceTileEntity;
 
 import static org.lwjgl.opengl.GL11.*;
 

@@ -5,7 +5,7 @@
 package net.minecraft.client.renderer.entity;
 
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import util.Mth;
 import net.minecraft.world.entity.global.LightningBolt;
 import net.minecraft.world.entity.projectile.FishingHook;

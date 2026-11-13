@@ -4,11 +4,10 @@
 
 package net.minecraft.client.renderer.tileentity;
 
-import net.minecraft.world.level.tile.entity.TileEntity;
-import java.util.Iterator;
-import net.minecraft.world.level.tile.entity.PistonPieceEntity;
-import net.minecraft.world.level.tile.entity.MobSpawnerTileEntity;
-import net.minecraft.world.level.tile.entity.SignTileEntity;
+import net.minecraft.world.level.block.entity.TileEntity;
+import net.minecraft.world.level.block.entity.PistonPieceEntity;
+import net.minecraft.world.level.block.entity.MobSpawnerTileEntity;
+import net.minecraft.world.level.block.entity.SignTileEntity;
 import java.util.HashMap;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.Level;

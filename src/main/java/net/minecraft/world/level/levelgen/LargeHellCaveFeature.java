@@ -5,7 +5,7 @@
 package net.minecraft.world.level.levelgen;
 
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import util.Mth;
 import java.util.Random;
 

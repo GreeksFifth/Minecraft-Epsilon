@@ -9,7 +9,7 @@ import net.minecraft.stats.Achievements;
 import net.minecraft.world.entity.player.Player;
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Material;
 import util.Mth;
 import net.minecraft.world.level.Level;

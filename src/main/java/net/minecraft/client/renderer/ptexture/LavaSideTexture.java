@@ -5,7 +5,7 @@
 package net.minecraft.client.renderer.ptexture;
 
 import util.Mth;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 
 public class LavaSideTexture extends DynamicTexture
 {

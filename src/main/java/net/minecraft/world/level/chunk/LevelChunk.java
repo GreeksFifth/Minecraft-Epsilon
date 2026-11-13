@@ -9,13 +9,13 @@ import java.util.Random;
 import net.minecraft.SharedConstants;
 import net.minecraft.world.phys.AABB;
 
-import net.minecraft.world.level.tile.EntityBlock;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.TilePos;
-import net.minecraft.world.level.tile.entity.TileEntity;
+import net.minecraft.world.level.block.entity.TileEntity;
 import util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.LightLayer;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

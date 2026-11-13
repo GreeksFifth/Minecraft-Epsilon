@@ -9,9 +9,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.tile.entity.MobSpawnerTileEntity;
-import net.minecraft.world.level.tile.entity.ChestTileEntity;
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.entity.MobSpawnerTileEntity;
+import net.minecraft.world.level.block.entity.ChestTileEntity;
+import net.minecraft.world.level.block.Block;
 import java.util.Random;
 import net.minecraft.world.level.Level;
 

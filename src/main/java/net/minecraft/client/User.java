@@ -4,7 +4,7 @@
 
 package net.minecraft.client;
 
-import net.minecraft.world.level.tile.Block;
+import net.minecraft.world.level.block.Block;
 import java.util.ArrayList;
 import java.util.List;
 
