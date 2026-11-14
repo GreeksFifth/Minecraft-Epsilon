@@ -7,13 +7,13 @@ package net.minecraft.client.renderer.entity;
 import java.util.Random;
 
 import net.minecraft.client.renderer.Tesselator;
-import net.minecraft.world.entity.global.LightningBolt;
+import net.minecraft.world.entity.global.EntityLightningBolt;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class LightningBoltRenderer extends EntityRenderer<LightningBolt>
+public class LightningBoltRenderer extends EntityRenderer<EntityLightningBolt>
 {
-    public void render(final LightningBolt lightningBolt, final double x, final double y, final double z, final float rot, final float a) {
+    public void render(final EntityLightningBolt lightningBolt, final double x, final double y, final double z, final float rot, final float a) {
         final Tesselator t = Tesselator.instance;
 
         glDisable(GL_TEXTURE_2D);

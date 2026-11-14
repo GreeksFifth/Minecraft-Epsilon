@@ -4,7 +4,7 @@
 
 package net.minecraft.client.player;
 
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 import net.minecraft.client.Options;
 
 public class KeyboardInput extends Input
@@ -45,7 +45,7 @@ public class KeyboardInput extends Input
     }
     
     @Override
-    public void tick(final Player player) {
+    public void tick(final EntityPlayer player) {
         this.xa = 0.0f;
         this.ya = 0.0f;
 

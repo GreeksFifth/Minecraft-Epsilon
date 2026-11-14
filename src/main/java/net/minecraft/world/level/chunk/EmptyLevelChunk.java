@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.List;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.level.block.entity.TileEntity;
+import net.minecraft.world.level.block.tileentity.TileEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.Level;

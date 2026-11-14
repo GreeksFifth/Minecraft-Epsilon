@@ -6,20 +6,20 @@ package net.minecraft.server;
 
 import net.minecraft.network.packet.Packet;
 import java.util.ArrayList;
-import java.util.Iterator;
-import net.minecraft.world.entity.Painting;
-import net.minecraft.world.entity.item.FallingTile;
-import net.minecraft.world.entity.item.PrimedTnt;
+
+import net.minecraft.world.entity.EntityPainting;
+import net.minecraft.world.entity.item.EntityFallingBlock;
+import net.minecraft.world.entity.item.EntityTNTPrimed;
 import net.minecraft.world.entity.Creature;
-import net.minecraft.world.entity.animal.Squid;
-import net.minecraft.world.entity.item.Boat;
-import net.minecraft.world.entity.item.Minecart;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.projectile.ThrownEgg;
-import net.minecraft.world.entity.projectile.Snowball;
-import net.minecraft.world.entity.projectile.Fireball;
-import net.minecraft.world.entity.projectile.Arrow;
-import net.minecraft.world.entity.projectile.FishingHook;
+import net.minecraft.world.entity.animal.EntitySquid;
+import net.minecraft.world.entity.item.EntityBoat;
+import net.minecraft.world.entity.item.EntityMinecart;
+import net.minecraft.world.entity.item.EntityItem;
+import net.minecraft.world.entity.projectile.EntityProjectileEgg;
+import net.minecraft.world.entity.projectile.EntityProjectileSnowball;
+import net.minecraft.world.entity.projectile.EntityProjectileFireballGhast;
+import net.minecraft.world.entity.projectile.EntityProjectileArrow;
+import net.minecraft.world.entity.projectile.EntityProjectileFishingHook;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import java.util.HashSet;
@@ -50,19 +50,19 @@ public class EntityTracker
                 }
             }
         }
-        else if (e instanceof FishingHook) this.addEntity(e, 16 * 4, 5, true);
-        else if (e instanceof Arrow) this.addEntity(e, 16 * 4, 20, false);
-        else if (e instanceof Fireball) this.addEntity(e, 16 * 4, 10, false);
-        else if (e instanceof Snowball) this.addEntity(e, 16 * 4, 10, true);
-        else if (e instanceof ThrownEgg) this.addEntity(e, 16 * 4, 10, true);
-        else if (e instanceof ItemEntity) this.addEntity(e, 16 * 4, 20, true);
-        else if (e instanceof Minecart) this.addEntity(e, 16 * 10, 5, true);
-        else if (e instanceof Boat) this.addEntity(e, 16 * 10, 5, true);
-        else if (e instanceof Squid) this.addEntity(e, 16 * 10, 3, true);
+        else if (e instanceof EntityProjectileFishingHook) this.addEntity(e, 16 * 4, 5, true);
+        else if (e instanceof EntityProjectileArrow) this.addEntity(e, 16 * 4, 20, false);
+        else if (e instanceof EntityProjectileFireballGhast) this.addEntity(e, 16 * 4, 10, false);
+        else if (e instanceof EntityProjectileSnowball) this.addEntity(e, 16 * 4, 10, true);
+        else if (e instanceof EntityProjectileEgg) this.addEntity(e, 16 * 4, 10, true);
+        else if (e instanceof EntityItem) this.addEntity(e, 16 * 4, 20, true);
+        else if (e instanceof EntityMinecart) this.addEntity(e, 16 * 10, 5, true);
+        else if (e instanceof EntityBoat) this.addEntity(e, 16 * 10, 5, true);
+        else if (e instanceof EntitySquid) this.addEntity(e, 16 * 10, 3, true);
         else if (e instanceof Creature) this.addEntity(e, 16 * 10, 3);
-        else if (e instanceof PrimedTnt) this.addEntity(e, 16 * 10, 10, true);
-        else if (e instanceof FallingTile) this.addEntity(e, 16 * 10, 20, true);
-        else if (e instanceof Painting) this.addEntity(e, 16 * 10, Integer.MAX_VALUE, false);
+        else if (e instanceof EntityTNTPrimed) this.addEntity(e, 16 * 10, 10, true);
+        else if (e instanceof EntityFallingBlock) this.addEntity(e, 16 * 10, 20, true);
+        else if (e instanceof EntityPainting) this.addEntity(e, 16 * 10, Integer.MAX_VALUE, false);
     }
     
     public void addEntity(final Entity e, final int range, final int updateInterval) {

@@ -4,7 +4,7 @@
 
 package net.minecraft.world.entity.player;
 
-import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ItemArmor;
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.ListTag;
 import net.minecraft.world.level.block.Block;
@@ -23,11 +23,11 @@ public class Inventory implements Container
     public ItemInstance[] items = new ItemInstance[INVENTORY_SIZE];
     public ItemInstance[] armor = new ItemInstance[4];
     public int selected = 0;
-    public Player player;
+    public EntityPlayer player;
     private ItemInstance carried;
     public boolean changed = false;
     
-    public Inventory(final Player player) {
+    public Inventory(final EntityPlayer player) {
         this.player = player;
     }
     
@@ -270,11 +270,11 @@ public class Inventory implements Container
         int currentSuitDamage = 0;
         int maxSuitDamage = 0;
         for (int i = 0; i < this.armor.length; ++i) {
-            if (this.armor[i] != null && this.armor[i].getItem() instanceof ArmorItem) {
+            if (this.armor[i] != null && this.armor[i].getItem() instanceof ItemArmor) {
                 final int maxDamage = this.armor[i].getMaxDamage();
                 currentSuitDamage += maxDamage - this.armor[i].getDamageValue();
                 maxSuitDamage += maxDamage;
-                totalDefense += ((ArmorItem)this.armor[i].getItem()).defense;
+                totalDefense += ((ItemArmor)this.armor[i].getItem()).defense;
             }
         }
         if (maxSuitDamage == 0) return 0;
@@ -283,7 +283,7 @@ public class Inventory implements Container
     
     public void hurtArmor(final int dmg) {
         for (int i = 0; i < this.armor.length; ++i) {
-            if (this.armor[i] != null && this.armor[i].getItem() instanceof ArmorItem) {
+            if (this.armor[i] != null && this.armor[i].getItem() instanceof ItemArmor) {
                 this.armor[i].hurt(dmg, this.player);
                 if (this.armor[i].count == 0) {
                     this.armor[i].snap(this.player);
@@ -354,7 +354,7 @@ public class Inventory implements Container
         return this.carried;
     }
     
-    public boolean stillValid(final Player player) {
+    public boolean stillValid(final EntityPlayer player) {
         if (this.player.removed) return false;
         if (player.distanceToSqr(this.player) > 8 * 8) return false;
         return true;

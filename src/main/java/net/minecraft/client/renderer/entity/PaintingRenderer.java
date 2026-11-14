@@ -6,17 +6,17 @@ package net.minecraft.client.renderer.entity;
 
 import util.Mth;
 import net.minecraft.client.renderer.Tesselator;
-import net.minecraft.world.entity.Painting;
+import net.minecraft.world.entity.EntityPainting;
 import java.util.Random;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL12.*;
 
-public class PaintingRenderer extends EntityRenderer<Painting>
+public class PaintingRenderer extends EntityRenderer<EntityPainting>
 {
     private Random random = new Random();
     
-    public void render(final Painting entity, final double x, final double y, final double z, final float rot, final float a) {
+    public void render(final EntityPainting entity, final double x, final double y, final double z, final float rot, final float a) {
         this.random.setSeed(187L);
 
         glPushMatrix();
@@ -25,7 +25,7 @@ public class PaintingRenderer extends EntityRenderer<Painting>
         glEnable(GL_RESCALE_NORMAL);
         this.bindTexture("/art/kz.png");
 
-        final Painting.Motive motive = entity.motive;
+        final EntityPainting.Motive motive = entity.motive;
         final float s = 1/ 16.0f;
         glScalef(s, s, s);
         this.renderPainting(entity, motive.w, motive.h, motive.uo, motive.vo);
@@ -33,7 +33,7 @@ public class PaintingRenderer extends EntityRenderer<Painting>
         glPopMatrix();
     }
     
-    private void renderPainting(final Painting painting, final int w, final int h, final int uo, final int vo) {
+    private void renderPainting(final EntityPainting painting, final int w, final int h, final int uo, final int vo) {
         final float xx0 = -w / 2.0f;
         final float yy0 = -h / 2.0f;
 
@@ -111,7 +111,7 @@ public class PaintingRenderer extends EntityRenderer<Painting>
         }
     }
     
-    private void setBrightness(final Painting painting, final float ss, final float ya) {
+    private void setBrightness(final EntityPainting painting, final float ss, final float ya) {
         int x = Mth.floor(painting.x);
         int y = Mth.floor(painting.y + ya / 16.0f);
         int z = Mth.floor(painting.z);

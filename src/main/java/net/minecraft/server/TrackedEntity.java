@@ -6,27 +6,26 @@ package net.minecraft.server;
 
 import net.minecraft.network.packet.AddPaintingPacket;
 import net.minecraft.network.packet.MoveEntityPacket;
-import net.minecraft.world.entity.Painting;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.entity.item.FallingTile;
-import net.minecraft.world.entity.item.PrimedTnt;
-import net.minecraft.world.entity.projectile.ThrownEgg;
-import net.minecraft.world.entity.projectile.Fireball;
-import net.minecraft.world.entity.projectile.Snowball;
-import net.minecraft.world.entity.projectile.Arrow;
-import net.minecraft.world.entity.projectile.FishingHook;
+import net.minecraft.world.entity.EntityPainting;
+import net.minecraft.world.entity.item.EntityFallingBlock;
+import net.minecraft.world.entity.item.EntityTNTPrimed;
+import net.minecraft.world.entity.projectile.EntityProjectileEgg;
+import net.minecraft.world.entity.projectile.EntityProjectileFireballGhast;
+import net.minecraft.world.entity.projectile.EntityProjectileSnowball;
+import net.minecraft.world.entity.projectile.EntityProjectileArrow;
+import net.minecraft.world.entity.projectile.EntityProjectileFishingHook;
 import net.minecraft.network.packet.AddMobPacket;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.EntityMob;
 import net.minecraft.world.entity.Creature;
-import net.minecraft.world.entity.item.Boat;
+import net.minecraft.world.entity.item.EntityBoat;
 import net.minecraft.network.packet.AddEntityPacket;
-import net.minecraft.world.entity.item.Minecart;
+import net.minecraft.world.entity.item.EntityMinecart;
 import net.minecraft.network.packet.AddPlayerPacket;
 import net.minecraft.network.packet.AddItemEntityPacket;
-import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.item.EntityItem;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.network.packet.EntityActionAtPositionPacket;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 import net.minecraft.network.packet.SetEquippedItemPacket;
 import net.minecraft.network.packet.RemoveEntityPacket;
 import net.minecraft.server.level.ServerPlayer;
@@ -36,6 +35,8 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.SetEntityMotionPacket;
 import net.minecraft.network.packet.TeleportEntityPacket;
 import java.util.List;
+
+import net.minecraft.world.level.block.Blocks;
 import util.Mth;
 import java.util.HashSet;
 import java.util.Set;
@@ -80,7 +81,7 @@ public class TrackedEntity
         return this.e.entityId;
     }
     
-    public void tick(final List<Player> players) {
+    public void tick(final List<EntityPlayer> players) {
         this.moved = false;
         if (!this.updatedPlayerVisibility || this.e.distanceToSqr(this.xpu, this.ypu, this.zpu) > 16.0) {
             this.xpu = this.e.x;
@@ -214,8 +215,8 @@ public class TrackedEntity
                     }
                 }
 
-                if (this.e instanceof Player) {
-                    Player spe = (Player) this.e;
+                if (this.e instanceof EntityPlayer) {
+                    EntityPlayer spe = (EntityPlayer) this.e;
                     if (spe.isSleeping()) {
                         sp.connection.send(new EntityActionAtPositionPacket(this.e, EntityActionAtPositionPacket.START_SLEEP, Mth.floor(this.e.x), Mth.floor(this.e.y), Mth.floor(this.e.z)));
                     }
@@ -228,15 +229,15 @@ public class TrackedEntity
         }
     }
     
-    public void updatePlayers(final List<Player> players) {
+    public void updatePlayers(final List<EntityPlayer> players) {
         for (int i = 0; i < players.size(); ++i) {
             this.updatePlayer((ServerPlayer)players.get(i));
         }
     }
     
     private Packet getAddEntityPacket() {
-        if (this.e instanceof ItemEntity) {
-            final ItemEntity item = (ItemEntity)this.e;
+        if (this.e instanceof EntityItem) {
+            final EntityItem item = (EntityItem)this.e;
             final AddItemEntityPacket packet = new AddItemEntityPacket(item);
             item.x = packet.x / 32.0;
             item.y = packet.y / 32.0;
@@ -244,52 +245,52 @@ public class TrackedEntity
             return packet;
         }
         if (this.e instanceof ServerPlayer) {
-            Player player = (Player) this.e;
+            EntityPlayer player = (EntityPlayer) this.e;
             return new AddPlayerPacket(player);
         }
-        if (this.e instanceof Minecart) {
-            final Minecart minecart = (Minecart)this.e;
-            if (minecart.type == Minecart.RIDEABLE) return new AddEntityPacket(this.e, AddEntityPacket.MINECART_RIDEABLE);
-            if (minecart.type == Minecart.CHEST) return new AddEntityPacket(this.e, AddEntityPacket.MINECART_CHEST);
-            if (minecart.type == Minecart.FURNACE) return new AddEntityPacket(this.e, AddEntityPacket.MINECART_FURNACE);
+        if (this.e instanceof EntityMinecart) {
+            final EntityMinecart minecart = (EntityMinecart)this.e;
+            if (minecart.type == EntityMinecart.RIDEABLE) return new AddEntityPacket(this.e, AddEntityPacket.MINECART_RIDEABLE);
+            if (minecart.type == EntityMinecart.CHEST) return new AddEntityPacket(this.e, AddEntityPacket.MINECART_CHEST);
+            if (minecart.type == EntityMinecart.FURNACE) return new AddEntityPacket(this.e, AddEntityPacket.MINECART_FURNACE);
         }
-        if (this.e instanceof Boat) {
+        if (this.e instanceof EntityBoat) {
             return new AddEntityPacket(this.e, AddEntityPacket.BOAT);
         }
         if (this.e instanceof Creature) {
-            return new AddMobPacket((Mob)this.e);
+            return new AddMobPacket((EntityMob)this.e);
         }
-        if (this.e instanceof FishingHook) {
+        if (this.e instanceof EntityProjectileFishingHook) {
             return new AddEntityPacket(this.e, AddEntityPacket.FISH_HOOK);
         }
-        if (this.e instanceof Arrow) {
-            final Mob owner = ((Arrow)this.e).owner;
+        if (this.e instanceof EntityProjectileArrow) {
+            final EntityMob owner = ((EntityProjectileArrow)this.e).owner;
             return new AddEntityPacket(this.e, AddEntityPacket.ARROW, (owner != null) ? owner.entityId : this.e.entityId);
         }
-        if (this.e instanceof Snowball) {
+        if (this.e instanceof EntityProjectileSnowball) {
             return new AddEntityPacket(this.e, AddEntityPacket.SNOWBALL);
         }
-        if (this.e instanceof Fireball) {
-            final Fireball fb = (Fireball)this.e;
-            final AddEntityPacket aep = new AddEntityPacket(this.e, AddEntityPacket.FIREBALL, ((Fireball)this.e).owner.entityId);
+        if (this.e instanceof EntityProjectileFireballGhast) {
+            final EntityProjectileFireballGhast fb = (EntityProjectileFireballGhast)this.e;
+            final AddEntityPacket aep = new AddEntityPacket(this.e, AddEntityPacket.FIREBALL, ((EntityProjectileFireballGhast)this.e).owner.entityId);
             aep.xa = (int)(fb.xPower * 8000.0);
             aep.ya = (int)(fb.yPower * 8000.0);
             aep.za = (int)(fb.zPower * 8000.0);
             return aep;
         }
-        if (this.e instanceof ThrownEgg) {
+        if (this.e instanceof EntityProjectileEgg) {
             return new AddEntityPacket(this.e, AddEntityPacket.EGG);
         }
-        if (this.e instanceof PrimedTnt) {
+        if (this.e instanceof EntityTNTPrimed) {
             return new AddEntityPacket(this.e, AddEntityPacket.PRIMED_TNT);
         }
-        if (this.e instanceof FallingTile) {
-            final FallingTile ft = (FallingTile)this.e;
-            if (ft.tile == Block.sand.id) return new AddEntityPacket(this.e, AddEntityPacket.FALLING_SAND);
-            if (ft.tile == Block.gravel.id) return new AddEntityPacket(this.e, AddEntityPacket.FALLING_GRAVEL);
+        if (this.e instanceof EntityFallingBlock) {
+            final EntityFallingBlock ft = (EntityFallingBlock)this.e;
+            if (ft.tile == Blocks.sand.id) return new AddEntityPacket(this.e, AddEntityPacket.FALLING_SAND);
+            if (ft.tile == Blocks.gravel.id) return new AddEntityPacket(this.e, AddEntityPacket.FALLING_GRAVEL);
         }
-        if (this.e instanceof Painting) {
-            return new AddPaintingPacket((Painting)this.e);
+        if (this.e instanceof EntityPainting) {
+            return new AddPaintingPacket((EntityPainting)this.e);
         }
         throw new IllegalArgumentException("Don't know how to add " + this.e.getClass() + "!");
     }

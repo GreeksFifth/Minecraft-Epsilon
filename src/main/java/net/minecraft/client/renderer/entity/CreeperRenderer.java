@@ -5,21 +5,21 @@
 package net.minecraft.client.renderer.entity;
 
 import util.Mth;
-import net.minecraft.world.entity.monster.Creeper;
-import net.minecraft.client.model.CreeperModel;
+import net.minecraft.world.entity.monster.EntityCreeper;
+import net.minecraft.client.model.ModelCreeper;
 import net.minecraft.client.model.Model;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class CreeperRenderer extends MobRenderer<Creeper>
+public class CreeperRenderer extends MobRenderer<EntityCreeper>
 {
-    private Model armorModel = new CreeperModel(2.0f);
+    private Model armorModel = new ModelCreeper(2.0f);
     
     public CreeperRenderer() {
-        super(new CreeperModel(), 0.5f);
+        super(new ModelCreeper(), 0.5f);
     }
     
-    protected void scale(final Creeper creeper, final float a) {
+    protected void scale(final EntityCreeper creeper, final float a) {
         float g = creeper.getSwelling(a);
 
         final float wobble = 1.0f + Mth.sin(g * 100.0f) * g * 0.01f;
@@ -32,7 +32,7 @@ public class CreeperRenderer extends MobRenderer<Creeper>
         glScalef(s, hs, s);
     }
     
-    protected int getOverlayColor(final Creeper creeper, final float br, final float a) {
+    protected int getOverlayColor(final EntityCreeper creeper, final float br, final float a) {
         final float step = creeper.getSwelling(a);
 
         if ((int)(step * 10.0f) % 2 == 0) return 0;
@@ -48,7 +48,7 @@ public class CreeperRenderer extends MobRenderer<Creeper>
         return (_a << 24) | (r << 16) | (g << 8) | b;
     }
     
-    protected boolean prepareArmor(final Creeper creeper, final int layer, final float a) {
+    protected boolean prepareArmor(final EntityCreeper creeper, final int layer, final float a) {
         if (creeper.isPowered()) {
             if (layer == 1) {
                 final float time = creeper.tickCount + a;
@@ -78,7 +78,7 @@ public class CreeperRenderer extends MobRenderer<Creeper>
         return false;
     }
     
-    protected boolean prepareArmorOverlay(final Creeper mob, final int layer, final float a) {
+    protected boolean prepareArmorOverlay(final EntityCreeper mob, final int layer, final float a) {
         return false;
     }
 }

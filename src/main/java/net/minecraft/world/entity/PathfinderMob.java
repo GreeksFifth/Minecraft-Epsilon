@@ -9,7 +9,7 @@ import util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.pathfinder.Path;
 
-public class PathfinderMob extends Mob
+public class PathfinderMob extends EntityMob
 {
     private static final int MAX_TURN = 30;
     private Path path;

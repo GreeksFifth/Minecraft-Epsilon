@@ -5,7 +5,7 @@
 package net.minecraft.client.renderer;
 
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.RecordingItem;
+import net.minecraft.world.item.ItemMusicDisc;
 import net.minecraft.client.particle.HeartParticle;
 import net.minecraft.client.particle.SnowShovelParticle;
 import net.minecraft.client.particle.BreakingItemParticle;
@@ -21,17 +21,18 @@ import net.minecraft.client.particle.NoteParticle;
 import net.minecraft.client.particle.SmokeParticle;
 import net.minecraft.client.particle.BubbleParticle;
 import net.minecraft.world.level.LevelEvent;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 import java.util.Collections;
 import net.minecraft.client.Lighting;
-import net.minecraft.world.level.block.entity.TileEntity;
+import net.minecraft.world.level.block.tileentity.TileEntity;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderDispatcher;
 import net.minecraft.client.renderer.culling.Culler;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.EntityMob;
 
 import java.util.Arrays;
 import net.minecraft.world.entity.Entity;
@@ -227,7 +228,7 @@ public class LevelRenderer implements LevelListener
 
     @Override
     public void allChanged() {
-        Block.leaves.setFancy(this.mc.options.fancyGraphics);
+        Blocks.leaves.setFancy(this.mc.options.fancyGraphics);
         this.lastViewDistance = this.mc.options.viewDistance;
 
         if (this.chunks != null) {
@@ -280,7 +281,7 @@ public class LevelRenderer implements LevelListener
         }
 
         if (this.level != null) {
-            final Mob player = this.mc.cameraTargetPlayer;
+            final EntityMob player = this.mc.cameraTargetPlayer;
             if (player != null) {
                 this.resortChunks(Mth.floor(player.x), Mth.floor(player.y), Mth.floor(player.z));
                 Arrays.sort(this.sortedChunks, new DistanceChunkSorter(player));
@@ -401,7 +402,7 @@ public class LevelRenderer implements LevelListener
         }
     }
     
-    public int render(final Mob player, final int layer, final double alpha) {
+    public int render(final EntityMob player, final int layer, final double alpha) {
         for (int i = 0; i < 10; ++i) {
             this.chunkFixOffs = (this.chunkFixOffs + 1) % this.chunks.length;
             final Chunk c = this.chunks[this.chunkFixOffs];
@@ -576,7 +577,7 @@ public class LevelRenderer implements LevelListener
             }
         }
 
-        final Mob player = this.mc.cameraTargetPlayer;
+        final EntityMob player = this.mc.cameraTargetPlayer;
         final double xOff = player.xOld + (player.x - player.xOld) * alpha;
         final double yOff = player.yOld + (player.y - player.yOld) * alpha;
         final double zOff = player.zOld + (player.z - player.zOld) * alpha;
@@ -955,7 +956,7 @@ public class LevelRenderer implements LevelListener
         glEnable(GL_CULL_FACE);
     }
     
-    public boolean updateDirtyChunks(final Mob player, final boolean force) {
+    public boolean updateDirtyChunks(final EntityMob player, final boolean force) {
         final boolean slow = false;
         if (slow) {
             Collections.sort(this.dirtyChunks, new DirtyChunkSorter(player));
@@ -1084,7 +1085,7 @@ public class LevelRenderer implements LevelListener
         return pendingChunkSize == pendingChunkRemoved + secondaryRemoved;
     }
     
-    public void renderHit(final Player player, final HitResult h, final int mode, final ItemInstance inventoryItem, final float a) {
+    public void renderHit(final EntityPlayer player, final HitResult h, final int mode, final ItemInstance inventoryItem, final float a) {
         final Tesselator t = Tesselator.instance;
         glEnable(GL_BLEND);
         glEnable(GL_ALPHA_TEST);
@@ -1107,7 +1108,7 @@ public class LevelRenderer implements LevelListener
                 final double xo = player.xOld + (player.x - player.xOld) * a;
                 final double yo = player.yOld + (player.y - player.yOld) * a;
                 final double zo = player.zOld + (player.z - player.zOld) * a;
-                if (block == null) block = Block.rock;
+                if (block == null) block = Blocks.rock;
 
                 glEnable(GL_ALPHA_TEST);
                 t.begin();
@@ -1146,7 +1147,7 @@ public class LevelRenderer implements LevelListener
         glDisable(GL_ALPHA_TEST);
     }
     
-    public void renderHitOutline(final Player player, final HitResult h, final int mode, final ItemInstance inventoryItem, final float a) {
+    public void renderHitOutline(final EntityPlayer player, final HitResult h, final int mode, final ItemInstance inventoryItem, final float a) {
         if (mode == 0 && h.type == HitResult.Type.TILE) {
             glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -1320,7 +1321,7 @@ public class LevelRenderer implements LevelListener
         MemoryTracker.releaseLists(this.chunkLists);
     }
     
-    public void levelEvent(final Player source, final int type, final int x, final int y, final int z, final int data) {
+    public void levelEvent(final EntityPlayer source, final int type, final int x, final int y, final int z, final int data) {
         final Random random = this.level.random;
         switch (type) {
             case LevelEvent.SOUND_CLICK_FAIL: {
@@ -1375,8 +1376,8 @@ public class LevelRenderer implements LevelListener
                 break;
             }
             case LevelEvent.SOUND_PLAY_RECORDING: {
-                if (Item.items[data] instanceof RecordingItem) {
-                    RecordingItem recording = (RecordingItem)Item.items[data];
+                if (Item.items[data] instanceof ItemMusicDisc) {
+                    ItemMusicDisc recording = (ItemMusicDisc)Item.items[data];
                     this.level.playStreamingMusic(recording.recording, x, y, z);
                 } else {
                     this.level.playStreamingMusic(null, x, y, z);

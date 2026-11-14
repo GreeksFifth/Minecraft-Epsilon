@@ -5,49 +5,49 @@
 package net.minecraft.client.renderer.entity;
 
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import util.Mth;
-import net.minecraft.world.entity.global.LightningBolt;
-import net.minecraft.world.entity.projectile.FishingHook;
-import net.minecraft.world.entity.item.Boat;
-import net.minecraft.world.entity.item.Minecart;
-import net.minecraft.world.entity.item.FallingTile;
-import net.minecraft.world.entity.item.PrimedTnt;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.projectile.Fireball;
-import net.minecraft.world.entity.projectile.ThrownEgg;
-import net.minecraft.world.entity.projectile.Snowball;
-import net.minecraft.world.entity.projectile.Arrow;
-import net.minecraft.world.entity.Painting;
+import net.minecraft.world.entity.global.EntityLightningBolt;
+import net.minecraft.world.entity.projectile.EntityProjectileFishingHook;
+import net.minecraft.world.entity.item.EntityBoat;
+import net.minecraft.world.entity.item.EntityMinecart;
+import net.minecraft.world.entity.item.EntityFallingBlock;
+import net.minecraft.world.entity.item.EntityTNTPrimed;
+import net.minecraft.world.entity.item.EntityItem;
+import net.minecraft.world.entity.projectile.EntityProjectileFireballGhast;
+import net.minecraft.world.entity.projectile.EntityProjectileEgg;
+import net.minecraft.world.entity.projectile.EntityProjectileSnowball;
+import net.minecraft.world.entity.projectile.EntityProjectileArrow;
+import net.minecraft.world.entity.EntityPainting;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.client.model.SquidModel;
-import net.minecraft.world.entity.animal.Squid;
-import net.minecraft.world.entity.monster.Ghast;
-import net.minecraft.world.entity.monster.Giant;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.client.model.SlimeModel;
-import net.minecraft.world.entity.monster.Slime;
-import net.minecraft.client.model.ZombieModel;
-import net.minecraft.world.entity.monster.Zombie;
-import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.model.SkeletonModel;
-import net.minecraft.world.entity.monster.Skeleton;
-import net.minecraft.world.entity.monster.Creeper;
-import net.minecraft.client.model.ChickenModel;
-import net.minecraft.world.entity.animal.Chicken;
-import net.minecraft.client.model.WolfModel;
-import net.minecraft.world.entity.animal.Wolf;
-import net.minecraft.client.model.CowModel;
-import net.minecraft.world.entity.animal.Cow;
-import net.minecraft.client.model.SheepFurModel;
-import net.minecraft.client.model.SheepModel;
-import net.minecraft.world.entity.animal.Sheep;
-import net.minecraft.client.model.PigModel;
-import net.minecraft.world.entity.animal.Pig;
-import net.minecraft.world.entity.monster.Spider;
+import net.minecraft.client.model.ModelSquid;
+import net.minecraft.world.entity.animal.EntitySquid;
+import net.minecraft.world.entity.monster.EntityGhast;
+import net.minecraft.world.entity.monster.EntityGiant;
+import net.minecraft.world.entity.player.EntityPlayer;
+import net.minecraft.client.model.ModelSlime;
+import net.minecraft.world.entity.monster.EntitySlime;
+import net.minecraft.client.model.ModelZombie;
+import net.minecraft.world.entity.monster.EntityZombie;
+import net.minecraft.client.model.ModelHumanoid;
+import net.minecraft.client.model.ModelSkeletonArcher;
+import net.minecraft.world.entity.monster.EntitySkeletonArcher;
+import net.minecraft.world.entity.monster.EntityCreeper;
+import net.minecraft.client.model.ModelChicken;
+import net.minecraft.world.entity.animal.EntityChicken;
+import net.minecraft.client.model.ModelWolf;
+import net.minecraft.world.entity.animal.EntityWolf;
+import net.minecraft.client.model.ModelCow;
+import net.minecraft.world.entity.animal.EntityCow;
+import net.minecraft.client.model.ModelSheepFur;
+import net.minecraft.client.model.ModelSheep;
+import net.minecraft.world.entity.animal.EntitySheep;
+import net.minecraft.client.model.ModelPig;
+import net.minecraft.world.entity.animal.EntityPig;
+import net.minecraft.world.entity.monster.EntitySpider;
 import java.util.HashMap;
 import net.minecraft.client.Options;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.EntityMob;
 import net.minecraft.world.level.Level;
 import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.client.renderer.Textures;
@@ -67,7 +67,7 @@ public class EntityRenderDispatcher
     public Textures textures;
     public ItemInHandRenderer itemInHandRenderer;
     public Level level;
-    public Mob player;
+    public EntityMob player;
     public float playerRotY;
     public float playerRotX;
     public Options options;
@@ -76,34 +76,34 @@ public class EntityRenderDispatcher
     public double zPlayer;
     
     private EntityRenderDispatcher() {
-        this.renderers.put(Spider.class, new SpiderRenderer());
-        this.renderers.put(Pig.class, new PigRenderer(new PigModel(), new PigModel(0.5f), 0.7f));
-        this.renderers.put(Sheep.class, new SheepRenderer(new SheepModel(), new SheepFurModel(), 0.7f));
-        this.renderers.put(Cow.class, new CowRenderer(new CowModel(), 0.7f));
-        this.renderers.put(Wolf.class, new WolfRenderer(new WolfModel(), 0.5f));
-        this.renderers.put(Chicken.class, new ChickenRenderer(new ChickenModel(), 0.3f));
-        this.renderers.put(Creeper.class, new CreeperRenderer());
-        this.renderers.put(Skeleton.class, new HumanoidMobRenderer<>(new SkeletonModel(), 0.5f));
-        this.renderers.put(Zombie.class, new HumanoidMobRenderer<>(new ZombieModel(), 0.5f));
-        this.renderers.put(Slime.class, new SlimeRenderer(new SlimeModel(16), new SlimeModel(0), 0.25f));
-        this.renderers.put(Player.class, new PlayerRenderer());
-        this.renderers.put(Giant.class, new GiantMobRenderer(new ZombieModel(), 0.5f, 6.0f));
-        this.renderers.put(Ghast.class, new GhastRenderer());
-        this.renderers.put(Squid.class, new SquidRenderer(new SquidModel(), 0.7f));
-        this.renderers.put(Mob.class, new MobRenderer<>(new HumanoidModel(), 0.5f));
+        this.renderers.put(EntitySpider.class, new SpiderRenderer());
+        this.renderers.put(EntityPig.class, new PigRenderer(new ModelPig(), new ModelPig(0.5f), 0.7f));
+        this.renderers.put(EntitySheep.class, new SheepRenderer(new ModelSheep(), new ModelSheepFur(), 0.7f));
+        this.renderers.put(EntityCow.class, new CowRenderer(new ModelCow(), 0.7f));
+        this.renderers.put(EntityWolf.class, new WolfRenderer(new ModelWolf(), 0.5f));
+        this.renderers.put(EntityChicken.class, new ChickenRenderer(new ModelChicken(), 0.3f));
+        this.renderers.put(EntityCreeper.class, new CreeperRenderer());
+        this.renderers.put(EntitySkeletonArcher.class, new HumanoidMobRenderer<>(new ModelSkeletonArcher(), 0.5f));
+        this.renderers.put(EntityZombie.class, new HumanoidMobRenderer<>(new ModelZombie(), 0.5f));
+        this.renderers.put(EntitySlime.class, new SlimeRenderer(new ModelSlime(16), new ModelSlime(0), 0.25f));
+        this.renderers.put(EntityPlayer.class, new PlayerRenderer());
+        this.renderers.put(EntityGiant.class, new GiantMobRenderer(new ModelZombie(), 0.5f, 6.0f));
+        this.renderers.put(EntityGhast.class, new GhastRenderer());
+        this.renderers.put(EntitySquid.class, new SquidRenderer(new ModelSquid(), 0.7f));
+        this.renderers.put(EntityMob.class, new MobRenderer<>(new ModelHumanoid(), 0.5f));
         this.renderers.put(Entity.class, new DefaultRenderer());
-        this.renderers.put(Painting.class, new PaintingRenderer());
-        this.renderers.put(Arrow.class, new ArrowRenderer());
-        this.renderers.put(Snowball.class, new ItemSpriteRenderer(Items.snowBall.getIcon(0)));
-        this.renderers.put(ThrownEgg.class, new ItemSpriteRenderer(Items.egg.getIcon(0)));
-        this.renderers.put(Fireball.class, new FireballRenderer());
-        this.renderers.put(ItemEntity.class, new ItemRenderer());
-        this.renderers.put(PrimedTnt.class, new TntRenderer());
-        this.renderers.put(FallingTile.class, new FallingTileRenderer());
-        this.renderers.put(Minecart.class, new MinecartRenderer());
-        this.renderers.put(Boat.class, new BoatRenderer());
-        this.renderers.put(FishingHook.class, new FishingHookRenderer());
-        this.renderers.put(LightningBolt.class, new LightningBoltRenderer());
+        this.renderers.put(EntityPainting.class, new PaintingRenderer());
+        this.renderers.put(EntityProjectileArrow.class, new ArrowRenderer());
+        this.renderers.put(EntityProjectileSnowball.class, new ItemSpriteRenderer(Items.snowBall.getIcon(0)));
+        this.renderers.put(EntityProjectileEgg.class, new ItemSpriteRenderer(Items.egg.getIcon(0)));
+        this.renderers.put(EntityProjectileFireballGhast.class, new FireballRenderer());
+        this.renderers.put(EntityItem.class, new ItemRenderer());
+        this.renderers.put(EntityTNTPrimed.class, new TntRenderer());
+        this.renderers.put(EntityFallingBlock.class, new FallingBlockRenderer());
+        this.renderers.put(EntityMinecart.class, new MinecartRenderer());
+        this.renderers.put(EntityBoat.class, new BoatRenderer());
+        this.renderers.put(EntityProjectileFishingHook.class, new FishingHookRenderer());
+        this.renderers.put(EntityLightningBolt.class, new LightningBoltRenderer());
 
         for (EntityRenderer<? extends Entity> entityRenderer : this.renderers.values()) {
             entityRenderer.init(this);
@@ -123,7 +123,7 @@ public class EntityRenderDispatcher
         return this.getRenderer(entity.getClass());
     }
     
-    public void prepare(final Level level, final Textures textures, final Font font, final Mob player, final Options options, final float a) {
+    public void prepare(final Level level, final Textures textures, final Font font, final EntityMob player, final Options options, final float a) {
         this.level = level;
         this.textures = textures;
         this.options = options;
@@ -132,7 +132,7 @@ public class EntityRenderDispatcher
 
         if (player.isSleeping()) {
             int t = level.getTile(Mth.floor(player.x), Mth.floor(player.y), Mth.floor(player.z));
-            if (t == Block.bed.id) {
+            if (t == Blocks.bed.id) {
                 int data = level.getData(Mth.floor(player.x), Mth.floor(player.y), Mth.floor(player.z));
 
                 int direction = data & 0x3;

@@ -5,15 +5,15 @@
 package net.minecraft.client.renderer.entity;
 
 import net.minecraft.client.renderer.Tesselator;
-import net.minecraft.world.entity.projectile.Fireball;
+import net.minecraft.world.entity.projectile.EntityProjectileFireballGhast;
 import net.minecraft.world.item.Items;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL12.*;
 
-public class FireballRenderer extends EntityRenderer<Fireball>
+public class FireballRenderer extends EntityRenderer<EntityProjectileFireballGhast>
 {
-    public void render(final Fireball fireball, final double x, final double y, final double z, final float rot, final float a) {
+    public void render(final EntityProjectileFireballGhast fireball, final double x, final double y, final double z, final float rot, final float a) {
         glPushMatrix();
 
         glTranslatef((float)x, (float)y, (float)z);

@@ -4,9 +4,9 @@
 
 package net.minecraft.world.inventory;
 
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 import net.minecraft.world.Container;
-import net.minecraft.world.level.block.entity.DispenserTileEntity;
+import net.minecraft.world.level.block.tileentity.TileEntityDispenser;
 
 public class TrapMenu extends AbstractContainerMenu
 {
@@ -14,9 +14,9 @@ public class TrapMenu extends AbstractContainerMenu
     private static final int INV_SLOT_END = INV_SLOT_START + 9 * 3;
     private static final int USE_ROW_SLOT_START = INV_SLOT_END;
     private static final int USE_ROW_SLOT_END = USE_ROW_SLOT_START + 9;
-    private DispenserTileEntity trap;
+    private TileEntityDispenser trap;
     
-    public TrapMenu(final Container container, final DispenserTileEntity trap) {
+    public TrapMenu(final Container container, final TileEntityDispenser trap) {
         this.trap = trap;
 
         for (int y = 0; y < 3; ++y) {
@@ -36,7 +36,7 @@ public class TrapMenu extends AbstractContainerMenu
     }
     
     @Override
-    public boolean stillValid(final Player player) {
+    public boolean stillValid(final EntityPlayer player) {
         return this.trap.stillValid(player);
     }
 }

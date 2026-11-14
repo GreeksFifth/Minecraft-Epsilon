@@ -5,8 +5,8 @@
 package net.minecraft.server.level;
 
 import net.minecraft.network.packet.LevelEventPacket;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.block.entity.TileEntity;
+import net.minecraft.world.entity.player.EntityPlayer;
+import net.minecraft.world.level.block.tileentity.TileEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.LevelListener;
@@ -58,7 +58,7 @@ public class ServerLevelListener implements LevelListener
         this.server.players.isTrackingTileEntity(x, y, z, te);
     }
     
-    public void levelEvent(final Player source, final int type, final int x, final int y, final int z, final int data) {
+    public void levelEvent(final EntityPlayer source, final int type, final int x, final int y, final int z, final int data) {
         this.server.players.broadcast(source, x, y, z, 64.0, this.level.dimension.id, new LevelEventPacket(type, x, y, z, data));
     }
 }

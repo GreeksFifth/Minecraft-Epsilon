@@ -7,6 +7,7 @@ package net.minecraft.client.particle;
 import net.minecraft.client.renderer.Tesselator;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 public class TerrainParticle extends Particle
 {
@@ -24,7 +25,7 @@ public class TerrainParticle extends Particle
     }
     
     public TerrainParticle init(final int x, final int y, final int z) {
-        if (this.block == Block.grass) return this;
+        if (this.block == Blocks.grass) return this;
         final int col = this.block.getColor(this.level, x, y, z);
         this.rCol *= (col >> 16 & 0xFF) / 255.0f;
         this.gCol *= (col >> 8 & 0xFF) / 255.0f;

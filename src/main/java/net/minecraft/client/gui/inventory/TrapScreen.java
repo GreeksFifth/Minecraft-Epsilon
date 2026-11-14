@@ -5,14 +5,14 @@
 package net.minecraft.client.gui.inventory;
 
 import net.minecraft.world.inventory.TrapMenu;
-import net.minecraft.world.level.block.entity.DispenserTileEntity;
+import net.minecraft.world.level.block.tileentity.TileEntityDispenser;
 import net.minecraft.world.entity.player.Inventory;
 
 import static org.lwjgl.opengl.GL11.*;
 
 public class TrapScreen extends AbstractContainerScreen
 {
-    public TrapScreen(final Inventory inventory, final DispenserTileEntity trap) {
+    public TrapScreen(final Inventory inventory, final TileEntityDispenser trap) {
         super(new TrapMenu(inventory, trap));
     }
     

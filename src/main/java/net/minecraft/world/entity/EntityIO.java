@@ -4,28 +4,28 @@
 
 package net.minecraft.world.entity;
 
-import net.minecraft.world.entity.item.Boat;
-import net.minecraft.world.entity.item.Minecart;
-import net.minecraft.world.entity.item.FallingTile;
-import net.minecraft.world.entity.item.PrimedTnt;
-import net.minecraft.world.entity.animal.Wolf;
-import net.minecraft.world.entity.animal.Squid;
-import net.minecraft.world.entity.animal.Chicken;
-import net.minecraft.world.entity.animal.Cow;
-import net.minecraft.world.entity.animal.Sheep;
-import net.minecraft.world.entity.animal.Pig;
-import net.minecraft.world.entity.monster.PigZombie;
-import net.minecraft.world.entity.monster.Ghast;
-import net.minecraft.world.entity.monster.Slime;
-import net.minecraft.world.entity.monster.Zombie;
-import net.minecraft.world.entity.monster.Giant;
-import net.minecraft.world.entity.monster.Spider;
-import net.minecraft.world.entity.monster.Skeleton;
-import net.minecraft.world.entity.monster.Creeper;
-import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.projectile.Snowball;
-import net.minecraft.world.entity.projectile.Arrow;
+import net.minecraft.world.entity.item.EntityBoat;
+import net.minecraft.world.entity.item.EntityMinecart;
+import net.minecraft.world.entity.item.EntityFallingBlock;
+import net.minecraft.world.entity.item.EntityTNTPrimed;
+import net.minecraft.world.entity.animal.EntityWolf;
+import net.minecraft.world.entity.animal.EntitySquid;
+import net.minecraft.world.entity.animal.EntityChicken;
+import net.minecraft.world.entity.animal.EntityCow;
+import net.minecraft.world.entity.animal.EntitySheep;
+import net.minecraft.world.entity.animal.EntityPig;
+import net.minecraft.world.entity.monster.EntityPigZombie;
+import net.minecraft.world.entity.monster.EntityGhast;
+import net.minecraft.world.entity.monster.EntitySlime;
+import net.minecraft.world.entity.monster.EntityZombie;
+import net.minecraft.world.entity.monster.EntityGiant;
+import net.minecraft.world.entity.monster.EntitySpider;
+import net.minecraft.world.entity.monster.EntitySkeletonArcher;
+import net.minecraft.world.entity.monster.EntityCreeper;
+import net.minecraft.world.entity.monster.EntityMobHostile;
+import net.minecraft.world.entity.item.EntityItem;
+import net.minecraft.world.entity.projectile.EntityProjectileSnowball;
+import net.minecraft.world.entity.projectile.EntityProjectileArrow;
 import java.util.HashMap;
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
@@ -46,30 +46,30 @@ public class EntityIO
     }
 
     static {
-        setId(Arrow.class, "Arrow", 10);
-        setId(Snowball.class, "Snowball", 11);
-        setId(ItemEntity.class, "Item", 1);
-        setId(Painting.class, "Painting", 9);
-        setId(Mob.class, "Mob", 48);
-        setId(Monster.class, "Monster", 49);
-        setId(Creeper.class, "Creeper", 50);
-        setId(Skeleton.class, "Skeleton", 51);
-        setId(Spider.class, "Spider", 52);
-        setId(Giant.class, "Giant", 53);
-        setId(Zombie.class, "Zombie", 54);
-        setId(Slime.class, "Slime", 55);
-        setId(Ghast.class, "Ghast", 56);
-        setId(PigZombie.class, "PigZombie", 57);
-        setId(Pig.class, "Pig", 90);
-        setId(Sheep.class, "Sheep", 91);
-        setId(Cow.class, "Cow", 92);
-        setId(Chicken.class, "Chicken", 93);
-        setId(Squid.class, "Squid", 94);
-        setId(Wolf.class, "Wolf", 95);
-        setId(PrimedTnt.class, "PrimedTnt", 20);
-        setId(FallingTile.class, "FallingSand", 21);
-        setId(Minecart.class, "Minecart", 40);
-        setId(Boat.class, "Boat", 41);
+        setId(EntityProjectileArrow.class, "Arrow", 10);
+        setId(EntityProjectileSnowball.class, "Snowball", 11);
+        setId(EntityItem.class, "Item", 1);
+        setId(EntityPainting.class, "Painting", 9);
+        setId(EntityMob.class, "Mob", 48);
+        setId(EntityMobHostile.class, "Monster", 49);
+        setId(EntityCreeper.class, "Creeper", 50);
+        setId(EntitySkeletonArcher.class, "Skeleton", 51);
+        setId(EntitySpider.class, "Spider", 52);
+        setId(EntityGiant.class, "Giant", 53);
+        setId(EntityZombie.class, "Zombie", 54);
+        setId(EntitySlime.class, "Slime", 55);
+        setId(EntityGhast.class, "Ghast", 56);
+        setId(EntityPigZombie.class, "PigZombie", 57);
+        setId(EntityPig.class, "Pig", 90);
+        setId(EntitySheep.class, "Sheep", 91);
+        setId(EntityCow.class, "Cow", 92);
+        setId(EntityChicken.class, "Chicken", 93);
+        setId(EntitySquid.class, "Squid", 94);
+        setId(EntityWolf.class, "Wolf", 95);
+        setId(EntityTNTPrimed.class, "PrimedTnt", 20);
+        setId(EntityFallingBlock.class, "FallingSand", 21);
+        setId(EntityMinecart.class, "Minecart", 40);
+        setId(EntityBoat.class, "Boat", 41);
     }
 
     public static Entity newEntity(final String id, final Level level) {

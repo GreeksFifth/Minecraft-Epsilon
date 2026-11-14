@@ -8,22 +8,22 @@ import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.Item;
 import net.minecraft.client.renderer.TileRenderer;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.world.entity.EntityMob;
+import net.minecraft.client.model.ModelHumanoid;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class HumanoidMobRenderer<T extends Mob> extends MobRenderer<T>
+public class HumanoidMobRenderer<T extends EntityMob> extends MobRenderer<T>
 {
-    protected HumanoidModel humanoidModel;
+    protected ModelHumanoid humanoidModel;
     
-    public HumanoidMobRenderer(final HumanoidModel humanoidModel, final float shadow) {
+    public HumanoidMobRenderer(final ModelHumanoid humanoidModel, final float shadow) {
         super(humanoidModel, shadow);
         this.humanoidModel = humanoidModel;
     }
     
     @Override
-    protected void additionalRendering(final Mob mob, final float a) {
+    protected void additionalRendering(final EntityMob mob, final float a) {
         final ItemInstance item = mob.getCarriedItem();
         if (item != null) {
             glPushMatrix();

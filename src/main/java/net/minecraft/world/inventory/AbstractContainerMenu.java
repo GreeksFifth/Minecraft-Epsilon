@@ -6,7 +6,7 @@ package net.minecraft.world.inventory;
 
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 import net.minecraft.world.item.ItemInstance;
 import java.util.HashSet;
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public abstract class AbstractContainerMenu
     public int containerId = 0;
     private short changeUid = 0;
     protected List<ContainerListener> containerListeners = new ArrayList<>();
-    private Set<Player> unSynchedPlayers = new HashSet<>();
+    private Set<EntityPlayer> unSynchedPlayers = new HashSet<>();
     
     protected void addSlot(final Slot slot) {
         slot.index = this.slots.size();
@@ -92,7 +92,7 @@ public abstract class AbstractContainerMenu
         return null;
     }
     
-    public ItemInstance clicked(final int slotIndex, final int buttonNum, final boolean quickMove, final Player player) {
+    public ItemInstance clicked(final int slotIndex, final int buttonNum, final boolean quickMove, final EntityPlayer player) {
         ItemInstance clickedEntity = null;
 
         if (buttonNum == 0 || buttonNum == 1) {
@@ -202,7 +202,7 @@ public abstract class AbstractContainerMenu
         return clickedEntity;
     }
     
-    public void removed(final Player player) {
+    public void removed(final EntityPlayer player) {
         final Inventory inventory = player.inventory;
         if (inventory.getCarried() != null) {
             player.drop(inventory.getCarried());
@@ -214,11 +214,11 @@ public abstract class AbstractContainerMenu
         this.broadcastChanges();
     }
 
-    public boolean isSynched(final Player player) {
+    public boolean isSynched(final EntityPlayer player) {
         return !this.unSynchedPlayers.contains(player);
     }
 
-    public void setSynched(final Player player, final boolean synched) {
+    public void setSynched(final EntityPlayer player, final boolean synched) {
         if (synched) {
             this.unSynchedPlayers.remove(player);
         }
@@ -251,7 +251,7 @@ public abstract class AbstractContainerMenu
     public void rollbackToBackup(final short uid) {
     }
     
-    public abstract boolean stillValid(final Player player);
+    public abstract boolean stillValid(final EntityPlayer player);
     
     protected void moveItemStackTo(final ItemInstance itemStack, final int startSlot, final int endSlot, final boolean backwards) {
         int destSlot = startSlot;

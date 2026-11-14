@@ -5,9 +5,9 @@
 package net.minecraft.client.particle;
 
 import net.minecraft.client.renderer.Tesselator;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 
 public class BreakingItemParticle extends Particle
 {
@@ -15,7 +15,7 @@ public class BreakingItemParticle extends Particle
         super(level, x, y, z, 0.0, 0.0, 0.0);
         this.tex = item.getIcon(0);
         this.rCol = this.gCol = this.bCol = 1.0f;
-        this.gravity = Block.snow.gravity;
+        this.gravity = Blocks.snow.gravity;
         this.size /= 2.0f;
     }
     

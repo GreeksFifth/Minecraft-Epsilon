@@ -7,17 +7,17 @@ package net.minecraft.client.renderer.tileentity;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.world.entity.EntityIO;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.block.entity.MobSpawnerTileEntity;
+import net.minecraft.world.level.block.tileentity.TileEntityMobSpawner;
 import java.util.HashMap;
 import java.util.Map;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class MobSpawnerRenderer extends TileEntityRenderer<MobSpawnerTileEntity>
+public class MobSpawnerRenderer extends TileEntityRenderer<TileEntityMobSpawner>
 {
     private Map<String, Entity> models = new HashMap<>();
     
-    public void render(final MobSpawnerTileEntity spawner, final double x, final double y, final double z, final float a) {
+    public void render(final TileEntityMobSpawner spawner, final double x, final double y, final double z, final float a) {
         glPushMatrix();
         glTranslatef((float)x + 0.5f, (float)y, (float)z + 0.5f);
 

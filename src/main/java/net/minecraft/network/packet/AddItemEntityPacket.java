@@ -9,7 +9,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 
 import util.Mth;
-import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.item.EntityItem;
 
 public class AddItemEntityPacket extends Packet
 {
@@ -23,7 +23,7 @@ public class AddItemEntityPacket extends Packet
     public AddItemEntityPacket() {
     }
     
-    public AddItemEntityPacket(final ItemEntity itemEntity) {
+    public AddItemEntityPacket(final EntityItem itemEntity) {
         this.id = itemEntity.entityId;
         this.itemId = itemEntity.item.id;
         this.itemCount = itemEntity.item.count;

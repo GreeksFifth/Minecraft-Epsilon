@@ -8,10 +8,10 @@ import net.minecraft.Facing;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.level.LevelSource;
 import java.util.Random;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.block.entity.PistonPieceEntity;
+import net.minecraft.world.entity.player.EntityPlayer;
+import net.minecraft.world.level.block.tileentity.TileEntityPistonPiece;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.TileEntity;
+import net.minecraft.world.level.block.tileentity.TileEntity;
 import net.minecraft.world.level.material.Material;
 
 public class BlockPistonMovingPiece extends EntityBlock
@@ -33,8 +33,8 @@ public class BlockPistonMovingPiece extends EntityBlock
     @Override
     public void onRemove(final Level level, final int x, final int y, final int z) {
         final TileEntity tileEntity = level.getTileEntity(x, y, z);
-        if (tileEntity != null && tileEntity instanceof PistonPieceEntity) {
-            ((PistonPieceEntity)tileEntity).finalTick();
+        if (tileEntity != null && tileEntity instanceof TileEntityPistonPiece) {
+            ((TileEntityPistonPiece)tileEntity).finalTick();
         }
         else {
             super.onRemove(level, x, y, z);
@@ -67,7 +67,7 @@ public class BlockPistonMovingPiece extends EntityBlock
     }
     
     @Override
-    public boolean use(final Level level, final int x, final int y, final int z, final Player player) {
+    public boolean use(final Level level, final int x, final int y, final int z, final EntityPlayer player) {
         // this is a special case in order to help removing invisible, unbreakable, blocks in the world
         if (!level.isClientSide && level.getTileEntity(x, y, z) == null) {
             // this block is no longer valid
@@ -86,7 +86,7 @@ public class BlockPistonMovingPiece extends EntityBlock
     public void spawnResources(final Level level, final int x, final int y, final int z, final int data, final float odds) {
         if (level.isClientSide) return;
 
-        final PistonPieceEntity entity = this.getEntity(level, x, y, z);
+        final TileEntityPistonPiece entity = this.getEntity(level, x, y, z);
         if (entity == null) {
             return;
         }
@@ -101,12 +101,12 @@ public class BlockPistonMovingPiece extends EntityBlock
     }
     
     public static TileEntity newMovingPieceEntity(final int block, final int data, final int facing, final boolean extending, final boolean isSourcePiston) {
-        return new PistonPieceEntity(block, data, facing, extending, isSourcePiston);
+        return new TileEntityPistonPiece(block, data, facing, extending, isSourcePiston);
     }
     
     @Override
     public AABB getAABB(final Level level, final int x, final int y, final int z) {
-        final PistonPieceEntity entity = this.getEntity(level, x, y, z);
+        final TileEntityPistonPiece entity = this.getEntity(level, x, y, z);
         if (entity == null) {
             return null;
         }
@@ -121,7 +121,7 @@ public class BlockPistonMovingPiece extends EntityBlock
     
     @Override
     public void updateShape(final LevelSource level, final int x, final int y, final int z) {
-        final PistonPieceEntity entity = this.getEntity(level, x, y, z);
+        final TileEntityPistonPiece entity = this.getEntity(level, x, y, z);
         if (entity != null) {
             final Block block = Block.BLOCKS[entity.getId()];
             if (block == null || block == this) {
@@ -163,10 +163,10 @@ public class BlockPistonMovingPiece extends EntityBlock
         return aabb;
     }
     
-    private PistonPieceEntity getEntity(final LevelSource level, final int x, final int y, final int z) {
+    private TileEntityPistonPiece getEntity(final LevelSource level, final int x, final int y, final int z) {
         final TileEntity tileEntity = level.getTileEntity(x, y, z);
-        if (tileEntity != null && tileEntity instanceof PistonPieceEntity) {
-            return (PistonPieceEntity)tileEntity;
+        if (tileEntity != null && tileEntity instanceof TileEntityPistonPiece) {
+            return (TileEntityPistonPiece)tileEntity;
         }
         return null;
     }

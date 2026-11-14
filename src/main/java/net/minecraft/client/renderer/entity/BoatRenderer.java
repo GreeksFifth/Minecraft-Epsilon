@@ -5,21 +5,21 @@
 package net.minecraft.client.renderer.entity;
 
 import util.Mth;
-import net.minecraft.world.entity.item.Boat;
-import net.minecraft.client.model.BoatModel;
+import net.minecraft.world.entity.item.EntityBoat;
+import net.minecraft.client.model.ModelBoat;
 import net.minecraft.client.model.Model;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class BoatRenderer extends EntityRenderer<Boat>
+public class BoatRenderer extends EntityRenderer<EntityBoat>
 {
-    protected Model model = new BoatModel();
+    protected Model model = new ModelBoat();
     
     public BoatRenderer() {
         this.shadowRadius = 0.5f;
     }
     
-    public void render(final Boat boat, final double x, final double y, final double z, final float rot, final float a) {
+    public void render(final EntityBoat boat, final double x, final double y, final double z, final float rot, final float a) {
         glPushMatrix();
 
         glTranslatef((float)x, (float)y, (float)z);

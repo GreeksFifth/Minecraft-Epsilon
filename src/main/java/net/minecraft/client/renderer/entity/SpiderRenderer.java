@@ -4,23 +4,23 @@
 
 package net.minecraft.client.renderer.entity;
 
-import net.minecraft.world.entity.monster.Spider;
-import net.minecraft.client.model.SpiderModel;
+import net.minecraft.world.entity.monster.EntitySpider;
+import net.minecraft.client.model.ModelSpider;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class SpiderRenderer extends MobRenderer<Spider>
+public class SpiderRenderer extends MobRenderer<EntitySpider>
 {
     public SpiderRenderer() {
-        super(new SpiderModel(), 1.0f);
-        this.setArmor(new SpiderModel());
+        super(new ModelSpider(), 1.0f);
+        this.setArmor(new ModelSpider());
     }
     
-    protected float getFlipDegrees(final Spider spider) {
+    protected float getFlipDegrees(final EntitySpider spider) {
         return 180.0f;
     }
     
-    protected boolean prepareArmor(final Spider spider, final int layer, final float a) {
+    protected boolean prepareArmor(final EntitySpider spider, final int layer, final float a) {
         if (layer != 0) return false;
         this.bindTexture("/mob/spider_eyes.png");
 

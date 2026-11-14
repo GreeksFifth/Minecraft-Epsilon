@@ -9,10 +9,10 @@ import net.minecraft.stats.Stats;
 import net.minecraft.world.Container;
 import net.minecraft.locale.language.I18n;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.EntityMob;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 import java.util.Random;
 
 public class Item implements Descriptive<Item> {
@@ -63,7 +63,7 @@ public class Item implements Descriptive<Item> {
         return this.getIcon(itemInstance.getAuxValue());
     }
 
-    public boolean useOn(final ItemInstance itemInstance, final Player player, final Level level, final int x, final int y, final int z, final int face) {
+    public boolean useOn(final ItemInstance itemInstance, final EntityPlayer player, final Level level, final int x, final int y, final int z, final int face) {
         return false;
     }
 
@@ -71,7 +71,7 @@ public class Item implements Descriptive<Item> {
         return 1.0f;
     }
 
-    public ItemInstance use(final ItemInstance itemInstance, final Level level, final Player player) {
+    public ItemInstance use(final ItemInstance itemInstance, final Level level, final EntityPlayer player) {
         return itemInstance;
     }
 
@@ -114,7 +114,7 @@ public class Item implements Descriptive<Item> {
      * @param attacker
      * @return
      */
-    public boolean hurtEnemy(final ItemInstance itemInstance, final Mob mob, final Mob attacker) {
+    public boolean hurtEnemy(final ItemInstance itemInstance, final EntityMob mob, final EntityMob attacker) {
         return false;
     }
 
@@ -129,7 +129,7 @@ public class Item implements Descriptive<Item> {
      * @param owner
      * @return
      */
-    public boolean mineBlock(final ItemInstance itemInstance, final int tile, final int x, final int y, final int z, final Mob owner) {
+    public boolean mineBlock(final ItemInstance itemInstance, final int tile, final int x, final int y, final int z, final EntityMob owner) {
         return false;
     }
 
@@ -141,7 +141,7 @@ public class Item implements Descriptive<Item> {
         return false;
     }
 
-    public void interactEnemy(final ItemInstance itemInstance, final Mob mob) {
+    public void interactEnemy(final ItemInstance itemInstance, final EntityMob mob) {
     }
 
     public Item handEquipped() {
@@ -195,7 +195,7 @@ public class Item implements Descriptive<Item> {
     public void inventoryTick(final ItemInstance itemInstance, final Level level, final Entity owner, final int slot, final boolean selected) {
     }
 
-    public void onCraftedBy(final ItemInstance itemInstance, final Level level, final Player player) {
+    public void onCraftedBy(final ItemInstance itemInstance, final Level level, final EntityPlayer player) {
     }
 
     public boolean isComplex() {

@@ -5,7 +5,7 @@
 package net.minecraft.server.players;
 
 import net.minecraft.network.packet.SetTimePacket;
-import net.minecraft.world.level.block.entity.TileEntity;
+import net.minecraft.world.level.block.tileentity.TileEntity;
 import net.minecraft.network.packet.ChatPacket;
 
 import java.io.PrintWriter;
@@ -19,7 +19,7 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.GameEventPacket;
 import net.minecraft.server.level.ServerPlayerGameMode;
 import net.minecraft.server.network.PendingConnection;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
 import java.util.HashSet;
@@ -173,7 +173,7 @@ public class PlayerList
         final ServerLevel level = this.server.getLevel(serverPlayer.dimension);
 
         if (bedPosition != null) {
-            final Pos respawnPosition = Player.checkBedValidRespawnPosition(this.server.getLevel(serverPlayer.dimension), bedPosition);
+            final Pos respawnPosition = EntityPlayer.checkBedValidRespawnPosition(this.server.getLevel(serverPlayer.dimension), bedPosition);
             if (respawnPosition != null) {
                 player.moveTo(respawnPosition.x + 0.5f, respawnPosition.y + 0.1f, respawnPosition.z + 0.5f, 0.0f, 0.0f);
                 player.setRespawnPosition(bedPosition);
@@ -460,7 +460,7 @@ public class PlayerList
         this.broadcast(null, x, y, z, range, dimension, packet);
     }
     
-    public void broadcast(final Player except, final double x, final double y, final double z, final double range, final int dimension, final Packet packet) {
+    public void broadcast(final EntityPlayer except, final double x, final double y, final double z, final double range, final int dimension, final Packet packet) {
         for (int i = 0; i < this.players.size(); ++i) {
             final ServerPlayer p = this.players.get(i);
             if (p == except) continue;

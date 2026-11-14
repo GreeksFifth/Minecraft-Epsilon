@@ -4,14 +4,14 @@
 
 package net.minecraft.client.renderer;
 
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.EntityMob;
 import java.util.Comparator;
 
 public class DirtyChunkSorter implements Comparator<Chunk>
 {
-    private Mob player;
+    private EntityMob player;
     
-    public DirtyChunkSorter(final Mob player) {
+    public DirtyChunkSorter(final EntityMob player) {
         this.player = player;
     }
     

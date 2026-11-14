@@ -4,8 +4,8 @@
 
 package net.minecraft.world.level.biome;
 
-import net.minecraft.world.entity.monster.PigZombie;
-import net.minecraft.world.entity.monster.Ghast;
+import net.minecraft.world.entity.monster.EntityPigZombie;
+import net.minecraft.world.entity.monster.EntityGhast;
 
 public class HellBiome extends Biome
 {
@@ -14,7 +14,7 @@ public class HellBiome extends Biome
         this.friendlies.clear();
         this.waterFriendlies.clear();
 
-        this.enemies.add(new MobSpawnerData(Ghast.class, 10));
-        this.enemies.add(new MobSpawnerData(PigZombie.class, 10));
+        this.enemies.add(new MobSpawnerData(EntityGhast.class, 10));
+        this.enemies.add(new MobSpawnerData(EntityPigZombie.class, 10));
     }
 }

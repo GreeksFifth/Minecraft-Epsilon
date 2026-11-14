@@ -6,6 +6,8 @@ package net.minecraft.world.level;
 
 import java.util.List;
 import java.util.ArrayList;
+
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.level.block.Block;
@@ -23,7 +25,7 @@ public class Explosion
     public double x, y, z;
     public Entity source;
     public float r;
-    public Set<TilePos> toBlow = new HashSet<>();
+    public Set<BlockPos> toBlow = new HashSet<>();
     
     public Explosion(final Level level, final Entity source, final double x, final double y, final double z, final float r) {
         this.level = level;
@@ -67,7 +69,7 @@ public class Explosion
                             remainingPower -= (Block.BLOCKS[t].getExplosionResistance(this.source) + 0.3f) * stepSize;
                         }
                         if (remainingPower > 0.0f) {
-                            this.toBlow.add(new TilePos(xt, yt, zt));
+                            this.toBlow.add(new BlockPos(xt, yt, zt));
                         }
 
                         xp += xd * stepSize;
@@ -117,19 +119,19 @@ public class Explosion
             }
         }
         this.r = oR;
-        final ArrayList<TilePos> toBlowArray = new ArrayList<>();
+        final ArrayList<BlockPos> toBlowArray = new ArrayList<>();
         toBlowArray.addAll(this.toBlow);
 
         if (this.fire) {
             for (int j = toBlowArray.size() - 1; j >= 0; --j) {
-                final TilePos tp = toBlowArray.get(j);
+                final BlockPos tp = toBlowArray.get(j);
                 final int xt = tp.x;
                 final int yt = tp.y;
                 final int zt = tp.z;
                 final int t = this.level.getTile(xt, yt, zt);
                 final int b = this.level.getTile(xt, yt - 1, zt);
                 if (t == 0 && Block.solid[b] && this.random.nextInt(3) == 0) {
-                    this.level.setTile(xt, yt, zt, Block.fire.id);
+                    this.level.setTile(xt, yt, zt, Blocks.fire.id);
                 }
             }
         }
@@ -138,10 +140,10 @@ public class Explosion
     public void finalizeExplosion(final boolean generateParticles) {
         this.level.playSound(this.x, this.y, this.z, "random.explode", 4.0f, (1.0f + (this.level.random.nextFloat() - this.level.random.nextFloat()) * 0.2f) * 0.7f);
 
-        final ArrayList<TilePos> toBlowArray = new ArrayList<>();
+        final ArrayList<BlockPos> toBlowArray = new ArrayList<>();
         toBlowArray.addAll(this.toBlow);
         for (int j = toBlowArray.size() - 1; j >= 0; --j) {
-            final TilePos tp = toBlowArray.get(j);
+            final BlockPos tp = toBlowArray.get(j);
             final int xt = tp.x;
             final int yt = tp.y;
             final int zt = tp.z;

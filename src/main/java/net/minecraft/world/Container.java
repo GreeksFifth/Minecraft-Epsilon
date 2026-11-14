@@ -4,7 +4,7 @@
 
 package net.minecraft.world;
 
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 import net.minecraft.world.item.ItemInstance;
 
 public interface Container
@@ -24,5 +24,5 @@ public interface Container
     
     void setChanged();
     
-    boolean stillValid(final Player player);
+    boolean stillValid(final EntityPlayer player);
 }

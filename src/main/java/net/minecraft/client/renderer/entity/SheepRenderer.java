@@ -4,24 +4,24 @@
 
 package net.minecraft.client.renderer.entity;
 
-import net.minecraft.world.entity.animal.Sheep;
+import net.minecraft.world.entity.animal.EntitySheep;
 import net.minecraft.client.model.Model;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class SheepRenderer extends MobRenderer<Sheep>
+public class SheepRenderer extends MobRenderer<EntitySheep>
 {
     public SheepRenderer(final Model model, final Model armor, final float shadow) {
         super(model, shadow);
         this.setArmor(armor);
     }
     
-    protected boolean prepareArmor(final Sheep sheep, final int layer, final float a) {
+    protected boolean prepareArmor(final EntitySheep sheep, final int layer, final float a) {
         if (layer == 0 && !sheep.isSheared()) {
             this.bindTexture("/mob/sheep_fur.png");
             final float brightness = sheep.getBrightness(a);
             final int color = sheep.getColor();
-            glColor3f(brightness * Sheep.COLOR[color][0], brightness * Sheep.COLOR[color][1], brightness * Sheep.COLOR[color][2]);
+            glColor3f(brightness * EntitySheep.COLOR[color][0], brightness * EntitySheep.COLOR[color][1], brightness * EntitySheep.COLOR[color][2]);
             return true;
         }
         return false;

@@ -5,16 +5,17 @@
 package net.minecraft.world.entity;
 
 import net.minecraft.SharedConstants;
-import net.minecraft.world.entity.global.LightningBolt;
+import net.minecraft.world.entity.global.EntityLightningBolt;
 import net.minecraft.world.item.ItemInstance;
-import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.item.EntityItem;
 import com.mojang.nbt.ListTag;
 import com.mojang.nbt.FloatTag;
 import com.mojang.nbt.DoubleTag;
 import com.mojang.nbt.CompoundTag;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.block.BlockLogicFluid;
+import net.minecraft.world.entity.player.EntityPlayer;
+import net.minecraft.world.level.block.BlockFluid;
 import net.minecraft.world.level.material.Material;
 
 import java.util.List;
@@ -416,7 +417,7 @@ public abstract class Entity
             final int yt = Mth.floor(this.y - 0.2f - this.heightOffset);
             final int zt = Mth.floor(this.z);
             int t = this.level.getTile(xt, yt, zt);
-            if (this.level.getTile(xt, yt - 1, zt) == Block.fence.id) {
+            if (this.level.getTile(xt, yt - 1, zt) == Blocks.fence.id) {
                 t = this.level.getTile(xt, yt - 1, zt);
             }
 
@@ -424,8 +425,8 @@ public abstract class Entity
                 this.nextStep++;
 
                 Block.SoundType soundType = Block.BLOCKS[t].soundType;
-                if (this.level.getTile(xt, yt + 1, zt) == Block.topSnow.id) {
-                    soundType = Block.topSnow.soundType;
+                if (this.level.getTile(xt, yt + 1, zt) == Blocks.topSnow.id) {
+                    soundType = Blocks.topSnow.soundType;
                     this.level.playSound(this, soundType.getStepSound(), soundType.getVolume() * 0.15f, soundType.getPitch());
                 }
                 else if (!Block.BLOCKS[t].material.isLiquid()) {
@@ -525,7 +526,7 @@ public abstract class Entity
         final int zt = Mth.floor(this.z);
         final int t = this.level.getTile(xt, yt, zt);
         if (t != 0 && Block.BLOCKS[t].material == material) {
-            float hh = BlockLogicFluid.getHeight(this.level.getData(xt, yt, zt)) - 1 / 9.0f;
+            float hh = BlockFluid.getHeight(this.level.getData(xt, yt, zt)) - 1 / 9.0f;
             float h = yt + 1 - hh;
             return yp < h;
         }
@@ -625,7 +626,7 @@ public abstract class Entity
         return xd * xd + yd * yd + zd * zd;
     }
     
-    public void playerTouch(final Player player) {
+    public void playerTouch(final EntityPlayer player) {
     }
     
     public void push(final Entity e) {
@@ -792,16 +793,16 @@ public abstract class Entity
         return this.bbHeight / 2.0f;
     }
     
-    public ItemEntity spawnAtLocation(final int resource, final int count) {
+    public EntityItem spawnAtLocation(final int resource, final int count) {
         return this.spawnAtLocation(resource, count, 0.0f);
     }
     
-    public ItemEntity spawnAtLocation(final int resource, final int count, final float yOffs) {
+    public EntityItem spawnAtLocation(final int resource, final int count, final float yOffs) {
         return this.spawnAtLocation(new ItemInstance(resource, count, 0), yOffs);
     }
     
-    public ItemEntity spawnAtLocation(final ItemInstance itemInstance, final float yOffs) {
-        final ItemEntity e = new ItemEntity(this.level, this.x, this.y + yOffs, this.z, itemInstance);
+    public EntityItem spawnAtLocation(final ItemInstance itemInstance, final float yOffs) {
+        final EntityItem e = new EntityItem(this.level, this.x, this.y + yOffs, this.z, itemInstance);
         e.throwTime = 10;
         this.level.addEntity(e);
         return e;
@@ -826,7 +827,7 @@ public abstract class Entity
         return false;
     }
     
-    public boolean interact(final Player player) {
+    public boolean interact(final EntityPlayer player) {
         return false;
     }
     
@@ -997,7 +998,7 @@ public abstract class Entity
         }
     }
     
-    public void thunderHit(final LightningBolt lightningBolt) {
+    public void thunderHit(final EntityLightningBolt lightningBolt) {
         this.burn(5);
         this.onFire++;
         if (this.onFire == 0) {
@@ -1005,7 +1006,7 @@ public abstract class Entity
         }
     }
     
-    public void killed(final Mob mob) {
+    public void killed(final EntityMob mob) {
     }
     
     protected boolean checkInTile(final double x, final double y, final double z) {

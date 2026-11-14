@@ -8,7 +8,7 @@ import java.io.DataOutputStream;
 import java.io.DataInputStream;
 import util.Mth;
 import net.minecraft.world.entity.EntityIO;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.EntityMob;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,7 +26,7 @@ public class AddMobPacket extends Packet
     public AddMobPacket() {
     }
     
-    public AddMobPacket(final Mob mob) {
+    public AddMobPacket(final EntityMob mob) {
         this.id = mob.entityId;
 
         this.type = (byte)EntityIO.getId(mob);

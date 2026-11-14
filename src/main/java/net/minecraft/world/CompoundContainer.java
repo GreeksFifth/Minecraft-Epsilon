@@ -4,7 +4,7 @@
 
 package net.minecraft.world;
 
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 import net.minecraft.world.item.ItemInstance;
 
 public class CompoundContainer implements Container
@@ -50,7 +50,7 @@ public class CompoundContainer implements Container
         this.c2.setChanged();
     }
     
-    public boolean stillValid(final Player player) {
+    public boolean stillValid(final EntityPlayer player) {
         return this.c1.stillValid(player) && this.c2.stillValid(player);
     }
 }

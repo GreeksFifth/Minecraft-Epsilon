@@ -4,6 +4,7 @@
 
 package net.minecraft.world.level.levelgen.feature;
 
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.Block;
@@ -86,8 +87,8 @@ public class LakeFeature extends Feature
             for (int zz = 0; zz < 16; ++zz) {
                 for (int yy = 4; yy < 8; ++yy) {
                     if (grid[(xx * 16 + zz) * 8 + yy]) {
-                        if (level.getTile(x + xx, y + yy - 1, z + zz) == Block.dirt.id && level.getBrightness(LightLayer.Sky, x + xx, y + yy, z + zz) > 0) {
-                            level.setTileNoUpdate(x + xx, y + yy - 1, z + zz, Block.grass.id);
+                        if (level.getTile(x + xx, y + yy - 1, z + zz) == Blocks.dirt.id && level.getBrightness(LightLayer.Sky, x + xx, y + yy, z + zz) > 0) {
+                            level.setTileNoUpdate(x + xx, y + yy - 1, z + zz, Blocks.grass.id);
                         }
                     }
                 }
@@ -108,7 +109,7 @@ public class LakeFeature extends Feature
 
                         if (check) {
                             if ((yy < 4 || random.nextInt(2) != 0) && level.getMaterial(x + xx, y + yy, z + zz).isSolid()) {
-                                level.setTileNoUpdate(x + xx, y + yy, z + zz, Block.rock.id);
+                                level.setTileNoUpdate(x + xx, y + yy, z + zz, Blocks.rock.id);
                             }
                         }
                     }

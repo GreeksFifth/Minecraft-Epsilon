@@ -14,32 +14,32 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemInstance;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.world.item.ItemArmor;
+import net.minecraft.world.entity.player.EntityPlayer;
+import net.minecraft.client.model.ModelHumanoid;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class PlayerRenderer extends MobRenderer<Player>
+public class PlayerRenderer extends MobRenderer<EntityPlayer>
 {
-    private final HumanoidModel humanoidModel = (HumanoidModel)this.model;
-    private final HumanoidModel armorParts1 = new HumanoidModel(1.0f);
-    private final HumanoidModel armorParts2 = new HumanoidModel(0.5f);
+    private final ModelHumanoid humanoidModel = (ModelHumanoid)this.model;
+    private final ModelHumanoid armorParts1 = new ModelHumanoid(1.0f);
+    private final ModelHumanoid armorParts2 = new ModelHumanoid(0.5f);
     private static final String[] MATERIAL_NAMES = new String[] { "cloth", "chain", "iron", "diamond", "gold" };
     
     public PlayerRenderer() {
-        super(new HumanoidModel(0.0f), 0.5f);
+        super(new ModelHumanoid(0.0f), 0.5f);
     }
     
-    protected boolean prepareArmor(final Player player, final int layer, final float a) {
+    protected boolean prepareArmor(final EntityPlayer player, final int layer, final float a) {
         final ItemInstance itemInstance = player.inventory.getArmor(3 - layer);
         if (itemInstance != null) {
             final Item item = itemInstance.getItem();
-            if (item instanceof ArmorItem) {
-                ArmorItem armorItem = (ArmorItem)item;
+            if (item instanceof ItemArmor) {
+                ItemArmor armorItem = (ItemArmor)item;
                 this.bindTexture("/armor/" + PlayerRenderer.MATERIAL_NAMES[armorItem.materialIcon] + "_" + ((layer == 2) ? 2 : 1) + ".png");
 
-                final HumanoidModel armor2 = (layer == 2) ? this.armorParts2 : this.armorParts1;
+                final ModelHumanoid armor2 = (layer == 2) ? this.armorParts2 : this.armorParts1;
 
                 armor2.head.visible = layer == 0;
                 armor2.hair.visible = layer == 0;
@@ -56,7 +56,7 @@ public class PlayerRenderer extends MobRenderer<Player>
         return false;
     }
     
-    public void render(final Player player, final double x, final double y, final double z, final float rot, final float a) {
+    public void render(final EntityPlayer player, final double x, final double y, final double z, final float rot, final float a) {
         final ItemInstance item = player.inventory.getSelected();
 
         this.armorParts1.holdingRightHand = this.armorParts2.holdingRightHand = this.humanoidModel.holdingRightHand = (((item != null) ? 1 : 0) != 0);
@@ -73,7 +73,7 @@ public class PlayerRenderer extends MobRenderer<Player>
         this.armorParts1.holdingRightHand = this.armorParts2.holdingRightHand = this.humanoidModel.holdingRightHand = false;
     }
     
-    protected void renderName(final Player player, final double x, final double y, final double z) {
+    protected void renderName(final EntityPlayer player, final double x, final double y, final double z) {
         if (Minecraft.renderNames() && player != this.entityRenderDispatcher.player) {
             float size = 1.6f;
             float s = 1 / 60.0f * size;
@@ -131,7 +131,7 @@ public class PlayerRenderer extends MobRenderer<Player>
     }
 
     @Override
-    protected void additionalRendering(final Player player, final float a) {
+    protected void additionalRendering(final EntityPlayer player, final float a) {
         final ItemInstance headGear = player.inventory.getArmor(3);
         if (headGear != null) {
             if (headGear.getItem().id < Block.TILE_NUM_COUNT) {
@@ -245,7 +245,7 @@ public class PlayerRenderer extends MobRenderer<Player>
     }
 
     @Override
-    protected void scale(final Player player, final float a) {
+    protected void scale(final EntityPlayer player, final float a) {
         final float s = 15 / 16.0f;
         glScalef(s, s, s);
     }
@@ -256,7 +256,7 @@ public class PlayerRenderer extends MobRenderer<Player>
         this.humanoidModel.arm0.render(1 / 16.0f);
     }
     
-    protected void setupPosition(final Player player, final double x, final double y, final double z) {
+    protected void setupPosition(final EntityPlayer player, final double x, final double y, final double z) {
         if (player.isAlive() && player.isSleeping()) {
             super.setupPosition(player, x + player.bedOffsetX, y + player.bedOffsetY, z + player.bedOffsetZ);
         }
@@ -265,7 +265,7 @@ public class PlayerRenderer extends MobRenderer<Player>
         }
     }
     
-    protected void setupRotations(final Player player, final float bob, final float bodyRot, final float a) {
+    protected void setupRotations(final EntityPlayer player, final float bob, final float bodyRot, final float a) {
         if (player.isAlive() && player.isSleeping()) {
             glRotatef(player.getSleepRotation(), 0.0f, 1.0f, 0.0f);
             glRotatef(this.getFlipDegrees(player), 0.0f, 0.0f, 1.0f);

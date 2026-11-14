@@ -4,7 +4,7 @@
 
 package net.minecraft.client.renderer.ptexture;
 
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 public class WaterTexture extends DynamicTexture
 {
@@ -15,7 +15,7 @@ public class WaterTexture extends DynamicTexture
     private int tickCount = 0;
     
     public WaterTexture() {
-        super(Block.water.tex);
+        super(Blocks.water.tex);
     }
     
     @Override

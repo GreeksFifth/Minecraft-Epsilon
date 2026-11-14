@@ -4,11 +4,12 @@
 
 package net.minecraft.world.level.levelgen.feature;
 
-import net.minecraft.world.level.block.BlockLogicLeaves;
+import net.minecraft.world.level.block.BlockLeaves;
 import net.minecraft.world.level.block.Block;
 import java.util.Random;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BlockLogicLog;
+import net.minecraft.world.level.block.BlockLog;
+import net.minecraft.world.level.block.Blocks;
 
 public class BirchFeature extends Feature
 {
@@ -28,7 +29,7 @@ public class BirchFeature extends Feature
                 for (int zz = z - r; zz <= z + r && free; ++zz) {
                     if (yy >= 0 && yy < Level.MAX_HEIGHT) {
                         final int tt = level.getTile(xx, yy, zz);
-                        if (tt != 0 && tt != Block.leaves.id) free = false;
+                        if (tt != 0 && tt != Blocks.leaves.id) free = false;
                     }
                     else {
                         free = false;
@@ -40,9 +41,9 @@ public class BirchFeature extends Feature
         if (!free) return false;
 
         final int belowTile = level.getTile(x, y - 1, z);
-        if ((belowTile != Block.grass.id && belowTile != Block.dirt.id) || y >= Level.MAX_HEIGHT - treeHeight - 1) return false;
+        if ((belowTile != Blocks.grass.id && belowTile != Blocks.dirt.id) || y >= Level.MAX_HEIGHT - treeHeight - 1) return false;
 
-        level.setTileNoUpdate(x, y - 1, z, Block.dirt.id);
+        level.setTileNoUpdate(x, y - 1, z, Blocks.dirt.id);
         for (int yy = y - 3 + treeHeight; yy <= y + treeHeight; ++yy) {
             final int yo = yy - (y + treeHeight);
             final int offs = 1 - yo / 2;
@@ -51,14 +52,14 @@ public class BirchFeature extends Feature
                 for (int zz = z - offs; zz <= z + offs; ++zz) {
                     final int zo = zz - z;
                     if (Math.abs(xo) == offs && Math.abs(zo) == offs && (random.nextInt(2) == 0 || yo == 0)) continue;
-                    if (!Block.solid[level.getTile(xx, yy, zz)]) level.setTileAndDataNoUpdate(xx, yy, zz, Block.leaves.id, BlockLogicLeaves.BIRCH_LEAF);
+                    if (!Block.solid[level.getTile(xx, yy, zz)]) level.setTileAndDataNoUpdate(xx, yy, zz, Blocks.leaves.id, BlockLeaves.BIRCH_LEAF);
                 }
             }
         }
 
         for (int hh = 0; hh < treeHeight; ++hh) {
             final int t = level.getTile(x, y + hh, z);
-            if (t == 0 || t == Block.leaves.id) level.setTileAndDataNoUpdate(x, y + hh, z, Block.treeTrunk.id, BlockLogicLog.BIRCH_TRUNK);
+            if (t == 0 || t == Blocks.leaves.id) level.setTileAndDataNoUpdate(x, y + hh, z, Blocks.treeTrunk.id, BlockLog.BIRCH_TRUNK);
         }
         return true;
     }

@@ -4,7 +4,7 @@
 
 package net.minecraft.network.packet;
 
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 
 import java.io.DataOutputStream;
 import java.io.DataInputStream;
@@ -35,7 +35,7 @@ public class LoginPacket extends Packet
     @Override
     public void read(final DataInputStream dis) throws IOException {
         this.clientVersion = dis.readInt();
-        this.userName = Packet.readUTF(dis, Player.MAX_NAME_LENGTH);
+        this.userName = Packet.readUTF(dis, EntityPlayer.MAX_NAME_LENGTH);
         this.seed = dis.readLong();
         this.dimension = dis.readByte();
     }

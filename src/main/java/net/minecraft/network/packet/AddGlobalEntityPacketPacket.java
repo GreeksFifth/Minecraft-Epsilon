@@ -8,7 +8,7 @@ import java.io.DataOutputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-import net.minecraft.world.entity.global.LightningBolt;
+import net.minecraft.world.entity.global.EntityLightningBolt;
 import util.Mth;
 import net.minecraft.world.entity.Entity;
 
@@ -28,7 +28,7 @@ public class AddGlobalEntityPacketPacket extends Packet
         this.x = Mth.floor(entity.x * 32.0);
         this.y = Mth.floor(entity.y * 32.0);
         this.z = Mth.floor(entity.z * 32.0);
-        if (entity instanceof LightningBolt) {
+        if (entity instanceof EntityLightningBolt) {
             this.type = 1;
         }
     }

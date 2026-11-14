@@ -7,14 +7,14 @@ package net.minecraft.client.renderer.entity;
 import net.minecraft.world.phys.Vec3;
 import util.Mth;
 import net.minecraft.client.renderer.Tesselator;
-import net.minecraft.world.entity.projectile.FishingHook;
+import net.minecraft.world.entity.projectile.EntityProjectileFishingHook;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL12.*;
 
-public class FishingHookRenderer extends EntityRenderer<FishingHook>
+public class FishingHookRenderer extends EntityRenderer<EntityProjectileFishingHook>
 {
-    public void render(final FishingHook fishingHook, final double x, final double y, final double z, final float rot, final float a) {
+    public void render(final EntityProjectileFishingHook fishingHook, final double x, final double y, final double z, final float rot, final float a) {
         glPushMatrix();
 
         glTranslatef((float)x, (float)y, (float)z);

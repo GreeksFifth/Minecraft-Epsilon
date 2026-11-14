@@ -4,19 +4,20 @@
 
 package net.minecraft.world.item.crafting;
 
-import net.minecraft.world.item.DyePowderItem;
+import net.minecraft.world.item.ItemDyePowder;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 public class OreRecipes
 {
     private Object[][] map = new Object[][]
             {
-                    { Block.goldBlock, new ItemInstance(Items.goldIngot, 9) },
-                    { Block.ironBlock, new ItemInstance(Items.ironIngot, 9) },
-                    { Block.diamondBlock, new ItemInstance(Items.diamond, 9) },
-                    { Block.lapisBlock, new ItemInstance(Items.dye_powder, 9, DyePowderItem.BLUE) }
+                    { Blocks.goldBlock, new ItemInstance(Items.goldIngot, 9) },
+                    { Blocks.ironBlock, new ItemInstance(Items.ironIngot, 9) },
+                    { Blocks.diamondBlock, new ItemInstance(Items.diamond, 9) },
+                    { Blocks.lapisBlock, new ItemInstance(Items.dye_powder, 9, ItemDyePowder.BLUE) }
             };
     
     public void addRecipes(final Recipes recipes) {

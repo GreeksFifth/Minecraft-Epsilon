@@ -10,7 +10,7 @@ import java.io.IOException;
 
 import net.minecraft.world.item.ItemInstance;
 import util.Mth;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 
 public class AddPlayerPacket extends Packet
 {
@@ -23,7 +23,7 @@ public class AddPlayerPacket extends Packet
     public AddPlayerPacket() {
     }
     
-    public AddPlayerPacket(final Player player) {
+    public AddPlayerPacket(final EntityPlayer player) {
         this.id = player.entityId;
         this.name = player.name;
 
@@ -41,7 +41,7 @@ public class AddPlayerPacket extends Packet
     @Override
     public void read(final DataInputStream dis) throws IOException {
         this.id = dis.readInt();
-        this.name = Packet.readUTF(dis, Player.MAX_NAME_LENGTH);
+        this.name = Packet.readUTF(dis, EntityPlayer.MAX_NAME_LENGTH);
         this.x = dis.readInt();
         this.y = dis.readInt();
         this.z = dis.readInt();

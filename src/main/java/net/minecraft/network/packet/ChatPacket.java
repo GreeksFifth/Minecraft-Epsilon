@@ -5,7 +5,7 @@
 package net.minecraft.network.packet;
 
 import net.minecraft.SharedConstants;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 
 import java.io.DataOutputStream;
 import java.io.DataInputStream;
@@ -14,7 +14,7 @@ import java.io.IOException;
 public class ChatPacket extends Packet
 {
     // longest allowed string is "<" + name + "> " + message
-    public static final int MAX_LENGTH = SharedConstants.maxChatLength + Player.MAX_NAME_LENGTH + 3;
+    public static final int MAX_LENGTH = SharedConstants.maxChatLength + EntityPlayer.MAX_NAME_LENGTH + 3;
     public String message;
     
     public ChatPacket() {

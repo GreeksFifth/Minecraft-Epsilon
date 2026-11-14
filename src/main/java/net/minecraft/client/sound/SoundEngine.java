@@ -5,7 +5,7 @@
 package net.minecraft.client.sound;
 
 import util.Mth;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.EntityMob;
 import java.io.File;
 import paulscode.sound.codecs.CodecWav;
 import paulscode.sound.codecs.CodecJOrbis;
@@ -112,7 +112,7 @@ public class SoundEngine
         SoundEngine.soundSystem.play("BgMusic");
     }
     
-    public void update(final Mob player, final float a) {
+    public void update(final EntityMob player, final float a) {
         if (!SoundEngine.loaded || this.options.sound == 0.0f) return;
         if (player == null) return;
 

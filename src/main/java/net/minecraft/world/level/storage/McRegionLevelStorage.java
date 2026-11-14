@@ -6,7 +6,7 @@ package net.minecraft.world.level.storage;
 
 import java.util.List;
 
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 import net.minecraft.world.level.LevelData;
 import net.minecraft.world.level.chunk.storage.McRegionChunkStorage;
 import net.minecraft.world.level.dimension.HellDimension;
@@ -33,7 +33,7 @@ public class McRegionLevelStorage extends DirectoryLevelStorage
     }
     
     @Override
-    public void saveLevelData(final LevelData levelData, final List<Player> players) {
+    public void saveLevelData(final LevelData levelData, final List<EntityPlayer> players) {
         levelData.setVersion(MCREGION_VERSION_ID);
         super.saveLevelData(levelData, players);
     }

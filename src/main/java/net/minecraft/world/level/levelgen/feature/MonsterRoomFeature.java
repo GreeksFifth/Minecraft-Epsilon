@@ -4,14 +4,15 @@
 
 package net.minecraft.world.level.levelgen.feature;
 
-import net.minecraft.world.item.DyePowderItem;
+import net.minecraft.world.item.ItemDyePowder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.block.entity.MobSpawnerTileEntity;
-import net.minecraft.world.level.block.entity.ChestTileEntity;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.tileentity.TileEntityMobSpawner;
+import net.minecraft.world.level.block.tileentity.TileEntityChest;
+
 import java.util.Random;
 import net.minecraft.world.level.Level;
 
@@ -51,10 +52,10 @@ public class MonsterRoomFeature extends Feature
                         }
                         else if (level.getMaterial(xx, yy, zz).isSolid()) {
                             if (yy == y - 1 && random.nextInt(4) != 0) {
-                                level.setTile(xx, yy, zz, Block.mossStone.id);
+                                level.setTile(xx, yy, zz, Blocks.mossStone.id);
                             }
                             else {
-                                level.setTile(xx, yy, zz, Block.stoneBrick.id);
+                                level.setTile(xx, yy, zz, Blocks.stoneBrick.id);
                             }
                         }
                     }
@@ -80,8 +81,8 @@ public class MonsterRoomFeature extends Feature
 
                 if (count != 1) continue;
 
-                level.setTile(xc, yc, zc, Block.chest.id);
-                final ChestTileEntity chest = (ChestTileEntity)level.getTileEntity(xc, yc, zc);
+                level.setTile(xc, yc, zc, Blocks.chest.id);
+                final TileEntityChest chest = (TileEntityChest)level.getTileEntity(xc, yc, zc);
                 for (int j = 0; j < 8; ++j) {
                     final ItemInstance item = this.randomItem(random);
                     if (item != null) chest.setItem(random.nextInt(chest.getContainerSize()), item);
@@ -90,8 +91,8 @@ public class MonsterRoomFeature extends Feature
                 break;
             }
         }
-        level.setTile(x, y, z, Block.mobSpawner.id);
-        MobSpawnerTileEntity entity = ((MobSpawnerTileEntity)level.getTileEntity(x, y, z));
+        level.setTile(x, y, z, Blocks.mobSpawner.id);
+        TileEntityMobSpawner entity = ((TileEntityMobSpawner)level.getTileEntity(x, y, z));
         entity.setEntityId(this.randomEntityId(random));
         return true;
     }
@@ -108,7 +109,7 @@ public class MonsterRoomFeature extends Feature
         if (type == 7 && random.nextInt(100) == 0) return new ItemInstance(Items.apple_gold);
         if (type == 8 && random.nextInt(2) == 0) return new ItemInstance(Items.redStone, random.nextInt(4) + 1);
         if (type == 9 && random.nextInt(10) == 0) return new ItemInstance(Item.items[Items.record_01.id + random.nextInt(2)]);
-        if (type == 10) return new ItemInstance(Items.dye_powder, 1, DyePowderItem.BROWN);
+        if (type == 10) return new ItemInstance(Items.dye_powder, 1, ItemDyePowder.BROWN);
 
         return null;
     }

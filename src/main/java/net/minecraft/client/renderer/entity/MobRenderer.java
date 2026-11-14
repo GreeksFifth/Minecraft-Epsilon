@@ -8,13 +8,13 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.Tesselator;
 import net.minecraft.client.Minecraft;
 import util.Mth;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.EntityMob;
 import net.minecraft.client.model.Model;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL12.*;
 
-public class MobRenderer<T extends Mob> extends EntityRenderer<T>
+public class MobRenderer<T extends EntityMob> extends EntityRenderer<T>
 {
     private static final int MAX_ARMOR_LAYER = 4;
 

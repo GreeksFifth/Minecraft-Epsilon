@@ -5,7 +5,7 @@
 package net.minecraft.world.inventory;
 
 import net.minecraft.world.item.ItemInstance;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 import net.minecraft.world.Container;
 
 public class ContainerMenu extends AbstractContainerMenu
@@ -35,7 +35,7 @@ public class ContainerMenu extends AbstractContainerMenu
     }
     
     @Override
-    public boolean stillValid(final Player player) {
+    public boolean stillValid(final EntityPlayer player) {
         return this.container.stillValid(player);
     }
     

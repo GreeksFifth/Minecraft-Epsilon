@@ -4,25 +4,25 @@
 
 package net.minecraft.client.renderer.entity;
 
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.client.renderer.TileRenderer;
 import util.Mth;
-import net.minecraft.world.entity.item.Minecart;
-import net.minecraft.client.model.MinecartModel;
+import net.minecraft.world.entity.item.EntityMinecart;
+import net.minecraft.client.model.ModelMinecart;
 import net.minecraft.client.model.Model;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class MinecartRenderer extends EntityRenderer<Minecart>
+public class MinecartRenderer extends EntityRenderer<EntityMinecart>
 {
-    protected Model model = new MinecartModel();
+    protected Model model = new ModelMinecart();
     
     public MinecartRenderer() {
         this.shadowRadius = 0.5f;
     }
     
-    public void render(final Minecart minecart, double x, double y, double z, float rot, final float a) {
+    public void render(final EntityMinecart minecart, double x, double y, double z, float rot, final float a) {
         glPushMatrix();
 
         final double xx = minecart.xOld + (minecart.x - minecart.xOld) * a;
@@ -65,7 +65,7 @@ public class MinecartRenderer extends EntityRenderer<Minecart>
             glRotatef(Mth.sin(hurt) * hurt * dmg / 10.0f * minecart.hurtDir, 1.0f, 0.0f, 0.0f);
         }
 
-        if (minecart.type != Minecart.RIDEABLE) {
+        if (minecart.type != EntityMinecart.RIDEABLE) {
             this.bindTexture("/terrain.png");
             final float ss = 12 / 16.0f;
             glScalef(ss, ss, ss);
@@ -73,11 +73,11 @@ public class MinecartRenderer extends EntityRenderer<Minecart>
             glTranslatef(0.0f, 5.0f / 16.0f, 0.0f);
             glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
 
-            if (minecart.type == Minecart.CHEST) {
-                new TileRenderer().renderTile(Block.chest, 0, minecart.getBrightness(a));
+            if (minecart.type == EntityMinecart.CHEST) {
+                new TileRenderer().renderTile(Blocks.chest, 0, minecart.getBrightness(a));
             }
-            else if (minecart.type == Minecart.FURNACE) {
-                new TileRenderer().renderTile(Block.furnace, 0, minecart.getBrightness(a));
+            else if (minecart.type == EntityMinecart.FURNACE) {
+                new TileRenderer().renderTile(Blocks.furnace, 0, minecart.getBrightness(a));
             }
             glRotatef(-90.0f, 0.0f, 1.0f, 0.0f);
             glTranslatef(0.0f, -5.0f / 16.0f, 0.0f);

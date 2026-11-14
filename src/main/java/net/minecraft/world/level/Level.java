@@ -7,15 +7,16 @@ package net.minecraft.world.level;
 import net.minecraft.SharedConstants;
 import net.minecraft.client.level.ServerChunkCache;
 import net.minecraft.world.Difficulty;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.Pos;
 import net.minecraft.world.level.pathfinder.PathFinder;
 import net.minecraft.world.level.pathfinder.Path;
-import net.minecraft.world.entity.global.LightningBolt;
-import net.minecraft.world.level.block.BlockLogicFluid;
+import net.minecraft.world.entity.global.EntityLightningBolt;
+import net.minecraft.world.level.block.BlockFluid;
 import java.util.Iterator;
-import net.minecraft.world.level.block.entity.TileEntity;
+import net.minecraft.world.level.block.tileentity.TileEntity;
 import java.util.Collection;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
@@ -28,7 +29,7 @@ import net.minecraft.world.entity.Entity;
 import util.Mth;
 import net.minecraft.world.level.chunk.ChunkCache;
 import com.mojang.nbt.CompoundTag;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 
 import java.util.HashSet;
 import net.minecraft.world.level.biome.BiomeSource;
@@ -64,7 +65,7 @@ public class Level implements LevelSource
     private Set<TickNextTickData> tickNextTickSet = new HashSet<>();
     public List<TileEntity> tileEntityList = new ArrayList<>();
     private List<TileEntity> pendingTileEntities = new ArrayList<>();
-    public List<Player> players = new ArrayList<>();
+    public List<EntityPlayer> players = new ArrayList<>();
     public List<Entity> globalEntities = new ArrayList<>();
     private long cloudColor = 0x00ffffffL;
     public int skyDarken = 0;
@@ -214,7 +215,7 @@ public class Level implements LevelSource
     public void clearLoadedPlayerData() {
     }
     
-    public void loadPlayer(final Player player) {
+    public void loadPlayer(final EntityPlayer player) {
         try {
             final CompoundTag playerTag = this.levelData.getLoadedPlayerTag();
             if (playerTag != null) {
@@ -462,7 +463,7 @@ public class Level implements LevelSource
 
         if (propagate) {
             final int id = this.getTile(x, y, z);
-            if (id == Block.stoneSlabHalf.id || id == Block.farmland.id || id == Block.stairs_stone.id || id == Block.stairs_wood.id) {
+            if (id == Blocks.stoneSlabHalf.id || id == Blocks.farmland.id || id == Blocks.stairs_stone.id || id == Blocks.stairs_wood.id) {
                 int br = this.getRawBrightness(x, y + 1, z, false);
                 final int br1 = this.getRawBrightness(x + 1, y, z, false);
                 final int br2 = this.getRawBrightness(x - 1, y, z, false);
@@ -725,13 +726,13 @@ public class Level implements LevelSource
         final int zc = Mth.floor(e.z / 16.0);
 
         boolean forced = false;
-        if (e instanceof Player) {
+        if (e instanceof EntityPlayer) {
             forced = true;
         }
 
         if (forced || this.hasChunk(xc, zc)) {
-            if (e instanceof Player) {
-                this.players.add((Player) e);
+            if (e instanceof EntityPlayer) {
+                this.players.add((EntityPlayer) e);
                 this.updateSleepingPlayerList();
             }
             this.getChunk(xc, zc).addEntity(e);
@@ -763,7 +764,7 @@ public class Level implements LevelSource
         }
         e.remove();
 
-        if (e instanceof Player) {
+        if (e instanceof EntityPlayer) {
             this.players.remove(e);
             this.updateSleepingPlayerList();
         }
@@ -772,7 +773,7 @@ public class Level implements LevelSource
     public void removeEntityImmediately(final Entity e) {
         e.remove();
 
-        if (e instanceof Player) {
+        if (e instanceof EntityPlayer) {
             this.players.remove(e);
             this.updateSleepingPlayerList();
         }
@@ -1252,7 +1253,7 @@ public class Level implements LevelSource
                 for (int y = y0; y < y1; ++y) {
                     for (int z = z0; z < z1; ++z) {
                         final int t = this.getTile(x, y, z);
-                        if (t == Block.fire.id || t == Block.lava.id || t == Block.calmLava.id) return true;
+                        if (t == Blocks.fire.id || t == Blocks.lava.id || t == Blocks.calmLava.id) return true;
                     }
                 }
             }
@@ -1281,7 +1282,7 @@ public class Level implements LevelSource
                 for (int z = z0; z < z1; ++z) {
                     final Block block = Block.BLOCKS[this.getTile(x, y, z)];
                     if (block != null && block.material == material) {
-                        double yt0 = (y + 1 - BlockLogicFluid.getHeight(this.getData(x, y, z)));
+                        double yt0 = (y + 1 - BlockFluid.getHeight(this.getData(x, y, z)));
                         if (y1 >= yt0) {
                             ok = true;
                             block.handleEntityInside(this, x, y, z, e, current);
@@ -1382,7 +1383,7 @@ public class Level implements LevelSource
         return hits / (float)count;
     }
     
-    public void extinguishFire(final Player player, int x, int y, int z, final int face) {
+    public void extinguishFire(final EntityPlayer player, int x, int y, int z, final int face) {
         if (face == 0) y--;
         if (face == 1) y++;
         if (face == 2) z--;
@@ -1390,7 +1391,7 @@ public class Level implements LevelSource
         if (face == 4) x--;
         if (face == 5) x++;
 
-        if (this.getTile(x, y, z) == Block.fire.id) {
+        if (this.getTile(x, y, z) == Blocks.fire.id) {
             this.levelEvent(player, LevelEvent.SOUND_FIZZ, x, y, z, 0);
             this.setTile(x, y, z, 0);
         }
@@ -1651,7 +1652,7 @@ public class Level implements LevelSource
     protected void tickTiles() {
         this.chunksToPoll.clear();
         for (int i = 0; i < this.players.size(); ++i) {
-            final Player player = this.players.get(i);
+            final EntityPlayer player = this.players.get(i);
             final int xx = Mth.floor(player.x / 16.0);
             final int zz = Mth.floor(player.z / 16.0);
 
@@ -1681,7 +1682,7 @@ public class Level implements LevelSource
                 x += xo;
                 z += zo;
                 if (id == 0 && this.getDaytimeRawBrightness(x, y, z) <= this.random.nextInt(8) && this.getBrightness(LightLayer.Sky, x, y, z) <= 0) {
-                    final Player player = this.getNearestPlayer(x + 0.5, y + 0.5, z + 0.5, 8.0);
+                    final EntityPlayer player = this.getNearestPlayer(x + 0.5, y + 0.5, z + 0.5, 8.0);
                     if (player != null && player.distanceToSqr(x + 0.5, y + 0.5, z + 0.5) > 4.0) {
                         this.playSound(x + 0.5, y + 0.5, z + 0.5, "ambient.cave.cave", 0.7f, 0.8f + this.random.nextFloat() * 0.2f);
                         this.delayUntilNextMoodSound = this.random.nextInt(SharedConstants.TICKS_PER_SECOND * 60 * 10) + SharedConstants.TICKS_PER_SECOND * 60 * 5;
@@ -1698,7 +1699,7 @@ public class Level implements LevelSource
                 final int y = this.getTopRainBlock(x, z);
 
                 if (this.isRainingAt(x, y, z)) {
-                    this.addGlobalEntity(new LightningBolt(this, x, y, z));
+                    this.addGlobalEntity(new EntityLightningBolt(this, x, y, z));
                     this.lightningTime = 2;
                 }
             }
@@ -1713,12 +1714,12 @@ public class Level implements LevelSource
                 if (cold) {
                     final int below = lc.getTile(x, yy - 1, z);
                     final int current = lc.getTile(x, yy, z);
-                    boolean shouldSnow = current == 0 && Block.topSnow.mayPlace(this, x + xo, yy, z + zo) && below != 0 && below != Block.ice.id && Block.BLOCKS[below].material.blocksMotion();
+                    boolean shouldSnow = current == 0 && Blocks.topSnow.mayPlace(this, x + xo, yy, z + zo) && below != 0 && below != Blocks.ice.id && Block.BLOCKS[below].material.blocksMotion();
                     if (this.isRaining() && shouldSnow) {
-                        this.setTile(x + xo, yy, z + zo, Block.topSnow.id);
+                        this.setTile(x + xo, yy, z + zo, Blocks.topSnow.id);
                     }
-                    if (below == Block.calmWater.id && lc.getData(x, yy - 1, z) == 0) {
-                        this.setTile(x + xo, yy - 1, z + zo, Block.ice.id);
+                    if (below == Blocks.calmWater.id && lc.getData(x, yy - 1, z) == 0) {
+                        this.setTile(x + xo, yy - 1, z + zo, Blocks.ice.id);
                     }
                 }
             }
@@ -1855,7 +1856,7 @@ public class Level implements LevelSource
         AABB aabb = block.getAABB(this, x, y, z);
         if (ignoreEntities) aabb = null;
         if (aabb != null && !this.isUnobstructed(aabb)) return false;
-        if (targetBlock == Block.water || targetBlock == Block.calmWater || targetBlock == Block.lava || targetBlock == Block.calmLava || targetBlock == Block.fire || targetBlock == Block.topSnow) targetBlock = null;
+        if (targetBlock == Blocks.water || targetBlock == Blocks.calmWater || targetBlock == Blocks.lava || targetBlock == Blocks.calmLava || targetBlock == Blocks.fire || targetBlock == Blocks.topSnow) targetBlock = null;
         if (tileId > 0 && targetBlock == null) {
             if (block.mayPlace(this, x, y, z, face)) {
                 return true;
@@ -1937,15 +1938,15 @@ public class Level implements LevelSource
         return false;
     }
     
-    public Player getNearestPlayer(final Entity source, final double maxDist) {
+    public EntityPlayer getNearestPlayer(final Entity source, final double maxDist) {
         return this.getNearestPlayer(source.x, source.y, source.z, maxDist);
     }
     
-    public Player getNearestPlayer(final double x, final double y, final double z, final double maxDist) {
+    public EntityPlayer getNearestPlayer(final double x, final double y, final double z, final double maxDist) {
         double best = -1.0;
-        Player result = null;
+        EntityPlayer result = null;
         for (int i = 0; i < this.players.size(); ++i) {
-            final Player p = this.players.get(i);
+            final EntityPlayer p = this.players.get(i);
             final double dist = p.distanceToSqr(x, y, z);
             if ((maxDist < 0.0 || dist < maxDist * maxDist) && (best == -1.0 || dist < best)) {
                 best = dist;
@@ -1955,7 +1956,7 @@ public class Level implements LevelSource
         return result;
     }
     
-    public Player getPlayerByName(final String name) {
+    public EntityPlayer getPlayerByName(final String name) {
         for (int i = 0; i < this.players.size(); ++i) {
             if (name.equals(this.players.get(i).name)) {
                 return this.players.get(i);
@@ -2072,7 +2073,7 @@ public class Level implements LevelSource
         }
     }
     
-    public boolean mayInteract(final Player player, final int xt, final int yt, final int zt) {
+    public boolean mayInteract(final EntityPlayer player, final int xt, final int yt, final int zt) {
         return true;
     }
     
@@ -2138,7 +2139,7 @@ public class Level implements LevelSource
     
     public void updateSleepingPlayerList() {
         this.allPlayersSleeping = !this.players.isEmpty();
-        for (Player player : this.players) {
+        for (EntityPlayer player : this.players) {
             if (!player.isSleeping()) {
                 this.allPlayersSleeping = false;
                 break;
@@ -2148,7 +2149,7 @@ public class Level implements LevelSource
     
     protected void awakenAllPlayers() {
         this.allPlayersSleeping = false;
-        for (final Player player : this.players) {
+        for (final EntityPlayer player : this.players) {
             if (player.isSleeping()) {
                 player.stopSleepInBed(false, false, true);
             }
@@ -2160,7 +2161,7 @@ public class Level implements LevelSource
     public boolean allPlayersAreSleeping() {
         if (this.allPlayersSleeping && !this.isClientSide) {
             // all players are sleeping, but have they slept long enough?
-            for (Player player : this.players) {
+            for (EntityPlayer player : this.players) {
 //                System.out.println(player.entityId + ": " + player.getSleepTimer());
                 if (!player.isSleepingLongEnough()) {
                     return false;
@@ -2219,7 +2220,7 @@ public class Level implements LevelSource
         this.levelEvent(null, type, x, y, z, data);
     }
     
-    public void levelEvent(final Player source, final int type, final int x, final int y, final int z, final int data) {
+    public void levelEvent(final EntityPlayer source, final int type, final int x, final int y, final int z, final int data) {
         for (int i = 0; i < this.listeners.size(); ++i) {
             this.listeners.get(i).levelEvent(source, type, x, y, z, data);
         }

@@ -6,14 +6,14 @@ package net.minecraft.client.renderer.entity;
 
 import util.Mth;
 import net.minecraft.client.renderer.Tesselator;
-import net.minecraft.world.entity.projectile.Arrow;
+import net.minecraft.world.entity.projectile.EntityProjectileArrow;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL12.*;
 
-public class ArrowRenderer extends EntityRenderer<Arrow>
+public class ArrowRenderer extends EntityRenderer<EntityProjectileArrow>
 {
-    public void render(final Arrow arrow, final double x, final double y, final double z, final float rot, final float a) {
+    public void render(final EntityProjectileArrow arrow, final double x, final double y, final double z, final float rot, final float a) {
         if (arrow.yRotO == 0.0f && arrow.xRotO == 0.0f) return;
         this.bindTexture("/item/arrows.png");
 

@@ -6,17 +6,17 @@ package net.minecraft.world.inventory;
 
 import net.minecraft.stats.Achievements;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.ItemInstance;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 import net.minecraft.world.Container;
+import net.minecraft.world.level.block.Blocks;
 
 public class ResultSlot extends Slot
 {
     private final Container craftSlots;
-    private Player player;
+    private EntityPlayer player;
     
-    public ResultSlot(final Player player, final Container craftSlots, final Container container, final int id, final int x, final int y) {
+    public ResultSlot(final EntityPlayer player, final Container craftSlots, final Container container, final int id, final int x, final int y) {
         super(container, id, x, y);
         this.player = player;
         this.craftSlots = craftSlots;
@@ -31,9 +31,9 @@ public class ResultSlot extends Slot
     public void onTake(final ItemInstance carried) {
         carried.onCraftedBy(this.player.level, this.player);
 
-        if (carried.id == Block.workBench.id) this.player.awardStat(Achievements.buildWorkbench, 1);
+        if (carried.id == Blocks.workBench.id) this.player.awardStat(Achievements.buildWorkbench, 1);
         else if (carried.id == Items.pickAxe_wood.id) this.player.awardStat(Achievements.buildPickaxe, 1);
-        else if (carried.id == Block.furnace.id) this.player.awardStat(Achievements.buildFurnace, 1);
+        else if (carried.id == Blocks.furnace.id) this.player.awardStat(Achievements.buildFurnace, 1);
         else if (carried.id == Items.hoe_wood.id) this.player.awardStat(Achievements.buildHoe, 1);
         else if (carried.id == Items.bread.id) this.player.awardStat(Achievements.makeBread, 1);
         else if (carried.id == Items.cake.id) this.player.awardStat(Achievements.bakeCake, 1);

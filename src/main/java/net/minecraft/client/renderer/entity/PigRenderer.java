@@ -4,17 +4,17 @@
 
 package net.minecraft.client.renderer.entity;
 
-import net.minecraft.world.entity.animal.Pig;
+import net.minecraft.world.entity.animal.EntityPig;
 import net.minecraft.client.model.Model;
 
-public class PigRenderer extends MobRenderer<Pig>
+public class PigRenderer extends MobRenderer<EntityPig>
 {
     public PigRenderer(final Model model, final Model armor, final float shadow) {
         super(model, shadow);
         this.setArmor(armor);
     }
     
-    protected boolean prepareArmor(final Pig pig, final int layer, final float a) {
+    protected boolean prepareArmor(final EntityPig pig, final int layer, final float a) {
         this.bindTexture("/mob/saddle.png");
         return layer == 0 && pig.hasSaddle();
     }

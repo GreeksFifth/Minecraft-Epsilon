@@ -7,14 +7,14 @@ package net.minecraft.world.inventory;
 import net.minecraft.stats.Achievements;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.Container;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 import net.minecraft.world.item.Items;
 
 public class FurnaceResultSlot extends Slot
 {
-    private Player player;
+    private EntityPlayer player;
     
-    public FurnaceResultSlot(final Player player, final Container container, final int slot, final int x, final int y) {
+    public FurnaceResultSlot(final EntityPlayer player, final Container container, final int slot, final int x, final int y) {
         super(container, slot, x, y);
         this.player = player;
     }

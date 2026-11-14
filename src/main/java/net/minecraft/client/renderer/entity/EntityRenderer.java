@@ -5,6 +5,7 @@
 package net.minecraft.client.renderer.entity;
 
 import net.minecraft.client.gui.Font;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.level.Level;
 import util.Mth;
@@ -12,7 +13,7 @@ import net.minecraft.client.renderer.Tesselator;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.client.renderer.Textures;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.ModelHumanoid;
 import net.minecraft.client.renderer.TileRenderer;
 import net.minecraft.client.model.Model;
 
@@ -21,7 +22,7 @@ import static org.lwjgl.opengl.GL11.*;
 public abstract class EntityRenderer<T extends Entity>
 {
     protected EntityRenderDispatcher entityRenderDispatcher;
-    private Model model = new HumanoidModel();
+    private Model model = new ModelHumanoid();
     private TileRenderer tileRenderer = new TileRenderer();
     protected float shadowRadius = 0.0f;
     protected float shadowStrength = 1.0f;
@@ -47,7 +48,7 @@ public abstract class EntityRenderer<T extends Entity>
     private void renderFlame(final Entity e, final double x, final double y, final double z, final float a) {
         glDisable(GL_LIGHTING);
 
-        final int tex = Block.fire.tex;
+        final int tex = Blocks.fire.tex;
         final int xt = (tex & 0xF) << 4;
         final int yt = tex & 0xF0;
         float u0 = xt / 256.0f;

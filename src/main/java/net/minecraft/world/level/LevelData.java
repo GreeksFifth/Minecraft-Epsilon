@@ -5,7 +5,7 @@
 package net.minecraft.world.level;
 
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 import java.util.List;
 import com.mojang.nbt.CompoundTag;
 
@@ -78,7 +78,7 @@ public class LevelData
         return tag;
     }
     
-    public CompoundTag createTag(final List<Player> players) {
+    public CompoundTag createTag(final List<EntityPlayer> players) {
         final CompoundTag tag = new CompoundTag();
         Entity mainPlayer = null;
         CompoundTag compoundTag = null;

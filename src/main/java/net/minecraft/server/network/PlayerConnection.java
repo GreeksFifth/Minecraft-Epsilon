@@ -5,8 +5,8 @@
 package net.minecraft.server.network;
 
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.TileEntity;
-import net.minecraft.world.level.block.entity.SignTileEntity;
+import net.minecraft.world.level.block.tileentity.TileEntity;
+import net.minecraft.world.level.block.tileentity.TileEntitySign;
 import net.minecraft.network.packet.SignUpdatePacket;
 
 import java.util.ArrayList;
@@ -559,8 +559,8 @@ public class PlayerConnection extends PacketListener implements ConsoleInputSour
         final ServerLevel level = this.server.getLevel(this.player.dimension);
         if (level.hasChunkAt(packet.x, packet.y, packet.z)) {
             final TileEntity te = level.getTileEntity(packet.x, packet.y, packet.z);
-            if (te instanceof SignTileEntity) {
-                SignTileEntity ste = (SignTileEntity) te;
+            if (te instanceof TileEntitySign) {
+                TileEntitySign ste = (TileEntitySign) te;
                 if (!ste.isEditable()) {
                     this.server.warn("Player " + this.player.name + " just tried to change non-editable sign");
                     return;
@@ -569,7 +569,7 @@ public class PlayerConnection extends PacketListener implements ConsoleInputSour
 
             for (int i = 0; i < 4; ++i) {
                 boolean validLine = true;
-                if (packet.lines[i].length() > SignTileEntity.MAX_LINE_LENGTH) {
+                if (packet.lines[i].length() > TileEntitySign.MAX_LINE_LENGTH) {
                     validLine = false;
                 }
                 else {
@@ -581,12 +581,12 @@ public class PlayerConnection extends PacketListener implements ConsoleInputSour
                 if (!validLine) packet.lines[i] = "!?";
             }
 
-            if (te instanceof SignTileEntity) {
+            if (te instanceof TileEntitySign) {
                 final int x = packet.x;
                 final int y = packet.y;
                 final int z = packet.z;
-                final SignTileEntity ste = (SignTileEntity)te;
-                for (int i = 0; i < SignTileEntity.MAX_SIGN_LINES; ++i) {
+                final TileEntitySign ste = (TileEntitySign)te;
+                for (int i = 0; i < TileEntitySign.MAX_SIGN_LINES; ++i) {
                     ste.messages[i] = packet.lines[i];
                 }
                 ste.setEditable(false);

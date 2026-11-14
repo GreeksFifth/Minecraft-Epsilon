@@ -4,8 +4,9 @@
 
 package net.minecraft.world.level.pathfinder;
 
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.block.BlockLogicDoor;
+import net.minecraft.world.level.block.BlockDoor;
 import net.minecraft.world.level.block.Block;
 import util.Mth;
 import net.minecraft.world.entity.Entity;
@@ -155,8 +156,8 @@ public class PathFinder
                 for (int zz = z; zz < z + size.z; ++zz) {
                     final int tileId = this.level.getTile(xx, yy, zz);
                     if (tileId <= 0) continue;
-                    if (tileId == Block.door_iron.id || tileId == Block.door_wood.id) {
-                        if (!BlockLogicDoor.isOpen(this.level.getData(xx, yy, zz))) return TYPE_BLOCKED;
+                    if (tileId == Blocks.door_iron.id || tileId == Blocks.door_wood.id) {
+                        if (!BlockDoor.isOpen(this.level.getData(xx, yy, zz))) return TYPE_BLOCKED;
                     }
                     else {
                         final Material m = Block.BLOCKS[tileId].material;

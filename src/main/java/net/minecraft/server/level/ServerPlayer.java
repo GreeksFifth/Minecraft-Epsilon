@@ -15,9 +15,9 @@ import net.minecraft.network.packet.ContainerSetSlotPacket;
 import net.minecraft.world.inventory.ResultSlot;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.TrapMenu;
-import net.minecraft.world.level.block.entity.DispenserTileEntity;
+import net.minecraft.world.level.block.tileentity.TileEntityDispenser;
 import net.minecraft.world.inventory.FurnaceMenu;
-import net.minecraft.world.level.block.entity.FurnaceTileEntity;
+import net.minecraft.world.level.block.tileentity.TileEntityFurnace;
 import net.minecraft.world.inventory.ContainerMenu;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.CraftingMenu;
@@ -27,14 +27,14 @@ import net.minecraft.network.packet.EntityActionAtPositionPacket;
 import net.minecraft.network.packet.AnimatePacket;
 import net.minecraft.server.EntityTracker;
 import net.minecraft.network.packet.TakeItemEntityPacket;
-import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.item.EntityItem;
 import net.minecraft.network.packet.SetHealthPacket;
-import net.minecraft.world.level.block.entity.TileEntity;
+import net.minecraft.world.level.block.tileentity.TileEntity;
 import net.minecraft.network.packet.BlockRegionUpdatePacket;
 import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.item.ComplexItem;
+import net.minecraft.world.item.ItemComplex;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.entity.projectile.Arrow;
+import net.minecraft.world.entity.projectile.EntityProjectileArrow;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.network.packet.SetEquippedItemPacket;
@@ -48,9 +48,9 @@ import java.util.List;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.PlayerConnection;
 import net.minecraft.world.inventory.ContainerListener;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 
-public class ServerPlayer extends Player implements ContainerListener
+public class ServerPlayer extends EntityPlayer implements ContainerListener
 {
     public PlayerConnection connection;
     public MinecraftServer server;
@@ -147,10 +147,10 @@ public class ServerPlayer extends Player implements ContainerListener
         if (this.invulnerableTime > 0) return false;
 
         if (!this.server.pvp) {
-            if (source instanceof Player) {
+            if (source instanceof EntityPlayer) {
                 return false;
             }
-            if (source instanceof Arrow && ((Arrow)source).owner instanceof Player) {
+            if (source instanceof EntityProjectileArrow && ((EntityProjectileArrow)source).owner instanceof EntityPlayer) {
                 return false;
             }
         }
@@ -173,7 +173,7 @@ public class ServerPlayer extends Player implements ContainerListener
             final ItemInstance ie = this.inventory.getItem(i);
             if (ie != null) {
                 if (Item.items[ie.id].isComplex() && this.connection.countDelayedPackets() <= 2) {
-                    final Packet packet = ((ComplexItem) Item.items[ie.id]).getUpdatePacket(ie, this.level, this);
+                    final Packet packet = ((ItemComplex) Item.items[ie.id]).getUpdatePacket(ie, this.level, this);
                     if (packet != null) {
                         this.connection.send(packet);
                     }
@@ -254,10 +254,10 @@ public class ServerPlayer extends Player implements ContainerListener
     public void take(final Entity e, final int orgCount) {
         if (!e.removed) {
             final EntityTracker entityTracker = this.server.getTracker(this.dimension);
-            if (e instanceof ItemEntity) {
+            if (e instanceof EntityItem) {
                 entityTracker.broadcast(e, new TakeItemEntityPacket(e.entityId, this.entityId));
             }
-            if (e instanceof Arrow) {
+            if (e instanceof EntityProjectileArrow) {
                 entityTracker.broadcast(e, new TakeItemEntityPacket(e.entityId, this.entityId));
             }
         }
@@ -339,7 +339,7 @@ public class ServerPlayer extends Player implements ContainerListener
     }
     
     @Override
-    public void openFurnace(final FurnaceTileEntity furnace) {
+    public void openFurnace(final TileEntityFurnace furnace) {
         this.nextContainerCounter();
         this.connection.send(new ContainerOpenPacket(this.containerCounter, ContainerOpenPacket.FURNACE, furnace.getName(), furnace.getContainerSize()));
         this.containerMenu = new FurnaceMenu(this.inventory, furnace);
@@ -348,7 +348,7 @@ public class ServerPlayer extends Player implements ContainerListener
     }
     
     @Override
-    public void openTrap(final DispenserTileEntity trap) {
+    public void openTrap(final TileEntityDispenser trap) {
         this.nextContainerCounter();
         this.connection.send(new ContainerOpenPacket(this.containerCounter, ContainerOpenPacket.TRAP, trap.getName(), trap.getContainerSize()));
         this.containerMenu = new TrapMenu(this.inventory, trap);

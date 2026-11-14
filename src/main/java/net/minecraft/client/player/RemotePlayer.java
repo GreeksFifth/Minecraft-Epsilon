@@ -8,9 +8,9 @@ import net.minecraft.world.item.ItemInstance;
 import util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 
-public class RemotePlayer extends Player
+public class RemotePlayer extends EntityPlayer
 {
     private int lSteps;
     private double lx, ly, lz, lyr, lxr;

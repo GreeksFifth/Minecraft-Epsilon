@@ -4,9 +4,9 @@
 
 package net.minecraft.world.level.levelgen.feature;
 
-import net.minecraft.world.level.block.Block;
 import java.util.Random;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 
 public class HellFireFeature extends Feature
 {
@@ -17,8 +17,8 @@ public class HellFireFeature extends Feature
             final int y2 = y + random.nextInt(4) - random.nextInt(4);
             final int z2 = z + random.nextInt(8) - random.nextInt(8);
             if (!level.isEmptyTile(x2, y2, z2)) continue;
-            if (level.getTile(x2, y2 - 1, z2) != Block.hellRock.id) continue;
-            level.setTile(x2, y2, z2, Block.fire.id);
+            if (level.getTile(x2, y2 - 1, z2) != Blocks.hellRock.id) continue;
+            level.setTile(x2, y2, z2, Blocks.fire.id);
         }
 
         return true;

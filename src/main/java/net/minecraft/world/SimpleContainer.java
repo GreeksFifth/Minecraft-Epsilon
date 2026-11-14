@@ -4,7 +4,7 @@
 
 package net.minecraft.world;
 
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +82,7 @@ public class SimpleContainer implements Container
         }
     }
     
-    public boolean stillValid(final Player player) {
+    public boolean stillValid(final EntityPlayer player) {
         return true;
     }
 }

@@ -9,14 +9,14 @@ import net.minecraft.stats.Achievement;
 import net.minecraft.stats.Stat;
 import net.minecraft.client.particle.TakeAnimationParticle;
 import net.minecraft.client.gui.inventory.TrapScreen;
-import net.minecraft.world.level.block.entity.DispenserTileEntity;
+import net.minecraft.world.level.block.tileentity.TileEntityDispenser;
 import net.minecraft.client.gui.inventory.FurnaceScreen;
-import net.minecraft.world.level.block.entity.FurnaceTileEntity;
+import net.minecraft.world.level.block.tileentity.TileEntityFurnace;
 import net.minecraft.client.gui.inventory.CraftingScreen;
 import net.minecraft.client.gui.inventory.ContainerScreen;
 import net.minecraft.world.Container;
 import net.minecraft.client.gui.inventory.TextEditScreen;
-import net.minecraft.world.level.block.entity.SignTileEntity;
+import net.minecraft.world.level.block.tileentity.TileEntitySign;
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.stats.Achievements;
@@ -24,9 +24,9 @@ import net.minecraft.client.User;
 import net.minecraft.world.level.Level;
 import util.SmoothFloat;
 import net.minecraft.client.Minecraft;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 
-public class LocalPlayer extends Player
+public class LocalPlayer extends EntityPlayer
 {
     public Input input;
     protected Minecraft minecraft;
@@ -157,7 +157,7 @@ public class LocalPlayer extends Player
     }
     
     @Override
-    public void openTextEdit(final SignTileEntity sign) {
+    public void openTextEdit(final TileEntitySign sign) {
         this.minecraft.setScreen(new TextEditScreen(sign));
     }
     
@@ -172,12 +172,12 @@ public class LocalPlayer extends Player
     }
     
     @Override
-    public void openFurnace(final FurnaceTileEntity furnace) {
+    public void openFurnace(final TileEntityFurnace furnace) {
         this.minecraft.setScreen(new FurnaceScreen(this.inventory, furnace));
     }
     
     @Override
-    public void openTrap(final DispenserTileEntity trap) {
+    public void openTrap(final TileEntityDispenser trap) {
         this.minecraft.setScreen(new TrapScreen(this.inventory, trap));
     }
     

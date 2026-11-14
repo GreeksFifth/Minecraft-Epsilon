@@ -5,11 +5,11 @@
 package net.minecraft.world.item;
 
 import net.minecraft.locale.Descriptive;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.EntityMob;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.world.level.block.Block;
 
@@ -67,7 +67,7 @@ public final class ItemInstance implements Descriptive<ItemInstance>
         return this.getItem().getIcon(this);
     }
     
-    public boolean useOn(final Player player, final Level level, final int x, final int y, final int z, final int face) {
+    public boolean useOn(final EntityPlayer player, final Level level, final int x, final int y, final int z, final int face) {
         final boolean useOn = this.getItem().useOn(this, player, level, x, y, z, face);
         if (useOn) player.awardStat(Stats.itemUsed[this.id], 1);
         return useOn;
@@ -77,7 +77,7 @@ public final class ItemInstance implements Descriptive<ItemInstance>
         return this.getItem().getDestroySpeed(this, block);
     }
     
-    public ItemInstance use(final Level level, final Player player) {
+    public ItemInstance use(final Level level, final EntityPlayer player) {
         return this.getItem().use(this, level, player);
     }
     
@@ -143,8 +143,8 @@ public final class ItemInstance implements Descriptive<ItemInstance>
 
         this.auxValue += i;
         if (this.auxValue > this.getMaxDamage()) {
-            if (owner instanceof Player) {
-                Player player = ((Player)owner);
+            if (owner instanceof EntityPlayer) {
+                EntityPlayer player = ((EntityPlayer)owner);
                 player.awardStat(Stats.itemBroke[this.id], 1);
             }
             this.count--;
@@ -153,13 +153,13 @@ public final class ItemInstance implements Descriptive<ItemInstance>
         }
     }
     
-    public void hurtEnemy(final Mob mob, final Player attacker) {
+    public void hurtEnemy(final EntityMob mob, final EntityPlayer attacker) {
         if (Item.items[this.id].hurtEnemy(this, mob, attacker)) {
             attacker.awardStat(Stats.itemUsed[this.id], 1);
         }
     }
     
-    public void mineBlock(final int tile, final int x, final int y, final int z, final Player owner) {
+    public void mineBlock(final int tile, final int x, final int y, final int z, final EntityPlayer owner) {
         if (Item.items[this.id].mineBlock(this, tile, x, y, z, owner)) {
             owner.awardStat(Stats.itemUsed[this.id], 1);
         }
@@ -173,10 +173,10 @@ public final class ItemInstance implements Descriptive<ItemInstance>
         return Item.items[this.id].canDestroySpecial(block);
     }
     
-    public void snap(final Player player) {
+    public void snap(final EntityPlayer player) {
     }
     
-    public void interactEnemy(final Mob mob) {
+    public void interactEnemy(final EntityMob mob) {
         Item.items[this.id].interactEnemy(this, mob);
     }
     
@@ -231,7 +231,7 @@ public final class ItemInstance implements Descriptive<ItemInstance>
         Item.items[this.id].inventoryTick(this, level, owner, slot, selected);
     }
     
-    public void onCraftedBy(final Level level, final Player player) {
+    public void onCraftedBy(final Level level, final EntityPlayer player) {
         player.awardStat(Stats.itemCrafted[this.id], this.count);
         Item.items[this.id].onCraftedBy(this, level, player);
     }

@@ -6,8 +6,8 @@ package net.minecraft.world.item.crafting;
 
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Blocks;
 
 public class ArmorRecipes
 {
@@ -29,7 +29,7 @@ public class ArmorRecipes
             };
     private Object[][] map = new Object[][]
             {
-                    { Items.leather, Block.fire, Items.ironIngot, Items.diamond, Items.goldIngot },
+                    { Items.leather, Blocks.fire, Items.ironIngot, Items.diamond, Items.goldIngot },
                     { Items.helmet_cloth, Items.helmet_chain, Items.helmet_iron, Items.helmet_diamond, Items.helmet_gold },
                     { Items.chestplate_cloth, Items.chestplate_chain, Items.chestplate_iron, Items.chestplate_diamond, Items.chestplate_gold },
                     { Items.leggings_cloth, Items.leggings_chain, Items.leggings_iron, Items.leggings_diamond, Items.leggings_gold },

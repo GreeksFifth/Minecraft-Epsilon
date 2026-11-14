@@ -6,7 +6,7 @@ import net.minecraft.client.gui.achievement.AchievementScreen;
 import net.minecraft.client.gui.achievement.StatsScreen;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.stats.Achievements;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL11.glDisable;
@@ -22,7 +22,7 @@ public class InventoryScreen_OLD extends AbstractContainerScreen
     private float xMouse;
     private float yMouse;
 
-    public InventoryScreen_OLD(final Player player) {
+    public InventoryScreen_OLD(final EntityPlayer player) {
         super(player.inventoryMenu);
 
         this.passEvents = true;

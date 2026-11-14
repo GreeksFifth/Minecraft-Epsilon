@@ -4,8 +4,8 @@
 
 package net.minecraft.world.level;
 
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.block.entity.TileEntity;
+import net.minecraft.world.entity.player.EntityPlayer;
+import net.minecraft.world.level.block.tileentity.TileEntity;
 import net.minecraft.world.entity.Entity;
 
 public interface LevelListener
@@ -29,5 +29,5 @@ public interface LevelListener
     
     void tileEntityChanged(final int x, final int y, final int z, final TileEntity te);
     
-    void levelEvent(final Player source, final int type, final int x, final int y, final int z, final int data);
+    void levelEvent(final EntityPlayer source, final int type, final int x, final int y, final int z, final int data);
 }

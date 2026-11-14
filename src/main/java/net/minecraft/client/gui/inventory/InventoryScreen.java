@@ -9,16 +9,12 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.achievement.StatsScreen;
 import net.minecraft.client.gui.achievement.AchievementScreen;
 import net.minecraft.client.gui.Button;
-import net.minecraft.client.renderer.Tesselator;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.Lighting;
 import net.minecraft.stats.Achievements;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.entity.player.EntityPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemInstance;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
 import java.util.LinkedList;
 
@@ -37,7 +33,7 @@ public class InventoryScreen extends AbstractContainerScreen
 
     private final LinkedList<ItemInstance> allItemsInGame = new LinkedList<>();
     
-    public InventoryScreen(final Player player) {
+    public InventoryScreen(final EntityPlayer player) {
         super(player.inventoryMenu);
 
         this.passEvents = true;

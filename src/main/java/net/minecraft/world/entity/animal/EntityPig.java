@@ -1,0 +1,100 @@
+// 
+// Decompiled by Procyon v0.6.0
+// 
+
+package net.minecraft.world.entity.animal;
+
+import net.minecraft.stats.Achievements;
+import net.minecraft.world.entity.monster.EntityPigZombie;
+import net.minecraft.world.entity.global.EntityLightningBolt;
+import net.minecraft.world.entity.player.EntityPlayer;
+import com.mojang.nbt.CompoundTag;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
+
+public class EntityPig extends EntityMobPassive
+{
+    private static final int DATA_SADDLE_ID = 16;
+    public EntityPig(final Level level) {
+        super(level);
+        this.textureName = "/mob/pig.png";
+        this.setSize(0.9f, 0.9f);
+    }
+    
+    @Override
+    protected void definedSynchedData() {
+        this.entityData.define(DATA_SADDLE_ID, (byte) 0);
+    }
+    
+    @Override
+    public void addAdditionalSaveData(final CompoundTag compoundTag) {
+        super.addAdditionalSaveData(compoundTag);
+        compoundTag.putBoolean("Saddle", this.hasSaddle());
+    }
+    
+    @Override
+    public void readAdditionalSaveData(final CompoundTag compoundTag) {
+        super.readAdditionalSaveData(compoundTag);
+        this.setSaddle(compoundTag.getBoolean("Saddle"));
+    }
+    
+    @Override
+    protected String getAmbientSound() {
+        return "mob.pig";
+    }
+    
+    @Override
+    protected String getHurtSound() {
+        return "mob.pig";
+    }
+    
+    @Override
+    protected String getDeathSound() {
+        return "mob.pigdeath";
+    }
+    
+    @Override
+    public boolean interact(final EntityPlayer player) {
+        if (this.hasSaddle() && !this.level.isClientSide && (this.rider == null || this.rider == player)) {
+            player.ride(this);
+            return true;
+        }
+        return false;
+    }
+    
+    @Override
+    protected int getDeathLoot() {
+        if (this.onFire > 0) return Items.porkChop_cooked.id;
+        return Items.porkChop_raw.id;
+    }
+    
+    public boolean hasSaddle() {
+        return (this.entityData.getByte(DATA_SADDLE_ID) & 0x1) != 0x0;
+    }
+    
+    public void setSaddle(final boolean value) {
+        if (value) {
+            this.entityData.set(DATA_SADDLE_ID, (byte)1);
+        }
+        else {
+            this.entityData.set(DATA_SADDLE_ID, (byte)0);
+        }
+    }
+    
+    @Override
+    public void thunderHit(final EntityLightningBolt lightningBolt) {
+        if (this.level.isClientSide) return;
+        final EntityPigZombie pz = new EntityPigZombie(this.level);
+        pz.moveTo(this.x, this.y, this.z, this.yRot, this.xRot);
+        this.level.addEntity(pz);
+        this.remove();
+    }
+    
+    @Override
+    protected void causeFallDamage(final float distance) {
+        super.causeFallDamage(distance);
+        if (distance > 5.0f && this.rider instanceof EntityPlayer) {
+            ((EntityPlayer)this.rider).awardStat(Achievements.flyPig);
+        }
+    }
+}

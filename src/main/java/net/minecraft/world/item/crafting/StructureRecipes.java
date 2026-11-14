@@ -5,35 +5,35 @@
 package net.minecraft.world.item.crafting;
 
 import net.minecraft.world.item.ItemInstance;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 public class StructureRecipes
 {
     public void addRecipes(final Recipes recipes) {
-        recipes.addShapedRecipe(new ItemInstance(Block.chest),
+        recipes.addShapedRecipe(new ItemInstance(Blocks.chest),
                 "###",
                 "# #",
                 "###",
 
-                '#', Block.wood);
+                '#', Blocks.wood);
 
-        recipes.addShapedRecipe(new ItemInstance(Block.furnace),
+        recipes.addShapedRecipe(new ItemInstance(Blocks.furnace),
                 "###",
                 "# #",
                 "###",
 
-                '#', Block.stoneBrick);
+                '#', Blocks.stoneBrick);
 
-        recipes.addShapedRecipe(new ItemInstance(Block.workBench),
+        recipes.addShapedRecipe(new ItemInstance(Blocks.workBench),
                 "##",
                 "##",
 
-                '#', Block.wood);
+                '#', Blocks.wood);
 
-        recipes.addShapedRecipe(new ItemInstance(Block.sandStone),
+        recipes.addShapedRecipe(new ItemInstance(Blocks.sandStone),
                 "##",
                 "##",
 
-                '#', Block.sand);
+                '#', Blocks.sand);
     }
 }

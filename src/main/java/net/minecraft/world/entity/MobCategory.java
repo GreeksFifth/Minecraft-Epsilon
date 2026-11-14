@@ -4,16 +4,16 @@
 
 package net.minecraft.world.entity;
 
-import net.minecraft.world.entity.animal.WaterAnimal;
-import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.entity.animal.EntityMobPassiveAquatic;
+import net.minecraft.world.entity.animal.EntityMobPassive;
+import net.minecraft.world.entity.monster.Hostile;
 import net.minecraft.world.level.material.Material;
 
 public enum MobCategory
 {
-    monster(Enemy.class, 70, Material.air, false),
-    creature(Animal.class, 15, Material.air, true),
-    waterCreature(WaterAnimal.class, 5, Material.water, true);
+    monster(Hostile.class, 70, Material.air, false),
+    creature(EntityMobPassive.class, 15, Material.air, true),
+    waterCreature(EntityMobPassiveAquatic.class, 5, Material.water, true);
     
     private final Class<?> base;
     private final int max;

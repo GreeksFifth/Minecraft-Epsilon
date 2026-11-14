@@ -4,22 +4,22 @@
 
 package net.minecraft.client.renderer.entity;
 
-import net.minecraft.world.entity.animal.Squid;
+import net.minecraft.world.entity.animal.EntitySquid;
 import net.minecraft.client.model.Model;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class SquidRenderer extends MobRenderer<Squid>
+public class SquidRenderer extends MobRenderer<EntitySquid>
 {
     public SquidRenderer(final Model model, final float shadow) {
         super(model, shadow);
     }
     
-    public void render(final Squid squid, final double x, final double y, final double z, final float rot, final float a) {
+    public void render(final EntitySquid squid, final double x, final double y, final double z, final float rot, final float a) {
         super.render(squid, x, y, z, rot, a);
     }
     
-    protected void setupRotations(final Squid squid, final float bob, final float bodyRot, final float a) {
+    protected void setupRotations(final EntitySquid squid, final float bob, final float bodyRot, final float a) {
         final float bodyXRot = squid.xBodyRotO + (squid.xBodyRot - squid.xBodyRotO) * a;
         final float bodyZRot = squid.zBodyRotO + (squid.zBodyRot - squid.zBodyRotO) * a;
 
@@ -30,10 +30,10 @@ public class SquidRenderer extends MobRenderer<Squid>
         glTranslatef(0.0f, -1.2f, 0.0f);
     }
     
-    protected void scale(final Squid squid, final float a) {
+    protected void scale(final EntitySquid squid, final float a) {
     }
     
-    protected float getBob(final Squid squid, final float a) {
+    protected float getBob(final EntitySquid squid, final float a) {
         return squid.oldTentacleAngle + (squid.tentacleAngle - squid.oldTentacleAngle) * a;
     }
 }

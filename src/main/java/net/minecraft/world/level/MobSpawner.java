@@ -4,41 +4,41 @@
 
 package net.minecraft.world.level;
 
-import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.entity.monster.EntityZombie;
 
 import java.util.HashSet;
 
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.pathfinder.Node;
 import net.minecraft.world.level.pathfinder.Path;
-import net.minecraft.world.level.block.BlockLogicBed;
+import net.minecraft.world.level.block.BlockBed;
 import net.minecraft.world.level.pathfinder.PathFinder;
-import net.minecraft.world.entity.animal.Sheep;
-import net.minecraft.world.entity.monster.Skeleton;
-import net.minecraft.world.entity.monster.Spider;
+import net.minecraft.world.entity.animal.EntitySheep;
+import net.minecraft.world.entity.monster.EntitySkeletonArcher;
+import net.minecraft.world.entity.monster.EntitySpider;
 import net.minecraft.world.level.material.Material;
 
 import java.util.List;
 
 import net.minecraft.Pos;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.EntityMob;
 import net.minecraft.world.entity.MobCategory;
 import util.Mth;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 
 import java.util.Set;
 
 public final class MobSpawner {
     private static final int MIN_SPAWN_DISTANCE = 24;
     private static Set<ChunkPos> chunksToPoll = new HashSet<>();
-    protected static final Class<? extends Mob>[] bedEnemies = new Class[]{Spider.class, Zombie.class, Skeleton.class};
+    protected static final Class<? extends EntityMob>[] bedEnemies = new Class[]{EntitySpider.class, EntityZombie.class, EntitySkeletonArcher.class};
 
-    protected static TilePos getRandomPosWithin(final Level level, final int cx, final int cz) {
+    protected static BlockPos getRandomPosWithin(final Level level, final int cx, final int cz) {
         int x = cx + level.random.nextInt(16);
         int y = level.random.nextInt(Level.MAX_HEIGHT);
         int z = cz + level.random.nextInt(16);
 
-        return new TilePos(x, y, z);
+        return new BlockPos(x, y, z);
     }
 
     public static final int tick(final Level level, final boolean spawnEnemies, final boolean spawnFriendlies) {
@@ -47,7 +47,7 @@ public final class MobSpawner {
         }
         MobSpawner.chunksToPoll.clear();
         for (int i = 0; i < level.players.size(); ++i) {
-            final Player player = level.players.get(i);
+            final EntityPlayer player = level.players.get(i);
             final int xx = Mth.floor(player.x / 16.0);
             final int zz = Mth.floor(player.z / 16.0);
 
@@ -88,7 +88,7 @@ public final class MobSpawner {
                     }
                 }
 
-                final TilePos start = getRandomPosWithin(level, cp.x * 16, cp.z * 16);
+                final BlockPos start = getRandomPosWithin(level, cp.x * 16, cp.z * 16);
                 final int xStart = start.x;
                 final int yStart = start.y;
                 final int zStart = start.z;
@@ -123,7 +123,7 @@ public final class MobSpawner {
                                 }
                             }
 
-                            Mob mob;
+                            EntityMob mob;
                             try {
                                 mob = mobSpawnerData.mobClass.getConstructor(Level.class).newInstance(level);
                             } catch (final Exception e) {
@@ -156,24 +156,24 @@ public final class MobSpawner {
         return level.isSolidBlockingTile(x, y - 1, z) && !level.isSolidBlockingTile(x, y, z) && !level.getMaterial(x, y, z).isLiquid() && !level.isSolidBlockingTile(x, y + 1, z);
     }
 
-    private static void finalizeMobSettings(final Mob mob, final Level level, final float xx, final float yy, final float zz) {
-        if (mob instanceof Spider && level.random.nextInt(100) == 0) {
-            final Skeleton skeleton = new Skeleton(level);
+    private static void finalizeMobSettings(final EntityMob mob, final Level level, final float xx, final float yy, final float zz) {
+        if (mob instanceof EntitySpider && level.random.nextInt(100) == 0) {
+            final EntitySkeletonArcher skeleton = new EntitySkeletonArcher(level);
             skeleton.moveTo(xx, yy, zz, mob.yRot, 0.0f);
             level.addEntity(skeleton);
             skeleton.ride(mob);
-        } else if (mob instanceof Sheep) {
-            ((Sheep) mob).setColor(Sheep.getSheepColor(level.random));
+        } else if (mob instanceof EntitySheep) {
+            ((EntitySheep) mob).setColor(EntitySheep.getSheepColor(level.random));
         }
     }
 
-    public static boolean attackSleepingPlayers(final Level level, final List<Player> players) {
+    public static boolean attackSleepingPlayers(final Level level, final List<EntityPlayer> players) {
         boolean somebodyWokeUp = false;
 
         final PathFinder finder = new PathFinder(level);
 
-        for (final Player player : players) {
-            final Class<? extends Mob>[] bedEnemies = MobSpawner.bedEnemies;
+        for (final EntityPlayer player : players) {
+            final Class<? extends EntityMob>[] bedEnemies = MobSpawner.bedEnemies;
             if (bedEnemies == null || bedEnemies.length == 0) continue;
 
             boolean nextPlayer = false;
@@ -206,7 +206,7 @@ public final class MobSpawner {
                 final float xx = x + 0.5f;
                 final float yy = (float) y;
                 final float zz = z + 0.5f;
-                Mob mob;
+                EntityMob mob;
                 try {
                     mob = bedEnemies[type].getConstructor(Level.class).newInstance(level);
                 } catch (final Exception e) {
@@ -227,7 +227,7 @@ public final class MobSpawner {
                     if (Math.abs(last.x - player.x) < 1.5 && Math.abs(last.z - player.z) < 1.5 && Math.abs(last.y - player.y) < 1.5) {
                         // System.out.println("Found path!");
 
-                        Pos bedPos = BlockLogicBed.findStandUpPosition(level, Mth.floor(player.x), Mth.floor(player.y), Mth.floor(player.z), 1);
+                        Pos bedPos = BlockBed.findStandUpPosition(level, Mth.floor(player.x), Mth.floor(player.y), Mth.floor(player.z), 1);
                         if (bedPos == null) {
                             // an unlikely case where the bed is
                             // completely blocked

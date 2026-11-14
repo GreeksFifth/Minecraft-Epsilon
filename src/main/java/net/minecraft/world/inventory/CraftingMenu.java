@@ -4,13 +4,13 @@
 
 package net.minecraft.world.inventory;
 
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.ItemInstance;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 import net.minecraft.world.item.crafting.Recipes;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.Container;
+import net.minecraft.world.level.block.Blocks;
 
 public class CraftingMenu extends AbstractContainerMenu
 {
@@ -56,7 +56,7 @@ public class CraftingMenu extends AbstractContainerMenu
     }
     
     @Override
-    public void removed(final Player player) {
+    public void removed(final EntityPlayer player) {
         super.removed(player);
         if (this.level.isClientSide) return;
 
@@ -69,8 +69,8 @@ public class CraftingMenu extends AbstractContainerMenu
     }
     
     @Override
-    public boolean stillValid(final Player player) {
-        if (this.level.getTile(this.x, this.y, this.z) != Block.workBench.id) return false;
+    public boolean stillValid(final EntityPlayer player) {
+        if (this.level.getTile(this.x, this.y, this.z) != Blocks.workBench.id) return false;
         if (player.distanceToSqr(this.x + 0.5, this.y + 0.5, this.z + 0.5) <= 8 * 8) return true;
         return false;
     }

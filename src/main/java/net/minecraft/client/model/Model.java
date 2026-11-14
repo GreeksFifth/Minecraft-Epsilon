@@ -4,7 +4,7 @@
 
 package net.minecraft.client.model;
 
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.EntityMob;
 
 public abstract class Model
 {
@@ -17,6 +17,6 @@ public abstract class Model
     public void setupAnim(final float time, final float r, final float bob, final float yRot, final float xRot, final float scale) {
     }
     
-    public void prepareMobModel(final Mob mob, final float time, final float r, final float a) {
+    public void prepareMobModel(final EntityMob mob, final float time, final float r, final float a) {
     }
 }

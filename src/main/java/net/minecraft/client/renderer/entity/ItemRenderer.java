@@ -10,15 +10,16 @@ import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.Item;
 import net.minecraft.client.renderer.Tesselator;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import util.Mth;
-import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.item.EntityItem;
 import java.util.Random;
 import net.minecraft.client.renderer.TileRenderer;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL12.*;
 
-public class ItemRenderer extends EntityRenderer<ItemEntity>
+public class ItemRenderer extends EntityRenderer<EntityItem>
 {
     private TileRenderer tileRenderer;
     private Random random;
@@ -32,7 +33,7 @@ public class ItemRenderer extends EntityRenderer<ItemEntity>
         this.shadowStrength = 0.75f;
     }
     
-    public void render(final ItemEntity itemEntity, final double x, final double y, final double z, final float rot, final float a) {
+    public void render(final EntityItem itemEntity, final double x, final double y, final double z, final float rot, final float a) {
         this.random.setSeed(187L);
         final ItemInstance item = itemEntity.item;
 
@@ -53,7 +54,7 @@ public class ItemRenderer extends EntityRenderer<ItemEntity>
 
             this.bindTexture("/terrain.png");
             float s = 1 / 4.0f;
-            if (!Block.BLOCKS[item.id].isCubeShaped() && item.id != Block.stoneSlabHalf.id && Block.BLOCKS[item.id].getRenderShape() != Block.SHAPE_PISTON_BASE) {
+            if (!Block.BLOCKS[item.id].isCubeShaped() && item.id != Blocks.stoneSlabHalf.id && Block.BLOCKS[item.id].getRenderShape() != Block.SHAPE_PISTON_BASE) {
                 s = 0.5f;
             }
 

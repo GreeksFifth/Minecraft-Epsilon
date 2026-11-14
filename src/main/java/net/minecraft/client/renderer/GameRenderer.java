@@ -5,6 +5,7 @@
 package net.minecraft.client.renderer;
 
 import net.minecraft.client.renderer.culling.Culler;
+import net.minecraft.world.level.block.Blocks;
 import org.lwjgl.input.Keyboard;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.Level;
@@ -21,8 +22,8 @@ import net.minecraft.client.gui.ScreenSizeCalculator;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.NVFogDistance;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.player.EntityPlayer;
+import net.minecraft.world.entity.EntityMob;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.AABB;
 import java.util.List;
@@ -217,7 +218,7 @@ public class GameRenderer
     }
     
     private float getFov(final float a) {
-        final Mob player = this.mc.cameraTargetPlayer;
+        final EntityMob player = this.mc.cameraTargetPlayer;
         float fov = 70.0f;
         if (player.isUnderLiquid(Material.water)) {
             fov = 60.0f;
@@ -231,7 +232,7 @@ public class GameRenderer
     }
     
     private void bobHurt(final float a) {
-        final Mob player = this.mc.cameraTargetPlayer;
+        final EntityMob player = this.mc.cameraTargetPlayer;
 
         float hurt = player.hurtTime - a;
 
@@ -253,9 +254,9 @@ public class GameRenderer
     }
     
     private void bobView(final float a) {
-        if (!(this.mc.cameraTargetPlayer instanceof Player)) return;
+        if (!(this.mc.cameraTargetPlayer instanceof EntityPlayer)) return;
 
-        final Player player = (Player)this.mc.cameraTargetPlayer;
+        final EntityPlayer player = (EntityPlayer)this.mc.cameraTargetPlayer;
         final float wda = player.walkDist - player.walkDistO;
         final float b = -(player.walkDist + wda * a);
         final float bob = player.oBob + (player.bob - player.oBob) * a;
@@ -267,7 +268,7 @@ public class GameRenderer
     }
     
     private void moveCameraToPlayer(final float a) {
-        final Mob player = this.mc.cameraTargetPlayer;
+        final EntityMob player = this.mc.cameraTargetPlayer;
         float heightOffset = player.heightOffset - 1.62f;
 
         double x = player.xo + (player.x - player.xo) * a;
@@ -281,7 +282,7 @@ public class GameRenderer
             glTranslatef(0.0f, 0.3f, 0.0f);
             if (!this.mc.options.fixedCamera) {
                 int t = this.mc.level.getTile(Mth.floor(player.x), Mth.floor(player.y), Mth.floor(player.z));
-                if (t == Block.bed.id) {
+                if (t == Blocks.bed.id) {
                     int data = this.mc.level.getData(Mth.floor(player.x), Mth.floor(player.y), Mth.floor(player.z));
 
                     int direction = data & 0x3;
@@ -541,7 +542,7 @@ public class GameRenderer
 
         this.pick(a);
 
-        final Mob cameraEntity = this.mc.cameraTargetPlayer;
+        final EntityMob cameraEntity = this.mc.cameraTargetPlayer;
         final LevelRenderer levelRenderer = this.mc.levelRenderer;
         final ParticleEngine particleEngine = this.mc.particleEngine;
         final double xOff = cameraEntity.xOld + (cameraEntity.x - cameraEntity.xOld) * a;
@@ -613,8 +614,8 @@ public class GameRenderer
             this.setupFog(0, a);
             particleEngine.render(cameraEntity, a);
 
-            if (this.mc.hitResult != null && cameraEntity.isUnderLiquid(Material.water) && cameraEntity instanceof Player) {
-                final Player player = (Player)cameraEntity;
+            if (this.mc.hitResult != null && cameraEntity.isUnderLiquid(Material.water) && cameraEntity instanceof EntityPlayer) {
+                final EntityPlayer player = (EntityPlayer)cameraEntity;
                 glDisable(GL_ALPHA_TEST);
                 levelRenderer.renderHit(player, this.mc.hitResult, 0, player.inventory.getSelected(), a);
                 levelRenderer.renderHitOutline(player, this.mc.hitResult, 0, player.inventory.getSelected(), a);
@@ -660,9 +661,9 @@ public class GameRenderer
             glEnable(GL_CULL_FACE);
             glDisable(GL_BLEND);
 
-            if (this.zoom == 1.0 && cameraEntity instanceof Player) {
+            if (this.zoom == 1.0 && cameraEntity instanceof EntityPlayer) {
                 if (this.mc.hitResult != null && !cameraEntity.isUnderLiquid(Material.water)) {
-                    final Player player = (Player)cameraEntity;
+                    final EntityPlayer player = (EntityPlayer)cameraEntity;
                     glDisable(GL_ALPHA_TEST);
                     levelRenderer.renderHit(player, this.mc.hitResult, 0, player.inventory.getSelected(), a);
                     levelRenderer.renderHitOutline(player, this.mc.hitResult, 0, player.inventory.getSelected(), a);
@@ -700,7 +701,7 @@ public class GameRenderer
         if (rainLevel == 0.0f) return;
 
         this.random.setSeed(this.tick * 312987231L);
-        final Mob player = this.mc.cameraTargetPlayer;
+        final EntityMob player = this.mc.cameraTargetPlayer;
         final Level level = this.mc.level;
 
         final int x0 = Mth.floor(player.x);
@@ -754,7 +755,7 @@ public class GameRenderer
         final float rainLevel = this.mc.level.getRainLevel(a);
         if (rainLevel <= 0.0f) return;
 
-        final Mob player = this.mc.cameraTargetPlayer;
+        final EntityMob player = this.mc.cameraTargetPlayer;
         final Level level = this.mc.level;
 
         final int x0 = Mth.floor(player.x);
@@ -895,7 +896,7 @@ public class GameRenderer
     
     private void setupClearColor(final float a) {
         final Level level = this.mc.level;
-        final Mob player = this.mc.cameraTargetPlayer;
+        final EntityMob player = this.mc.cameraTargetPlayer;
 
         float whiteness = 1.0f / (4 - this.mc.options.viewDistance);
         whiteness = 1.0f - (float)Math.pow(whiteness, 0.25);
@@ -966,7 +967,7 @@ public class GameRenderer
     }
     
     private void setupFog(final int i, final float alpha) {
-        final Mob player = this.mc.cameraTargetPlayer;
+        final EntityMob player = this.mc.cameraTargetPlayer;
 
         glFogfv(GL_FOG_COLOR, this.getBuffer(this.fr, this.fg, this.fb, 1.0f));
         glNormal3f(0.0f, -1.0f, 0.0f);

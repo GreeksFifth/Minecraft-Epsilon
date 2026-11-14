@@ -7,8 +7,10 @@ package net.minecraft.client.gui.achievement;
 import net.minecraft.client.Lighting;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.stats.Achievement;
-import net.minecraft.world.level.block.Block;
+
 import java.util.Random;
+
+import net.minecraft.world.level.block.Blocks;
 import util.Mth;
 import org.lwjgl.input.Mouse;
 import net.minecraft.client.gui.Button;
@@ -200,24 +202,24 @@ public class AchievementScreen extends Screen
                     random.setSeed(1234 + leftTile + tileX);
                     random.nextInt();
                     final int heightValue = random.nextInt(1 + topTile + tileY) + (topTile + tileY) / 2;
-                    int tileType = Block.sand.tex;
+                    int tileType = Blocks.sand.tex;
 
                     if (heightValue > bedrockLevel || topTile + tileY == MAX_BG_TILE_Y) {
-                        tileType = Block.unbreakable.tex;
+                        tileType = Blocks.unbreakable.tex;
                     } else if (heightValue == diamondLevel) {
                         if (random.nextInt(2) == 0) {
-                            tileType = Block.diamondOre.tex;
+                            tileType = Blocks.diamondOre.tex;
                         } else {
-                            tileType = Block.redStoneOre.tex;
+                            tileType = Blocks.redStoneOre.tex;
                         }
                     } else if (heightValue == ironLevel) {
-                        tileType = Block.ironOre.tex;
+                        tileType = Blocks.ironOre.tex;
                     } else if (heightValue == coalLevel) {
-                        tileType = Block.coalOre.tex;
+                        tileType = Blocks.coalOre.tex;
                     } else if (heightValue > rockLevel) {
-                        tileType = Block.rock.tex;
+                        tileType = Blocks.rock.tex;
                     } else if (heightValue > 0) {
-                        tileType = Block.dirt.tex;
+                        tileType = Blocks.dirt.tex;
                     }
                     this.blit(xBigMap + tileX * 16 - xMob, yBigMap + tileY * 16 - yMod, tileType % 16 << 4, tileType >> 4 << 4, 16, 16);
                 }

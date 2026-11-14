@@ -8,7 +8,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.client.User;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 import net.minecraft.client.Minecraft;
 
 public class CreativeMode extends GameMode
@@ -19,7 +19,7 @@ public class CreativeMode extends GameMode
     }
     
     @Override
-    public void adjustPlayer(final Player player) {
+    public void adjustPlayer(final EntityPlayer player) {
         for (int i = 0; i < 9; ++i) {
             if (player.inventory.items[i] == null) {
                 this.minecraft.player.inventory.items[i] = new ItemInstance((Block)User.allowedBlocks.get(i));

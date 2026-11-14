@@ -7,7 +7,7 @@ package net.minecraft.client.gamemode;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 import net.minecraft.client.Minecraft;
 
 public class SurvivalMode extends GameMode
@@ -25,7 +25,7 @@ public class SurvivalMode extends GameMode
     }
     
     @Override
-    public void initPlayer(final Player player) {
+    public void initPlayer(final EntityPlayer player) {
         player.yRot = -180.0f;
     }
     

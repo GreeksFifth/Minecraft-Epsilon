@@ -6,16 +6,17 @@ package net.minecraft.client.renderer;
 
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.PlayerRenderer;
 import net.minecraft.world.item.Item;
 import util.Mth;
 import net.minecraft.client.Lighting;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.EntityMob;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.client.Minecraft;
 
@@ -37,7 +38,7 @@ public class ItemInHandRenderer
         this.minimap = new Minimap(mc.font, mc.options, mc.textures);
     }
     
-    public void renderItem(final Mob mob, final ItemInstance item) {
+    public void renderItem(final EntityMob mob, final ItemInstance item) {
         glPushMatrix();
         if (item.id < Block.TILE_NUM_COUNT && TileRenderer.canRender(Block.BLOCKS[item.id].getRenderShape())) {
             glBindTexture(GL_TEXTURE_2D, this.mc.textures.loadTexture("/terrain.png"));
@@ -150,7 +151,7 @@ public class ItemInHandRenderer
     
     public void render(final float a) {
         final float h = this.oHeight + (this.height - this.oHeight) * a;
-        final Player player = this.mc.player;
+        final EntityPlayer player = this.mc.player;
 
         final float xr = player.xRotO + (player.xRot - player.xRotO) * a;
 
@@ -209,7 +210,7 @@ public class ItemInHandRenderer
                     glRotatef(59.0f, 0.0f, 0.0f, 1.0f);
                     glRotatef((float) (-65 * flip), 0.0f, 1.0f, 0.0f);
 
-                    final EntityRenderer<Player> er = EntityRenderDispatcher.instance.getRenderer(this.mc.player);
+                    final EntityRenderer<EntityPlayer> er = EntityRenderDispatcher.instance.getRenderer(this.mc.player);
                     final PlayerRenderer playerRenderer = (PlayerRenderer) er;
                     final float ss = 1.0f;
                     glScalef(ss, ss, ss);
@@ -319,7 +320,7 @@ public class ItemInHandRenderer
             glScalef(1.5f / 24.0f * 16, 1.5f / 24.0f * 16, 1.5f / 24.0f * 16);
             glTranslatef(5.6f, 0.0f, 0.0f);
 
-            final EntityRenderer<Player> er = EntityRenderDispatcher.instance.getRenderer(this.mc.player);
+            final EntityRenderer<EntityPlayer> er = EntityRenderDispatcher.instance.getRenderer(this.mc.player);
             final PlayerRenderer playerRenderer = (PlayerRenderer)er;
             final float ss = 1.0f;
             glScalef(ss, ss, ss);
@@ -445,7 +446,7 @@ public class ItemInHandRenderer
         final float size = 1.0f;
         for (int i = 0; i < 2; ++i) {
             glPushMatrix();
-            final int tex = Block.fire.tex + i * 16;
+            final int tex = Blocks.fire.tex + i * 16;
             final int texX = (tex & 0xF) << 4;
             final int texY = tex & 0xF0;
 

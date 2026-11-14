@@ -15,6 +15,7 @@ import net.minecraft.client.player.KeyboardInput;
 import net.minecraft.midforddevutils.DebugMenuSelectorScreen;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.PortalForcer;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.dimension.Dimension;
 import net.minecraft.world.level.chunk.ChunkSource;
 import net.minecraft.client.gui.ChatScreen;
@@ -28,9 +29,8 @@ import org.lwjgl.util.glu.GLU;
 import org.useless.SDL3Window;
 import util.Mth;
 import net.minecraft.world.level.chunk.ChunkCache;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.ItemInstance;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 import net.minecraft.client.gamemode.CreativeMode;
 import net.minecraft.client.gui.PauseScreen;
 import net.minecraft.client.gui.OutOfMemoryScreen;
@@ -73,7 +73,7 @@ import java.io.File;
 import net.minecraft.client.skins.TexturePackRepository;
 import net.minecraft.client.sound.SoundEngine;
 import net.minecraft.world.phys.HitResult;
-import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.ModelHumanoid;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.achievement.AchievementPopup;
 import net.minecraft.client.renderer.GameRenderer;
@@ -87,7 +87,7 @@ import java.net.URL;
 import java.nio.ByteBuffer;
 
 import net.minecraft.client.particle.ParticleEngine;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.EntityMob;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.world.level.Level;
@@ -114,7 +114,7 @@ public abstract class Minecraft implements Runnable
     public Level level;
     public LevelRenderer levelRenderer;
     public LocalPlayer player;
-    public Mob cameraTargetPlayer;
+    public EntityMob cameraTargetPlayer;
     public ParticleEngine particleEngine;
     public User user = null;
     public String serverDomain;
@@ -132,7 +132,7 @@ public abstract class Minecraft implements Runnable
     public AchievementPopup achievementPopup = new AchievementPopup(this);
     public Gui gui;
     public boolean noRender = false;
-    public HumanoidModel humanoidModel = new HumanoidModel(0.0f);
+    public ModelHumanoid humanoidModel = new ModelHumanoid(0.0f);
     public HitResult hitResult = null;
     public Options options;
     public SoundEngine soundEngine = new SoundEngine();
@@ -1033,9 +1033,9 @@ public abstract class Minecraft implements Runnable
     private void handleGrabTexture() {
         if (this.hitResult != null) {
             int id = this.level.getTile(this.hitResult.x, this.hitResult.y, this.hitResult.z);
-            if (id == Block.grass.id) id = Block.dirt.id;
-            if (id == Block.stoneSlab.id) id = Block.stoneSlabHalf.id;
-            if (id == Block.unbreakable.id) id = Block.rock.id;
+            if (id == Blocks.grass.id) id = Blocks.dirt.id;
+            if (id == Blocks.stoneSlab.id) id = Blocks.stoneSlabHalf.id;
+            if (id == Blocks.unbreakable.id) id = Blocks.rock.id;
             this.player.inventory.grabTexture(id, this.gameMode instanceof CreativeMode);
         }
     }
@@ -1367,7 +1367,7 @@ public abstract class Minecraft implements Runnable
         this.setLevel(level, message, null);
     }
     
-    public void setLevel(final Level level, final String message, final Player forceInsertPlayer) {
+    public void setLevel(final Level level, final String message, final EntityPlayer forceInsertPlayer) {
         this.stats.forceSend();
         this.stats.forceSave();
         this.cameraTargetPlayer = null;
@@ -1525,7 +1525,7 @@ public abstract class Minecraft implements Runnable
         if (this.player != null && !boolean1) {
             bedPosition = this.player.getRespawnPosition();
             if (bedPosition != null) {
-                respawnPosition = Player.checkBedValidRespawnPosition(this.level, bedPosition);
+                respawnPosition = EntityPlayer.checkBedValidRespawnPosition(this.level, bedPosition);
                 if (respawnPosition == null) {
                     this.player.displayClientMessage("tile.bed.notValid");
                 }
@@ -1689,7 +1689,7 @@ public abstract class Minecraft implements Runnable
                         String playerName = tokens[1];
 
                         boolean found = false;
-                        for (Player player : this.level.players) {
+                        for (EntityPlayer player : this.level.players) {
                             if (playerName.equalsIgnoreCase(player.name)) {
                                 this.cameraTargetPlayer = player;
                                 found = true;
@@ -1701,8 +1701,8 @@ public abstract class Minecraft implements Runnable
                             try {
                                 int entityId = Integer.parseInt(playerName);
                                 for (Entity e : this.level.entities) {
-                                    if (e.entityId == entityId && e instanceof Mob) {
-                                        this.cameraTargetPlayer = (Mob) e;
+                                    if (e.entityId == entityId && e instanceof EntityMob) {
+                                        this.cameraTargetPlayer = (EntityMob) e;
                                         found = true;
                                         break;
                                     }

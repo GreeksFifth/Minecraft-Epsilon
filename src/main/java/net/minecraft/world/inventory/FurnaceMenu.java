@@ -5,9 +5,9 @@
 package net.minecraft.world.inventory;
 
 import net.minecraft.world.item.ItemInstance;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.level.block.entity.FurnaceTileEntity;
+import net.minecraft.world.level.block.tileentity.TileEntityFurnace;
 
 public class FurnaceMenu extends AbstractContainerMenu
 {
@@ -18,12 +18,12 @@ public class FurnaceMenu extends AbstractContainerMenu
     public static final int INV_SLOT_END = FurnaceMenu.INV_SLOT_START + 9 * 3;
     public static final int USE_ROW_SLOT_START = FurnaceMenu.INV_SLOT_END;
     public static final int USE_ROW_SLOT_END = FurnaceMenu.USE_ROW_SLOT_START + 9;
-    private FurnaceTileEntity furnace;
+    private TileEntityFurnace furnace;
     private int tc;
     private int lt;
     private int ld;
     
-    public FurnaceMenu(final Inventory inventory, final FurnaceTileEntity furnace) {
+    public FurnaceMenu(final Inventory inventory, final TileEntityFurnace furnace) {
         this.tc = 0;
         this.lt = 0;
         this.ld = 0;
@@ -73,7 +73,7 @@ public class FurnaceMenu extends AbstractContainerMenu
     }
     
     @Override
-    public boolean stillValid(final Player player) {
+    public boolean stillValid(final EntityPlayer player) {
         return this.furnace.stillValid(player);
     }
     

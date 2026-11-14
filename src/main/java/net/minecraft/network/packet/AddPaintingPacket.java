@@ -8,7 +8,7 @@ import java.io.DataOutputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-import net.minecraft.world.entity.Painting;
+import net.minecraft.world.entity.EntityPainting;
 
 public class AddPaintingPacket extends Packet
 {
@@ -20,7 +20,7 @@ public class AddPaintingPacket extends Packet
     public AddPaintingPacket() {
     }
     
-    public AddPaintingPacket(final Painting painting) {
+    public AddPaintingPacket(final EntityPainting painting) {
         this.id = painting.entityId;
         this.x = painting.xTile;
         this.y = painting.yTile;
@@ -32,7 +32,7 @@ public class AddPaintingPacket extends Packet
     @Override
     public void read(final DataInputStream dis) throws IOException {
         this.id = dis.readInt();
-        this.motive = Packet.readUTF(dis, Painting.Motive.MAX_MOTIVE_NAME_LENGTH);
+        this.motive = Packet.readUTF(dis, EntityPainting.Motive.MAX_MOTIVE_NAME_LENGTH);
         this.x = dis.readInt();
         this.y = dis.readInt();
         this.z = dis.readInt();

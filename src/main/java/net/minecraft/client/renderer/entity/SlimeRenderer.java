@@ -4,12 +4,12 @@
 
 package net.minecraft.client.renderer.entity;
 
-import net.minecraft.world.entity.monster.Slime;
+import net.minecraft.world.entity.monster.EntitySlime;
 import net.minecraft.client.model.Model;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class SlimeRenderer extends MobRenderer<Slime>
+public class SlimeRenderer extends MobRenderer<EntitySlime>
 {
     private Model slimeArmor;
     
@@ -18,7 +18,7 @@ public class SlimeRenderer extends MobRenderer<Slime>
         this.slimeArmor = armor;
     }
     
-    protected boolean prepareArmor(final Slime slime, final int layer, final float a) {
+    protected boolean prepareArmor(final EntitySlime slime, final int layer, final float a) {
         if (layer == 0) {
             this.setArmor(this.slimeArmor);
 
@@ -35,7 +35,7 @@ public class SlimeRenderer extends MobRenderer<Slime>
         return false;
     }
     
-    protected void scale(final Slime slime, final float a) {
+    protected void scale(final EntitySlime slime, final float a) {
         final int size = slime.getSize();
         final float ss = (slime.oSquish + (slime.squish - slime.oSquish) * a) / (size * 0.5f + 1.0f);
         final float w = 1.0f / (ss + 1.0f);

@@ -5,9 +5,10 @@
 package net.minecraft.world.level;
 
 import net.minecraft.world.level.biome.BiomeSource;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.TileEntity;
+import net.minecraft.world.level.block.tileentity.TileEntity;
 import net.minecraft.world.level.chunk.LevelChunk;
 
 public class Region implements LevelSource
@@ -77,7 +78,7 @@ public class Region implements LevelSource
 
         if (propagate) {
             final int id = this.getTile(x, y, z);
-            if (id == Block.stoneSlabHalf.id || id == Block.farmland.id || id == Block.stairs_wood.id || id == Block.stairs_stone.id) {
+            if (id == Blocks.stoneSlabHalf.id || id == Blocks.farmland.id || id == Blocks.stairs_wood.id || id == Blocks.stairs_stone.id) {
                 int br = this.getRawBrightness(x, y + 1, z, false);
                 final int br1 = this.getRawBrightness(x + 1, y, z, false);
                 final int br2 = this.getRawBrightness(x - 1, y, z, false);

@@ -10,23 +10,24 @@ import net.minecraft.network.packet.LevelEventPacket;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.MapItem;
+import net.minecraft.world.item.ItemMap;
 import net.minecraft.network.packet.ComplexItemDataPacket;
 import net.minecraft.network.packet.GameEventPacket;
 import net.minecraft.network.packet.TileEventPacket;
 import net.minecraft.network.packet.ContainerClosePacket;
 import net.minecraft.network.packet.SetEquippedItemPacket;
 import net.minecraft.network.packet.ContainerSetDataPacket;
-import net.minecraft.world.level.block.entity.TileEntity;
-import net.minecraft.world.level.block.entity.SignTileEntity;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.tileentity.TileEntity;
+import net.minecraft.world.level.block.tileentity.TileEntitySign;
 import net.minecraft.network.packet.SignUpdatePacket;
 import net.minecraft.network.packet.ContainerSetContentPacket;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.network.packet.ContainerAckPacket;
 import net.minecraft.network.packet.ContainerSetSlotPacket;
 import util.Mth;
-import net.minecraft.world.level.block.entity.DispenserTileEntity;
-import net.minecraft.world.level.block.entity.FurnaceTileEntity;
+import net.minecraft.world.level.block.tileentity.TileEntityDispenser;
+import net.minecraft.world.level.block.tileentity.TileEntityFurnace;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.network.packet.ContainerOpenPacket;
 import net.minecraft.world.level.Explosion;
@@ -49,7 +50,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import net.minecraft.network.packet.PreLoginPacket;
 import net.minecraft.network.packet.EntityActionAtPositionPacket;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 import net.minecraft.network.packet.AnimatePacket;
 import net.minecraft.network.packet.ChatPacket;
 import net.minecraft.client.particle.TakeAnimationParticle;
@@ -71,20 +72,19 @@ import net.minecraft.network.packet.AddPlayerPacket;
 import net.minecraft.network.packet.SetEntityDataPacket;
 import net.minecraft.network.packet.SetEntityMotionPacket;
 import net.minecraft.network.packet.AddPaintingPacket;
-import net.minecraft.world.entity.global.LightningBolt;
+import net.minecraft.world.entity.global.EntityLightningBolt;
 import net.minecraft.network.packet.AddGlobalEntityPacketPacket;
-import net.minecraft.world.entity.item.FallingTile;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.entity.item.PrimedTnt;
-import net.minecraft.world.entity.item.Boat;
-import net.minecraft.world.entity.projectile.ThrownEgg;
-import net.minecraft.world.entity.projectile.Fireball;
-import net.minecraft.world.entity.projectile.Snowball;
-import net.minecraft.world.entity.projectile.Arrow;
-import net.minecraft.world.entity.projectile.FishingHook;
-import net.minecraft.world.entity.item.Minecart;
+import net.minecraft.world.entity.item.EntityFallingBlock;
+import net.minecraft.world.entity.item.EntityTNTPrimed;
+import net.minecraft.world.entity.item.EntityBoat;
+import net.minecraft.world.entity.projectile.EntityProjectileEgg;
+import net.minecraft.world.entity.projectile.EntityProjectileFireballGhast;
+import net.minecraft.world.entity.projectile.EntityProjectileSnowball;
+import net.minecraft.world.entity.projectile.EntityProjectileArrow;
+import net.minecraft.world.entity.projectile.EntityProjectileFishingHook;
+import net.minecraft.world.entity.item.EntityMinecart;
 import net.minecraft.network.packet.AddEntityPacket;
-import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.item.EntityItem;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.network.packet.AddItemEntityPacket;
 import net.minecraft.stats.Stats;
@@ -132,7 +132,7 @@ public class ClientConnection extends PacketListener
     
     @Override
     public void handleAddItemEntity(final AddItemEntityPacket packet) {
-        final ItemEntity e = new ItemEntity(this.level, packet.x / 32.0, packet.y / 32.0, packet.z / 32.0, new ItemInstance(packet.itemId, packet.itemCount, packet.auxValue));
+        final EntityItem e = new EntityItem(this.level, packet.x / 32.0, packet.y / 32.0, packet.z / 32.0, new ItemInstance(packet.itemId, packet.itemCount, packet.auxValue));
         e.xd = packet.xa / 128.0;
         e.yd = packet.ya / 128.0;
         e.zd = packet.za / 128.0;
@@ -149,21 +149,21 @@ public class ClientConnection extends PacketListener
         final double z = packet.z / 32.0;
         Entity e = null;
 
-        if (packet.type == AddEntityPacket.MINECART_RIDEABLE) e = new Minecart(this.level, x, y, z, 0);
-        if (packet.type == AddEntityPacket.MINECART_CHEST) e = new Minecart(this.level, x, y, z, 1);
-        if (packet.type == AddEntityPacket.MINECART_FURNACE) e = new Minecart(this.level, x, y, z, 2);
-        if (packet.type == AddEntityPacket.FISH_HOOK) e = new FishingHook(this.level, x, y, z);
-        if (packet.type == AddEntityPacket.ARROW) e = new Arrow(this.level, x, y, z);
-        if (packet.type == AddEntityPacket.SNOWBALL) e = new Snowball(this.level, x, y, z);
+        if (packet.type == AddEntityPacket.MINECART_RIDEABLE) e = new EntityMinecart(this.level, x, y, z, 0);
+        if (packet.type == AddEntityPacket.MINECART_CHEST) e = new EntityMinecart(this.level, x, y, z, 1);
+        if (packet.type == AddEntityPacket.MINECART_FURNACE) e = new EntityMinecart(this.level, x, y, z, 2);
+        if (packet.type == AddEntityPacket.FISH_HOOK) e = new EntityProjectileFishingHook(this.level, x, y, z);
+        if (packet.type == AddEntityPacket.ARROW) e = new EntityProjectileArrow(this.level, x, y, z);
+        if (packet.type == AddEntityPacket.SNOWBALL) e = new EntityProjectileSnowball(this.level, x, y, z);
         if (packet.type == AddEntityPacket.FIREBALL) {
-            e = new Fireball(this.level, x, y, z, packet.xa / 8000.0, packet.ya / 8000.0, packet.za / 8000.0);
+            e = new EntityProjectileFireballGhast(this.level, x, y, z, packet.xa / 8000.0, packet.ya / 8000.0, packet.za / 8000.0);
             packet.data = 0;
         }
-        if (packet.type == AddEntityPacket.EGG) e = new ThrownEgg(this.level, x, y, z);
-        if (packet.type == AddEntityPacket.BOAT) e = new Boat(this.level, x, y, z);
-        if (packet.type == AddEntityPacket.PRIMED_TNT) e = new PrimedTnt(this.level, x, y, z);
-        if (packet.type == AddEntityPacket.FALLING_SAND) e = new FallingTile(this.level, x, y, z, Block.sand.id);
-        if (packet.type == AddEntityPacket.FALLING_GRAVEL) e = new FallingTile(this.level, x, y, z, Block.gravel.id);
+        if (packet.type == AddEntityPacket.EGG) e = new EntityProjectileEgg(this.level, x, y, z);
+        if (packet.type == AddEntityPacket.BOAT) e = new EntityBoat(this.level, x, y, z);
+        if (packet.type == AddEntityPacket.PRIMED_TNT) e = new EntityTNTPrimed(this.level, x, y, z);
+        if (packet.type == AddEntityPacket.FALLING_SAND) e = new EntityFallingBlock(this.level, x, y, z, Blocks.sand.id);
+        if (packet.type == AddEntityPacket.FALLING_GRAVEL) e = new EntityFallingBlock(this.level, x, y, z, Blocks.gravel.id);
 
         if (e != null) {
             e.xp = packet.x;
@@ -177,8 +177,8 @@ public class ClientConnection extends PacketListener
             if (packet.data > 0) {
                 if (packet.type == AddEntityPacket.ARROW) {
                     final Entity owner = this.getEntity(packet.data);
-                    if (owner instanceof Mob) {
-                        ((Arrow)e).owner = (Mob)owner;
+                    if (owner instanceof EntityMob) {
+                        ((EntityProjectileArrow)e).owner = (EntityMob)owner;
                     }
                 }
 
@@ -193,7 +193,7 @@ public class ClientConnection extends PacketListener
         final double y = packet.y / 32.0;
         final double z = packet.z / 32.0;
         Entity e = null;
-        if (packet.type == AddGlobalEntityPacketPacket.LIGHTNING) e = new LightningBolt(this.level, x, y, z);
+        if (packet.type == AddGlobalEntityPacketPacket.LIGHTNING) e = new EntityLightningBolt(this.level, x, y, z);
         if (e != null) {
             e.xp = packet.x;
             e.yp = packet.y;
@@ -207,7 +207,7 @@ public class ClientConnection extends PacketListener
     
     @Override
     public void handleAddPainting(final AddPaintingPacket packet) {
-        Painting painting = new Painting(this.level, packet.x, packet.y, packet.z, packet.dir, packet.motive);
+        EntityPainting painting = new EntityPainting(this.level, packet.x, packet.y, packet.z, packet.dir, packet.motive);
         this.level.putEntity(packet.id, painting);
     }
     
@@ -394,7 +394,7 @@ public class ClientConnection extends PacketListener
     @Override
     public void handleTakeItemEntity(final TakeItemEntityPacket packet) {
         final Entity from = this.getEntity(packet.itemId);
-        Mob to = (Mob)this.getEntity(packet.playerId);
+        EntityMob to = (EntityMob)this.getEntity(packet.playerId);
         if (to == null) to = this.minecraft.player;
 
         if (from != null) {
@@ -415,18 +415,18 @@ public class ClientConnection extends PacketListener
         if (e == null) return;
 
         if (packet.action == AnimatePacket.SWING) {
-            Player player = (Player)e;
+            EntityPlayer player = (EntityPlayer)e;
             player.swing();
         }
         else if (packet.action == AnimatePacket.HURT) {
             e.animateHurt();
         }
         else if (packet.action == AnimatePacket.WAKE_UP) {
-            Player player = (Player)e;
+            EntityPlayer player = (EntityPlayer)e;
             player.stopSleepInBed(false, false, false);
         }
         else if (packet.action == AnimatePacket.RESPAWN) {
-            Player player = (Player)e;
+            EntityPlayer player = (EntityPlayer)e;
             player.animateRespawn();
         }
     }
@@ -437,7 +437,7 @@ public class ClientConnection extends PacketListener
         if (e == null) return;
 
         if (packet.action == EntityActionAtPositionPacket.START_SLEEP) {
-            Player player = (Player)e;
+            EntityPlayer player = (EntityPlayer)e;
             player.startSleepInBed(packet.x, packet.y, packet.z);
         }
     }
@@ -482,7 +482,7 @@ public class ClientConnection extends PacketListener
         final float yRot = packet.yRot * 360 / 256.0f;
         final float xRot = packet.xRot * 360 / 256.0f;
 
-        final Mob e = (Mob)EntityIO.newById(packet.type, this.minecraft.level);
+        final EntityMob e = (EntityMob)EntityIO.newById(packet.type, this.minecraft.level);
         e.xp = packet.x;
         e.yp = packet.y;
         e.zp = packet.z;
@@ -569,11 +569,11 @@ public class ClientConnection extends PacketListener
             this.minecraft.player.containerMenu.containerId = packet.containerId;
         }
         else if (packet.type == ContainerOpenPacket.FURNACE) {
-            this.minecraft.player.openFurnace(new FurnaceTileEntity());
+            this.minecraft.player.openFurnace(new TileEntityFurnace());
             this.minecraft.player.containerMenu.containerId = packet.containerId;
         }
         else if (packet.type == ContainerOpenPacket.TRAP) {
-            this.minecraft.player.openTrap(new DispenserTileEntity());
+            this.minecraft.player.openTrap(new TileEntityDispenser());
             this.minecraft.player.containerMenu.containerId = packet.containerId;
         }
         else if (packet.type == ContainerOpenPacket.WORKBENCH) {
@@ -635,9 +635,9 @@ public class ClientConnection extends PacketListener
     public void handleSignUpdate(final SignUpdatePacket packet) {
         if (this.minecraft.level.hasChunkAt(packet.x, packet.y, packet.z)) {
             final TileEntity te = this.minecraft.level.getTileEntity(packet.x, packet.y, packet.z);
-            if (te instanceof SignTileEntity) {
-                final SignTileEntity ste = (SignTileEntity)te;
-                for (int i = 0; i < SignTileEntity.MAX_SIGN_LINES; ++i) {
+            if (te instanceof TileEntitySign) {
+                final TileEntitySign ste = (TileEntitySign)te;
+                for (int i = 0; i < TileEntitySign.MAX_SIGN_LINES; ++i) {
                     ste.messages[i] = packet.lines[i];
                 }
 
@@ -693,7 +693,7 @@ public class ClientConnection extends PacketListener
     @Override
     public void handleComplexItemData(final ComplexItemDataPacket packet) {
         if (packet.itemType == Items.map.id) {
-            MapItem.getSavedData(packet.itemId, this.minecraft.level).handleComplexItemData(packet.data);
+            ItemMap.getSavedData(packet.itemId, this.minecraft.level).handleComplexItemData(packet.data);
         }
         else {
             System.out.println("Unknown itemid: " + packet.itemId);

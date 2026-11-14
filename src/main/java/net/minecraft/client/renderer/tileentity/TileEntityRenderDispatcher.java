@@ -4,12 +4,12 @@
 
 package net.minecraft.client.renderer.tileentity;
 
-import net.minecraft.world.level.block.entity.TileEntity;
-import net.minecraft.world.level.block.entity.PistonPieceEntity;
-import net.minecraft.world.level.block.entity.MobSpawnerTileEntity;
-import net.minecraft.world.level.block.entity.SignTileEntity;
+import net.minecraft.world.level.block.tileentity.TileEntity;
+import net.minecraft.world.level.block.tileentity.TileEntityPistonPiece;
+import net.minecraft.world.level.block.tileentity.TileEntityMobSpawner;
+import net.minecraft.world.level.block.tileentity.TileEntitySign;
 import java.util.HashMap;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.EntityMob;
 import net.minecraft.world.level.Level;
 import net.minecraft.client.renderer.Textures;
 import net.minecraft.client.gui.Font;
@@ -25,14 +25,14 @@ public class TileEntityRenderDispatcher
     public static double xOff, yOff, zOff;
     public Textures textures;
     public Level level;
-    public Mob player;
+    public EntityMob player;
     public float playerRotY, playerRotX;
     public double xPlayer, yPlayer, zPlayer;
     
     private TileEntityRenderDispatcher() {
-        this.renderers.put(SignTileEntity.class, new SignRenderer());
-        this.renderers.put(MobSpawnerTileEntity.class, new MobSpawnerRenderer());
-        this.renderers.put(PistonPieceEntity.class, new PistonPieceRenderer());
+        this.renderers.put(TileEntitySign.class, new SignRenderer());
+        this.renderers.put(TileEntityMobSpawner.class, new MobSpawnerRenderer());
+        this.renderers.put(TileEntityPistonPiece.class, new PistonPieceRenderer());
 
         for (TileEntityRenderer<? extends TileEntity> tileEntityRenderer : this.renderers.values()) {
             tileEntityRenderer.bindTexture(this);
@@ -57,7 +57,7 @@ public class TileEntityRenderDispatcher
         return this.getRenderer(e.getClass());
     }
     
-    public void prepare(final Level level, final Textures textures, final Font font, final Mob player, final float a) {
+    public void prepare(final Level level, final Textures textures, final Font font, final EntityMob player, final float a) {
         if (this.level != level) {
             this.setLevel(level);
         }

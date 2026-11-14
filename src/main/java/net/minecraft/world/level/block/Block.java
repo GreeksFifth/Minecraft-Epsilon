@@ -6,24 +6,15 @@ package net.minecraft.world.level.block;
 
 import net.minecraft.Facing;
 import net.minecraft.locale.Descriptive;
-import net.minecraft.world.item.TileItem;
-import net.minecraft.world.item.PistonTileItem;
-import net.minecraft.world.item.LeavesTileItem;
-import net.minecraft.world.item.SaplingTileItem;
-import net.minecraft.world.item.StoneSlabTileItem;
-import net.minecraft.world.item.TreeTileItem;
-import net.minecraft.world.item.ClothTileItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.entity.SignTileEntity;
 import net.minecraft.locale.language.I18n;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.EntityMob;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.item.EntityItem;
 import net.minecraft.world.item.ItemInstance;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 import java.util.Random;
 import java.util.ArrayList;
 import net.minecraft.world.phys.AABB;
@@ -86,482 +77,6 @@ public class Block implements Descriptive<Block> {
     public static final boolean[] transculent = new boolean[TILE_NUM_COUNT];
     public static final int[] lightEmission = new int[TILE_NUM_COUNT];
     public static final boolean[] sendTileData = new boolean[TILE_NUM_COUNT];
-
-    public static final Block rock = new BlockLogicStone(1, 1)
-            .setDestroyTime(1.5f)
-            .setExplodeable(10.0f)
-            .setSoundType(Block.SOUND_STONE)
-            .setDescriptionId("stone");
-    public static final BlockDirtGrassy grass = (BlockDirtGrassy)new BlockDirtGrassy(2)
-            .setDestroyTime(0.6f)
-            .setSoundType(Block.SOUND_GRASS)
-            .setDescriptionId("grass");
-    public static final Block dirt = new BlockLogicDirt(3, 2)
-            .setDestroyTime(0.5f)
-            .setSoundType(Block.SOUND_GRAVEL)
-            .setDescriptionId("dirt");
-    public static final Block stoneBrick = new Block(4, 16, Material.stone)
-            .setDestroyTime(2.0f)
-            .setExplodeable(10.0f)
-            .setSoundType(Block.SOUND_STONE)
-            .setDescriptionId("stonebrick");
-    public static final Block wood = new Block(5, 4, Material.wood)
-            .setDestroyTime(2.0f)
-            .setExplodeable(5.0f)
-            .setSoundType(Block.SOUND_WOOD)
-            .setDescriptionId("wood")
-            .sendTileData();
-    public static final Block sapling = new BlockLogicSapling(6, 15)
-            .setDestroyTime(0.0f)
-            .setSoundType(Block.SOUND_GRASS)
-            .setDescriptionId("sapling")
-            .sendTileData();
-    public static final Block unbreakable = new Block(7, 17, Material.stone)
-            .setIndestructible()
-            .setExplodeable(6000000.0f)
-            .setSoundType(Block.SOUND_STONE)
-            .setDescriptionId("bedrock")
-            .setNotCollectStatistics();
-    public static final Block water = new BlockLogicFluidDynamic(8, Material.water)
-            .setDestroyTime(100.0f)
-            .setLightBlock(3)
-            .setDescriptionId("water")
-            .setNotCollectStatistics()
-            .sendTileData();
-    public static final Block calmWater = new BlockLogicFluidStatic(9, Material.water)
-            .setDestroyTime(100.0f)
-            .setLightBlock(3)
-            .setDescriptionId("water")
-            .setNotCollectStatistics()
-            .sendTileData();
-    public static final Block lava = new BlockLogicFluidDynamic(10, Material.lava)
-            .setDestroyTime(0.0f)
-            .setLightEmission(1.0f)
-            .setLightBlock(255)
-            .setDescriptionId("lava")
-            .setNotCollectStatistics()
-            .sendTileData();
-    public static final Block calmLava = new BlockLogicFluidStatic(11, Material.lava)
-            .setDestroyTime(100.0f)
-            .setLightEmission(1.0f)
-            .setLightBlock(255)
-            .setDescriptionId("lava")
-            .setNotCollectStatistics()
-            .sendTileData();
-    public static final Block sand = new BlockLogicSand(12, 18)
-            .setDestroyTime(0.5f)
-            .setSoundType(Block.SOUND_SAND)
-            .setDescriptionId("sand");
-    public static final Block gravel = new BlockLogicGravel(13, 19)
-            .setDestroyTime(0.6f)
-            .setSoundType(Block.SOUND_GRAVEL)
-            .setDescriptionId("gravel");
-    public static final Block goldOre = new BlockLogicOre(14, 32)
-            .setDestroyTime(3.0f)
-            .setExplodeable(5.0f)
-            .setSoundType(Block.SOUND_STONE)
-            .setDescriptionId("oreGold");
-    public static final Block ironOre = new BlockLogicOre(15, 33)
-            .setDestroyTime(3.0f)
-            .setExplodeable(5.0f)
-            .setSoundType(Block.SOUND_STONE)
-            .setDescriptionId("oreIron");
-    public static final Block coalOre = new BlockLogicOre(16, 34)
-            .setDestroyTime(3.0f)
-            .setExplodeable(5.0f)
-            .setSoundType(Block.SOUND_STONE)
-            .setDescriptionId("oreCoal");
-    public static final Block treeTrunk = new BlockLogicLog(17)
-            .setDestroyTime(2.0f)
-            .setSoundType(Block.SOUND_WOOD)
-            .setDescriptionId("log")
-            .sendTileData();
-    public static final BlockLogicLeaves leaves = (BlockLogicLeaves)new BlockLogicLeaves(18, 52)
-            .setDestroyTime(0.2f)
-            .setLightBlock(1)
-            .setSoundType(Block.SOUND_GRASS)
-            .setDescriptionId("leaves")
-            .setNotCollectStatistics()
-            .sendTileData();
-    public static final Block sponge = new BlockLogicSponge(19)
-            .setDestroyTime(0.6f)
-            .setSoundType(Block.SOUND_GRASS)
-            .setDescriptionId("sponge");
-    public static final Block glass = new BlockLogicGlass(20, 49, Material.glass, false)
-            .setDestroyTime(0.3f)
-            .setSoundType(Block.SOUND_GLASS)
-            .setDescriptionId("glass");
-    public static final Block lapisOre = new BlockLogicOre(21, 160)
-            .setDestroyTime(3.0f)
-            .setExplodeable(5.0f)
-            .setSoundType(Block.SOUND_STONE)
-            .setDescriptionId("oreLapis");
-    public static final Block lapisBlock = new Block(22, 144, Material.stone)
-            .setDestroyTime(3.0f)
-            .setExplodeable(5.0f)
-            .setSoundType(Block.SOUND_STONE)
-            .setDescriptionId("blockLapis");
-    public static final Block dispenser = new BlockLogicDispenser(23)
-            .setDestroyTime(3.5f)
-            .setSoundType(Block.SOUND_STONE)
-            .setDescriptionId("dispenser")
-            .sendTileData();
-    public static final Block sandStone = new BlockLogicSandstone(24)
-            .setSoundType(Block.SOUND_STONE)
-            .setDestroyTime(0.8f)
-            .setDescriptionId("sandStone");
-    public static final Block musicBlock = new BlockLogicNoteblock(25)
-            .setDestroyTime(0.8f)
-            .setDescriptionId("musicBlock")
-            .sendTileData();
-    public static final Block bed = new BlockLogicBed(26)
-            .setDestroyTime(0.2f)
-            .setDescriptionId("bed")
-            .setNotCollectStatistics()
-            .sendTileData();
-    public static final Block goldenRail = new BlockLogicRail(27, 179, true)
-            .setDestroyTime(0.7f)
-            .setSoundType(Block.SOUND_METAL)
-            .setDescriptionId("goldenRail")
-            .sendTileData();
-    public static final Block detectorRail = new BlockLogicRailDetector(28, 195)
-            .setDestroyTime(0.7f)
-            .setSoundType(Block.SOUND_METAL)
-            .setDescriptionId("detectorRail")
-            .sendTileData();
-    public static final Block pistonStickyBase = new BlockLogicPistonBase(29, BlockLogicPistonBase.PLATFORM_STICKY_TEX, true)
-            .setDescriptionId("pistonStickyBase")
-            .sendTileData();
-    public static final Block web = new BlockLogicCobweb(30, 11)
-            .setLightBlock(1)
-            .setDestroyTime(4.0f)
-            .setDescriptionId("web");
-    public static final BlockLogicGrass tallgrass = (BlockLogicGrass)new BlockLogicGrass(31, 39)
-            .setDestroyTime(0.0f)
-            .setSoundType(Block.SOUND_GRASS)
-            .setDescriptionId("tallgrass");
-    public static final BlockLogicDeadBush deadBush = (BlockLogicDeadBush)new BlockLogicDeadBush(32, 55)
-            .setDestroyTime(0.0f)
-            .setSoundType(Block.SOUND_GRASS)
-            .setDescriptionId("deadbush");
-    public static final Block pistonBase = new BlockLogicPistonBase(33, BlockLogicPistonBase.PLATFORM_STICKY_TEX, false)
-            .setDescriptionId("pistonBase")
-            .sendTileData();
-    public static final BlockLogicPistonHead pistonExtension = (BlockLogicPistonHead)new BlockLogicPistonHead(34, 107)
-            .sendTileData();
-    public static final Block cloth = new BlockLogicWool()
-            .setDestroyTime(0.8f)
-            .setSoundType(Block.SOUND_CLOTH)
-            .setDescriptionId("cloth")
-            .sendTileData();
-    public static final BlockPistonMovingPiece pistonMovingPiece = new BlockPistonMovingPiece(36);
-    public static final BlockLogicBush flower = (BlockLogicBush)new BlockLogicBush(37, 13)
-            .setDestroyTime(0.0f)
-            .setSoundType(Block.SOUND_GRASS)
-            .setDescriptionId("flower");
-    public static final BlockLogicBush rose = (BlockLogicBush)new BlockLogicBush(38, 12)
-            .setDestroyTime(0.0f)
-            .setSoundType(Block.SOUND_GRASS)
-            .setDescriptionId("rose");
-    public static final BlockLogicBush mushroom1 = (BlockLogicBush)new BlockLogicMushroom(39, 29)
-            .setDestroyTime(0.0f)
-            .setSoundType(Block.SOUND_GRASS)
-            .setLightEmission(0.125f)
-            .setDescriptionId("mushroom");
-    public static final BlockLogicBush mushroom2 = (BlockLogicBush)new BlockLogicMushroom(40, 28)
-            .setDestroyTime(0.0f)
-            .setSoundType(Block.SOUND_GRASS)
-            .setDescriptionId("mushroom");
-    public static final Block goldBlock = new BlockMetal(41, 23)
-            .setDestroyTime(3.0f)
-            .setExplodeable(10.0f)
-            .setSoundType(Block.SOUND_METAL)
-            .setDescriptionId("blockGold");
-    public static final Block ironBlock = new BlockMetal(42, 22)
-            .setDestroyTime(5.0f)
-            .setExplodeable(10.0f)
-            .setSoundType(Block.SOUND_METAL)
-            .setDescriptionId("blockIron");
-    public static final Block stoneSlab = new BlockLogicSlab(43, true)
-            .setDestroyTime(2.0f)
-            .setExplodeable(10.0f)
-            .setSoundType(Block.SOUND_STONE)
-            .setDescriptionId("stoneSlab");
-    public static final Block stoneSlabHalf = new BlockLogicSlab(44, false)
-            .setDestroyTime(2.0f)
-            .setExplodeable(10.0f)
-            .setSoundType(Block.SOUND_STONE)
-            .setDescriptionId("stoneSlab");
-    public static final Block redBrick = new Block(45, 7, Material.stone)
-            .setDestroyTime(2.0f)
-            .setExplodeable(10.0f)
-            .setSoundType(Block.SOUND_STONE)
-            .setDescriptionId("brick");
-    public static final Block tnt = new BlockLogicTNT(46, 8)
-            .setDestroyTime(0.0f)
-            .setSoundType(Block.SOUND_GRASS)
-            .setDescriptionId("tnt");
-    public static final Block bookshelf = new BlockLogicBookshelf(47, 35)
-            .setDestroyTime(1.5f)
-            .setSoundType(Block.SOUND_WOOD)
-            .setDescriptionId("bookshelf");
-    public static final Block mossStone = new Block(48, 36, Material.stone)
-            .setDestroyTime(2.0f)
-            .setExplodeable(10.0f)
-            .setSoundType(Block.SOUND_STONE)
-            .setDescriptionId("stoneMoss");
-    public static final Block obsidian = new BlockLogicObsidian(49, 37)
-            .setDestroyTime(10.0f)
-            .setExplodeable(2000.0f)
-            .setSoundType(Block.SOUND_STONE)
-            .setDescriptionId("obsidian");
-    public static final Block torch = new BlockLogicTorch(50, 80)
-            .setDestroyTime(0.0f)
-            .setLightEmission(0.9375f)
-            .setSoundType(Block.SOUND_WOOD)
-            .setDescriptionId("torch")
-            .sendTileData();
-    public static final BlockLogicFire fire = (BlockLogicFire)new BlockLogicFire(51, 31)
-            .setDestroyTime(0.0f)
-            .setLightEmission(1.0f)
-            .setSoundType(Block.SOUND_WOOD)
-            .setDescriptionId("fire")
-            .setNotCollectStatistics()
-            .sendTileData();
-    public static final Block mobSpawner = new BlockLogicMobSpawner(52, 65)
-            .setDestroyTime(5.0f)
-            .setSoundType(Block.SOUND_METAL)
-            .setDescriptionId("mobSpawner")
-            .setNotCollectStatistics();
-    public static final Block stairs_wood = new BlockLogicStairs(53, Block.wood)
-            .setDescriptionId("stairsWood")
-            .sendTileData();
-    public static final Block chest = new BlockLogicChest(54)
-            .setDestroyTime(2.5f)
-            .setSoundType(Block.SOUND_WOOD)
-            .setDescriptionId("chest")
-            .sendTileData();
-    public static final Block redStoneDust = new BlockLogicRedstoneDust(55, 164)
-            .setDestroyTime(0.0f)
-            .setSoundType(Block.SOUND_NORMAL)
-            .setDescriptionId("redstoneDust")
-            .setNotCollectStatistics()
-            .sendTileData();
-    public static final Block diamondOre = new BlockLogicOre(56, 50)
-            .setDestroyTime(3.0f)
-            .setExplodeable(5.0f)
-            .setSoundType(Block.SOUND_STONE)
-            .setDescriptionId("oreDiamond");
-    public static final Block diamondBlock = new BlockMetal(57, 24)
-            .setDestroyTime(5.0f)
-            .setExplodeable(10.0f)
-            .setSoundType(Block.SOUND_METAL)
-            .setDescriptionId("blockDiamond");
-    public static final Block workBench = new BlockLogicWorkbench(58)
-            .setDestroyTime(2.5f)
-            .setSoundType(Block.SOUND_WOOD)
-            .setDescriptionId("workbench");
-    public static final Block crops = new BlockLogicWheatCrop(59, 88)
-            .setDestroyTime(0.0f)
-            .setSoundType(Block.SOUND_GRASS)
-            .setDescriptionId("crops")
-            .setNotCollectStatistics()
-            .sendTileData();
-    public static final Block farmland = new BlockLogicFarmland(60)
-            .setDestroyTime(0.6f)
-            .setSoundType(Block.SOUND_GRAVEL)
-            .setDescriptionId("farmland");
-    public static final Block furnace = new BlockLogicFurnace(61, false)
-            .setDestroyTime(3.5f)
-            .setSoundType(Block.SOUND_STONE)
-            .setDescriptionId("furnace")
-            .sendTileData();
-    public static final Block furnace_lit = new BlockLogicFurnace(62, true)
-            .setDestroyTime(3.5f)
-            .setSoundType(Block.SOUND_STONE)
-            .setLightEmission(0.875f)
-            .setDescriptionId("furnace")
-            .sendTileData();
-    public static final Block sign = new BlockLogicSign(63, SignTileEntity.class, true)
-            .setDestroyTime(1.0f)
-            .setSoundType(Block.SOUND_WOOD)
-            .setDescriptionId("sign")
-            .setNotCollectStatistics()
-            .sendTileData();
-    public static final Block door_wood = new BlockLogicDoor(64, Material.wood)
-            .setDestroyTime(3.0f)
-            .setSoundType(Block.SOUND_WOOD)
-            .setDescriptionId("doorWood")
-            .setNotCollectStatistics()
-            .sendTileData();
-    public static final Block ladder = new BlockLogicLadder(65, 83)
-            .setDestroyTime(0.4f)
-            .setSoundType(Block.SOUND_WOOD)
-            .setDescriptionId("ladder")
-            .sendTileData();
-    public static final Block rail = new BlockLogicRail(66, 128, false)
-            .setDestroyTime(0.7f)
-            .setSoundType(Block.SOUND_METAL)
-            .setDescriptionId("rail")
-            .sendTileData();
-    public static final Block stairs_stone = new BlockLogicStairs(67, Block.stoneBrick)
-            .setDescriptionId("stairsStone")
-            .sendTileData();
-    public static final Block wallSign = new BlockLogicSign(68, SignTileEntity.class, false)
-            .setDestroyTime(1.0f)
-            .setSoundType(Block.SOUND_WOOD)
-            .setDescriptionId("sign")
-            .setNotCollectStatistics()
-            .sendTileData();
-    public static final Block lever = new BlockLogicLever(69, 96)
-            .setDestroyTime(0.5f)
-            .setSoundType(Block.SOUND_WOOD)
-            .setDescriptionId("lever")
-            .sendTileData();
-    public static final Block pressurePlate_stone = new BlockLogicPressurePlate(70, Block.rock.tex, BlockLogicPressurePlate.Sensitivity.mobs, Material.stone)
-            .setDestroyTime(0.5f)
-            .setSoundType(Block.SOUND_STONE)
-            .setDescriptionId("pressurePlate")
-            .sendTileData();
-    public static final Block door_iron = new BlockLogicDoor(71, Material.metal)
-            .setDestroyTime(5.0f)
-            .setSoundType(Block.SOUND_METAL)
-            .setDescriptionId("doorIron")
-            .setNotCollectStatistics()
-            .sendTileData();
-    public static final Block pressurePlate_wood = new BlockLogicPressurePlate(72, Block.wood.tex, BlockLogicPressurePlate.Sensitivity.everything, Material.wood)
-            .setDestroyTime(0.5f)
-            .setSoundType(Block.SOUND_WOOD)
-            .setDescriptionId("pressurePlate")
-            .sendTileData();
-    public static final Block redStoneOre = new BlockLogicRedstoneOre(73, 51, false)
-            .setDestroyTime(3.0f)
-            .setExplodeable(5.0f)
-            .setSoundType(Block.SOUND_STONE)
-            .setDescriptionId("oreRedstone")
-            .sendTileData();
-    public static final Block redStoneOre_lit = new BlockLogicRedstoneOre(74, 51, true)
-            .setLightEmission(0.625f)
-            .setDestroyTime(3.0f)
-            .setExplodeable(5.0f)
-            .setSoundType(Block.SOUND_STONE)
-            .setDescriptionId("oreRedstone")
-            .sendTileData();
-    public static final Block notGate_off = new BlockLogicRedstoneTorch(75, 115, false)
-            .setDestroyTime(0.0f)
-            .setSoundType(Block.SOUND_WOOD)
-            .setDescriptionId("notGate")
-            .sendTileData();
-    public static final Block notGate_on = new BlockLogicRedstoneTorch(76, 99, true)
-            .setDestroyTime(0.0f)
-            .setLightEmission(0.5f)
-            .setSoundType(Block.SOUND_WOOD)
-            .setDescriptionId("notGate")
-            .sendTileData();
-    public static final Block button = new BlockLogicButton(77, Block.rock.tex)
-            .setDestroyTime(0.5f)
-            .setSoundType(Block.SOUND_STONE)
-            .setDescriptionId("button")
-            .sendTileData();
-    public static final Block topSnow = new BlockLogicSnowLayer(78, 66)
-            .setDestroyTime(0.1f)
-            .setSoundType(Block.SOUND_CLOTH)
-            .setDescriptionId("snow");
-    public static final Block ice = new BlockLogicIce(79, 67)
-            .setDestroyTime(0.5f)
-            .setLightBlock(3)
-            .setSoundType(Block.SOUND_GLASS)
-            .setDescriptionId("ice");
-    public static final Block snow = new BlockLogicSnow(80, 66)
-            .setDestroyTime(0.2f)
-            .setSoundType(Block.SOUND_CLOTH)
-            .setDescriptionId("snow");
-    public static final Block cactus = new BlockLogicCactus(81, 70)
-            .setDestroyTime(0.4f)
-            .setSoundType(Block.SOUND_CLOTH)
-            .setDescriptionId("cactus");
-    public static final Block clay = new BlockLogicClay(82, 72)
-            .setDestroyTime(0.6f)
-            .setSoundType(Block.SOUND_GRAVEL)
-            .setDescriptionId("clay");
-    public static final Block reeds = new BlockLogicReed(83, 73)
-            .setDestroyTime(0.0f)
-            .setSoundType(Block.SOUND_GRASS)
-            .setDescriptionId("reeds")
-            .setNotCollectStatistics();
-    public static final Block recordPlayer = new BlockLogicJukebox(84, 74)
-            .setDestroyTime(2.0f)
-            .setExplodeable(10.0f)
-            .setSoundType(Block.SOUND_STONE)
-            .setDescriptionId("jukebox")
-            .sendTileData();
-    public static final Block fence = new BlockLogicFence(85, 4)
-            .setDestroyTime(2.0f)
-            .setExplodeable(5.0f)
-            .setSoundType(Block.SOUND_WOOD)
-            .setDescriptionId("fence")
-            .sendTileData();
-    public static final Block pumpkin = new BlockLogicPumpkin(86, 102, false)
-            .setDestroyTime(1.0f)
-            .setSoundType(Block.SOUND_WOOD)
-            .setDescriptionId("pumpkin")
-            .sendTileData();
-    public static final Block hellRock = new BlockLogicNetherrack(87, 103)
-            .setDestroyTime(0.4f)
-            .setSoundType(Block.SOUND_STONE)
-            .setDescriptionId("hellrock");
-    public static final Block hellSand = new BlockLogicSoulSand(88, 104)
-            .setDestroyTime(0.5f)
-            .setSoundType(Block.SOUND_SAND)
-            .setDescriptionId("hellsand");
-    public static final Block lightGem = new BlockLogicGlowstone(89, 105, Material.stone)
-            .setDestroyTime(0.3f)
-            .setSoundType(Block.SOUND_GLASS)
-            .setLightEmission(1.0f)
-            .setDescriptionId("lightgem");
-    public static final BlockLogicPortalNether portalTile = (BlockLogicPortalNether)new BlockLogicPortalNether(90, 14)
-            .setDestroyTime(-1.0f)
-            .setSoundType(Block.SOUND_GLASS)
-            .setLightEmission(0.75f)
-            .setDescriptionId("portal");
-    public static final Block litPumpkin = new BlockLogicPumpkin(91, 102, true)
-            .setDestroyTime(1.0f)
-            .setSoundType(Block.SOUND_WOOD)
-            .setLightEmission(1.0f)
-            .setDescriptionId("litpumpkin")
-            .sendTileData();
-    public static final Block cake = new BlockLogicCake(92, 121)
-            .setDestroyTime(0.5f)
-            .setSoundType(Block.SOUND_CLOTH)
-            .setDescriptionId("cake")
-            .setNotCollectStatistics()
-            .sendTileData();
-    public static final Block diode_off = new BlockLogicRepeater(93, false)
-            .setDestroyTime(0.0f)
-            .setSoundType(Block.SOUND_WOOD)
-            .setDescriptionId("diode")
-            .setNotCollectStatistics()
-            .sendTileData();
-    public static final Block diode_on = new BlockLogicRepeater(94, true)
-            .setDestroyTime(0.0f)
-            .setLightEmission(0.625f)
-            .setSoundType(Block.SOUND_WOOD)
-            .setDescriptionId("diode")
-            .setNotCollectStatistics()
-            .sendTileData();
-    public static final Block aprilFoolsJoke = new BlockLogicLockedChest(95)
-            .setDestroyTime(0.0f)
-            .setLightEmission(1.0f)
-            .setSoundType(Block.SOUND_WOOD)
-            .setDescriptionId("lockedchest")
-            .setTicking(true)
-            .sendTileData();
-    public static final Block trapdoor = new BlockLogicTrapdoor(96, Material.wood)
-            .setDestroyTime(3.0f)
-            .setSoundType(Block.SOUND_WOOD)
-            .setDescriptionId("trapdoor")
-            .setNotCollectStatistics()
-            .sendTileData();
 
     public int tex;
     public final int id;
@@ -754,7 +269,7 @@ public class Block implements Descriptive<Block> {
         return this.id;
     }
     
-    public float getDestroyProgress(final Player player) {
+    public float getDestroyProgress(final EntityPlayer player) {
         if (this.destroySpeed < 0.0f) return 0.0f;
         if (!player.canDestroy(this)) return 1.0f / this.destroySpeed / 100.0f;
         return player.getDestroySpeed(this) / this.destroySpeed / 30.0f;
@@ -783,7 +298,7 @@ public class Block implements Descriptive<Block> {
         double xo = level.random.nextFloat() * s + (1.0f - s) * 0.5;
         double yo = level.random.nextFloat() * s + (1.0f - s) * 0.5;
         double zo = level.random.nextFloat() * s + (1.0f - s) * 0.5;
-        final ItemEntity item = new ItemEntity(level, x + xo, y + yo, z + zo, itemInstance);
+        final EntityItem item = new EntityItem(level, x + xo, y + yo, z + zo, itemInstance);
         item.throwTime = 10;
         level.addEntity(item);
     }
@@ -870,7 +385,7 @@ public class Block implements Descriptive<Block> {
         return t == 0 || Block.BLOCKS[t].material.isReplaceable();
     }
     
-    public boolean use(final Level level, final int x, final int y, final int z, final Player player) {
+    public boolean use(final Level level, final int x, final int y, final int z, final EntityPlayer player) {
         return false;
     }
     
@@ -884,7 +399,7 @@ public class Block implements Descriptive<Block> {
     public void prepareRender(Level level, int x, int y, int z) {
     }
     
-    public void attack(final Level level, final int x, final int y, final int z, final Player player) {
+    public void attack(final Level level, final int x, final int y, final int z, final EntityPlayer player) {
     }
     
     public void handleEntityInside(final Level level, final int x, final int y, final int z, final Entity e, final Vec3 current) {
@@ -919,7 +434,7 @@ public class Block implements Descriptive<Block> {
     public void updateDefaultShape() {
     }
     
-    public void playerDestroy(final Level level, final Player player, final int x, final int y, final int z, final int data) {
+    public void playerDestroy(final Level level, final EntityPlayer player, final int x, final int y, final int z, final int data) {
         player.awardStat(Stats.blockMined[this.id], 1);
         this.spawnResources(level, x, y, z, data);
     }
@@ -928,7 +443,7 @@ public class Block implements Descriptive<Block> {
         return true;
     }
     
-    public void setPlacedBy(final Level level, final int x, final int y, final int z, final Mob by) {
+    public void setPlacedBy(final Level level, final int x, final int y, final int z, final EntityMob by) {
     }
 
     public String getName() {
@@ -961,24 +476,7 @@ public class Block implements Descriptive<Block> {
     public int getPistonPushReaction() {
         return this.material.getPushReaction();
     }
-    
-    static {
-        Item.items[Block.cloth.id] = new ClothTileItem(Block.cloth.id - Block.TILE_NUM_COUNT).setDescriptionId("cloth");
-        Item.items[Block.treeTrunk.id] = new TreeTileItem(Block.treeTrunk.id - Block.TILE_NUM_COUNT).setDescriptionId("log");
-        Item.items[Block.stoneSlabHalf.id] = new StoneSlabTileItem(Block.stoneSlabHalf.id - Block.TILE_NUM_COUNT).setDescriptionId("stoneSlab");
-        Item.items[Block.sapling.id] = new SaplingTileItem(Block.sapling.id - Block.TILE_NUM_COUNT).setDescriptionId("sapling");
-        Item.items[Block.leaves.id] = new LeavesTileItem(Block.leaves.id - Block.TILE_NUM_COUNT).setDescriptionId("leaves");
-        Item.items[Block.pistonBase.id] = new PistonTileItem(Block.pistonBase.id - Block.TILE_NUM_COUNT);
-        Item.items[Block.pistonStickyBase.id] = new PistonTileItem(Block.pistonStickyBase.id - Block.TILE_NUM_COUNT);
-        for (int i = 0; i < Block.TILE_NUM_COUNT; ++i) {
-            if (Block.BLOCKS[i] != null && Item.items[i] == null) {
-                Item.items[i] = new TileItem(i - Block.TILE_NUM_COUNT);
-                Block.BLOCKS[i].init();
-            }
-        }
-        Block.transculent[0] = true;
-        Stats.buildBlockStats();
-    }
+
 
     public static class SoundType
     {

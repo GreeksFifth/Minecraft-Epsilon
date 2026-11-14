@@ -7,7 +7,7 @@ package net.minecraft.client.renderer.tileentity;
 import net.minecraft.client.gui.Font;
 import net.minecraft.world.level.Level;
 import net.minecraft.client.renderer.Textures;
-import net.minecraft.world.level.block.entity.TileEntity;
+import net.minecraft.world.level.block.tileentity.TileEntity;
 
 public abstract class TileEntityRenderer<T extends TileEntity>
 {

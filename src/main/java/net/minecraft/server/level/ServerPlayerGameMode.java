@@ -9,12 +9,12 @@ import net.minecraft.network.packet.TileUpdatePacket;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelEvent;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 
 public class ServerPlayerGameMode
 {
     private ServerLevel level;
-    public Player player;
+    public EntityPlayer player;
     private float destroyProgress = 0.0f; // Useless - Assuming this class is copied from regular gamemode classes, this seems most likely to be destroyProgress still
     private int destroyProgressStart;
     private int xDestroyBlock, yDestroyBlock, zDestroyBlock;
@@ -123,7 +123,7 @@ public class ServerPlayerGameMode
         return changed;
     }
     
-    public boolean useItem(final Player player, final Level level, final ItemInstance item) {
+    public boolean useItem(final EntityPlayer player, final Level level, final ItemInstance item) {
         final int oldCount = item.count;
         final ItemInstance itemInstance = item.use(level, player);
         if (itemInstance != item || (itemInstance != null && itemInstance.count != oldCount)) {
@@ -136,7 +136,7 @@ public class ServerPlayerGameMode
         return false;
     }
     
-    public boolean useItemOn(final Player player, final Level level, final ItemInstance item, final int x, final int y, final int z, final int face) {
+    public boolean useItemOn(final EntityPlayer player, final Level level, final ItemInstance item, final int x, final int y, final int z, final int face) {
         final int t = level.getTile(x, y, z);
         return (t > 0 && Block.BLOCKS[t].use(level, x, y, z, player)) || (item != null && item.useOn(player, level, x, y, z, face));
     }

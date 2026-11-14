@@ -4,11 +4,11 @@
 
 package net.minecraft.world.level.levelgen.feature;
 
+import net.minecraft.world.level.block.Blocks;
 import util.Mth;
 import net.minecraft.world.level.material.Material;
 import java.util.Random;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 
 public class ClayFeature extends Feature
 {
@@ -16,7 +16,7 @@ public class ClayFeature extends Feature
     private int count;
     
     public ClayFeature(final int count) {
-        this.tile = Block.clay.id;
+        this.tile = Blocks.clay.id;
         this.count = count;
     }
     
@@ -58,7 +58,7 @@ public class ClayFeature extends Feature
                         final double yd = (y2 + 0.5 - yy) / (hr / 2.0);
                         final double zd = (z2 + 0.5 - zz) / (r / 2.0);
                         if (xd * xd + yd * yd + zd * zd < 1.0) {
-                            if (level.getTile(x2, y2, z2) == Block.sand.id) {
+                            if (level.getTile(x2, y2, z2) == Blocks.sand.id) {
                                 level.setTileNoUpdate(x2, y2, z2, this.tile);
                             }
                         }

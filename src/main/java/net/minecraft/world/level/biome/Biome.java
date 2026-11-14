@@ -4,25 +4,26 @@
 
 package net.minecraft.world.level.biome;
 
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.EntityMob;
 import net.minecraft.world.entity.MobCategory;
 import java.awt.Color;
+
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.BasicTree;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import java.util.Random;
-import net.minecraft.world.entity.animal.Squid;
-import net.minecraft.world.entity.animal.Cow;
-import net.minecraft.world.entity.animal.Chicken;
-import net.minecraft.world.entity.animal.Pig;
-import net.minecraft.world.entity.animal.Sheep;
-import net.minecraft.world.entity.monster.Slime;
-import net.minecraft.world.entity.monster.Creeper;
-import net.minecraft.world.entity.monster.Skeleton;
-import net.minecraft.world.entity.monster.Zombie;
-import net.minecraft.world.entity.monster.Spider;
+import net.minecraft.world.entity.animal.EntitySquid;
+import net.minecraft.world.entity.animal.EntityCow;
+import net.minecraft.world.entity.animal.EntityChicken;
+import net.minecraft.world.entity.animal.EntityPig;
+import net.minecraft.world.entity.animal.EntitySheep;
+import net.minecraft.world.entity.monster.EntitySlime;
+import net.minecraft.world.entity.monster.EntityCreeper;
+import net.minecraft.world.entity.monster.EntitySkeletonArcher;
+import net.minecraft.world.entity.monster.EntityZombie;
+import net.minecraft.world.entity.monster.EntitySpider;
 import java.util.ArrayList;
-import net.minecraft.world.level.block.Block;
 import java.util.List;
 
 public class Biome
@@ -42,8 +43,8 @@ public class Biome
     public static final Biome sky = new SkyBiome().setColor(0x8080ff).setName("Sky").setNoRain();
     public String name;
     public int color;
-    public byte topMaterial = (byte) Block.grass.id;
-    public byte material = (byte) Block.dirt.id;
+    public byte topMaterial = (byte) Blocks.grass.id;
+    public byte material = (byte) Blocks.dirt.id;
     public int leafColor = 0x4ee031;
     protected List<MobSpawnerData> enemies = new ArrayList<>();
     protected List<MobSpawnerData> friendlies = new ArrayList<>();
@@ -59,18 +60,18 @@ public class Biome
     }
 
     protected Biome() {
-        this.enemies.add(new MobSpawnerData(Spider.class, 10));
-        this.enemies.add(new MobSpawnerData(Zombie.class, 10));
-        this.enemies.add(new MobSpawnerData(Skeleton.class, 10));
-        this.enemies.add(new MobSpawnerData(Creeper.class, 10));
-        this.enemies.add(new MobSpawnerData(Slime.class, 10));
+        this.enemies.add(new MobSpawnerData(EntitySpider.class, 10));
+        this.enemies.add(new MobSpawnerData(EntityZombie.class, 10));
+        this.enemies.add(new MobSpawnerData(EntitySkeletonArcher.class, 10));
+        this.enemies.add(new MobSpawnerData(EntityCreeper.class, 10));
+        this.enemies.add(new MobSpawnerData(EntitySlime.class, 10));
 
-        this.friendlies.add(new MobSpawnerData(Sheep.class, 12));
-        this.friendlies.add(new MobSpawnerData(Pig.class, 10));
-        this.friendlies.add(new MobSpawnerData(Chicken.class, 10));
-        this.friendlies.add(new MobSpawnerData(Cow.class, 8));
+        this.friendlies.add(new MobSpawnerData(EntitySheep.class, 12));
+        this.friendlies.add(new MobSpawnerData(EntityPig.class, 10));
+        this.friendlies.add(new MobSpawnerData(EntityChicken.class, 10));
+        this.friendlies.add(new MobSpawnerData(EntityCow.class, 8));
 
-        this.waterFriendlies.add(new MobSpawnerData(Squid.class, 10));
+        this.waterFriendlies.add(new MobSpawnerData(EntitySquid.class, 10));
     }
 
     private Biome setNoRain() {
@@ -85,8 +86,8 @@ public class Biome
             }
         }
 
-        Biome.desert.topMaterial = Biome.desert.material = (byte) Block.sand.id;
-        Biome.iceDesert.topMaterial = Biome.iceDesert.material = (byte) Block.sand.id;
+        Biome.desert.topMaterial = Biome.desert.material = (byte) Blocks.sand.id;
+        Biome.iceDesert.topMaterial = Biome.iceDesert.material = (byte) Blocks.sand.id;
     }
 
     public Feature getTreeFeature(final Random random) {
@@ -167,10 +168,10 @@ public class Biome
 
     public static class MobSpawnerData
     {
-        public Class<? extends Mob> mobClass;
+        public Class<? extends EntityMob> mobClass;
         public int probabilityWeight;
 
-        public MobSpawnerData(final Class<? extends Mob> mobClass, final int probabilityWeight) {
+        public MobSpawnerData(final Class<? extends EntityMob> mobClass, final int probabilityWeight) {
             this.mobClass = mobClass;
             this.probabilityWeight = probabilityWeight;
         }

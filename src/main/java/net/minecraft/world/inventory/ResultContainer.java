@@ -4,7 +4,7 @@
 
 package net.minecraft.world.inventory;
 
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.Container;
 
@@ -44,7 +44,7 @@ public class ResultContainer implements Container
     public void setChanged() {
     }
     
-    public boolean stillValid(final Player player) {
+    public boolean stillValid(final EntityPlayer player) {
         return true;
     }
 }

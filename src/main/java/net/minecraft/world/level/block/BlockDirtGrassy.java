@@ -45,7 +45,7 @@ public class BlockDirtGrassy extends Block
 
         if (level.getRawBrightness(x, y + 1, z) < MIN_BRIGHTNESS && Block.lightBlock[level.getTile(x, y + 1, z)] > 2) {
             if (random.nextInt(4) == 0) {
-                level.setTile(x, y, z, Block.dirt.id);
+                level.setTile(x, y, z, Blocks.dirt.id);
             }
         }
         else if (level.getRawBrightness(x, y + 1, z) >= (Level.MAX_BRIGHTNESS - 6)) {
@@ -53,14 +53,14 @@ public class BlockDirtGrassy extends Block
             final int yt = y + random.nextInt(5) - 3;
             final int zt = z + random.nextInt(3) - 1;
             final int above = level.getTile(xt, yt + 1, zt);
-            if (level.getTile(xt, yt, zt) == Block.dirt.id && level.getRawBrightness(xt, yt + 1, zt) >= MIN_BRIGHTNESS && Block.lightBlock[above] <= 2) {
-                level.setTile(xt, yt, zt, Block.grass.id);
+            if (level.getTile(xt, yt, zt) == Blocks.dirt.id && level.getRawBrightness(xt, yt + 1, zt) >= MIN_BRIGHTNESS && Block.lightBlock[above] <= 2) {
+                level.setTile(xt, yt, zt, Blocks.grass.id);
             }
         }
     }
     
     @Override
     public int getResource(final int data, final Random random) {
-        return Block.dirt.getResource(0, random);
+        return Blocks.dirt.getResource(0, random);
     }
 }

@@ -13,7 +13,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.network.packet.PlayerActionPacket;
 import net.minecraft.world.item.ItemInstance;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gamemode.GameMode;
 
@@ -36,7 +36,7 @@ public class MultiPlayerGameMode extends GameMode
     }
     
     @Override
-    public void initPlayer(final Player player) {
+    public void initPlayer(final EntityPlayer player) {
         player.yRot = -180.0f;
     }
     
@@ -166,40 +166,40 @@ public class MultiPlayerGameMode extends GameMode
     }
     
     @Override
-    public boolean useItemOn(final Player player, final Level level, final ItemInstance item, final int x, final int y, final int z, final int face) {
+    public boolean useItemOn(final EntityPlayer player, final Level level, final ItemInstance item, final int x, final int y, final int z, final int face) {
         this.ensureHasSentCarriedItem();
         this.connection.send(new UseItemPacket(x, y, z, face, player.inventory.getSelected()));
         return super.useItemOn(player, level, item, x, y, z, face);
     }
     
     @Override
-    public boolean useItem(final Player player, final Level level, final ItemInstance item) {
+    public boolean useItem(final EntityPlayer player, final Level level, final ItemInstance item) {
         this.ensureHasSentCarriedItem();
         this.connection.send(new UseItemPacket(-1, -1, -1, 255, player.inventory.getSelected()));
         return super.useItem(player, level, item);
     }
     
     @Override
-    public Player createPlayer(final Level level) {
+    public EntityPlayer createPlayer(final Level level) {
         return new MultiplayerLocalPlayer(this.minecraft, level, this.minecraft.user, this.connection);
     }
     
     @Override
-    public void attack(final Player player, final Entity entity) {
+    public void attack(final EntityPlayer player, final Entity entity) {
         this.ensureHasSentCarriedItem();
         this.connection.send(new InteractPacket(player.entityId, entity.entityId, InteractPacket.ATTACK));
         player.attack(entity);
     }
     
     @Override
-    public void interact(final Player player, final Entity entity) {
+    public void interact(final EntityPlayer player, final Entity entity) {
         this.ensureHasSentCarriedItem();
         this.connection.send(new InteractPacket(player.entityId, entity.entityId, InteractPacket.INTERACT));
         player.interact(entity);
     }
     
     @Override
-    public ItemInstance handleInventoryMouseClick(final int containerId, final int slotNum, final int buttonNum, final boolean quickKeyHeld, final Player player) {
+    public ItemInstance handleInventoryMouseClick(final int containerId, final int slotNum, final int buttonNum, final boolean quickKeyHeld, final EntityPlayer player) {
         final short changeUid = player.containerMenu.backup(player.inventory);
 
         final ItemInstance clicked = super.handleInventoryMouseClick(containerId, slotNum, buttonNum, quickKeyHeld, player);
@@ -209,7 +209,7 @@ public class MultiPlayerGameMode extends GameMode
     }
     
     @Override
-    public void handleCloseInventory(final int containerId, final Player player) {
+    public void handleCloseInventory(final int containerId, final EntityPlayer player) {
         if (containerId == -9999) {
         }
     }

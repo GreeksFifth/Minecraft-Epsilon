@@ -15,6 +15,8 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.Recipes;
 import java.util.HashSet;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+
 import java.util.List;
 import java.util.Map;
 
@@ -146,17 +148,17 @@ public class Stats
     }
 
     private static void remapIds(final Stat[] stats) {
-        remapId(stats, Block.calmWater.id, Block.water.id);
-        remapId(stats, Block.calmLava.id, Block.calmLava.id);
-        remapId(stats, Block.litPumpkin.id, Block.pumpkin.id);
-        remapId(stats, Block.furnace_lit.id, Block.furnace.id);
-        remapId(stats, Block.redStoneOre_lit.id, Block.redStoneOre.id);
-        remapId(stats, Block.diode_on.id, Block.diode_off.id);
-        remapId(stats, Block.notGate_on.id, Block.notGate_off.id);
-        remapId(stats, Block.mushroom2.id, Block.mushroom1.id);
-        remapId(stats, Block.stoneSlab.id, Block.stoneSlabHalf.id);
-        remapId(stats, Block.grass.id, Block.dirt.id);
-        remapId(stats, Block.farmland.id, Block.dirt.id);
+        remapId(stats, Blocks.calmWater.id, Blocks.water.id);
+        remapId(stats, Blocks.calmLava.id, Blocks.calmLava.id);
+        remapId(stats, Blocks.litPumpkin.id, Blocks.pumpkin.id);
+        remapId(stats, Blocks.furnace_lit.id, Blocks.furnace.id);
+        remapId(stats, Blocks.redStoneOre_lit.id, Blocks.redStoneOre.id);
+        remapId(stats, Blocks.diode_on.id, Blocks.diode_off.id);
+        remapId(stats, Blocks.notGate_on.id, Blocks.notGate_off.id);
+        remapId(stats, Blocks.mushroom2.id, Blocks.mushroom1.id);
+        remapId(stats, Blocks.stoneSlab.id, Blocks.stoneSlabHalf.id);
+        remapId(stats, Blocks.grass.id, Blocks.dirt.id);
+        remapId(stats, Blocks.farmland.id, Blocks.dirt.id);
     }
 
     private static void remapId(final Stat[] stats, final int id1, final int id2) {

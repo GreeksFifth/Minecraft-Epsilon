@@ -5,21 +5,13 @@
 package net.minecraft.client.renderer;
 
 import net.minecraft.Facing;
-import net.minecraft.world.level.block.BlockLogicDoor;
+import net.minecraft.world.level.block.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Material;
 import util.Mth;
-import net.minecraft.world.level.block.BlockLogicFluid;
-import net.minecraft.world.level.block.BlockLogicRedstoneDust;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.level.block.BlockLogicPistonHead;
-import net.minecraft.world.level.block.BlockLogicPistonBase;
-import net.minecraft.world.level.block.BlockLogicRepeater;
 import net.minecraft.Direction;
-import net.minecraft.world.level.block.BlockLogicBed;
-import net.minecraft.world.level.block.BlockLogicRail;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.LevelSource;
 
 import static org.lwjgl.opengl.GL11.*;
@@ -84,7 +76,7 @@ public class TileRenderer
         if (shape == Block.SHAPE_RED_DUST) return this.tesselateDustInWorld(tt, x, y, z);
         if (shape == Block.SHAPE_LADDER) return this.tesselateLadderInWorld(tt, x, y, z);
         if (shape == Block.SHAPE_DOOR) return this.tesselateDoorInWorld(tt, x, y, z);
-        if (shape == Block.SHAPE_RAIL) return this.tesselateRailInWorld((BlockLogicRail) tt, x, y, z);
+        if (shape == Block.SHAPE_RAIL) return this.tesselateRailInWorld((BlockRail) tt, x, y, z);
         if (shape == Block.SHAPE_STAIRS) return this.tesselateStairsInWorld(tt, x, y, z);
         if (shape == Block.SHAPE_FENCE) return this.tesselateFenceInWorld(tt, x, y, z);
         if (shape == Block.SHAPE_LEVER) return this.tesselateLeverInWorld(tt, x, y, z);
@@ -98,8 +90,8 @@ public class TileRenderer
     private boolean tesselateBedInWorld(final Block tt, final int x, final int y, final int z) {
         final Tesselator t = Tesselator.instance;
         final int data = this.level.getData(x, y, z);
-        final int direction = BlockLogicBed.getDirection(data);
-        final boolean isHead = BlockLogicBed.isHeadPiece(data);
+        final int direction = BlockBed.getDirection(data);
+        final boolean isHead = BlockBed.isHeadPiece(data);
 
         final float c10 = 0.5f;
         final float c11 = 1.0f;
@@ -296,8 +288,8 @@ public class TileRenderer
     
     private boolean tesselateDiodeInWorld(final Block tt, final int x, final int y, final int z) {
         final int data = this.level.getData(x, y, z);
-        final int dir = data & BlockLogicRepeater.DIRECTION_MASK;
-        final int delay = (data & BlockLogicRepeater.DELAY_MASK) >> BlockLogicRepeater.DELAY_SHIFT;
+        final int dir = data & BlockRedstoneRepeater.DIRECTION_MASK;
+        final int delay = (data & BlockRedstoneRepeater.DELAY_MASK) >> BlockRedstoneRepeater.DELAY_SHIFT;
 
         // render half-block edges
         this.tesselateBlockInWorld(tt, x, y, z);
@@ -317,22 +309,22 @@ public class TileRenderer
             switch (dir) {
                 case 0: {
                     receiverZ = -5.0f / 16.0f;
-                    transmitterZ = BlockLogicRepeater.DELAY_RENDER_OFFSETS[delay];
+                    transmitterZ = BlockRedstoneRepeater.DELAY_RENDER_OFFSETS[delay];
                     break;
                 }
                 case 2: {
                     receiverZ = 5.0f / 16.0f;
-                    transmitterZ = -BlockLogicRepeater.DELAY_RENDER_OFFSETS[delay];
+                    transmitterZ = -BlockRedstoneRepeater.DELAY_RENDER_OFFSETS[delay];
                     break;
                 }
                 case 3: {
                     receiverX = -5.0f / 16.0f;
-                    transmitterX = BlockLogicRepeater.DELAY_RENDER_OFFSETS[delay];
+                    transmitterX = BlockRedstoneRepeater.DELAY_RENDER_OFFSETS[delay];
                     break;
                 }
                 case 1: {
                     receiverX = 5.0f / 16.0f;
-                    transmitterX = -BlockLogicRepeater.DELAY_RENDER_OFFSETS[delay];
+                    transmitterX = -BlockRedstoneRepeater.DELAY_RENDER_OFFSETS[delay];
                     break;
                 }
             }
@@ -403,10 +395,10 @@ public class TileRenderer
     
     private boolean tesselatePistonBaseInWorld(final Block tt, final int x, final int y, final int z, final boolean forceExtended) {
         final int data = this.level.getData(x, y, z);
-        final boolean extended = forceExtended || (data & BlockLogicPistonBase.EXTENDED_BIT) != 0;
-        final int facing = BlockLogicPistonBase.getFacing(data);
+        final boolean extended = forceExtended || (data & BlockPistonBase.EXTENDED_BIT) != 0;
+        final int facing = BlockPistonBase.getFacing(data);
 
-        final float thickness = BlockLogicPistonBase.PLATFORM_THICKNESS / 16.0f;
+        final float thickness = BlockPistonBase.PLATFORM_THICKNESS / 16.0f;
 
         if (extended) {
             switch (facing) {
@@ -510,7 +502,7 @@ public class TileRenderer
     }
     
     private void renderPistonArmUpDown(final double x0, final double x1, final double y0, final double y1, final double z0, final double z1, final float br, final double armLengthPixels) {
-        int armTex = BlockLogicPistonBase.EDGE_TEX;
+        int armTex = BlockPistonBase.EDGE_TEX;
         if (this.fixedTexture >= 0) armTex = this.fixedTexture;
 
         final int texX = (armTex & 0xF) << 4;
@@ -532,7 +524,7 @@ public class TileRenderer
     }
     
     private void renderPistonArmNorthSouth(final double x0, final double x1, final double y0, final double y1, final double z0, final double z1, final float br, final double armLengthPixels) {
-        int armTex = BlockLogicPistonBase.EDGE_TEX;
+        int armTex = BlockPistonBase.EDGE_TEX;
         if (this.fixedTexture >= 0) armTex = this.fixedTexture;
 
         final int texX = (armTex & 0xF) << 4;
@@ -554,7 +546,7 @@ public class TileRenderer
     }
     
     private void renderPistonArmEastWest(final double x0, final double x1, final double y0, final double y1, final double z0, final double z1, final float br, final double armLengthPixels) {
-        int armTex = BlockLogicPistonBase.EDGE_TEX;
+        int armTex = BlockPistonBase.EDGE_TEX;
         if (this.fixedTexture >= 0) armTex = this.fixedTexture;
 
         final int texX = (armTex & 0xF) << 4;
@@ -583,11 +575,11 @@ public class TileRenderer
     
     private boolean tesselatePistonExtensionInWorld(final Block tt, final int x, final int y, final int z, final boolean fullArm) {
         int data = this.level.getData(x, y, z);
-        int facing = BlockLogicPistonHead.getFacing(data);
+        int facing = BlockPistonHead.getFacing(data);
 
-        final float thickness = BlockLogicPistonBase.PLATFORM_THICKNESS / 16.0f;
-        final float leftEdge = (8.0f - (BlockLogicPistonBase.PLATFORM_THICKNESS / 2.0f)) / 16.0f;
-        final float rightEdge = (8.0f + (BlockLogicPistonBase.PLATFORM_THICKNESS / 2.0f)) / 16.0f;
+        final float thickness = BlockPistonBase.PLATFORM_THICKNESS / 16.0f;
+        final float leftEdge = (8.0f - (BlockPistonBase.PLATFORM_THICKNESS / 2.0f)) / 16.0f;
+        final float rightEdge = (8.0f + (BlockPistonBase.PLATFORM_THICKNESS / 2.0f)) / 16.0f;
         float br = tt.getBrightness(this.level, x, y, z);
         float armLength = fullArm ? 1.0f : 0.5f;
         double armLengthPixels = fullArm ? 16.0 : 8.0;
@@ -692,7 +684,7 @@ public class TileRenderer
         final Tesselator t = Tesselator.instance;
 
         final boolean hadFixed = this.fixedTexture >= 0;
-        if (!hadFixed) this.fixedTexture = Block.stoneBrick.tex;
+        if (!hadFixed) this.fixedTexture = Blocks.stoneBrick.tex;
 
         final float w1 = 4.0f / 16.0f;
         final float w2 = 3.0f / 16.0f;
@@ -842,7 +834,7 @@ public class TileRenderer
         double v1 = (texY + 15.99f) / 256.0f;
         float h = 1.4f;
 
-        if (this.level.isSolidBlockingTile(x, y - 1, z) || Block.fire.canBurn(this.level, x, y - 1, z)) {
+        if (this.level.isSolidBlockingTile(x, y - 1, z) || Blocks.fire.canBurn(this.level, x, y - 1, z)) {
             double x0 = x + 0.5 + 0.2;
             double x1 = x + 0.5 - 0.2;
             double z0 = z + 0.5 + 0.2;
@@ -928,7 +920,7 @@ public class TileRenderer
                 u0 = tmp;
             }
 
-            if (Block.fire.canBurn(this.level, x - 1, y, z)) {
+            if (Blocks.fire.canBurn(this.level, x - 1, y, z)) {
                 t.vertexUV(x + r, y + h + yo, z + 1, u1, v0);
                 t.vertexUV(x + 0, y + 0 + yo, z + 1, u1, v1);
                 t.vertexUV(x + 0, y + 0 + yo, z + 0, u0, v1);
@@ -938,7 +930,7 @@ public class TileRenderer
                 t.vertexUV(x + 0, y + 0 + yo, z + 1, u1, v1);
                 t.vertexUV(x + r, y + h + yo, z + 1, u1, v0);
             }
-            if (Block.fire.canBurn(this.level, x + 1, y, z)) {
+            if (Blocks.fire.canBurn(this.level, x + 1, y, z)) {
                 t.vertexUV(x + 1 - r, y + h + yo, z + 0, u0, v0);
                 t.vertexUV(x + 1 - 0, y + 0 + yo, z + 0, u0, v1);
                 t.vertexUV(x + 1 - 0, y + 0 + yo, z + 1, u1, v1);
@@ -948,7 +940,7 @@ public class TileRenderer
                 t.vertexUV(x + 1 - 0, y + 0 + yo, z + 0, u0, v1);
                 t.vertexUV(x + 1 - r, y + h + yo, z + 0, u0, v0);
             }
-            if (Block.fire.canBurn(this.level, x, y, z - 1)) {
+            if (Blocks.fire.canBurn(this.level, x, y, z - 1)) {
                 t.vertexUV(x + 0, y + h + yo, z + r, u1, v0);
                 t.vertexUV(x + 0, y + 0 + yo, z + 0, u1, v1);
                 t.vertexUV(x + 1, y + 0 + yo, z + 0, u0, v1);
@@ -958,7 +950,7 @@ public class TileRenderer
                 t.vertexUV(x + 0, y + 0 + yo, z + 0, u1, v1);
                 t.vertexUV(x + 0, y + h + yo, z + r, u1, v0);
             }
-            if (Block.fire.canBurn(this.level, x, y, z + 1)) {
+            if (Blocks.fire.canBurn(this.level, x, y, z + 1)) {
                 t.vertexUV(x + 1, y + h + yo, z + 1 - r, u0, v0);
                 t.vertexUV(x + 1, y + 0 + yo, z + 1 - 0, u0, v1);
                 t.vertexUV(x + 0, y + 0 + yo, z + 1 - 0, u1, v1);
@@ -968,7 +960,7 @@ public class TileRenderer
                 t.vertexUV(x + 1, y + 0 + yo, z + 1 - 0, u0, v1);
                 t.vertexUV(x + 1, y + h + yo, z + 1 - r, u0, v0);
             }
-            if (Block.fire.canBurn(this.level, x, y + 1, z)) {
+            if (Blocks.fire.canBurn(this.level, x, y + 1, z)) {
                 double x0 = x + 0.5 + 0.5;
                 double x1 = x + 0.5 - 0.5;
                 double z0 = z + 0.5 + 0.5;
@@ -1053,15 +1045,15 @@ public class TileRenderer
         float dustOffset = 0.25f / 16.0F;
         float overlayOffset = 0.25f / 16.0F;
 
-        boolean w = BlockLogicRedstoneDust.shouldReceivePowerFrom(this.level, x - 1, y, z, Direction.WEST) || (!this.level.isSolidBlockingTile(x - 1, y, z) && BlockLogicRedstoneDust.shouldReceivePowerFrom(this.level, x - 1, y - 1, z, Direction.UNDEFINED));
-        boolean e = BlockLogicRedstoneDust.shouldReceivePowerFrom(this.level, x + 1, y, z, Direction.EAST) || (!this.level.isSolidBlockingTile(x + 1, y, z) && BlockLogicRedstoneDust.shouldReceivePowerFrom(this.level, x + 1, y - 1, z, Direction.UNDEFINED));
-        boolean n = BlockLogicRedstoneDust.shouldReceivePowerFrom(this.level, x, y, z - 1, Direction.NORTH) || (!this.level.isSolidBlockingTile(x, y, z - 1) && BlockLogicRedstoneDust.shouldReceivePowerFrom(this.level, x, y - 1, z - 1, Direction.UNDEFINED));
-        boolean s = BlockLogicRedstoneDust.shouldReceivePowerFrom(this.level, x, y, z + 1, Direction.SOUTH) || (!this.level.isSolidBlockingTile(x, y, z + 1) && BlockLogicRedstoneDust.shouldReceivePowerFrom(this.level, x, y - 1, z + 1, Direction.UNDEFINED));
+        boolean w = BlockRedstoneDust.shouldReceivePowerFrom(this.level, x - 1, y, z, Direction.WEST) || (!this.level.isSolidBlockingTile(x - 1, y, z) && BlockRedstoneDust.shouldReceivePowerFrom(this.level, x - 1, y - 1, z, Direction.UNDEFINED));
+        boolean e = BlockRedstoneDust.shouldReceivePowerFrom(this.level, x + 1, y, z, Direction.EAST) || (!this.level.isSolidBlockingTile(x + 1, y, z) && BlockRedstoneDust.shouldReceivePowerFrom(this.level, x + 1, y - 1, z, Direction.UNDEFINED));
+        boolean n = BlockRedstoneDust.shouldReceivePowerFrom(this.level, x, y, z - 1, Direction.NORTH) || (!this.level.isSolidBlockingTile(x, y, z - 1) && BlockRedstoneDust.shouldReceivePowerFrom(this.level, x, y - 1, z - 1, Direction.UNDEFINED));
+        boolean s = BlockRedstoneDust.shouldReceivePowerFrom(this.level, x, y, z + 1, Direction.SOUTH) || (!this.level.isSolidBlockingTile(x, y, z + 1) && BlockRedstoneDust.shouldReceivePowerFrom(this.level, x, y - 1, z + 1, Direction.UNDEFINED));
         if (!this.level.isSolidBlockingTile(x, y + 1, z)) {
-            if (this.level.isSolidBlockingTile(x - 1, y, z) && BlockLogicRedstoneDust.shouldReceivePowerFrom(this.level, x - 1, y + 1, z, Direction.UNDEFINED)) w = true;
-            if (this.level.isSolidBlockingTile(x + 1, y, z) && BlockLogicRedstoneDust.shouldReceivePowerFrom(this.level, x + 1, y + 1, z, Direction.UNDEFINED)) e = true;
-            if (this.level.isSolidBlockingTile(x, y, z - 1) && BlockLogicRedstoneDust.shouldReceivePowerFrom(this.level, x, y + 1, z - 1, Direction.UNDEFINED)) n = true;
-            if (this.level.isSolidBlockingTile(x, y, z + 1) && BlockLogicRedstoneDust.shouldReceivePowerFrom(this.level, x, y + 1, z + 1, Direction.UNDEFINED)) s = true;
+            if (this.level.isSolidBlockingTile(x - 1, y, z) && BlockRedstoneDust.shouldReceivePowerFrom(this.level, x - 1, y + 1, z, Direction.UNDEFINED)) w = true;
+            if (this.level.isSolidBlockingTile(x + 1, y, z) && BlockRedstoneDust.shouldReceivePowerFrom(this.level, x + 1, y + 1, z, Direction.UNDEFINED)) e = true;
+            if (this.level.isSolidBlockingTile(x, y, z - 1) && BlockRedstoneDust.shouldReceivePowerFrom(this.level, x, y + 1, z - 1, Direction.UNDEFINED)) n = true;
+            if (this.level.isSolidBlockingTile(x, y, z + 1) && BlockRedstoneDust.shouldReceivePowerFrom(this.level, x, y + 1, z + 1, Direction.UNDEFINED)) s = true;
         }
         float d = 5.0f / 16.0f;
         float x0 = (float)(x + 0);
@@ -1134,7 +1126,7 @@ public class TileRenderer
             v1 = (texY + 15.99f) / 256.0f;
 
             final float yStretch = 0.35f / 16.0f;
-            if (this.level.isSolidBlockingTile(x - 1, y, z) && this.level.getTile(x - 1, y + 1, z) == Block.redStoneDust.id) {
+            if (this.level.isSolidBlockingTile(x - 1, y, z) && this.level.getTile(x - 1, y + 1, z) == Blocks.redStoneDust.id) {
                 t.color(br * red, br * green, br * blue);
                 t.vertexUV(x + overlayOffset, y + 1 + yStretch, z + 1, u1, v0);
                 t.vertexUV(x + overlayOffset, y + 0, z + 1, u0, v0);
@@ -1146,7 +1138,7 @@ public class TileRenderer
                 t.vertexUV(x + overlayOffset, y + 0, z + 0, u0, v1 + 1 / 16.0f);
                 t.vertexUV(x + overlayOffset, y + 1 + yStretch, z + 0, u1, v1 + 1 / 16.0f);
             }
-            if (this.level.isSolidBlockingTile(x + 1, y, z) && this.level.getTile(x + 1, y + 1, z) == Block.redStoneDust.id) {
+            if (this.level.isSolidBlockingTile(x + 1, y, z) && this.level.getTile(x + 1, y + 1, z) == Blocks.redStoneDust.id) {
                 t.color(br * red, br * green, br * blue);
                 t.vertexUV(x + 1 - overlayOffset, y + 0, z + 1, u0, v1);
                 t.vertexUV(x + 1 - overlayOffset, y + 1 + yStretch, z + 1, u1, v1);
@@ -1159,7 +1151,7 @@ public class TileRenderer
                 t.vertexUV(x + 1 - overlayOffset, y + 1 + yStretch, z + 0, u1, v0 + 1 / 16.0f);
                 t.vertexUV(x + 1 - overlayOffset, y + 0, z + 0, u0, v0 + 1 / 16.0f);
             }
-            if (this.level.isSolidBlockingTile(x, y, z - 1) && this.level.getTile(x, y + 1, z - 1) == Block.redStoneDust.id) {
+            if (this.level.isSolidBlockingTile(x, y, z - 1) && this.level.getTile(x, y + 1, z - 1) == Blocks.redStoneDust.id) {
                 t.color(br * red, br * green, br * blue);
                 t.vertexUV(x + 1, y + 0, z + overlayOffset, u0, v1);
                 t.vertexUV(x + 1, y + 1 + yStretch, z + overlayOffset, u1, v1);
@@ -1172,7 +1164,7 @@ public class TileRenderer
                 t.vertexUV(x + 0, y + 1 + yStretch, z + overlayOffset, u1, v0 + 1 / 16.0f);
                 t.vertexUV(x + 0, y + 0, z + overlayOffset, u0, v0 + 1 / 16.0f);
             }
-            if (this.level.isSolidBlockingTile(x, y, z + 1) && this.level.getTile(x, y + 1, z + 1) == Block.redStoneDust.id) {
+            if (this.level.isSolidBlockingTile(x, y, z + 1) && this.level.getTile(x, y + 1, z + 1) == Blocks.redStoneDust.id) {
                 t.color(br * red, br * green, br * blue);
                 t.vertexUV(x + 1, y + 1 + yStretch, z + 1 - overlayOffset, u1, v0);
                 t.vertexUV(x + 1, y + 0, z + 1 - overlayOffset, u0, v0);
@@ -1190,14 +1182,14 @@ public class TileRenderer
         return true;
     }
     
-    public boolean tesselateRailInWorld(final BlockLogicRail tt, final int x, final int y, final int z) {
+    public boolean tesselateRailInWorld(final BlockRail tt, final int x, final int y, final int z) {
         final Tesselator t = Tesselator.instance;
         int data = this.level.getData(x, y, z);
 
         int tex = tt.getTexture(0, data);
         if (this.fixedTexture >= 0) tex = this.fixedTexture;
 
-        if (tt.isUsesDataBit()) data &= BlockLogicRail.RAIL_DIRECTION_MASK;
+        if (tt.isUsesDataBit()) data &= BlockRail.RAIL_DIRECTION_MASK;
 
         final float br = tt.getBrightness(this.level, x, y, z);
         t.color(br, br, br);
@@ -1337,7 +1329,7 @@ public class TileRenderer
         double yt = y;
         double zt = z;
 
-        if (tt == Block.tallgrass) {
+        if (tt == Blocks.tallgrass) {
             long seed = (x * 3129871L) ^ z * 116129781L ^ (long)y;
             seed = seed * seed * 42317861L + seed * 11L;
 
@@ -1560,7 +1552,7 @@ public class TileRenderer
         if (this.noCulling || up) {
             changed = true;
             int tex = tt.getTexture(1, data);
-            float angle = (float) BlockLogicFluid.getSlopeAngle(this.level, x, y, z, m);
+            float angle = (float) BlockFluid.getSlopeAngle(this.level, x, y, z, m);
             if (angle > -999.0f) tex = tt.getTexture(2, data);
 
             final int texX = (tex & 0xF) << 4;
@@ -1679,10 +1671,10 @@ public class TileRenderer
             if (tm == m) {
                 final int d = this.level.getData(xx, yy, zz);
                 if (d >= 8 || d == 0) {
-                    h += BlockLogicFluid.getHeight(d) * 10.0f;
+                    h += BlockFluid.getHeight(d) * 10.0f;
                     count += 10;
                 }
-                h += BlockLogicFluid.getHeight(d);
+                h += BlockFluid.getHeight(d);
                 count++;
             }
             else if (!tm.isSolid()) {
@@ -2191,7 +2183,7 @@ public class TileRenderer
         float b2 = c2;
         float b3 = c3;
 
-        if (tt != Block.grass) {
+        if (tt != Blocks.grass) {
             r10 *= r;
             r2 *= r;
             r3 *= r;
@@ -2492,7 +2484,7 @@ public class TileRenderer
     
     public boolean tesselateDoorInWorld(final Block tt, final int x, final int y, final int z) {
         final Tesselator t = Tesselator.instance;
-        final BlockLogicDoor doorTile = (BlockLogicDoor)tt;
+        final BlockDoor doorTile = (BlockDoor)tt;
         final float c10 = 0.5f;
         final float c11 = 1.0f;
         final float c2 = 0.8f;

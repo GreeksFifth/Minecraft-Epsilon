@@ -4,8 +4,8 @@
 
 package net.minecraft.client.renderer.ptexture;
 
+import net.minecraft.world.level.block.Blocks;
 import util.Mth;
-import net.minecraft.world.level.block.Block;
 
 public class LavaTexture extends DynamicTexture
 {
@@ -15,7 +15,7 @@ public class LavaTexture extends DynamicTexture
     protected float[] heata = new float[16 * 16];
     
     public LavaTexture() {
-        super(Block.lava.tex);
+        super(Blocks.lava.tex);
     }
     
     @Override

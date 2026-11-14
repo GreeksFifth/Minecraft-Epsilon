@@ -10,8 +10,8 @@ import net.minecraft.SharedConstants;
 import net.minecraft.world.phys.AABB;
 
 import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.TilePos;
-import net.minecraft.world.level.block.entity.TileEntity;
+import net.minecraft.world.level.BlockPos;
+import net.minecraft.world.level.block.tileentity.TileEntity;
 import util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.LightLayer;
@@ -37,7 +37,7 @@ public class LevelChunk
     public int minHeight;
     public final int x;
     public final int z;
-    public Map<TilePos, TileEntity> tileEntities = new HashMap<>();
+    public Map<BlockPos, TileEntity> tileEntities = new HashMap<>();
     public List<Entity>[] entityBlocks = new List[ENTITY_BLOCKS_LENGTH];
     public boolean terrainPopulated = false;
     public boolean unsaved = false;
@@ -421,7 +421,7 @@ public class LevelChunk
     }
     
     public TileEntity getTileEntity(final int x, final int y, final int z) {
-        final TilePos pos = new TilePos(x, y, z);
+        final BlockPos pos = new BlockPos(x, y, z);
 
         TileEntity tileEntity = this.tileEntities.get(pos);
         if (tileEntity == null) {
@@ -451,7 +451,7 @@ public class LevelChunk
     }
     
     public void setTileEntity(final int x, final int y, final int z, final TileEntity tileEntity) {
-        final TilePos pos = new TilePos(x, y, z);
+        final BlockPos pos = new BlockPos(x, y, z);
 
         tileEntity.level = this.level;
         tileEntity.x = this.x * 16 + x;
@@ -469,7 +469,7 @@ public class LevelChunk
     }
     
     public void removeTileEntity(final int x, final int y, final int z) {
-        final TilePos pos = new TilePos(x, y, z);
+        final BlockPos pos = new BlockPos(x, y, z);
 
         if (this.loaded) {
             final TileEntity te = this.tileEntities.remove(pos);

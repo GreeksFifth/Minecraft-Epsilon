@@ -5,7 +5,8 @@
 package net.minecraft.world.item.crafting;
 
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,16 +20,16 @@ public class FurnaceRecipes
     }
     
     private FurnaceRecipes() {
-        this.addFurnaceRecipe(Block.ironOre.id, new ItemInstance(Items.ironIngot));
-        this.addFurnaceRecipe(Block.goldOre.id, new ItemInstance(Items.goldIngot));
-        this.addFurnaceRecipe(Block.diamondOre.id, new ItemInstance(Items.diamond));
-        this.addFurnaceRecipe(Block.sand.id, new ItemInstance(Block.glass));
+        this.addFurnaceRecipe(Blocks.ironOre.id, new ItemInstance(Items.ironIngot));
+        this.addFurnaceRecipe(Blocks.goldOre.id, new ItemInstance(Items.goldIngot));
+        this.addFurnaceRecipe(Blocks.diamondOre.id, new ItemInstance(Items.diamond));
+        this.addFurnaceRecipe(Blocks.sand.id, new ItemInstance(Blocks.glass));
         this.addFurnaceRecipe(Items.porkChop_raw.id, new ItemInstance(Items.porkChop_cooked));
         this.addFurnaceRecipe(Items.fish_raw.id, new ItemInstance(Items.fish_cooked));
-        this.addFurnaceRecipe(Block.stoneBrick.id, new ItemInstance(Block.rock));
+        this.addFurnaceRecipe(Blocks.stoneBrick.id, new ItemInstance(Blocks.rock));
         this.addFurnaceRecipe(Items.clay.id, new ItemInstance(Items.brick));
-        this.addFurnaceRecipe(Block.cactus.id, new ItemInstance(Items.dye_powder, 1, DyePowderItem.GREEN));
-        this.addFurnaceRecipe(Block.treeTrunk.id, new ItemInstance(Items.coal, 1, CoalItem.CHAR_COAL));
+        this.addFurnaceRecipe(Blocks.cactus.id, new ItemInstance(Items.dye_powder, 1, ItemDyePowder.GREEN));
+        this.addFurnaceRecipe(Blocks.treeTrunk.id, new ItemInstance(Items.coal, 1, ItemCoal.CHAR_COAL));
     }
     
     public void addFurnaceRecipe(final int itemId, final ItemInstance result) {

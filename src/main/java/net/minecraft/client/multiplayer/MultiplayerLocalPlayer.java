@@ -9,7 +9,7 @@ import net.minecraft.network.packet.ContainerClosePacket;
 import net.minecraft.network.packet.RespawnPacket;
 import net.minecraft.network.packet.AnimatePacket;
 import net.minecraft.network.packet.ChatPacket;
-import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.item.EntityItem;
 import net.minecraft.network.packet.PlayerActionPacket;
 import net.minecraft.network.packet.MovePlayerPacket;
 import net.minecraft.network.packet.PlayerCommandPacket;
@@ -135,7 +135,7 @@ public class MultiplayerLocalPlayer extends LocalPlayer
     }
     
     @Override
-    protected void reallyDrop(final ItemEntity itemEntity) {
+    protected void reallyDrop(final EntityItem itemEntity) {
     }
     
     @Override

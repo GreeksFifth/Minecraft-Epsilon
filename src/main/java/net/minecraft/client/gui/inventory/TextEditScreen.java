@@ -9,8 +9,9 @@ import net.minecraft.client.renderer.tileentity.TileEntityRenderDispatcher;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.network.packet.SignUpdatePacket;
 import net.minecraft.client.gui.Button;
+import net.minecraft.world.level.block.Blocks;
 import org.lwjgl.input.Keyboard;
-import net.minecraft.world.level.block.entity.SignTileEntity;
+import net.minecraft.world.level.block.tileentity.TileEntitySign;
 import net.minecraft.client.gui.Screen;
 
 import static org.lwjgl.opengl.GL11.*;
@@ -18,12 +19,12 @@ import static org.lwjgl.opengl.GL11.*;
 public class TextEditScreen extends Screen
 {
     protected String title = "Edit sign message:";
-    private SignTileEntity sign;
+    private TileEntitySign sign;
     private int frame;
     private int line = 0;
     private static final String allowedChars = SharedConstants.acceptableLetters;
     
-    public TextEditScreen(final SignTileEntity sign) {
+    public TextEditScreen(final TileEntitySign sign) {
         this.sign = sign;
     }
     
@@ -87,7 +88,7 @@ public class TextEditScreen extends Screen
 
         Block block = this.sign.getTile();
 
-        if (block == Block.sign) {
+        if (block == Blocks.sign) {
             final float rot = (this.sign.getData() * 360) / 16.0f;
             glRotatef(rot, 0.0f, 1.0f, 0.0f);
             glTranslatef(0.0f, -17.0f / 16.0f, 0.0f);

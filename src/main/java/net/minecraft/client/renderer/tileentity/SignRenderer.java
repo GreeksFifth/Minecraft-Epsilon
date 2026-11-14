@@ -6,21 +6,22 @@ package net.minecraft.client.renderer.tileentity;
 
 import net.minecraft.client.gui.Font;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.SignTileEntity;
-import net.minecraft.client.model.SignModel;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.tileentity.TileEntitySign;
+import net.minecraft.client.model.ModelSign;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class SignRenderer extends TileEntityRenderer<SignTileEntity>
+public class SignRenderer extends TileEntityRenderer<TileEntitySign>
 {
-    private SignModel signModel = new SignModel();
+    private ModelSign signModel = new ModelSign();
     
-    public void render(final SignTileEntity sign, final double x, final double y, final double z, final float a) {
+    public void render(final TileEntitySign sign, final double x, final double y, final double z, final float a) {
         final Block block = sign.getTile();
 
         glPushMatrix();
         final float size = 16 / 24.0f;
-        if (block == Block.sign) {
+        if (block == Blocks.sign) {
             glTranslatef((float)x + 0.5f, (float)y + 0.75f * size, (float)z + 0.5f);
             glRotatef(-(sign.getData() * 360 / 16.0f), 0.0f, 1.0f, 0.0f);
             this.signModel.cube2.visible = true;

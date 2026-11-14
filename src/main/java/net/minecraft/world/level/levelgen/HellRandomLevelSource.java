@@ -4,15 +4,15 @@
 
 package net.minecraft.world.level.levelgen;
 
+import net.minecraft.world.level.block.Blocks;
 import util.ProgressListener;
 import net.minecraft.world.level.levelgen.feature.FlowerFeature;
 import net.minecraft.world.level.levelgen.feature.LightGemFeature;
 import net.minecraft.world.level.levelgen.feature.HellPortalFeature;
 import net.minecraft.world.level.levelgen.feature.HellFireFeature;
 import net.minecraft.world.level.levelgen.feature.HellSpringFeature;
-import net.minecraft.world.level.block.BlockLogicSand;
+import net.minecraft.world.level.block.BlockFalling;
 import net.minecraft.world.level.chunk.LevelChunk;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.synth.PerlinNoise;
 import java.util.Random;
@@ -93,10 +93,10 @@ public class HellRandomLevelSource implements ChunkSource
                             for (int z = 0; z < CHUNK_WIDTH; ++z) {
                                 int tileId = 0;
                                 if (yc * CHUNK_HEIGHT + y < waterHeight) {
-                                    tileId = Block.calmLava.id;
+                                    tileId = Blocks.calmLava.id;
                                 }
                                 if (val > 0.0) {
-                                    tileId = Block.hellRock.id;
+                                    tileId = Blocks.hellRock.id;
                                 }
 
                                 blocks[offs] = (byte)tileId;
@@ -134,39 +134,39 @@ public class HellRandomLevelSource implements ChunkSource
 
                 int run = -1;
 
-                byte top = (byte) Block.hellRock.id;
-                byte material = (byte) Block.hellRock.id;
+                byte top = (byte) Blocks.hellRock.id;
+                byte material = (byte) Blocks.hellRock.id;
 
                 for (int y = Level.MAX_HEIGHT - 1; y >= 0; --y) {
                     final int offs = (z * 16 + x) * Level.MAX_HEIGHT + y;
 
                     if (y >= (Level.MAX_HEIGHT - 1) - this.random.nextInt(5)) {
-                        blocks[offs] = (byte) Block.unbreakable.id;
+                        blocks[offs] = (byte) Blocks.unbreakable.id;
                     }
                     else if (y <= 0 + this.random.nextInt(5)) {
-                        blocks[offs] = (byte) Block.unbreakable.id;
+                        blocks[offs] = (byte) Blocks.unbreakable.id;
                     }
                     else {
                         final byte old = blocks[offs];
                         if (old == 0) {
                             run = -1;
                         }
-                        else if (old == Block.hellRock.id) {
+                        else if (old == Blocks.hellRock.id) {
                             if (run == -1) {
                                 if (runDepth <= 0) {
                                     top = 0;
-                                    material = (byte) Block.hellRock.id;
+                                    material = (byte) Blocks.hellRock.id;
                                 }
                                 else if (y >= waterHeight - 4 && y <= waterHeight + 1) {
-                                    top = (byte) Block.hellRock.id;
-                                    material = (byte) Block.hellRock.id;
-                                    if (gravel) top = (byte) Block.gravel.id;
-                                    if (gravel) material = (byte) Block.hellRock.id;
-                                    if (sand) top = (byte) Block.hellSand.id;
-                                    if (sand) material = (byte) Block.hellSand.id;
+                                    top = (byte) Blocks.hellRock.id;
+                                    material = (byte) Blocks.hellRock.id;
+                                    if (gravel) top = (byte) Blocks.gravel.id;
+                                    if (gravel) material = (byte) Blocks.hellRock.id;
+                                    if (sand) top = (byte) Blocks.hellSand.id;
+                                    if (sand) material = (byte) Blocks.hellSand.id;
                                 }
 
-                                if (y < waterHeight && top == 0) top = (byte) Block.calmLava.id;
+                                if (y < waterHeight && top == 0) top = (byte) Blocks.calmLava.id;
 
                                 run = runDepth;
                                 if (y >= waterHeight - 1) blocks[offs] = top;
@@ -294,7 +294,7 @@ public class HellRandomLevelSource implements ChunkSource
     }
     
     public void postProcess(final ChunkSource parent, final int xt, final int zt) {
-        BlockLogicSand.instaFall = true;
+        BlockFalling.instaFall = true;
         final int xo = xt * 16;
         final int zo = zt * 16;
 
@@ -302,7 +302,7 @@ public class HellRandomLevelSource implements ChunkSource
             int x = xo + this.random.nextInt(16) + 8;
             int y = this.random.nextInt(Level.MAX_HEIGHT - 8) + 4;
             int z = zo + this.random.nextInt(16) + 8;
-            new HellSpringFeature(Block.lava.id).place(this.level, this.random, x, y, z);
+            new HellSpringFeature(Blocks.lava.id).place(this.level, this.random, x, y, z);
         }
 
         int count = this.random.nextInt(this.random.nextInt(10) + 1) + 1;
@@ -333,16 +333,16 @@ public class HellRandomLevelSource implements ChunkSource
             int x = xo + this.random.nextInt(16) + 8;
             int y = this.random.nextInt(Level.MAX_HEIGHT);
             int z = zo + this.random.nextInt(16) + 8;
-            new FlowerFeature(Block.mushroom1.id).place(this.level, this.random, x, y, z);
+            new FlowerFeature(Blocks.mushroom1.id).place(this.level, this.random, x, y, z);
         }
         if (this.random.nextInt(1) == 0) {
             int x = xo + this.random.nextInt(16) + 8;
             int y = this.random.nextInt(Level.MAX_HEIGHT);
             int z = zo + this.random.nextInt(16) + 8;
-            new FlowerFeature(Block.mushroom2.id).place(this.level, this.random, x, y, z);
+            new FlowerFeature(Blocks.mushroom2.id).place(this.level, this.random, x, y, z);
         }
 
-        BlockLogicSand.instaFall = false;
+        BlockFalling.instaFall = false;
     }
     
     public boolean save(final boolean force, final ProgressListener progressListener) {

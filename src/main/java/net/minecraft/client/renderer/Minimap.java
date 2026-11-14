@@ -5,10 +5,10 @@
 package net.minecraft.client.renderer;
 
 import net.minecraft.client.Options;
-import net.minecraft.world.item.MapItem;
+import net.minecraft.world.item.ItemMap;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.saveddata.MapItemSavedData;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 import java.awt.image.BufferedImage;
 
 import net.minecraft.client.gui.Font;
@@ -17,8 +17,8 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Minimap
 {
-    private static final int w = MapItem.IMAGE_WIDTH;
-    private static final int h = MapItem.IMAGE_HEIGHT;
+    private static final int w = ItemMap.IMAGE_WIDTH;
+    private static final int h = ItemMap.IMAGE_HEIGHT;
     private int[] pixels = new int[w * h];
     private int mapTexture;
     private Options options;
@@ -33,7 +33,7 @@ public class Minimap
         }
     }
     
-    public void render(final Player player, final Textures textures, final MapItemSavedData data) {
+    public void render(final EntityPlayer player, final Textures textures, final MapItemSavedData data) {
         for (int i = 0; i < w * h; ++i) {
             final byte c = data.colors[i];
             if (c / 4 == 0) {

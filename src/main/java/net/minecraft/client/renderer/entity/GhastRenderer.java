@@ -4,18 +4,18 @@
 
 package net.minecraft.client.renderer.entity;
 
-import net.minecraft.world.entity.monster.Ghast;
-import net.minecraft.client.model.GhastModel;
+import net.minecraft.world.entity.monster.EntityGhast;
+import net.minecraft.client.model.ModelGhast;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class GhastRenderer extends MobRenderer<Ghast>
+public class GhastRenderer extends MobRenderer<EntityGhast>
 {
     public GhastRenderer() {
-        super(new GhastModel(), 0.5f);
+        super(new ModelGhast(), 0.5f);
     }
     
-    protected void scale(final Ghast ghast, final float a) {
+    protected void scale(final EntityGhast ghast, final float a) {
         float ss = (ghast.oCharge + (ghast.charge - ghast.oCharge) * a) / 20.0f;
         if (ss < 0.0f) ss = 0.0f;
         ss = 1.0f / (ss * ss * ss * ss * ss * 2.0f + 1.0f);

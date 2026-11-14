@@ -12,13 +12,13 @@ import net.minecraft.network.packet.EntityEventPacket;
 import net.minecraft.network.packet.AddGlobalEntityPacketPacket;
 import net.minecraft.world.level.chunk.storage.ChunkStorage;
 import util.Mth;
-import net.minecraft.world.level.block.entity.TileEntity;
+import net.minecraft.world.level.block.tileentity.TileEntity;
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.world.level.chunk.ChunkSource;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.animal.WaterAnimal;
-import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.player.EntityPlayer;
+import net.minecraft.world.entity.animal.EntityMobPassiveAquatic;
+import net.minecraft.world.entity.animal.EntityMobPassive;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.dimension.Dimension;
 import net.minecraft.world.level.storage.LevelStorage;
@@ -43,10 +43,10 @@ public class ServerLevel extends Level
     
     @Override
     public void tick(final Entity e, final boolean actual) {
-        if (!this.server.isAnimals && (e instanceof Animal || e instanceof WaterAnimal)) {
+        if (!this.server.isAnimals && (e instanceof EntityMobPassive || e instanceof EntityMobPassiveAquatic)) {
             e.remove();
         }
-        if (e.rider == null || !(e.rider instanceof Player)) {
+        if (e.rider == null || !(e.rider instanceof EntityPlayer)) {
             super.tick(e, actual);
         }
     }
@@ -74,7 +74,7 @@ public class ServerLevel extends Level
     }
     
     @Override
-    public boolean mayInteract(final Player player, final int xt, final int yt, final int zt) {
+    public boolean mayInteract(final EntityPlayer player, final int xt, final int yt, final int zt) {
         int xd = (int)Mth.abs((float)(xt - this.levelData.getXSpawn()));
         int zd = (int)Mth.abs((float)(zt - this.levelData.getZSpawn()));
         if (xd > zd) zd = xd;

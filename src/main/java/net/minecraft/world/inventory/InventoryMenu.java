@@ -4,13 +4,13 @@
 
 package net.minecraft.world.inventory;
 
-import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ItemArmor;
 import net.minecraft.world.item.ItemInstance;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 import net.minecraft.world.item.crafting.Recipes;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.Container;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 public class InventoryMenu extends AbstractContainerMenu
 {
@@ -52,10 +52,10 @@ public class InventoryMenu extends AbstractContainerMenu
 
                 @Override
                 public boolean mayPlace(final ItemInstance item) {
-                    if (item.getItem() instanceof ArmorItem) {
-                        return ((ArmorItem)item.getItem()).slot == slotNum;
+                    if (item.getItem() instanceof ItemArmor) {
+                        return ((ItemArmor)item.getItem()).slot == slotNum;
                     }
-                    return item.getItem().id == Block.pumpkin.id && slotNum == 0;
+                    return item.getItem().id == Blocks.pumpkin.id && slotNum == 0;
                 }
             });
         }
@@ -77,7 +77,7 @@ public class InventoryMenu extends AbstractContainerMenu
     }
     
     @Override
-    public void removed(final Player player) {
+    public void removed(final EntityPlayer player) {
         super.removed(player);
         for (int i = 0; i < 4; ++i) {
             final ItemInstance item = this.craftSlots.getItem(i);
@@ -89,7 +89,7 @@ public class InventoryMenu extends AbstractContainerMenu
     }
     
     @Override
-    public boolean stillValid(final Player player) {
+    public boolean stillValid(final EntityPlayer player) {
         return true;
     }
     

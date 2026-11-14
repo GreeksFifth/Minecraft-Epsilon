@@ -7,7 +7,7 @@ package net.minecraft.world.item.crafting;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 public class WeaponRecipes
 {
@@ -17,7 +17,7 @@ public class WeaponRecipes
               "#" }
     };
     private Object[][] map = new Object[][] {
-            { Block.wood, Block.stoneBrick, Items.ironIngot, Items.diamond, Items.goldIngot },
+            { Blocks.wood, Blocks.stoneBrick, Items.ironIngot, Items.diamond, Items.goldIngot },
             { Items.sword_wood, Items.sword_stone, Items.sword_iron, Items.sword_diamond, Items.sword_gold }
     };
     

@@ -4,13 +4,13 @@
 
 package net.minecraft.client.renderer.entity;
 
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.entity.item.PrimedTnt;
+import net.minecraft.world.entity.item.EntityTNTPrimed;
 import net.minecraft.client.renderer.TileRenderer;
+import net.minecraft.world.level.block.Blocks;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class TntRenderer extends EntityRenderer<PrimedTnt>
+public class TntRenderer extends EntityRenderer<EntityTNTPrimed>
 {
     private TileRenderer tileRenderer = new TileRenderer();
     
@@ -18,7 +18,7 @@ public class TntRenderer extends EntityRenderer<PrimedTnt>
         this.shadowRadius = 0.5f;
     }
     
-    public void render(final PrimedTnt tnt, final double x, final double y, final double z, final float rot, final float a) {
+    public void render(final EntityTNTPrimed tnt, final double x, final double y, final double z, final float rot, final float a) {
         glPushMatrix();
         glTranslatef((float)x, (float)y, (float)z);
         if (tnt.life - a + 1.0f < 10.0f) {
@@ -33,14 +33,14 @@ public class TntRenderer extends EntityRenderer<PrimedTnt>
 
         final float br = (1.0f - (tnt.life - a + 1.0f) / 100.0f) * 0.8f;
         this.bindTexture("/terrain.png");
-        this.tileRenderer.renderTile(Block.tnt, 0, tnt.getBrightness(a));
+        this.tileRenderer.renderTile(Blocks.tnt, 0, tnt.getBrightness(a));
         if (tnt.life / 5 % 2 == 0) {
             glDisable(GL_TEXTURE_2D);
             glDisable(GL_LIGHTING);
             glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_DST_ALPHA);
             glColor4f(1.0f, 1.0f, 1.0f, br);
-            this.tileRenderer.renderTile(Block.tnt, 0, 1.0f);
+            this.tileRenderer.renderTile(Blocks.tnt, 0, 1.0f);
             glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
             glDisable(GL_BLEND);
             glEnable(GL_LIGHTING);

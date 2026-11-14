@@ -5,7 +5,7 @@
 package net.minecraft.network.packet;
 
 import java.io.DataOutputStream;
-import net.minecraft.world.level.TilePos;
+import net.minecraft.world.level.BlockPos;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -16,12 +16,12 @@ public class ExplodePacket extends Packet
 {
     public double x, y, z;
     public float r;
-    public Set<TilePos> toBlow;
+    public Set<BlockPos> toBlow;
 
     public ExplodePacket() {
     }
 
-    public ExplodePacket(final double x, final double y, final double z, final float r, final Set<TilePos> toBlow) {
+    public ExplodePacket(final double x, final double y, final double z, final float r, final Set<BlockPos> toBlow) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -45,7 +45,7 @@ public class ExplodePacket extends Packet
             int xx = dis.readByte() + xp;
             int yy = dis.readByte() + yp;
             int zz = dis.readByte() + zp;
-            this.toBlow.add(new TilePos(xx, yy, zz));
+            this.toBlow.add(new BlockPos(xx, yy, zz));
         }
     }
     
@@ -60,7 +60,7 @@ public class ExplodePacket extends Packet
         final int xp = (int)this.x;
         final int yp = (int)this.y;
         final int zp = (int)this.z;
-        for (final TilePos tp : this.toBlow) {
+        for (final BlockPos tp : this.toBlow) {
             final int xx = tp.x - xp;
             final int yy = tp.y - yp;
             final int zz = tp.z - zp;

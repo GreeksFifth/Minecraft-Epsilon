@@ -4,7 +4,7 @@
 
 package net.minecraft.world.level.biome;
 
-import net.minecraft.world.entity.animal.Chicken;
+import net.minecraft.world.entity.animal.EntityChicken;
 
 public class SkyBiome extends Biome
 {
@@ -13,7 +13,7 @@ public class SkyBiome extends Biome
         this.friendlies.clear();
         this.waterFriendlies.clear();
 
-        this.friendlies.add(new MobSpawnerData(Chicken.class, 10));
+        this.friendlies.add(new MobSpawnerData(EntityChicken.class, 10));
     }
     
     @Override

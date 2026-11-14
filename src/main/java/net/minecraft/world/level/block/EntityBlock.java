@@ -4,7 +4,7 @@
 
 package net.minecraft.world.level.block;
 
-import net.minecraft.world.level.block.entity.TileEntity;
+import net.minecraft.world.level.block.tileentity.TileEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Material;
 @Deprecated

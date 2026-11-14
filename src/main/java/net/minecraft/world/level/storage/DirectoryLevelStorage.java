@@ -7,7 +7,7 @@ package net.minecraft.world.level.storage;
 import com.mojang.nbt.CompoundTag;
 import java.util.List;
 import com.mojang.nbt.NbtIo;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 import net.minecraft.world.level.LevelData;
 import net.minecraft.world.level.chunk.storage.OldChunkStorage;
 import net.minecraft.world.level.dimension.HellDimension;
@@ -121,7 +121,7 @@ public class DirectoryLevelStorage implements PlayerIO, LevelStorage
         return null;
     }
     
-    public void saveLevelData(final LevelData levelData, final List<Player> players) {
+    public void saveLevelData(final LevelData levelData, final List<EntityPlayer> players) {
         final CompoundTag dataTag = levelData.createTag(players);
 
         final CompoundTag root = new CompoundTag();
@@ -176,7 +176,7 @@ public class DirectoryLevelStorage implements PlayerIO, LevelStorage
     }
 
     @Override
-    public void save(final Player player) {
+    public void save(final EntityPlayer player) {
         try {
             final CompoundTag tag = new CompoundTag();
             player.saveWithoutId(tag);
@@ -197,7 +197,7 @@ public class DirectoryLevelStorage implements PlayerIO, LevelStorage
     }
 
     @Override
-    public void load(final Player player) {
+    public void load(final EntityPlayer player) {
         final CompoundTag tag = this.loadPlayerDataTag(player.name);
         if (tag != null) {
             player.load(tag);

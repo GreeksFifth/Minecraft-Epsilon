@@ -1,0 +1,115 @@
+// 
+// Decompiled by Procyon v0.6.0
+// 
+
+package net.minecraft.world.entity.item;
+
+import com.mojang.nbt.CompoundTag;
+import net.minecraft.world.level.block.BlockFalling;
+import util.Mth;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.entity.Entity;
+
+public class EntityFallingBlock extends Entity
+{
+    public int tile;
+    public int time = 0;
+    
+    public EntityFallingBlock(final Level level) {
+        super(level);
+    }
+    
+    public EntityFallingBlock(final Level level, final double xo, final double yo, final double zo, final int tile) {
+        super(level);
+
+        this.tile = tile;
+        this.blocksBuilding = true;
+        this.setSize(0.98f, 0.98f);
+        this.heightOffset = this.bbHeight / 2.0f;
+        this.setPos(xo, yo, zo);
+
+        this.xd = 0.0;
+        this.yd = 0.0;
+        this.zd = 0.0;
+
+        this.xo = xo;
+        this.yo = yo;
+        this.zo = zo;
+    }
+    
+    @Override
+    protected boolean makeStepSound() {
+        return false;
+    }
+    
+    @Override
+    protected void definedSynchedData() {
+    }
+    
+    @Override
+    public boolean isPickable() {
+        return !this.removed;
+    }
+    
+    @Override
+    public void tick() {
+        if (this.tile == 0) {
+            this.remove();
+            return;
+        }
+
+        this.xo = this.x;
+        this.yo = this.y;
+        this.zo = this.z;
+        this.time++;
+
+        this.yd -= 0.04f;
+        this.move(this.xd, this.yd, this.zd);
+        this.xd *= 0.98f;
+        this.yd *= 0.98f;
+        this.zd *= 0.98f;
+
+        final int xt = Mth.floor(this.x);
+        final int yt = Mth.floor(this.y);
+        final int zt = Mth.floor(this.z);
+        if (this.level.getTile(xt, yt, zt) == this.tile) {
+            this.level.setTile(xt, yt, zt, 0);
+        }
+
+        if (this.onGround) {
+            this.xd *= 0.7f;
+            this.zd *= 0.7f;
+            this.yd *= -0.5;
+
+            this.remove();
+            if (!this.level.mayPlace(this.tile, xt, yt, zt, true, 1) || BlockFalling.isFree(this.level, xt, yt - 1, zt) || !this.level.setTile(xt, yt, zt, this.tile)) {
+                if (!this.level.isClientSide) {
+                    this.spawnAtLocation(this.tile, 1);
+                }
+            }
+        }
+        else if (this.time > 20 * 5 && !this.level.isClientSide) {
+            this.spawnAtLocation(this.tile, 1);
+            this.remove();
+        }
+    }
+    
+    @Override
+    protected void addAdditionalSaveData(final CompoundTag compoundTag) {
+        compoundTag.putByte("Tile", (byte)this.tile);
+    }
+    
+    @Override
+    protected void readAdditionalSaveData(final CompoundTag compoundTag) {
+        this.tile = (compoundTag.getByte("Tile") & 0xFF);
+    }
+    
+    @Override
+    public float getShadowHeightOffs() {
+        return 0.0f;
+    }
+    
+    public Level getLevel() {
+        return this.level;
+    }
+}

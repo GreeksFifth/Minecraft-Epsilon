@@ -7,14 +7,15 @@ package net.minecraft.client.gui;
 import net.minecraft.locale.language.Language;
 import net.minecraft.client.renderer.Tesselator;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.client.GuiMessage;
 import java.awt.Color;
+
+import net.minecraft.world.level.block.Blocks;
 import util.Mth;
 import net.minecraft.client.Lighting;
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.block.Block;
 
 import java.util.ArrayList;
 import net.minecraft.client.Minecraft;
@@ -61,7 +62,7 @@ public class Gui extends GuiComponent
         }
 
         final ItemInstance headGear = this.minecraft.player.inventory.getArmor(3);
-        if (!this.minecraft.options.thirdPersonView && headGear != null && headGear.id == Block.pumpkin.id) {
+        if (!this.minecraft.options.thirdPersonView && headGear != null && headGear.id == Blocks.pumpkin.id) {
             this.renderPumpkin(screenWidth, screenHeight);
         }
 
@@ -94,7 +95,7 @@ public class Gui extends GuiComponent
         if (this.minecraft.gameMode.canHurtPlayer()) {
             final int armor = this.minecraft.player.getArmor();
             // render health and armor
-            for (int i = 0; i < (Player.MAX_HEALTH / 2); ++i) {
+            for (int i = 0; i < (EntityPlayer.MAX_HEALTH / 2); ++i) {
                 int yo = screenHeight - 32;
                 if (armor > 0) {
                     final int xo = (screenWidth + quickSelectWidth) / 2 - i * 8 - 9;
@@ -130,8 +131,8 @@ public class Gui extends GuiComponent
 
             // render air bubbles
             if (this.minecraft.player.isUnderLiquid(Material.water)) {
-                int count = (int)Math.ceil((this.minecraft.player.airSupply - 2) * 10.0 / Player.TOTAL_AIR_SUPPLY);
-                int extra = (int)Math.ceil(this.minecraft.player.airSupply * 10.0 / Player.TOTAL_AIR_SUPPLY) - count;
+                int count = (int)Math.ceil((this.minecraft.player.airSupply - 2) * 10.0 / EntityPlayer.TOTAL_AIR_SUPPLY);
+                int extra = (int)Math.ceil(this.minecraft.player.airSupply * 10.0 / EntityPlayer.TOTAL_AIR_SUPPLY) - count;
                 for (int i = 0; i < count + extra; ++i) {
                     // Air bubbles
                     if (i < count) this.blit((screenWidth - quickSelectWidth) / 2 + i * 8, screenHeight - 32 - 9, 16, 18, 9, 9);
@@ -159,10 +160,10 @@ public class Gui extends GuiComponent
             glDisable(GL_DEPTH_TEST);
             glDisable(GL_ALPHA_TEST);
             final int timer = this.minecraft.player.getSleepTimer();
-            float amount = timer / (float) Player.SLEEP_DURATION;
+            float amount = timer / (float) EntityPlayer.SLEEP_DURATION;
             if (amount > 1.0f) {
                 // waking up
-                amount = 1.0f - (timer - Player.SLEEP_DURATION) / (float) Player.WAKE_UP_DURATION;
+                amount = 1.0f - (timer - EntityPlayer.SLEEP_DURATION) / (float) EntityPlayer.WAKE_UP_DURATION;
             }
             final int color = (int)(220.0f * amount) << 24 | 0x101020;
             this.fill(0, 0, screenWidth, screenHeight, color);
@@ -319,10 +320,10 @@ public class Gui extends GuiComponent
         glColor4f(1.0f, 1.0f, 1.0f, br);
         glBindTexture(GL_TEXTURE_2D, this.minecraft.textures.loadTexture("/terrain.png"));
 
-        final float u0 = Block.portalTile.tex % 16 / 16.0f;
-        final float v0 = Block.portalTile.tex / 16 / 16.0f;
-        final float u1 = (Block.portalTile.tex % 16 + 1) / 16.0f;
-        final float v1 = (Block.portalTile.tex / 16 + 1) / 16.0f;
+        final float u0 = Blocks.portalTile.tex % 16 / 16.0f;
+        final float v0 = Blocks.portalTile.tex / 16 / 16.0f;
+        final float u1 = (Blocks.portalTile.tex % 16 + 1) / 16.0f;
+        final float v1 = (Blocks.portalTile.tex / 16 + 1) / 16.0f;
         final Tesselator t = Tesselator.instance;
         t.begin();
         t.vertexUV(0.0, h, -90.0, u0, v1);

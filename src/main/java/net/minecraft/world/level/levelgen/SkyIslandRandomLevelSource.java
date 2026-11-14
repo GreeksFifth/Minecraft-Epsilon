@@ -4,6 +4,7 @@
 
 package net.minecraft.world.level.levelgen;
 
+import net.minecraft.world.level.block.Blocks;
 import util.ProgressListener;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.material.Material;
@@ -16,9 +17,8 @@ import net.minecraft.world.level.levelgen.feature.OreFeature;
 import net.minecraft.world.level.levelgen.feature.ClayFeature;
 import net.minecraft.world.level.levelgen.feature.MonsterRoomFeature;
 import net.minecraft.world.level.levelgen.feature.LakeFeature;
-import net.minecraft.world.level.block.BlockLogicSand;
+import net.minecraft.world.level.block.BlockFalling;
 import net.minecraft.world.level.chunk.LevelChunk;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.synth.PerlinNoise;
@@ -127,7 +127,7 @@ public class SkyIslandRandomLevelSource implements ChunkSource
                             for (int z = 0; z < CHUNK_WIDTH; ++z) {
                                 int tileId = 0;
                                 if (val > 0.0) {
-                                    tileId = Block.rock.id;
+                                    tileId = Blocks.rock.id;
                                 }
 
                                 blocks[offs] = (byte)tileId;
@@ -172,11 +172,11 @@ public class SkyIslandRandomLevelSource implements ChunkSource
                     if (old == 0) {
                         run = -1;
                     }
-                    else if (old == Block.rock.id) {
+                    else if (old == Blocks.rock.id) {
                         if (run == -1) {
                             if (runDepth <= 0) {
                                 top = 0;
-                                material = (byte) Block.rock.id;
+                                material = (byte) Blocks.rock.id;
                             }
                             run = runDepth;
                             if (y >= waterHeight) blocks[offs] = top;
@@ -188,9 +188,9 @@ public class SkyIslandRandomLevelSource implements ChunkSource
 
                             // place a few sandstone blocks beneath sand
                             // runs
-                            if (run == 0 && material == Block.sand.id) {
+                            if (run == 0 && material == Blocks.sand.id) {
                                 run = this.random.nextInt(4);
-                                material = (byte) Block.sandStone.id;
+                                material = (byte) Blocks.sandStone.id;
                             }
                         }
                     }
@@ -330,10 +330,10 @@ public class SkyIslandRandomLevelSource implements ChunkSource
                 if (h <= 0) {
                     if (this.level.getHeightmap(xp - 1, zp) > 0 || this.level.getHeightmap(xp + 1, zp) > 0 || this.level.getHeightmap(xp, zp - 1) > 0 || this.level.getHeightmap(xp, zp + 1) > 0) {
                         boolean hadWater = false;
-                        if (hadWater || this.level.getTile(xp - 1, y, zp) == Block.calmWater.id && this.level.getData(xp - 1, y, zp) < 7) hadWater = true;
-                        if (hadWater || this.level.getTile(xp + 1, y, zp) == Block.calmWater.id && this.level.getData(xp + 1, y, zp) < 7) hadWater = true;
-                        if (hadWater || this.level.getTile(xp, y, zp - 1) == Block.calmWater.id && this.level.getData(xp, y, zp - 1) < 7) hadWater = true;
-                        if (hadWater || this.level.getTile(xp, y, zp + 1) == Block.calmWater.id && this.level.getData(xp, y, zp + 1) < 7) hadWater = true;
+                        if (hadWater || this.level.getTile(xp - 1, y, zp) == Blocks.calmWater.id && this.level.getData(xp - 1, y, zp) < 7) hadWater = true;
+                        if (hadWater || this.level.getTile(xp + 1, y, zp) == Blocks.calmWater.id && this.level.getData(xp + 1, y, zp) < 7) hadWater = true;
+                        if (hadWater || this.level.getTile(xp, y, zp - 1) == Blocks.calmWater.id && this.level.getData(xp, y, zp - 1) < 7) hadWater = true;
+                        if (hadWater || this.level.getTile(xp, y, zp + 1) == Blocks.calmWater.id && this.level.getData(xp, y, zp + 1) < 7) hadWater = true;
                         if (hadWater) {
                             for (int x2 = -5; x2 <= 5; x2++) {
                                 for (int z2 = -5; z2 <= 5; z2++) {
@@ -341,7 +341,7 @@ public class SkyIslandRandomLevelSource implements ChunkSource
 
                                     if (d <= 5) {
                                         d = 6 - d;
-                                        if (this.level.getTile(xp + x2, y, zp + z2) == Block.calmWater.id) {
+                                        if (this.level.getTile(xp + x2, y, zp + z2) == Blocks.calmWater.id) {
                                             int od = this.level.getData(xp + x2, y, zp + z2);
                                             if (od < 7 && od < d) {
                                                 this.level.setData(xp + x2, y, zp + z2, d);
@@ -352,10 +352,10 @@ public class SkyIslandRandomLevelSource implements ChunkSource
                             }
 
                             if (hadWater) {
-                                this.level.setTileAndDataNoUpdate(xp, y, zp, Block.calmWater.id, 7);
+                                this.level.setTileAndDataNoUpdate(xp, y, zp, Blocks.calmWater.id, 7);
 
                                 for (int y2 = 0; y2 < y; y2++) {
-                                    this.level.setTileAndDataNoUpdate(xp, y2, zp, Block.calmWater.id, 8);
+                                    this.level.setTileAndDataNoUpdate(xp, y2, zp, Blocks.calmWater.id, 8);
                                 }
                             }
                         }
@@ -366,7 +366,7 @@ public class SkyIslandRandomLevelSource implements ChunkSource
     }
     
     public void postProcess(final ChunkSource parent, final int xt, final int zt) {
-        BlockLogicSand.instaFall = true;
+        BlockFalling.instaFall = true;
         final int xo = xt * 16;
         final int zo = zt * 16;
 
@@ -388,7 +388,7 @@ public class SkyIslandRandomLevelSource implements ChunkSource
             int y = this.random.nextInt(Level.MAX_HEIGHT);
             int z = zo + this.random.nextInt(16) + 8;
 
-            LakeFeature calmWater = new LakeFeature(Block.calmWater.id);
+            LakeFeature calmWater = new LakeFeature(Blocks.calmWater.id);
             calmWater.place(this.level, this.random, x, y, z);
         }
 
@@ -397,7 +397,7 @@ public class SkyIslandRandomLevelSource implements ChunkSource
             final int y = this.random.nextInt(this.random.nextInt(Level.MAX_HEIGHT - 8) + 8);
             final int z = zo + this.random.nextInt(16) + 8;
             if (y < (Level.SEA_LEVEL + 1) || this.random.nextInt(10) == 0) {
-                LakeFeature calmLava = new LakeFeature(Block.calmLava.id);
+                LakeFeature calmLava = new LakeFeature(Blocks.calmLava.id);
                 calmLava.place(this.level, this.random, x, y, z);
             }
         }
@@ -422,7 +422,7 @@ public class SkyIslandRandomLevelSource implements ChunkSource
             int x = xo + this.random.nextInt(16);
             int y = this.random.nextInt(Level.MAX_HEIGHT);
             int z = zo + this.random.nextInt(16);
-            OreFeature dirtOreFeature = new OreFeature(Block.dirt.id, 32);
+            OreFeature dirtOreFeature = new OreFeature(Blocks.dirt.id, 32);
             dirtOreFeature.place(this.level, this.random, x, y, z);
         }
 
@@ -430,7 +430,7 @@ public class SkyIslandRandomLevelSource implements ChunkSource
             int x = xo + this.random.nextInt(16);
             int y = this.random.nextInt(Level.MAX_HEIGHT);
             int z = zo + this.random.nextInt(16);
-            OreFeature gravelOreFeature = new OreFeature(Block.gravel.id, 32);
+            OreFeature gravelOreFeature = new OreFeature(Blocks.gravel.id, 32);
             gravelOreFeature.place(this.level, this.random, x, y, z);
         }
 
@@ -438,7 +438,7 @@ public class SkyIslandRandomLevelSource implements ChunkSource
             int x = xo + this.random.nextInt(16);
             int y = this.random.nextInt(Level.MAX_HEIGHT);
             int z = zo + this.random.nextInt(16);
-            OreFeature coalOreFeature = new OreFeature(Block.coalOre.id, 16);
+            OreFeature coalOreFeature = new OreFeature(Blocks.coalOre.id, 16);
             coalOreFeature.place(this.level, this.random, x, y, z);
         }
 
@@ -446,7 +446,7 @@ public class SkyIslandRandomLevelSource implements ChunkSource
             int x = xo + this.random.nextInt(16);
             int y = this.random.nextInt(Level.MAX_HEIGHT / 2);
             int z = zo + this.random.nextInt(16);
-            OreFeature ironOreFeature = new OreFeature(Block.ironOre.id, 8);
+            OreFeature ironOreFeature = new OreFeature(Blocks.ironOre.id, 8);
             ironOreFeature.place(this.level, this.random, x, y, z);
         }
 
@@ -454,7 +454,7 @@ public class SkyIslandRandomLevelSource implements ChunkSource
             int x = xo + this.random.nextInt(16);
             int y = this.random.nextInt(Level.MAX_HEIGHT / 4);
             int z = zo + this.random.nextInt(16);
-            OreFeature goldOreFeature = new OreFeature(Block.goldOre.id, 8);
+            OreFeature goldOreFeature = new OreFeature(Blocks.goldOre.id, 8);
             goldOreFeature.place(this.level, this.random, x, y, z);
         }
 
@@ -462,7 +462,7 @@ public class SkyIslandRandomLevelSource implements ChunkSource
             int x = xo + this.random.nextInt(16);
             int y = this.random.nextInt(Level.MAX_HEIGHT / 8);
             int z = zo + this.random.nextInt(16);
-            OreFeature redStoneOreFeature = new OreFeature(Block.redStoneOre.id, 7);
+            OreFeature redStoneOreFeature = new OreFeature(Blocks.redStoneOre.id, 7);
             redStoneOreFeature.place(this.level, this.random, x, y, z);
         }
 
@@ -470,7 +470,7 @@ public class SkyIslandRandomLevelSource implements ChunkSource
             int x = xo + this.random.nextInt(16);
             int y = this.random.nextInt(Level.MAX_HEIGHT / 8);
             int z = zo + this.random.nextInt(16);
-            OreFeature diamondOreFeature = new OreFeature(Block.diamondOre.id, 7);
+            OreFeature diamondOreFeature = new OreFeature(Blocks.diamondOre.id, 7);
             diamondOreFeature.place(this.level, this.random, x, y, z);
         }
 
@@ -478,7 +478,7 @@ public class SkyIslandRandomLevelSource implements ChunkSource
             int x = xo + this.random.nextInt(16);
             int y = this.random.nextInt(Level.MAX_HEIGHT / 8) + this.random.nextInt(Level.MAX_HEIGHT / 8);
             int z = zo + this.random.nextInt(16);
-            OreFeature lapisOreFeature = new OreFeature(Block.lapisOre.id, 6);
+            OreFeature lapisOreFeature = new OreFeature(Blocks.lapisOre.id, 6);
             lapisOreFeature.place(this.level, this.random, x, y, z);
         }
 
@@ -507,7 +507,7 @@ public class SkyIslandRandomLevelSource implements ChunkSource
             int x = xo + this.random.nextInt(16) + 8;
             int y = this.random.nextInt(Level.MAX_HEIGHT);
             int z = zo + this.random.nextInt(16) + 8;
-            FlowerFeature yellowFlowerFeature = new FlowerFeature(Block.flower.id);
+            FlowerFeature yellowFlowerFeature = new FlowerFeature(Blocks.flower.id);
             yellowFlowerFeature.place(this.level, this.random, x, y, z);
         }
 
@@ -515,7 +515,7 @@ public class SkyIslandRandomLevelSource implements ChunkSource
             int x = xo + this.random.nextInt(16) + 8;
             int y = this.random.nextInt(Level.MAX_HEIGHT);
             int z = zo + this.random.nextInt(16) + 8;
-            FlowerFeature roseFlowerFeature = new FlowerFeature(Block.rose.id);
+            FlowerFeature roseFlowerFeature = new FlowerFeature(Blocks.rose.id);
             roseFlowerFeature.place(this.level, this.random, x, y, z);
         }
 
@@ -523,7 +523,7 @@ public class SkyIslandRandomLevelSource implements ChunkSource
             int x = xo + this.random.nextInt(16) + 8;
             int y = this.random.nextInt(Level.MAX_HEIGHT);
             int z = zo + this.random.nextInt(16) + 8;
-            FlowerFeature brownMushroomFeature = new FlowerFeature(Block.mushroom1.id);
+            FlowerFeature brownMushroomFeature = new FlowerFeature(Blocks.mushroom1.id);
             brownMushroomFeature.place(this.level, this.random, x, y, z);
         }
 
@@ -531,7 +531,7 @@ public class SkyIslandRandomLevelSource implements ChunkSource
             int x = xo + this.random.nextInt(16) + 8;
             int y = this.random.nextInt(Level.MAX_HEIGHT);
             int z = zo + this.random.nextInt(16) + 8;
-            FlowerFeature redMushroomFeature = new FlowerFeature(Block.mushroom2.id);
+            FlowerFeature redMushroomFeature = new FlowerFeature(Blocks.mushroom2.id);
             redMushroomFeature.place(this.level, this.random, x, y, z);
         }
 
@@ -565,7 +565,7 @@ public class SkyIslandRandomLevelSource implements ChunkSource
             int x = xo + this.random.nextInt(16) + 8;
             int y = this.random.nextInt(this.random.nextInt(Level.MAX_HEIGHT - 8) + 8);
             int z = zo + this.random.nextInt(16) + 8;
-            SpringFeature waterSpringFeature = new SpringFeature(Block.water.id);
+            SpringFeature waterSpringFeature = new SpringFeature(Blocks.water.id);
             waterSpringFeature.place(this.level, this.random, x, y, z);
         }
 
@@ -573,7 +573,7 @@ public class SkyIslandRandomLevelSource implements ChunkSource
             int x = xo + this.random.nextInt(16) + 8;
             int y = this.random.nextInt(this.random.nextInt(this.random.nextInt(Level.MAX_HEIGHT - 16) + 8) + 8);
             int z = zo + this.random.nextInt(16) + 8;
-            SpringFeature lavaSpringFeature = new SpringFeature(Block.lava.id);
+            SpringFeature lavaSpringFeature = new SpringFeature(Blocks.lava.id);
             lavaSpringFeature.place(this.level, this.random, x, y, z);
         }
 
@@ -590,11 +590,11 @@ public class SkyIslandRandomLevelSource implements ChunkSource
                         && this.level.isEmptyTile(x, y, z)
                         && this.level.getMaterial(x, y - 1, z).blocksMotion()
                         && this.level.getMaterial(x, y - 1, z) != Material.ice) {
-                    this.level.setTile(x, y, z, Block.topSnow.id);
+                    this.level.setTile(x, y, z, Blocks.topSnow.id);
                 }
             }
         }
-        BlockLogicSand.instaFall = false;
+        BlockFalling.instaFall = false;
     }
     
     public boolean save(final boolean force, final ProgressListener progressListener) {

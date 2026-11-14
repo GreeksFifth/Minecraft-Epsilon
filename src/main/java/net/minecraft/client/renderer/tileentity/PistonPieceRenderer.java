@@ -5,21 +5,22 @@
 package net.minecraft.client.renderer.tileentity;
 
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BlockLogicPistonBase;
+import net.minecraft.world.level.block.BlockPistonBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Lighting;
 import net.minecraft.client.renderer.Tesselator;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.PistonPieceEntity;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.tileentity.TileEntityPistonPiece;
 import net.minecraft.client.renderer.TileRenderer;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class PistonPieceRenderer extends TileEntityRenderer<PistonPieceEntity>
+public class PistonPieceRenderer extends TileEntityRenderer<TileEntityPistonPiece>
 {
     private TileRenderer tileRenderer;
     
-    public void render(final PistonPieceEntity entity, final double x, final double y, final double z, final float a) {
+    public void render(final TileEntityPistonPiece entity, final double x, final double y, final double z, final float a) {
         final Block block = Block.BLOCKS[entity.getId()];
         if (block != null && entity.getProgress(a) < 1.0f) {
             final Tesselator t = Tesselator.instance;
@@ -40,15 +41,15 @@ public class PistonPieceRenderer extends TileEntityRenderer<PistonPieceEntity>
             t.begin();
             t.offset((float)x - entity.x + entity.getXOff(a), (float)y - entity.y + entity.getYOff(a), (float)z - entity.z + entity.getZOff(a));
             t.color(1, 1, 1);
-            if (block == Block.pistonExtension && entity.getProgress(a) < 0.5f) {
+            if (block == Blocks.pistonExtension && entity.getProgress(a) < 0.5f) {
                 // extending arms may appear through the base block
                 this.tileRenderer.tesselatePistonArmNoCulling(block, entity.x, entity.y, entity.z, false);
             }
             else if (entity.isSourcePiston() && !entity.isExtending()) {
                 // special case for withdrawing the arm back into the base
-                Block.pistonExtension.setOverrideTopTexture(((BlockLogicPistonBase) block).getPlatformTexture());
-                this.tileRenderer.tesselatePistonArmNoCulling(Block.pistonExtension, entity.x, entity.y, entity.z, entity.getProgress(a) < 0.5f);
-                Block.pistonExtension.clearOverrideTopTexture();
+                Blocks.pistonExtension.setOverrideTopTexture(((BlockPistonBase) block).getPlatformTexture());
+                this.tileRenderer.tesselatePistonArmNoCulling(Blocks.pistonExtension, entity.x, entity.y, entity.z, entity.getProgress(a) < 0.5f);
+                Blocks.pistonExtension.clearOverrideTopTexture();
 
                 t.offset((float)x - entity.x, (float)y - entity.y, (float)z - entity.z);
                 this.tileRenderer.tesselatePistonBaseForceExtended(block, entity.x, entity.y, entity.z);

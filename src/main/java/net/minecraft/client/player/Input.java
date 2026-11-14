@@ -4,7 +4,7 @@
 
 package net.minecraft.client.player;
 
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.EntityPlayer;
 
 public class Input
 {
@@ -14,7 +14,7 @@ public class Input
     public boolean jumping = false;
     public boolean sneaking = false;
 
-    public void tick(final Player player) {
+    public void tick(final EntityPlayer player) {
     }
     
     public void releaseAllKeys() {

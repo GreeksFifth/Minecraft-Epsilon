@@ -5,7 +5,7 @@
 package net.minecraft.client.particle;
 
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.block.BlockLogicFluid;
+import net.minecraft.world.level.block.BlockFluid;
 import util.Mth;
 import net.minecraft.client.renderer.Tesselator;
 import net.minecraft.world.level.Level;
@@ -57,7 +57,7 @@ public class WaterDropParticle extends Particle
 
         final Material m = this.level.getMaterial(Mth.floor(this.x), Mth.floor(this.y), Mth.floor(this.z));
         if (m.isLiquid() || m.isSolid()) {
-            double y0 = Mth.floor(this.y) + 1 - BlockLogicFluid.getHeight(this.level.getData(Mth.floor(this.x), Mth.floor(this.y), Mth.floor(this.z)));
+            double y0 = Mth.floor(this.y) + 1 - BlockFluid.getHeight(this.level.getData(Mth.floor(this.x), Mth.floor(this.y), Mth.floor(this.z)));
             if (this.y < y0) {
                 this.remove();
             }
