@@ -11,10 +11,15 @@ import net.minecraft.client.gui.achievement.AchievementScreen;
 import net.minecraft.client.gui.Button;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.Lighting;
+import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.midforddevutils.MidfordBlitter;
 import net.minecraft.stats.Achievements;
 import net.minecraft.world.entity.player.EntityPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemInstance;
+import net.minecraft.world.level.block.Blocks;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
 
 import java.util.LinkedList;
 
@@ -30,6 +35,17 @@ public class InventoryScreen extends AbstractContainerScreen
     int BUTTON_INVCLEAR = 4;
     int currentPage = 1;
     int pagesTotal = 1;
+    int endOfImage;
+    int slotsX;
+    int slotsY;
+    int slotsStartX;
+    int slotsStartY;
+    int pageOffset;
+    int slotwidth = 16;
+    int slotheight = 16;
+    LinkedList<Integer> slotAnchorsXPos  = new LinkedList<>();
+    LinkedList<Integer> slotAnchorsYPos  = new LinkedList<>();
+    Minecraft mc = Minecraft.instance;
 
     private final LinkedList<ItemInstance> allItemsInGame = new LinkedList<>();
     
@@ -42,16 +58,34 @@ public class InventoryScreen extends AbstractContainerScreen
     
     @Override
     public void init() {
+        currentPage = 1;
+        endOfImage = ((this.width - this.imageWidth) / 2)+this.imageWidth;
+        slotsX = ((this.width-endOfImage)/16);
+        slotsY = (this.height-20)/16;
+        slotsStartX = endOfImage+((this.width-endOfImage)%16);
+        slotsStartY = 21;
         this.buttons.clear();
-        pollAndPopulateGameItems();
-        this.buttons.add(new Button(BUTTON_PREVIOUS_PAGE,(this.width-128),0,32,20,"Prev."));
-        this.buttons.add(new Button(BUTTON_NEXT_PAGE,(this.width-32),0,32,20,"Next"));
-        if (Minecraft.DEBUG_MODE){
-            this.buttons.add(new Button(BUTTON_INVCLEAR,0,0,96,20,"Clear Inventory"));
+        if (mc.options.enableEIV) {
+            pollAndPopulateGameItems();
+            this.buttons.add(new Button(BUTTON_PREVIOUS_PAGE, slotsStartX, 0, 32, 20, "Prev."));
+            this.buttons.add(new Button(BUTTON_NEXT_PAGE, (this.width - 32), 0, 32, 20, "Next"));
+            if (Minecraft.DEBUG_MODE) {
+                this.buttons.add(new Button(BUTTON_INVCLEAR, 0, this.height-20, 96, 20, "Clear Inventory"));
+            }
+            pagesTotal = ((int)Math.ceil(allItemsInGame.size() / (float)(slotsX*slotsY)));
+            slotAnchorsXPos.clear();
+            slotAnchorsYPos.clear();
+            for (int i = 0; i < slotsY; i++) {
+                for (int j = 0; j < slotsX; j++) {
+                    slotAnchorsXPos.add(slotsStartX+(j*slotwidth));
+                    slotAnchorsYPos.add(slotsStartY+(i*slotheight));
+                }
+            }
+
         }
-        pagesTotal = ((int)(Math.round(allItemsInGame.size()/(((this.height-20.0)/16)*8))));
+
     }
-    
+
     @Override
     protected void renderLabels() {
         this.font.draw("Crafting", 84 + 2, 8 * 2, 0x404040);
@@ -59,40 +93,37 @@ public class InventoryScreen extends AbstractContainerScreen
     
     @Override
     public void render(final int xm, final int ym, final float a) {
-        glPushMatrix();
-        glTranslatef(0,0,1);
-        this.drawCenteredString(this.font,"Page:"+currentPage+"/"+ pagesTotal,(this.width-64),6,0xFFFFFF);
-        glPopMatrix();
         super.render(xm, ym, a);
         this.xMouse = (float)xm;
         this.yMouse = (float)ym;
-        renderFEI();
-
-
+        if (mc.options.enableEIV) {
+            renderFEI();
+        }
     }
 
     public void renderFEI(){
-        int drawingRow = 0;
-        int drawingColumn = 0;
-        int pageOffset = (((this.height-20)/16)*8);
-        boolean drawing = true;
-        for (int i = (currentPage-1)*(pageOffset); i < allItemsInGame.size(); i++) {
-            if (drawing){
+        int drawingX = 0;
+        int drawingY = 0;
+        pageOffset = (currentPage-1)*slotsX*slotsY;
+        glPushMatrix();
+        glTranslatef(0,0,1);
+        Lighting.turnOff();
+        this.drawCenteredString(this.font,"Page:"+currentPage+"/"+ pagesTotal,((slotsStartX)+this.width)/2,6,0xFFFFFF);
+        Lighting.turnOn();
+        glPopMatrix();
+        for (int i = 0; i < slotsX*slotsY; i++) {
+            if (i+pageOffset>=allItemsInGame.size()) break;
                 Lighting.turnOff();
-                Gui.itemRenderer.renderGuiItem(this.minecraft.font, this.minecraft.textures, allItemsInGame.get(i), (this.width - 128) + (drawingColumn * 16), 20 + (drawingRow * 16));
+                Gui.itemRenderer.renderGuiItem(this.font, mc.textures, allItemsInGame.get(i+pageOffset), slotAnchorsXPos.get(i), slotAnchorsYPos.get(i));
                 Lighting.turnOn();
-            }
-            drawingColumn++;
-            if (drawingColumn == 8) {
-                drawingRow++;
-                drawingColumn = 0;
-            }
-            if (drawingRow >= pageOffset/8){
-                drawing = false;
-            }
+
+
+//            mc.player.displayClientMessage("xMouse:"+xMouse);
+//            mc.player.displayClientMessage("yMouse:"+yMouse);
 
 
         }
+
     }
     
     @Override
@@ -167,8 +198,13 @@ public class InventoryScreen extends AbstractContainerScreen
     protected void pollAndPopulateGameItems(){
         allItemsInGame.clear();
         for (int i = 0; i <  Item.items.length; i++) {
-            if (Item.items[i] != null){
-                allItemsInGame.add(new ItemInstance(Item.items[i]));
+            if (Item.items[i] == null) continue;
+            allItemsInGame.add(new ItemInstance(Item.items[i]));
+                if (Item.items[i].id == Blocks.cloth.id){
+                    for (int j = 1; j < 16; j++) {
+                        allItemsInGame.add(new ItemInstance(Item.items[i],1,j));
+
+                }
             }
 
         }
@@ -177,8 +213,27 @@ public class InventoryScreen extends AbstractContainerScreen
 
     @Override
     protected void mouseClicked(final int x, final int y, final int buttonNum) {
-        super.mouseClicked(x,y,buttonNum);
-            }
+        super.mouseClicked(x, y, buttonNum);
+        for (int i = 0; i < slotsY; i++) {
+            for (int j = 0; j < slotsX; j++) {
+                int xStart = slotsStartX + (j * slotwidth);
+                if (x > xStart && x < xStart + slotwidth) {
+                    int yStart = slotsStartY + (i * slotheight);
+                    if (y > yStart && y < yStart + slotheight) {
+                        int itemSlot = (i * slotsX + j)+pageOffset;
+                        if (itemSlot < allItemsInGame.size()) {
+                            if (buttonNum == 0) {
+                                mc.player.inventory.add(new ItemInstance(allItemsInGame.get(itemSlot).id,allItemsInGame.get(itemSlot).getMaxStackSize(),allItemsInGame.get(itemSlot).getAuxValue()));
+                            }
+                            else {
+                                mc.player.inventory.add(new ItemInstance(allItemsInGame.get(itemSlot).id,1,allItemsInGame.get(itemSlot).getAuxValue()));
+                            }
+                        }
+                    }
 
+                }
+            }
+        }
+    }
 
 }
