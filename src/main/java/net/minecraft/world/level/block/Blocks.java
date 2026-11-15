@@ -184,7 +184,7 @@ public class Blocks {
             .setDestroyTime(0.0f)
             .setSoundType(Block.SOUND_GRASS)
             .setDescriptionId("deadbush");
-    public static final Block pistonBase = new BlockPistonBase(33, BlockPistonBase.PLATFORM_STICKY_TEX, false)
+    public static final Block pistonBase = new BlockPistonBase(33, BlockPistonBase.PLATFORM_TEX, false)
             .setDescriptionId("pistonBase")
             .sendTileData();
     public static final BlockPistonHead pistonExtension = (BlockPistonHead) new BlockPistonHead(34, 107)
