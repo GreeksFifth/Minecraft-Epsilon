@@ -9,16 +9,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.player.EntityPlayer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-/*
-    TODO: Figure out what the fuck this is supposed to be and unfuck/remove it.
-            -Midford
- */
-@Deprecated
-public class ItemSpecialBlockPlanter extends Item
+
+public class ItemSpecialPlacesArbitraryBlock extends Item
 {
     private int tileId;
     
-    public ItemSpecialBlockPlanter(final int id, final Block block) {
+    public ItemSpecialPlacesArbitraryBlock(final int id, final Block block) {
         super(id);
         this.tileId = block.id;
     }

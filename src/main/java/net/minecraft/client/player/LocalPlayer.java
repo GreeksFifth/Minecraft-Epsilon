@@ -8,7 +8,7 @@ import util.Mth;
 import net.minecraft.stats.Achievement;
 import net.minecraft.stats.Stat;
 import net.minecraft.client.particle.TakeAnimationParticle;
-import net.minecraft.client.gui.inventory.TrapScreen;
+import net.minecraft.client.gui.inventory.DispenserScreen;
 import net.minecraft.world.level.block.tileentity.TileEntityDispenser;
 import net.minecraft.client.gui.inventory.FurnaceScreen;
 import net.minecraft.world.level.block.tileentity.TileEntityFurnace;
@@ -178,7 +178,7 @@ public class LocalPlayer extends EntityPlayer
     
     @Override
     public void openTrap(final TileEntityDispenser trap) {
-        this.minecraft.setScreen(new TrapScreen(this.inventory, trap));
+        this.minecraft.setScreen(new DispenserScreen(this.inventory, trap));
     }
     
     @Override

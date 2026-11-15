@@ -87,7 +87,7 @@ public class Items {
     public static Item leather = new Item(78).setIcon(7, 6).setDescriptionId("leather");
     public static Item brick = new Item(80).setIcon(6, 1).setDescriptionId("brick");
     public static Item clay = new Item(81).setIcon(9, 3).setDescriptionId("clay");
-    public static Item reeds = new ItemSpecialBlockPlanter(82, Blocks.reeds).setIcon(11, 1).setDescriptionId("reeds");
+    public static Item reeds = new ItemSpecialPlacesArbitraryBlock(82, Blocks.reeds).setIcon(11, 1).setDescriptionId("reeds");
     public static Item paper = new Item(83).setIcon(10, 3).setDescriptionId("paper");
     public static Item book = new Item(84).setIcon(11, 3).setDescriptionId("book");
     public static Item slimeBall = new Item(85).setIcon(14, 1).setDescriptionId("slimeball");
@@ -103,9 +103,9 @@ public class Items {
     public static Item dye_powder = new ItemDyePowder(95).setIcon(14, 4).setDescriptionId("dyePowder");
     public static Item bone = new Item(96).setIcon(12, 1).setDescriptionId("bone").handEquipped();
     public static Item sugar = new Item(97).setIcon(13, 0).setDescriptionId("sugar").handEquipped();
-    public static Item cake = new ItemSpecialBlockPlanter(98, Blocks.cake).setMaxStackSize(1).setIcon(13, 1).setDescriptionId("cake");
+    public static Item cake = new ItemSpecialPlacesArbitraryBlock(98, Blocks.cake).setMaxStackSize(1).setIcon(13, 1).setDescriptionId("cake");
     public static Item bed = new ItemBed(99).setMaxStackSize(1).setIcon(13, 2).setDescriptionId("bed");
-    public static Item diode = new ItemSpecialBlockPlanter(100, Blocks.diode_off).setIcon(6, 5).setDescriptionId("diode");
+    public static Item diode = new ItemSpecialPlacesArbitraryBlock(100, Blocks.diode_off).setIcon(6, 5).setDescriptionId("diode");
     public static Item cookie = new ItemFoodStackable(101, 1, false, 8).setIcon(12, 5).setDescriptionId("cookie");
     public static ItemMap map = (ItemMap) new ItemMap(102).setIcon(12, 3).setDescriptionId("map");
     public static ItemShears shears = (ItemShears) new ItemShears(103).setIcon(13, 5).setDescriptionId("shears");

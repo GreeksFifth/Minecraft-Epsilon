@@ -4,15 +4,16 @@
 
 package net.minecraft.client.gui.inventory;
 
+import net.minecraft.midforddevutils.MidfordBlitter;
 import net.minecraft.world.inventory.TrapMenu;
 import net.minecraft.world.level.block.tileentity.TileEntityDispenser;
 import net.minecraft.world.entity.player.Inventory;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class TrapScreen extends AbstractContainerScreen
+public class DispenserScreen extends AbstractContainerScreen
 {
-    public TrapScreen(final Inventory inventory, final TileEntityDispenser trap) {
+    public DispenserScreen(final Inventory inventory, final TileEntityDispenser trap) {
         super(new TrapMenu(inventory, trap));
     }
     
@@ -20,11 +21,17 @@ public class TrapScreen extends AbstractContainerScreen
     protected void renderLabels() {
         this.font.draw("Dispenser", 16 + 4 + 40, 2 + 2 + 2, 0x404040);
         this.font.draw("Inventory", 8, this.imageHeight - 96 + 2, 0x404040);
+        glPushMatrix();
+        final int tex = this.minecraft.textures.loadTexture("/gui/dispenser.png");
+        glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+        this.minecraft.textures.bind(tex);
+        MidfordBlitter.blit(0,0,0,0,166,22,22);
+        glPopMatrix();
     }
     
     @Override
     protected void renderBg(final float a) {
-        final int tex = this.minecraft.textures.loadTexture("/gui/trap.png");
+        final int tex = this.minecraft.textures.loadTexture("/gui/dispenser.png");
         glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
         this.minecraft.textures.bind(tex);
         final int xo = (this.width - this.imageWidth) / 2;
