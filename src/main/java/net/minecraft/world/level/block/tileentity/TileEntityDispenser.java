@@ -4,6 +4,7 @@
 
 package net.minecraft.world.level.block.tileentity;
 
+import com.mojang.nbt.IntTag;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.EntityPlayer;
 import com.mojang.nbt.ListTag;
@@ -16,7 +17,7 @@ public class TileEntityDispenser extends TileEntity implements Container
     private ItemInstance[] items = new ItemInstance[9];
     // private Random random = new Random();
     Minecraft mc = Minecraft.instance;
-    private int targetSlot = 0; // Argent - specifically used for dispenser activation
+    public int targetSlot = -1; // Argent - specifically used for dispenser activation
     private boolean empty = true;
 
     public int getContainerSize() {
@@ -28,10 +29,6 @@ public class TileEntityDispenser extends TileEntity implements Container
     }
     
     public ItemInstance removeItem(final int slot, final int count) {
-        if (slot < 0 || slot > 8){
-            // System.out.println("Abnormal slot index of \""+slot+"\" detected, terminating method");
-            return null; // Argent - Avoids crashes from attempting to use abnormal slot indexes
-        }
         if (this.items[slot] != null) {
             if (this.items[slot].count <= count) {
                 final ItemInstance item = this.items[slot];
@@ -52,14 +49,20 @@ public class TileEntityDispenser extends TileEntity implements Container
 
     // Argent - Sequential slot iteration; only accessible within this method. Replaces "removeRandomItem".
     public ItemInstance removeSequentialItem() {
-        targetSlot++;
-        if (targetSlot > 8) {
-            targetSlot = 0;
+        if (targetSlot < 0 || targetSlot > 8){
+            // System.out.println("Abnormal slot index of \""+slot+"\" detected, terminating method");
+            return null; // Argent - Avoids crashes from attempting to use abnormal slot indexes
         }
 
-        skipEmptySlots(targetSlot);
-
-        return this.removeItem(targetSlot, 1);
+        ItemInstance removedItem = this.removeItem(targetSlot, 1); // Argent - Midford's funny return statement hack
+        if (!empty){
+            targetSlot++;
+            if(targetSlot > 8){
+                targetSlot = 0;
+            }
+            skipEmptySlots(targetSlot);
+        }
+        return removedItem;
     }
 
     public void skipEmptySlots(final int selected) {
@@ -84,7 +87,7 @@ public class TileEntityDispenser extends TileEntity implements Container
         this.items[slot] = item;
         if (item != null && item.count > this.getMaxStackSize()) item.count = this.getMaxStackSize();
         this.setChanged();
-        if (empty == true) { // T flip-flop; switching state requires external condition to be met
+        if (empty) { // T flip-flop; switching state requires external condition to be met
             targetSlot = slot;
             empty = false; // Argent - mark as not empty if any item is placed in dispenser
         }
@@ -98,11 +101,18 @@ public class TileEntityDispenser extends TileEntity implements Container
     public void load(final CompoundTag base) {
         super.load(base);
         final ListTag<CompoundTag> inventoryList = (ListTag<CompoundTag>) base.getList("Items");
+        final IntTag targetSlotTag = new IntTag(base.getInt("TargetSlot"));
+
         this.items = new ItemInstance[this.getContainerSize()];
         for (int i = 0; i < inventoryList.size(); ++i) {
             final CompoundTag tag = inventoryList.get(i);
             final int slot = tag.getByte("Slot") & 0xFF;
             if (slot >= 0 && slot < this.items.length) this.items[slot] = new ItemInstance(tag);
+        }
+
+        targetSlot = targetSlotTag.data;
+        if (this.items[targetSlot] != null){
+            empty = false;
         }
     }
     
@@ -110,6 +120,7 @@ public class TileEntityDispenser extends TileEntity implements Container
     public void save(final CompoundTag base) {
         super.save(base);
         final ListTag<CompoundTag> listTag = new ListTag<>();
+        final IntTag targetSlotTag = new IntTag();
 
         for (int i = 0; i < this.items.length; ++i) {
             if (this.items[i] != null) {
@@ -119,7 +130,11 @@ public class TileEntityDispenser extends TileEntity implements Container
                 listTag.add(tag);
             }
         }
+
+        targetSlotTag.data = targetSlot;
+
         base.put("Items", listTag);
+        base.put("TargetSlot", targetSlotTag);
     }
     
     public int getMaxStackSize() {
