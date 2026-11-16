@@ -11,15 +11,11 @@ import net.minecraft.client.gui.achievement.AchievementScreen;
 import net.minecraft.client.gui.Button;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.Lighting;
-import net.minecraft.client.renderer.entity.ItemRenderer;
-import net.minecraft.midforddevutils.MidfordBlitter;
 import net.minecraft.stats.Achievements;
 import net.minecraft.world.entity.player.EntityPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.level.block.Blocks;
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
 
 import java.util.LinkedList;
 
@@ -102,8 +98,6 @@ public class InventoryScreen extends AbstractContainerScreen
     }
 
     public void renderFEI(){
-        int drawingX = 0;
-        int drawingY = 0;
         pageOffset = (currentPage-1)*slotsX*slotsY;
         glPushMatrix();
         glTranslatef(0,0,1);
@@ -113,17 +107,10 @@ public class InventoryScreen extends AbstractContainerScreen
         glPopMatrix();
         for (int i = 0; i < slotsX*slotsY; i++) {
             if (i+pageOffset>=allItemsInGame.size()) break;
-                Lighting.turnOff();
-                Gui.itemRenderer.renderGuiItem(this.font, mc.textures, allItemsInGame.get(i+pageOffset), slotAnchorsXPos.get(i), slotAnchorsYPos.get(i));
-                Lighting.turnOn();
-
-
-//            mc.player.displayClientMessage("xMouse:"+xMouse);
-//            mc.player.displayClientMessage("yMouse:"+yMouse);
-
-
+            Lighting.turnOff();
+            Gui.itemRenderer.renderGuiItem(this.font, mc.textures, allItemsInGame.get(i+pageOffset), slotAnchorsXPos.get(i), slotAnchorsYPos.get(i));
+            Lighting.turnOn();
         }
-
     }
     
     @Override

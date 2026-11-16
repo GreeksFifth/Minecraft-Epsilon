@@ -96,7 +96,6 @@ public class BlockDoor extends Block
     
     @Override
     public void attack(final Level level, final int x, final int y, final int z, final EntityPlayer player) {
-        this.use(level, x, y, z, player);
     }
     
     @Override
