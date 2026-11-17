@@ -31,7 +31,8 @@ public class ItemPickaxe extends ItemSpecialMining
             Blocks.dispenser,
             Blocks.furnace,
             Blocks.furnace_lit,
-            Blocks.lightGem // Argent - new
+            Blocks.lightGem, // Argent - new
+            Blocks.stairs_stone // Argent - new
     };
     
     protected ItemPickaxe(final int id, final Tier tier) {

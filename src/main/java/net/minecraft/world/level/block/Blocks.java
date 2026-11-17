@@ -93,7 +93,7 @@ public class Blocks {
             .setSoundType(Block.SOUND_SAND)
             .setDescriptionId("sand");
     public static final Block gravel = new BlockGravel(13, 19)
-            .setDestroyTime(0.6f)
+            .setDestroyTime(0.5f)
             .setSoundType(Block.SOUND_GRAVEL)
             .setDescriptionId("gravel");
     public static final Block goldOre = new BlockOre(14, 32)
@@ -252,7 +252,7 @@ public class Blocks {
             .setSoundType(Block.SOUND_STONE)
             .setDescriptionId("stoneMoss");
     public static final Block obsidian = new BlockObsidian(49, 37)
-            .setDestroyTime(4.0f)
+            .setDestroyTime(3.0f) // Argent - Formerly 10 (50 seconds)
             .setExplodeable(2000.0f)
             .setSoundType(Block.SOUND_STONE)
             .setDescriptionId("obsidian");

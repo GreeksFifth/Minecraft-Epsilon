@@ -16,7 +16,8 @@ public class ItemAxe extends ItemSpecialMining
             Blocks.chest,
             Blocks.bookshelf,
             Blocks.musicBlock, // Argent - new
-            Blocks.recordPlayer // Argent - new
+            Blocks.recordPlayer, // Argent - new
+            Blocks.stairs_wood // Argent - new
     };
     
     protected ItemAxe(final int id, final Tier tier) {
