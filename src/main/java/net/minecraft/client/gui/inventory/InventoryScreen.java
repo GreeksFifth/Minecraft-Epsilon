@@ -197,7 +197,6 @@ public class InventoryScreen extends AbstractContainerScreen
 
     @Override
     protected void mouseClicked(final int x, final int y, final int buttonNum) {
-        super.mouseClicked(x, y, buttonNum);
         for (int i = 0; i < slotsY; i++) {
             for (int j = 0; j < slotsX; j++) {
                 int xStart = slotsStartX + (j * slotwidth);
@@ -206,16 +205,20 @@ public class InventoryScreen extends AbstractContainerScreen
                     if (y > yStart && y < yStart + slotheight) {
                         int itemSlot = (i * slotsX + j)+pageOffset;
                         if (itemSlot < allItemsInGame.size()) {
-                            if (buttonNum == 0) {
-                                mc.player.inventory.add(new ItemInstance(allItemsInGame.get(itemSlot).id,allItemsInGame.get(itemSlot).getMaxStackSize(),allItemsInGame.get(itemSlot).getAuxValue()));
+                            if (mc.player.inventory.getCarried() == null){
+                                if (buttonNum == 0) {
+                                 mc.player.inventory.add(new ItemInstance(allItemsInGame.get(itemSlot).id,allItemsInGame.get(itemSlot).getMaxStackSize(),allItemsInGame.get(itemSlot).getAuxValue()));
+                              }
+                             else {
+                                 mc.player.inventory.add(new ItemInstance(allItemsInGame.get(itemSlot).id,1,allItemsInGame.get(itemSlot).getAuxValue()));
+                              }
                             }
-                            else {
-                                mc.player.inventory.add(new ItemInstance(allItemsInGame.get(itemSlot).id,1,allItemsInGame.get(itemSlot).getAuxValue()));
-                            }
+                            else{mc.player.inventory.setCarried(null);}
                         }
                     }
                 }
             }
         }
+        super.mouseClicked(x, y, buttonNum);
     }
 }

@@ -106,7 +106,7 @@ public class BlockStairs extends Block
     
     @Override
     public void destroy(final Level level, final int x, final int y, final int z, final int data) {
-        this.base.destroy(level, x, y, z, data);
+        super.destroy(level, x, y, z, data);
     }
     
     @Override
@@ -126,12 +126,12 @@ public class BlockStairs extends Block
     
     @Override
     public int getResource(final int data, final Random random) {
-        return this.base.getResource(data, random);
+        return super.getResource(data, random);
     }
     
     @Override
     public int getResourceCount(final Random random) {
-        return this.base.getResourceCount(random);
+        return super.getResourceCount(random);
     }
     
     @Override
@@ -198,7 +198,7 @@ public class BlockStairs extends Block
 
     @Override
     public void spawnResources(final Level level, final int x, final int y, final int z, final int data, final float odds) {
-        this.base.spawnResources(level, x, y, z, data, odds);
+        super.spawnResources(level, x, y, z, data, odds);
     }
     
     @Override
