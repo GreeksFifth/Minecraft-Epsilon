@@ -44,3 +44,7 @@ bin/
 /unused/
 /mp/
 /.idea/
+
+###Minecraft Epsilon###
+*.kra
+*.png~
