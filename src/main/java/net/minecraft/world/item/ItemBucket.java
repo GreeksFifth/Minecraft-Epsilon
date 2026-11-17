@@ -62,15 +62,15 @@ public class ItemBucket extends Item
             if (this.content == 0) {
                 if (level.getMaterial(xt, yt, zt) == Material.water && level.getData(xt, yt, zt) == 0) {
                     level.setTile(xt, yt, zt, 0);
-                    return new ItemInstance(Items.bucket_water);
+                    return new ItemInstance(Items.bucketWater);
                 }
                 if (level.getMaterial(xt, yt, zt) == Material.lava && level.getData(xt, yt, zt) == 0) {
                     level.setTile(xt, yt, zt, 0);
-                    return new ItemInstance(Items.bucket_lava);
+                    return new ItemInstance(Items.bucketLava);
                 }
             }
             else {
-                if (this.content < 0) return new ItemInstance(Items.bucket_empty);
+                if (this.content < 0) return new ItemInstance(Items.bucketEmpty);
 
                 if (hr.f == Facing.DOWN) --yt;
                 if (hr.f == Facing.UP) ++yt;
@@ -91,14 +91,14 @@ public class ItemBucket extends Item
                         level.setTileAndData(xt, yt, zt, this.content, 0);
                     }
 
-                    return new ItemInstance(Items.bucket_empty);
+                    return new ItemInstance(Items.bucketEmpty);
                 }
             }
         }
         else {
             if (this.content == 0) {
                 if (hr.entity instanceof EntityCow) {
-                    return new ItemInstance(Items.milk);
+                    return new ItemInstance(Items.bucketMilk);
                 }
             }
         }

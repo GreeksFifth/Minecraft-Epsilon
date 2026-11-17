@@ -39,7 +39,7 @@ public class TreeFeature extends Feature
         if (!free) return false;
 
         final int belowTile = level.getTile(x, y - 1, z);
-        if ((belowTile != Blocks.grass.id && belowTile != Blocks.dirt.id) || y >= Level.MAX_HEIGHT - treeHeight - 1) return false;
+        if ((belowTile != Blocks.dirtGrassy.id && belowTile != Blocks.dirt.id) || y >= Level.MAX_HEIGHT - treeHeight - 1) return false;
 
         level.setTileNoUpdate(x, y - 1, z, Blocks.dirt.id);
 
@@ -60,7 +60,7 @@ public class TreeFeature extends Feature
 
         for (int hh = 0; hh < treeHeight; ++hh) {
             final int t = level.getTile(x, y + hh, z);
-            if (t == 0 || t == Blocks.leaves.id) level.setTileNoUpdate(x, y + hh, z, Blocks.treeTrunk.id);
+            if (t == 0 || t == Blocks.leaves.id) level.setTileNoUpdate(x, y + hh, z, Blocks.log.id);
         }
 
         return true;

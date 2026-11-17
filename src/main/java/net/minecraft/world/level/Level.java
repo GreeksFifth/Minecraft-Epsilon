@@ -1714,9 +1714,9 @@ public class Level implements LevelSource
                 if (cold) {
                     final int below = lc.getTile(x, yy - 1, z);
                     final int current = lc.getTile(x, yy, z);
-                    boolean shouldSnow = current == 0 && Blocks.topSnow.mayPlace(this, x + xo, yy, z + zo) && below != 0 && below != Blocks.ice.id && Block.BLOCKS[below].material.blocksMotion();
+                    boolean shouldSnow = current == 0 && Blocks.snowLayer.mayPlace(this, x + xo, yy, z + zo) && below != 0 && below != Blocks.ice.id && Block.BLOCKS[below].material.blocksMotion();
                     if (this.isRaining() && shouldSnow) {
-                        this.setTile(x + xo, yy, z + zo, Blocks.topSnow.id);
+                        this.setTile(x + xo, yy, z + zo, Blocks.snowLayer.id);
                     }
                     if (below == Blocks.calmWater.id && lc.getData(x, yy - 1, z) == 0) {
                         this.setTile(x + xo, yy - 1, z + zo, Blocks.ice.id);
@@ -1856,7 +1856,7 @@ public class Level implements LevelSource
         AABB aabb = block.getAABB(this, x, y, z);
         if (ignoreEntities) aabb = null;
         if (aabb != null && !this.isUnobstructed(aabb)) return false;
-        if (targetBlock == Blocks.water || targetBlock == Blocks.calmWater || targetBlock == Blocks.lava || targetBlock == Blocks.calmLava || targetBlock == Blocks.fire || targetBlock == Blocks.topSnow) targetBlock = null;
+        if (targetBlock == Blocks.water || targetBlock == Blocks.calmWater || targetBlock == Blocks.lava || targetBlock == Blocks.calmLava || targetBlock == Blocks.fire || targetBlock == Blocks.snowLayer) targetBlock = null;
         if (tileId > 0 && targetBlock == null) {
             if (block.mayPlace(this, x, y, z, face)) {
                 return true;

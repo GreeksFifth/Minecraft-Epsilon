@@ -186,8 +186,8 @@ public class BlockDoor extends Block
     @Override
     public int getResource(final int data, final Random random) {
         if ((data & UPPER_BIT) != 0x0) return 0;
-        if (this.material == Material.metal) return Items.door_iron.id;
-        return Items.door_wood.id;
+        if (this.material == Material.metal) return Items.doorIron.id;
+        return Items.doorWooden.id;
     }
     
     @Override

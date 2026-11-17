@@ -77,7 +77,7 @@ public class BlockSnowLayer extends Block
     
     @Override
     public void playerDestroy(final Level level, final EntityPlayer player, final int x, final int y, final int z, final int data) {
-        final int type = Items.snowBall.id;
+        final int type = Items.snowball.id;
         final float s = 0.7f;
         double xo = level.random.nextFloat() * s + (1.0f - s) * 0.5;
         double yo = level.random.nextFloat() * s + (1.0f - s) * 0.5;
@@ -91,7 +91,7 @@ public class BlockSnowLayer extends Block
     
     @Override
     public int getResource(final int data, final Random random) {
-        return Items.snowBall.id;
+        return Items.snowball.id;
     }
     
     @Override

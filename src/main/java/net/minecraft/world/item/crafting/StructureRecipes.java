@@ -15,20 +15,20 @@ public class StructureRecipes
                 "# #",
                 "###",
 
-                '#', Blocks.wood);
+                '#', Blocks.woodenPlanks);
 
         recipes.addShapedRecipe(new ItemInstance(Blocks.furnace),
                 "###",
                 "# #",
                 "###",
 
-                '#', Blocks.stoneBrick);
+                '#', Blocks.cobblestone);
 
         recipes.addShapedRecipe(new ItemInstance(Blocks.workBench),
                 "##",
                 "##",
 
-                '#', Blocks.wood);
+                '#', Blocks.woodenPlanks);
 
         recipes.addShapedRecipe(new ItemInstance(Blocks.sandStone),
                 "##",

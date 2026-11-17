@@ -13,8 +13,8 @@ public class LightGemFeature extends Feature
     @Override
     public boolean place(final Level level, final Random random, final int x, final int y, final int z) {
         if (!level.isEmptyTile(x, y, z)) return false;
-        if (level.getTile(x, y + 1, z) != Blocks.hellRock.id) return false;
-        level.setTile(x, y, z, Blocks.lightGem.id);
+        if (level.getTile(x, y + 1, z) != Blocks.netherrack.id) return false;
+        level.setTile(x, y, z, Blocks.glowstone.id);
 
         for (int i = 0; i < 1500; ++i) {
             final int x2 = x + random.nextInt(8) - random.nextInt(8);
@@ -32,10 +32,10 @@ public class LightGemFeature extends Feature
                 if (t == 4) tile = level.getTile(x2, y2, z2 - 1);
                 if (t == 5) tile = level.getTile(x2, y2, z2 + 1);
 
-                if (tile == Blocks.lightGem.id) ++count;
+                if (tile == Blocks.glowstone.id) ++count;
             }
 
-            if (count == 1) level.setTile(x2, y2, z2, Blocks.lightGem.id);
+            if (count == 1) level.setTile(x2, y2, z2, Blocks.glowstone.id);
         }
 
         return true;

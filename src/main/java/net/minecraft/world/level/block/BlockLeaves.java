@@ -105,7 +105,7 @@ public class BlockLeaves extends BlockTransparent
                     for (int zo = -r; zo <= r; ++zo) {
                         for (int yo = -r; yo <= r; ++yo) {
                             final int t = level.getTile(x + xo, y + zo, z + yo);
-                            if (t == Blocks.treeTrunk.id) {
+                            if (t == Blocks.log.id) {
                                 this.checkBuffer[(xo + WO) * WW + (zo + WO) * W + (yo + WO)] = 0;
                             }
                             else if (t == Blocks.leaves.id) {

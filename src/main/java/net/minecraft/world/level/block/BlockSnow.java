@@ -20,7 +20,7 @@ public class BlockSnow extends Block
     
     @Override
     public int getResource(final int data, final Random random) {
-        return Items.snowBall.id;
+        return Items.snowball.id;
     }
     
     @Override

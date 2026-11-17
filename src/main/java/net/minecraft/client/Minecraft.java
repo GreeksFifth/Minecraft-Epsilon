@@ -1033,9 +1033,9 @@ public abstract class Minecraft implements Runnable
     private void handleGrabTexture() {
         if (this.hitResult != null) {
             int id = this.level.getTile(this.hitResult.x, this.hitResult.y, this.hitResult.z);
-            if (id == Blocks.grass.id) id = Blocks.dirt.id;
+            if (id == Blocks.dirtGrassy.id) id = Blocks.dirt.id;
             if (id == Blocks.stoneSlab.id) id = Blocks.stoneSlabHalf.id;
-            if (id == Blocks.unbreakable.id) id = Blocks.rock.id;
+            if (id == Blocks.bedrock.id) id = Blocks.stone.id;
             this.player.inventory.grabTexture(id, this.gameMode instanceof CreativeMode);
         }
     }

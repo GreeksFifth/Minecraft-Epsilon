@@ -78,7 +78,7 @@ public class BlockPortalNether extends BlockTranslucent
         level.noNeighborUpdate = true;
         for (int xx = 0; xx < 2; ++xx) {
             for (int yy = 0; yy < 3; ++yy) {
-                level.setTile(x + xd * xx, y + yy, z + zd * xx, Blocks.portalTile.id);
+                level.setTile(x + xd * xx, y + yy, z + zd * xx, Blocks.portalBlock.id);
             }
         }
         level.noNeighborUpdate = false;

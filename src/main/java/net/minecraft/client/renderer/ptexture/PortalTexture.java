@@ -14,7 +14,7 @@ public class PortalTexture extends DynamicTexture
     private byte[][] frames = new byte[32][16 * 16 * 4];
     
     public PortalTexture() {
-        super(Blocks.portalTile.tex);
+        super(Blocks.portalBlock.tex);
         final Random random = new Random(100L);
         for (int time = 0; time < 32; ++time) {
             for (int x = 0; x < 16; ++x) {

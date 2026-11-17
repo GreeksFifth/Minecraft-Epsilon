@@ -96,7 +96,7 @@ public class HellRandomLevelSource implements ChunkSource
                                     tileId = Blocks.calmLava.id;
                                 }
                                 if (val > 0.0) {
-                                    tileId = Blocks.hellRock.id;
+                                    tileId = Blocks.netherrack.id;
                                 }
 
                                 blocks[offs] = (byte)tileId;
@@ -134,36 +134,36 @@ public class HellRandomLevelSource implements ChunkSource
 
                 int run = -1;
 
-                byte top = (byte) Blocks.hellRock.id;
-                byte material = (byte) Blocks.hellRock.id;
+                byte top = (byte) Blocks.netherrack.id;
+                byte material = (byte) Blocks.netherrack.id;
 
                 for (int y = Level.MAX_HEIGHT - 1; y >= 0; --y) {
                     final int offs = (z * 16 + x) * Level.MAX_HEIGHT + y;
 
                     if (y >= (Level.MAX_HEIGHT - 1) - this.random.nextInt(5)) {
-                        blocks[offs] = (byte) Blocks.unbreakable.id;
+                        blocks[offs] = (byte) Blocks.bedrock.id;
                     }
                     else if (y <= 0 + this.random.nextInt(5)) {
-                        blocks[offs] = (byte) Blocks.unbreakable.id;
+                        blocks[offs] = (byte) Blocks.bedrock.id;
                     }
                     else {
                         final byte old = blocks[offs];
                         if (old == 0) {
                             run = -1;
                         }
-                        else if (old == Blocks.hellRock.id) {
+                        else if (old == Blocks.netherrack.id) {
                             if (run == -1) {
                                 if (runDepth <= 0) {
                                     top = 0;
-                                    material = (byte) Blocks.hellRock.id;
+                                    material = (byte) Blocks.netherrack.id;
                                 }
                                 else if (y >= waterHeight - 4 && y <= waterHeight + 1) {
-                                    top = (byte) Blocks.hellRock.id;
-                                    material = (byte) Blocks.hellRock.id;
+                                    top = (byte) Blocks.netherrack.id;
+                                    material = (byte) Blocks.netherrack.id;
                                     if (gravel) top = (byte) Blocks.gravel.id;
-                                    if (gravel) material = (byte) Blocks.hellRock.id;
-                                    if (sand) top = (byte) Blocks.hellSand.id;
-                                    if (sand) material = (byte) Blocks.hellSand.id;
+                                    if (gravel) material = (byte) Blocks.netherrack.id;
+                                    if (sand) top = (byte) Blocks.soulSand.id;
+                                    if (sand) material = (byte) Blocks.soulSand.id;
                                 }
 
                                 if (y < waterHeight && top == 0) top = (byte) Blocks.calmLava.id;

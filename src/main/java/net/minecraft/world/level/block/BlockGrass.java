@@ -49,7 +49,7 @@ public class BlockGrass extends BlockBush
     @Override
     public int getResource(final int data, final Random random) {
         if (random.nextInt(8) == 0) {
-            return Items.seeds.id;
+            return Items.seedsWheat.id;
         }
         return -1;
     }

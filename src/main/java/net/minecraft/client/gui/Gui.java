@@ -320,10 +320,10 @@ public class Gui extends GuiComponent
         glColor4f(1.0f, 1.0f, 1.0f, br);
         glBindTexture(GL_TEXTURE_2D, this.minecraft.textures.loadTexture("/terrain.png"));
 
-        final float u0 = Blocks.portalTile.tex % 16 / 16.0f;
-        final float v0 = Blocks.portalTile.tex / 16 / 16.0f;
-        final float u1 = (Blocks.portalTile.tex % 16 + 1) / 16.0f;
-        final float v1 = (Blocks.portalTile.tex / 16 + 1) / 16.0f;
+        final float u0 = Blocks.portalBlock.tex % 16 / 16.0f;
+        final float v0 = Blocks.portalBlock.tex / 16 / 16.0f;
+        final float u1 = (Blocks.portalBlock.tex % 16 + 1) / 16.0f;
+        final float v1 = (Blocks.portalBlock.tex / 16 + 1) / 16.0f;
         final Tesselator t = Tesselator.instance;
         t.begin();
         t.vertexUV(0.0, h, -90.0, u0, v1);

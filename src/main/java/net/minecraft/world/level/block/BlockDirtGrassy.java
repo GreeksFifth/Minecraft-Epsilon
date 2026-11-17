@@ -54,7 +54,7 @@ public class BlockDirtGrassy extends Block
             final int zt = z + random.nextInt(3) - 1;
             final int above = level.getTile(xt, yt + 1, zt);
             if (level.getTile(xt, yt, zt) == Blocks.dirt.id && level.getRawBrightness(xt, yt + 1, zt) >= MIN_BRIGHTNESS && Block.lightBlock[above] <= 2) {
-                level.setTile(xt, yt, zt, Blocks.grass.id);
+                level.setTile(xt, yt, zt, Blocks.dirtGrassy.id);
             }
         }
     }

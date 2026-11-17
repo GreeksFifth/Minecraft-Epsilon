@@ -22,7 +22,7 @@ public class BlockRedstoneTorch extends BlockTorch
     
     @Override
     public int getTexture(final int face, final int data) {
-        if (face == Facing.UP) return Blocks.redStoneDust.getTexture(face, data);
+        if (face == Facing.UP) return Blocks.redstoneDust.getTexture(face, data);
         return super.getTexture(face, data);
     }
     
@@ -114,7 +114,7 @@ public class BlockRedstoneTorch extends BlockTorch
 
         if (this.on) {
             if (neighborSignal) {
-                level.setTileAndData(x, y, z, Blocks.notGate_off.id, level.getData(x, y, z));
+                level.setTileAndData(x, y, z, Blocks.redstoneTorchUnlit.id, level.getData(x, y, z));
 
                 if (this.isToggledTooFrequently(level, x, y, z, true)) {
                     level.playSound(x + 0.5f, y + 0.5f, z + 0.5f, "random.fizz", 0.5f, 2.6f + (level.random.nextFloat() - level.random.nextFloat()) * 0.8f);
@@ -131,7 +131,7 @@ public class BlockRedstoneTorch extends BlockTorch
         else {
             if (!neighborSignal) {
                 if (!this.isToggledTooFrequently(level, x, y, z, false)) {
-                    level.setTileAndData(x, y, z, Blocks.notGate_on.id, level.getData(x, y, z));
+                    level.setTileAndData(x, y, z, Blocks.redstoneTorchLit.id, level.getData(x, y, z));
                 }
             }
         }
@@ -153,7 +153,7 @@ public class BlockRedstoneTorch extends BlockTorch
     
     @Override
     public int getResource(final int data, final Random random) {
-        return Blocks.notGate_on.id;
+        return Blocks.redstoneTorchLit.id;
     }
     
     @Override

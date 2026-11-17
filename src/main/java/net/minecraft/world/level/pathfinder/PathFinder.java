@@ -156,7 +156,7 @@ public class PathFinder
                 for (int zz = z; zz < z + size.z; ++zz) {
                     final int tileId = this.level.getTile(xx, yy, zz);
                     if (tileId <= 0) continue;
-                    if (tileId == Blocks.door_iron.id || tileId == Blocks.door_wood.id) {
+                    if (tileId == Blocks.doorIron.id || tileId == Blocks.doorWooden.id) {
                         if (!BlockDoor.isOpen(this.level.getData(xx, yy, zz))) return TYPE_BLOCKED;
                     }
                     else {

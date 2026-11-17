@@ -127,13 +127,13 @@ public class LargeCaveFeature extends LargeFeature
                             final double yd = (yy + 0.5 - yCave) / yRad;
                             if (yd > -0.7 && xd * xd + yd * yd + zd * zd < 1.0) {
                                 int block = blocks[p];
-                                if (block == Blocks.grass.id) hasGrass = true;
-                                if (block == Blocks.rock.id || block == Blocks.dirt.id || block == Blocks.grass.id) {
+                                if (block == Blocks.dirtGrassy.id) hasGrass = true;
+                                if (block == Blocks.stone.id || block == Blocks.dirt.id || block == Blocks.dirtGrassy.id) {
                                     if (yy < 10) {
                                         blocks[p] = (byte) Blocks.lava.id;
                                     } else {
                                         blocks[p] = 0;
-                                        if (hasGrass && blocks[p - 1] == Blocks.dirt.id) blocks[p - 1] = (byte) Blocks.grass.id;
+                                        if (hasGrass && blocks[p - 1] == Blocks.dirt.id) blocks[p - 1] = (byte) Blocks.dirtGrassy.id;
                                     }
                                 }
                             }

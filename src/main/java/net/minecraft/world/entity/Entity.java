@@ -425,8 +425,8 @@ public abstract class Entity
                 this.nextStep++;
 
                 Block.SoundType soundType = Block.BLOCKS[t].soundType;
-                if (this.level.getTile(xt, yt + 1, zt) == Blocks.topSnow.id) {
-                    soundType = Blocks.topSnow.soundType;
+                if (this.level.getTile(xt, yt + 1, zt) == Blocks.snowLayer.id) {
+                    soundType = Blocks.snowLayer.soundType;
                     this.level.playSound(this, soundType.getStepSound(), soundType.getVolume() * 0.15f, soundType.getPitch());
                 }
                 else if (!Block.BLOCKS[t].material.isLiquid()) {

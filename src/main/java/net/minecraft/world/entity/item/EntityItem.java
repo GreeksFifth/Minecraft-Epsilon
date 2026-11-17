@@ -140,7 +140,7 @@ public class EntityItem extends Entity
 
         final int orgCount = this.item.count;
         if (this.throwTime == 0 && player.inventory.add(this.item)) {
-            if (this.item.id == Blocks.treeTrunk.id) player.awardStat(Achievements.mineWood);
+            if (this.item.id == Blocks.log.id) player.awardStat(Achievements.mineWood);
             if (this.item.id == Items.leather.id) player.awardStat(Achievements.killCow);
 
             this.level.playSound(this, "random.pop", 0.2f, ((this.random.nextFloat() - this.random.nextFloat()) * 0.7f + 1.0f) * 2.0f);

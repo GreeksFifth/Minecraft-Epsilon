@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.Blocks;
 public class FoodRecipes
 {
     public void addRecipes(final Recipes recipes) {
-        recipes.addShapedRecipe(new ItemInstance(Items.mushroomStew),
+        recipes.addShapedRecipe(new ItemInstance(Items.stewMushroom),
                 "Y",
                 "X",
                 "#",
@@ -21,7 +21,7 @@ public class FoodRecipes
                 'Y', Blocks.mushroom2,
                 '#', Items.bowl);
 
-        recipes.addShapedRecipe(new ItemInstance(Items.mushroomStew),
+        recipes.addShapedRecipe(new ItemInstance(Items.stewMushroom),
                 "Y",
                 "X",
                 "#",
@@ -33,7 +33,7 @@ public class FoodRecipes
         recipes.addShapedRecipe(new ItemInstance(Items.cookie, 8),
                 "#X#",
 
-                'X', new ItemInstance(Items.dye_powder, 1, ItemDyePowder.BROWN),
+                'X', new ItemInstance(Items.dyePowder, 1, ItemDyePowder.BROWN),
                 '#', Items.wheat);
     }
 }

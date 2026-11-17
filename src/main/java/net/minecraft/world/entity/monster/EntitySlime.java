@@ -148,7 +148,7 @@ public class EntitySlime extends EntityMob implements Hostile
     
     @Override
     protected int getDeathLoot() {
-        if (this.getSize() == 1) return Items.slimeBall.id;
+        if (this.getSize() == 1) return Items.slimeball.id;
         return 0;
     }
     

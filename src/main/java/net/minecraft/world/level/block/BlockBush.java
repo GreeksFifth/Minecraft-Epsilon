@@ -25,7 +25,7 @@ public class BlockBush extends Block
     }
     
     protected boolean mayPlaceOn(final int tile) {
-        return tile == Blocks.grass.id || tile == Blocks.dirt.id || tile == Blocks.farmland.id;
+        return tile == Blocks.dirtGrassy.id || tile == Blocks.dirt.id || tile == Blocks.farmland.id;
     }
     
     @Override

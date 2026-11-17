@@ -37,8 +37,8 @@ public class PortalForcer
             for (int z = zc - r; z <= zc + r; ++z) {
                 final double zd = z + 0.5 - e.z;
                 for (int y = Level.MAX_HEIGHT - 1; y >= Level.MIN_HEIGHT; --y) {
-                    if (level.getTile(x, y, z) == Blocks.portalTile.id) {
-                        while (level.getTile(x, y - 1, z) == Blocks.portalTile.id) {
+                    if (level.getTile(x, y, z) == Blocks.portalBlock.id) {
+                        while (level.getTile(x, y - 1, z) == Blocks.portalBlock.id) {
                             --y;
                         }
 
@@ -64,11 +64,11 @@ public class PortalForcer
             double yt = y + 0.5;
             double zt = z + 0.5;
 
-            if (level.getTile(x - 1, y, z) == Blocks.portalTile.id) xt -= 0.5;
-            if (level.getTile(x + 1, y, z) == Blocks.portalTile.id) xt += 0.5;
+            if (level.getTile(x - 1, y, z) == Blocks.portalBlock.id) xt -= 0.5;
+            if (level.getTile(x + 1, y, z) == Blocks.portalBlock.id) xt += 0.5;
 
-            if (level.getTile(x, y, z - 1) == Blocks.portalTile.id) zt -= 0.5;
-            if (level.getTile(x, y, z + 1) == Blocks.portalTile.id) zt += 0.5;
+            if (level.getTile(x, y, z - 1) == Blocks.portalBlock.id) zt -= 0.5;
+            if (level.getTile(x, y, z + 1) == Blocks.portalBlock.id) zt += 0.5;
 
             e.moveTo(xt, yt, zt, e.yRot, 0.0f);
             e.xd = e.yd = e.zd = 0.0;
@@ -225,7 +225,7 @@ public class PortalForcer
                     int zt = z + (s - 1) * za;
 
                     boolean border = s == 0 || s == 3 || h == -1 || h == 3;
-                    level.setTile(xt, yt, zt, border ? Blocks.obsidian.id : Blocks.portalTile.id);
+                    level.setTile(xt, yt, zt, border ? Blocks.obsidian.id : Blocks.portalBlock.id);
                 }
             }
             level.noNeighborUpdate = false;

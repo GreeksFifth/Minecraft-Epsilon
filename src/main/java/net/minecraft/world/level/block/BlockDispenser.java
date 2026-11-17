@@ -127,7 +127,7 @@ public class BlockDispenser extends EntityBlock
                 level.addEntity(egg);
                 level.levelEvent(LevelEvent.SOUND_LAUNCH, x, y, z, 0);
             }
-            else if (item.id == Items.snowBall.id) {
+            else if (item.id == Items.snowball.id) {
                 final EntityProjectileSnowball snowball = new EntityProjectileSnowball(level, xp, yp, zp);
                 snowball.shoot(xd, 0.1f, zd, power, accuracy);
                 level.addEntity(snowball);

@@ -20,16 +20,16 @@ public class FurnaceRecipes
     }
     
     private FurnaceRecipes() {
-        this.addFurnaceRecipe(Blocks.ironOre.id, new ItemInstance(Items.ironIngot));
-        this.addFurnaceRecipe(Blocks.goldOre.id, new ItemInstance(Items.goldIngot));
+        this.addFurnaceRecipe(Blocks.ironOre.id, new ItemInstance(Items.ingotIron));
+        this.addFurnaceRecipe(Blocks.goldOre.id, new ItemInstance(Items.ingotGold));
         this.addFurnaceRecipe(Blocks.diamondOre.id, new ItemInstance(Items.diamond));
         this.addFurnaceRecipe(Blocks.sand.id, new ItemInstance(Blocks.glass));
-        this.addFurnaceRecipe(Items.porkChop_raw.id, new ItemInstance(Items.porkChop_cooked));
-        this.addFurnaceRecipe(Items.fish_raw.id, new ItemInstance(Items.fish_cooked));
-        this.addFurnaceRecipe(Blocks.stoneBrick.id, new ItemInstance(Blocks.rock));
+        this.addFurnaceRecipe(Items.porkChopRaw.id, new ItemInstance(Items.porkChopCooked));
+        this.addFurnaceRecipe(Items.fishRaw.id, new ItemInstance(Items.fishCooked));
+        this.addFurnaceRecipe(Blocks.cobblestone.id, new ItemInstance(Blocks.stone));
         this.addFurnaceRecipe(Items.clay.id, new ItemInstance(Items.brick));
-        this.addFurnaceRecipe(Blocks.cactus.id, new ItemInstance(Items.dye_powder, 1, ItemDyePowder.GREEN));
-        this.addFurnaceRecipe(Blocks.treeTrunk.id, new ItemInstance(Items.coal, 1, ItemCoal.CHAR_COAL));
+        this.addFurnaceRecipe(Blocks.cactus.id, new ItemInstance(Items.dyePowder, 1, ItemDyePowder.GREEN));
+        this.addFurnaceRecipe(Blocks.log.id, new ItemInstance(Items.coal, 1, ItemCoal.CHAR_COAL));
     }
     
     public void addFurnaceRecipe(final int itemId, final ItemInstance result) {

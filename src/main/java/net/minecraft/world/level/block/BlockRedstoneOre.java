@@ -48,21 +48,21 @@ public class BlockRedstoneOre extends Block
     
     private void interact(final Level level, final int x, final int y, final int z) {
         this.poofParticles(level, x, y, z);
-        if (this.id == Blocks.redStoneOre.id) {
-            level.setTile(x, y, z, Blocks.redStoneOre_lit.id);
+        if (this.id == Blocks.redstoneOre.id) {
+            level.setTile(x, y, z, Blocks.redstoneOreLit.id);
         }
     }
     
     @Override
     public void tick(final Level level, final int x, final int y, final int z, final Random random) {
-        if (this.id == Blocks.redStoneOre_lit.id) {
-            level.setTile(x, y, z, Blocks.redStoneOre.id);
+        if (this.id == Blocks.redstoneOreLit.id) {
+            level.setTile(x, y, z, Blocks.redstoneOre.id);
         }
     }
     
     @Override
     public int getResource(final int data, final Random random) {
-        return Items.redStone.id;
+        return Items.redstone.id;
     }
     
     @Override

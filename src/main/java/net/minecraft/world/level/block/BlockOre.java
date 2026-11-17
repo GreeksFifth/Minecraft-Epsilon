@@ -21,7 +21,7 @@ public class BlockOre extends Block
     public int getResource(final int data, final Random random) {
         if (this.id == Blocks.coalOre.id) return Items.coal.id;
         if (this.id == Blocks.diamondOre.id) return Items.diamond.id;
-        if (this.id == Blocks.lapisOre.id) return Items.dye_powder.id;
+        if (this.id == Blocks.lapisOre.id) return Items.dyePowder.id;
         return this.id;
     }
     

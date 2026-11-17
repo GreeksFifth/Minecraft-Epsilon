@@ -684,7 +684,7 @@ public class TileRenderer
         final Tesselator t = Tesselator.instance;
 
         final boolean hadFixed = this.fixedTexture >= 0;
-        if (!hadFixed) this.fixedTexture = Blocks.stoneBrick.tex;
+        if (!hadFixed) this.fixedTexture = Blocks.cobblestone.tex;
 
         final float w1 = 4.0f / 16.0f;
         final float w2 = 3.0f / 16.0f;
@@ -1126,7 +1126,7 @@ public class TileRenderer
             v1 = (texY + 15.99f) / 256.0f;
 
             final float yStretch = 0.35f / 16.0f;
-            if (this.level.isSolidBlockingTile(x - 1, y, z) && this.level.getTile(x - 1, y + 1, z) == Blocks.redStoneDust.id) {
+            if (this.level.isSolidBlockingTile(x - 1, y, z) && this.level.getTile(x - 1, y + 1, z) == Blocks.redstoneDust.id) {
                 t.color(br * red, br * green, br * blue);
                 t.vertexUV(x + overlayOffset, y + 1 + yStretch, z + 1, u1, v0);
                 t.vertexUV(x + overlayOffset, y + 0, z + 1, u0, v0);
@@ -1138,7 +1138,7 @@ public class TileRenderer
                 t.vertexUV(x + overlayOffset, y + 0, z + 0, u0, v1 + 1 / 16.0f);
                 t.vertexUV(x + overlayOffset, y + 1 + yStretch, z + 0, u1, v1 + 1 / 16.0f);
             }
-            if (this.level.isSolidBlockingTile(x + 1, y, z) && this.level.getTile(x + 1, y + 1, z) == Blocks.redStoneDust.id) {
+            if (this.level.isSolidBlockingTile(x + 1, y, z) && this.level.getTile(x + 1, y + 1, z) == Blocks.redstoneDust.id) {
                 t.color(br * red, br * green, br * blue);
                 t.vertexUV(x + 1 - overlayOffset, y + 0, z + 1, u0, v1);
                 t.vertexUV(x + 1 - overlayOffset, y + 1 + yStretch, z + 1, u1, v1);
@@ -1151,7 +1151,7 @@ public class TileRenderer
                 t.vertexUV(x + 1 - overlayOffset, y + 1 + yStretch, z + 0, u1, v0 + 1 / 16.0f);
                 t.vertexUV(x + 1 - overlayOffset, y + 0, z + 0, u0, v0 + 1 / 16.0f);
             }
-            if (this.level.isSolidBlockingTile(x, y, z - 1) && this.level.getTile(x, y + 1, z - 1) == Blocks.redStoneDust.id) {
+            if (this.level.isSolidBlockingTile(x, y, z - 1) && this.level.getTile(x, y + 1, z - 1) == Blocks.redstoneDust.id) {
                 t.color(br * red, br * green, br * blue);
                 t.vertexUV(x + 1, y + 0, z + overlayOffset, u0, v1);
                 t.vertexUV(x + 1, y + 1 + yStretch, z + overlayOffset, u1, v1);
@@ -1164,7 +1164,7 @@ public class TileRenderer
                 t.vertexUV(x + 0, y + 1 + yStretch, z + overlayOffset, u1, v0 + 1 / 16.0f);
                 t.vertexUV(x + 0, y + 0, z + overlayOffset, u0, v0 + 1 / 16.0f);
             }
-            if (this.level.isSolidBlockingTile(x, y, z + 1) && this.level.getTile(x, y + 1, z + 1) == Blocks.redStoneDust.id) {
+            if (this.level.isSolidBlockingTile(x, y, z + 1) && this.level.getTile(x, y + 1, z + 1) == Blocks.redstoneDust.id) {
                 t.color(br * red, br * green, br * blue);
                 t.vertexUV(x + 1, y + 1 + yStretch, z + 1 - overlayOffset, u1, v0);
                 t.vertexUV(x + 1, y + 0, z + 1 - overlayOffset, u0, v0);
@@ -1329,7 +1329,7 @@ public class TileRenderer
         double yt = y;
         double zt = z;
 
-        if (tt == Blocks.tallgrass) {
+        if (tt == Blocks.grass) {
             long seed = (x * 3129871L) ^ z * 116129781L ^ (long)y;
             seed = seed * seed * 42317861L + seed * 11L;
 
@@ -2183,7 +2183,7 @@ public class TileRenderer
         float b2 = c2;
         float b3 = c3;
 
-        if (tt != Blocks.grass) {
+        if (tt != Blocks.dirtGrassy) {
             r10 *= r;
             r2 *= r;
             r3 *= r;

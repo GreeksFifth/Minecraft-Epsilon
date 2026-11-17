@@ -104,7 +104,7 @@ public class BlockBed extends Block
     @Override
     public int getTexture(final int face, final int data) {
         if (face == Facing.DOWN) {
-            return Blocks.wood.tex;
+            return Blocks.woodenPlanks.tex;
         }
 
         int direction = getDirection(data);

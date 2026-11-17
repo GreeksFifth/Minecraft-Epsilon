@@ -205,19 +205,19 @@ public class AchievementScreen extends Screen
                     int tileType = Blocks.sand.tex;
 
                     if (heightValue > bedrockLevel || topTile + tileY == MAX_BG_TILE_Y) {
-                        tileType = Blocks.unbreakable.tex;
+                        tileType = Blocks.bedrock.tex;
                     } else if (heightValue == diamondLevel) {
                         if (random.nextInt(2) == 0) {
                             tileType = Blocks.diamondOre.tex;
                         } else {
-                            tileType = Blocks.redStoneOre.tex;
+                            tileType = Blocks.redstoneOre.tex;
                         }
                     } else if (heightValue == ironLevel) {
                         tileType = Blocks.ironOre.tex;
                     } else if (heightValue == coalLevel) {
                         tileType = Blocks.coalOre.tex;
                     } else if (heightValue > rockLevel) {
-                        tileType = Blocks.rock.tex;
+                        tileType = Blocks.stone.tex;
                     } else if (heightValue > 0) {
                         tileType = Blocks.dirt.tex;
                     }

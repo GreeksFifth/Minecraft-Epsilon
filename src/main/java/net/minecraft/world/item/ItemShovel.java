@@ -10,15 +10,15 @@ import net.minecraft.world.level.block.Blocks;
 public class ItemShovel extends ItemSpecialMining
 {
     private static Block[] diggables = new Block[] {
-            Blocks.grass,
+            Blocks.dirtGrassy,
             Blocks.dirt,
             Blocks.sand,
             Blocks.gravel,
-            Blocks.topSnow,
+            Blocks.snowLayer,
             Blocks.snow,
             Blocks.clay,
             Blocks.farmland,
-            Blocks.hellSand
+            Blocks.soulSand
     };
     
     public ItemShovel(final int id, final Tier tier) {
@@ -27,7 +27,7 @@ public class ItemShovel extends ItemSpecialMining
     
     @Override
     public boolean canDestroySpecial(final Block block) {
-        if (block == Blocks.topSnow) return true;
+        if (block == Blocks.snowLayer) return true;
         if (block == Blocks.snow) return true;
         return false;
     }

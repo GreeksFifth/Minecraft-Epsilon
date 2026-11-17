@@ -274,7 +274,7 @@ public abstract class BlockFluid extends Block
                     level.setTile(x, y, z, Blocks.obsidian.id);
                 }
                 else if (data <= 4) {
-                    level.setTile(x, y, z, Blocks.stoneBrick.id);
+                    level.setTile(x, y, z, Blocks.cobblestone.id);
                 }
                 this.fizz(level, x, y, z);
             }

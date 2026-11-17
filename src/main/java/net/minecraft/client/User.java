@@ -14,12 +14,12 @@ public class User
 {
     public static List<Block> allowedBlocks = new ArrayList<>();
     static {
-        User.allowedBlocks.add(Blocks.rock);
-        User.allowedBlocks.add(Blocks.stoneBrick);
+        User.allowedBlocks.add(Blocks.stone);
+        User.allowedBlocks.add(Blocks.cobblestone);
         User.allowedBlocks.add(Blocks.redBrick);
         User.allowedBlocks.add(Blocks.dirt);
-        User.allowedBlocks.add(Blocks.wood);
-        User.allowedBlocks.add(Blocks.treeTrunk);
+        User.allowedBlocks.add(Blocks.woodenPlanks);
+        User.allowedBlocks.add(Blocks.log);
         User.allowedBlocks.add(Blocks.leaves);
         User.allowedBlocks.add(Blocks.torch);
         User.allowedBlocks.add(Blocks.stoneSlabHalf);
@@ -33,7 +33,7 @@ public class User
         User.allowedBlocks.add(Blocks.sand);
         User.allowedBlocks.add(Blocks.gravel);
         User.allowedBlocks.add(Blocks.sponge);
-        User.allowedBlocks.add(Blocks.cloth);
+        User.allowedBlocks.add(Blocks.wool);
         User.allowedBlocks.add(Blocks.coalOre);
         User.allowedBlocks.add(Blocks.ironOre);
         User.allowedBlocks.add(Blocks.goldOre);

@@ -239,7 +239,7 @@ public class BlockRedstoneDust extends Block
     
     @Override
     public int getResource(final int data, final Random random) {
-        return Items.redStone.id;
+        return Items.redstone.id;
     }
     
     @Override
@@ -306,9 +306,9 @@ public class BlockRedstoneDust extends Block
     
     public static boolean shouldReceivePowerFrom(final LevelSource level, final int x, final int y, final int z, final int direction) {
         final int t = level.getTile(x, y, z);
-        if (t == Blocks.redStoneDust.id) return true;
+        if (t == Blocks.redstoneDust.id) return true;
         if (t == 0) return false;
-        if (t == Blocks.diode_off.id || t == Blocks.diode_on.id) {
+        if (t == Blocks.repeaterOff.id || t == Blocks.repeaterOn.id) {
             int data = level.getData(x, y, z);
             if (direction == Direction.DIRECTION_OPPOSITE[data & BlockRedstoneRepeater.DIRECTION_MASK]) return true;
         }

@@ -10,13 +10,13 @@ import net.minecraft.world.level.block.Blocks;
 public class ItemAxe extends ItemSpecialMining
 {
     private static Block[] diggables = new Block[] {
-            Blocks.wood,
-            Blocks.treeTrunk,
+            Blocks.woodenPlanks,
+            Blocks.log,
             Blocks.workBench, // Argent - new
             Blocks.chest,
             Blocks.bookshelf,
-            Blocks.musicBlock, // Argent - new
-            Blocks.recordPlayer, // Argent - new
+            Blocks.noteblock, // Argent - new
+            Blocks.jukebox, // Argent - new
             Blocks.stairs_wood // Argent - new
     };
     

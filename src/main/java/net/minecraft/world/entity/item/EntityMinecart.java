@@ -242,7 +242,7 @@ public class EntityMinecart extends Entity implements Container
 
             boolean powerTrack = false;
             boolean haltTrack = false;
-            if (tile == Blocks.goldenRail.id) {
+            if (tile == Blocks.railPowered.id) {
                 powerTrack = (data & BlockRail.RAIL_DATA_BIT) != 0x0;
                 haltTrack = !powerTrack;
             }

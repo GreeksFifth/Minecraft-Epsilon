@@ -26,11 +26,11 @@ public class BlockRail extends Block
     
     public static boolean isRail(final Level level, final int x, final int y, final int z) {
         final int tile = level.getTile(x, y, z);
-        return tile == Blocks.rail.id || tile == Blocks.goldenRail.id || tile == Blocks.detectorRail.id;
+        return tile == Blocks.rail.id || tile == Blocks.railPowered.id || tile == Blocks.railDetector.id;
     }
     
     public static boolean isRail(final int id) {
-        return id == Blocks.rail.id || id == Blocks.goldenRail.id || id == Blocks.detectorRail.id;
+        return id == Blocks.rail.id || id == Blocks.railPowered.id || id == Blocks.railDetector.id;
     }
     
     protected BlockRail(final int id, final int tex, final boolean usesDataBit) {
@@ -73,7 +73,7 @@ public class BlockRail extends Block
     @Override
     public int getTexture(final int face, final int data) {
         if (this.usesDataBit) {
-            if (this.id == Blocks.goldenRail.id) {
+            if (this.id == Blocks.railPowered.id) {
                 if ((data & RAIL_DATA_BIT) == 0x0) {
                     return this.tex - 16;
                 }
@@ -135,7 +135,7 @@ public class BlockRail extends Block
             level.setTile(x, y, z, 0);
         }
         else {
-            if (this.id == Blocks.goldenRail.id) {
+            if (this.id == Blocks.railPowered.id) {
                 boolean signal = level.hasNeighborSignal(x, y, z) || level.hasNeighborSignal(x, y + 1, z);
                 signal = signal || this.findGoldenRailSignal(level, x, y, z, data, true, 0) || this.findGoldenRailSignal(level, x, y, z, data, false, 0);
 
@@ -242,7 +242,7 @@ public class BlockRail extends Block
     
     private boolean isGoldenRailWithPower(final Level level, final int x, final int y, final int z, final boolean forward, final int searchDepth, final int dir) {
         int tile = level.getTile(x, y, z);
-        if (tile == Blocks.goldenRail.id) {
+        if (tile == Blocks.railPowered.id) {
             final int tileData = level.getData(x, y, z);
             final int myDir = tileData & RAIL_DIRECTION_MASK;
             if (dir == DIR_FLAT_X && (myDir == DIR_FLAT_Z || myDir == 4 || myDir == 5)) {

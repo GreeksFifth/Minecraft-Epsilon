@@ -72,7 +72,7 @@ public class EntitySquid extends EntityMobPassiveAquatic
     protected void dropDeathLoot() {
         int count = this.random.nextInt(3) + 1;
         for (int i = 0; i < count; ++i) {
-            this.spawnAtLocation(new ItemInstance(Items.dye_powder, 1, ItemDyePowder.BLACK), 0.0f);
+            this.spawnAtLocation(new ItemInstance(Items.dyePowder, 1, ItemDyePowder.BLACK), 0.0f);
         }
     }
     

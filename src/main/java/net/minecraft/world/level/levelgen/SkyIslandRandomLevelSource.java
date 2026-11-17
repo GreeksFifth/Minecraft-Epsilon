@@ -127,7 +127,7 @@ public class SkyIslandRandomLevelSource implements ChunkSource
                             for (int z = 0; z < CHUNK_WIDTH; ++z) {
                                 int tileId = 0;
                                 if (val > 0.0) {
-                                    tileId = Blocks.rock.id;
+                                    tileId = Blocks.stone.id;
                                 }
 
                                 blocks[offs] = (byte)tileId;
@@ -172,11 +172,11 @@ public class SkyIslandRandomLevelSource implements ChunkSource
                     if (old == 0) {
                         run = -1;
                     }
-                    else if (old == Blocks.rock.id) {
+                    else if (old == Blocks.stone.id) {
                         if (run == -1) {
                             if (runDepth <= 0) {
                                 top = 0;
-                                material = (byte) Blocks.rock.id;
+                                material = (byte) Blocks.stone.id;
                             }
                             run = runDepth;
                             if (y >= waterHeight) blocks[offs] = top;
@@ -462,7 +462,7 @@ public class SkyIslandRandomLevelSource implements ChunkSource
             int x = xo + this.random.nextInt(16);
             int y = this.random.nextInt(Level.MAX_HEIGHT / 8);
             int z = zo + this.random.nextInt(16);
-            OreFeature redStoneOreFeature = new OreFeature(Blocks.redStoneOre.id, 7);
+            OreFeature redStoneOreFeature = new OreFeature(Blocks.redstoneOre.id, 7);
             redStoneOreFeature.place(this.level, this.random, x, y, z);
         }
 
@@ -590,7 +590,7 @@ public class SkyIslandRandomLevelSource implements ChunkSource
                         && this.level.isEmptyTile(x, y, z)
                         && this.level.getMaterial(x, y - 1, z).blocksMotion()
                         && this.level.getMaterial(x, y - 1, z) != Material.ice) {
-                    this.level.setTile(x, y, z, Blocks.topSnow.id);
+                    this.level.setTile(x, y, z, Blocks.snowLayer.id);
                 }
             }
         }

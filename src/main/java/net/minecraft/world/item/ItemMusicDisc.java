@@ -22,10 +22,10 @@ public class ItemMusicDisc extends Item
     
     @Override
     public boolean useOn(final ItemInstance itemInstance, final EntityPlayer player, final Level level, final int x, final int y, final int z, final int face) {
-        if (level.getTile(x, y, z) == Blocks.recordPlayer.id && level.getData(x, y, z) == 0) {
+        if (level.getTile(x, y, z) == Blocks.jukebox.id && level.getData(x, y, z) == 0) {
             if (level.isClientSide) return true;
 
-            ((BlockJukebox) Blocks.recordPlayer).setRecord(level, x, y, z, this.id);
+            ((BlockJukebox) Blocks.jukebox).setRecord(level, x, y, z, this.id);
             level.levelEvent(null, LevelEvent.SOUND_PLAY_RECORDING, x, y, z, this.id);
             itemInstance.count--;
             return true;

@@ -53,7 +53,7 @@ public class PineFeature extends Feature
 
         // must stand on ground
         final int belowTile = level.getTile(x, y - 1, z);
-        if ((belowTile != Blocks.grass.id && belowTile != Blocks.dirt.id) || y >= Level.MAX_HEIGHT - treeHeight - 1) return false;
+        if ((belowTile != Blocks.dirtGrassy.id && belowTile != Blocks.dirt.id) || y >= Level.MAX_HEIGHT - treeHeight - 1) return false;
 
         level.setTileNoUpdate(x, y - 1, z, Blocks.dirt.id);
 
@@ -77,7 +77,7 @@ public class PineFeature extends Feature
         }
         for (int hh = 0; hh < treeHeight - 1; ++hh) {
             final int t = level.getTile(x, y + hh, z);
-            if (t == 0 || t == Blocks.leaves.id) level.setTileAndDataNoUpdate(x, y + hh, z, Blocks.treeTrunk.id, BlockLog.DARK_TRUNK);
+            if (t == 0 || t == Blocks.leaves.id) level.setTileAndDataNoUpdate(x, y + hh, z, Blocks.log.id, BlockLog.DARK_TRUNK);
         }
 
         return true;

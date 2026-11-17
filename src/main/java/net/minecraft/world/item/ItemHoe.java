@@ -22,7 +22,7 @@ public class ItemHoe extends Item
         final int targetType = level.getTile(x, y, z);
         final int above = level.getTile(x, y + 1, z);
 
-        if ((face != 0 && above == 0 && targetType == Blocks.grass.id) || targetType == Blocks.dirt.id) {
+        if ((face != 0 && above == 0 && targetType == Blocks.dirtGrassy.id) || targetType == Blocks.dirt.id) {
             final Block block = Blocks.farmland;
             level.playSound(x + 0.5f, y + 0.5f, z + 0.5f, block.soundType.getStepSound(), (block.soundType.getVolume() + 1.0f) / 2.0f, block.soundType.getPitch() * 0.8f);
 

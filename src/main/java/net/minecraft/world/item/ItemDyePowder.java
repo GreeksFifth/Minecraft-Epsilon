@@ -94,14 +94,14 @@ public class ItemDyePowder extends Item
                 }
                 return true;
             }
-            if (tile == Blocks.crops.id) {
+            if (tile == Blocks.cropsWheat.id) {
                 if (!level.isClientSide) {
-                    ((BlockWheatCrop) Blocks.crops).growCropsToMax(level, x, y, z);
+                    ((BlockWheatCrop) Blocks.cropsWheat).growCropsToMax(level, x, y, z);
                     itemInstance.count--;
                 }
                 return true;
             }
-            if (tile == Blocks.grass.id) {
+            if (tile == Blocks.dirtGrassy.id) {
                 if (!level.isClientSide) {
                     itemInstance.count--;
                     mainLoop:
@@ -113,14 +113,14 @@ public class ItemDyePowder extends Item
                             xx += ItemDyePowder.random.nextInt(3) - 1;
                             yy += (ItemDyePowder.random.nextInt(3) - 1) * ItemDyePowder.random.nextInt(3) / 2;
                             zz += ItemDyePowder.random.nextInt(3) - 1;
-                            if (level.getTile(xx, yy - 1, zz) != Blocks.grass.id || level.isSolidBlockingTile(xx, yy, zz)) {
+                            if (level.getTile(xx, yy - 1, zz) != Blocks.dirtGrassy.id || level.isSolidBlockingTile(xx, yy, zz)) {
                                 continue mainLoop;
                             }
                         }
 
                         if (level.getTile(xx, yy, zz) == 0) {
                             if (ItemDyePowder.random.nextInt(10) != 0) {
-                                level.setTileAndData(xx, yy, zz, Blocks.tallgrass.id, 1);
+                                level.setTileAndData(xx, yy, zz, Blocks.grass.id, 1);
                             }
                             else if (ItemDyePowder.random.nextInt(3) != 0) {
                                 level.setTile(xx, yy, zz, Blocks.flower.id);

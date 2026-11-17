@@ -181,7 +181,7 @@ public class TileEntityFurnace extends TileEntity implements Container
         if (id < 256 && Block.BLOCKS[id].material == Material.wood) return BURN_INTERVAL * 3 / 2;
         if (id == Items.stick.id) return BURN_INTERVAL / 2;
         if (id == Items.coal.id) return BURN_INTERVAL * 8;
-        if (id == Items.bucket_lava.id) return BURN_INTERVAL * 100;
+        if (id == Items.bucketLava.id) return BURN_INTERVAL * 100;
         if (id == Blocks.sapling.id) return BURN_INTERVAL / 2;
         return 0;
     }

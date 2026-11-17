@@ -64,8 +64,8 @@ public class EntityPig extends EntityMobPassive
     
     @Override
     protected int getDeathLoot() {
-        if (this.onFire > 0) return Items.porkChop_cooked.id;
-        return Items.porkChop_raw.id;
+        if (this.onFire > 0) return Items.porkChopCooked.id;
+        return Items.porkChopRaw.id;
     }
     
     public boolean hasSaddle() {

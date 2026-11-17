@@ -16,7 +16,7 @@ public class EntityPigZombie extends EntityZombie
 {
     private int angryTime = 0;
     private int playAngrySoundIn = 0;
-    private static final ItemInstance sword = new ItemInstance(Items.sword_gold, 1);
+    private static final ItemInstance sword = new ItemInstance(Items.swordGold, 1);
     
     public EntityPigZombie(final Level level) {
         super(level);
@@ -103,7 +103,7 @@ public class EntityPigZombie extends EntityZombie
     
     @Override
     protected int getDeathLoot() {
-        return Items.porkChop_cooked.id;
+        return Items.porkChopCooked.id;
     }
     
     @Override

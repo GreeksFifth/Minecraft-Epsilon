@@ -87,7 +87,7 @@ public class EntityBoat extends Entity
         if (this.damage > 20 * 2) {
             if (this.rider != null) this.rider.ride(this);
             for (int i = 0; i < 3; ++i) {
-                this.spawnAtLocation(Blocks.wood.id, 1, 0.0f);
+                this.spawnAtLocation(Blocks.woodenPlanks.id, 1, 0.0f);
             }
             for (int j = 0; j < 2; ++j) {
                 this.spawnAtLocation(Items.stick.id, 1, 0.0f);
@@ -239,7 +239,7 @@ public class EntityBoat extends Entity
             if (!this.level.isClientSide) {
                 this.remove();
                 for (int i = 0; i < 3; ++i) {
-                    this.spawnAtLocation(Blocks.wood.id, 1, 0.0f);
+                    this.spawnAtLocation(Blocks.woodenPlanks.id, 1, 0.0f);
                 }
                 for (int i = 0; i < 2; ++i) {
                     this.spawnAtLocation(Items.stick.id, 1, 0.0f);
@@ -284,7 +284,7 @@ public class EntityBoat extends Entity
             final int yy = Mth.floor(this.y);
             final int zz = Mth.floor(this.z + (i / 2 - 0.5) * 0.8);
 
-            if (this.level.getTile(xx, yy, zz) == Blocks.topSnow.id) {
+            if (this.level.getTile(xx, yy, zz) == Blocks.snowLayer.id) {
                 this.level.setTile(xx, yy, zz, 0);
             }
         }

@@ -196,7 +196,7 @@ public class BlockFluidDynamic extends BlockFluid
     
     private boolean isWaterBlocking(final Level level, final int x, final int y, final int z) {
         final int t = level.getTile(x, y, z);
-        if (t == Blocks.door_wood.id || t == Blocks.door_iron.id || t == Blocks.sign.id || t == Blocks.ladder.id || t == Blocks.reeds.id) {
+        if (t == Blocks.doorWooden.id || t == Blocks.doorIron.id || t == Blocks.sign.id || t == Blocks.ladder.id || t == Blocks.sugarcane.id) {
             return true;
         }
         if (t == 0) return false;

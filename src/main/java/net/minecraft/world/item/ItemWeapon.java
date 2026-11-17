@@ -23,7 +23,7 @@ public class ItemWeapon extends Item
     
     @Override
     public float getDestroySpeed(final ItemInstance itemInstance, final Block block) {
-        if (block.id == Blocks.web.id) {
+        if (block.id == Blocks.cobweb.id) {
             // swords can quickly cut web
             return 15.0f;
         }
@@ -54,6 +54,6 @@ public class ItemWeapon extends Item
     
     @Override
     public boolean canDestroySpecial(final Block block) {
-        return block.id == Blocks.web.id;
+        return block.id == Blocks.cobweb.id;
     }
 }

@@ -17,8 +17,8 @@ public class WeaponRecipes
               "#" }
     };
     private Object[][] map = new Object[][] {
-            { Blocks.wood, Blocks.stoneBrick, Items.ironIngot, Items.diamond, Items.goldIngot },
-            { Items.sword_wood, Items.sword_stone, Items.sword_iron, Items.sword_diamond, Items.sword_gold }
+            { Blocks.woodenPlanks, Blocks.cobblestone, Items.ingotIron, Items.diamond, Items.ingotGold},
+            { Items.swordWood, Items.swordStone, Items.swordIron, Items.swordDiamond, Items.swordGold}
     };
     
     public void addRecipes(final Recipes recipes) {

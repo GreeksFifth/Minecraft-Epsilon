@@ -27,8 +27,8 @@ public class FurnaceResultSlot extends Slot
     @Override
     public void onTake(final ItemInstance carried) {
         carried.onCraftedBy(this.player.level, this.player);
-        if (carried.id == Items.ironIngot.id) this.player.awardStat(Achievements.acquireIron, 1);
-        if (carried.id == Items.fish_cooked.id) this.player.awardStat(Achievements.cookFish, 1);
+        if (carried.id == Items.ingotIron.id) this.player.awardStat(Achievements.acquireIron, 1);
+        if (carried.id == Items.fishCooked.id) this.player.awardStat(Achievements.cookFish, 1);
         super.onTake(carried);
     }
 }

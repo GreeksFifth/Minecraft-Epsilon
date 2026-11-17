@@ -57,7 +57,7 @@ public class OreFeature extends Feature
                             for (int z2 = zt0; z2 <= zt1; ++z2) {
                                 final double zd = (z2 + 0.5 - zz) / (r / 2.0);
                                 if (xd * xd + yd * yd + zd * zd < 1.0) {
-                                    if (level.getTile(x2, y2, z2) == Blocks.rock.id) {
+                                    if (level.getTile(x2, y2, z2) == Blocks.stone.id) {
                                         level.setTileNoUpdate(x2, y2, z2, this.tile);
                                     }
                                 }

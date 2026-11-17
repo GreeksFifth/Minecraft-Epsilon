@@ -18,7 +18,7 @@ public class ItemShears extends Item
     
     @Override
     public boolean mineBlock(final ItemInstance itemInstance, final int tile, final int x, final int y, final int z, final EntityMob owner) {
-        if (tile == Blocks.leaves.id || tile == Blocks.web.id) {
+        if (tile == Blocks.leaves.id || tile == Blocks.cobweb.id) {
             itemInstance.hurt(1, owner);
         }
         return super.mineBlock(itemInstance, tile, x, y, z, owner);
@@ -26,15 +26,15 @@ public class ItemShears extends Item
     
     @Override
     public boolean canDestroySpecial(final Block block) {
-        return block.id == Blocks.web.id;
+        return block.id == Blocks.cobweb.id;
     }
     
     @Override
     public float getDestroySpeed(final ItemInstance itemInstance, final Block block) {
-        if (block.id == Blocks.web.id || block.id == Blocks.leaves.id) {
+        if (block.id == Blocks.cobweb.id || block.id == Blocks.leaves.id) {
             return 15.0f;
         }
-        if (block.id == Blocks.cloth.id) {
+        if (block.id == Blocks.wool.id) {
             return 5.0f;
         }
         return super.getDestroySpeed(itemInstance, block);

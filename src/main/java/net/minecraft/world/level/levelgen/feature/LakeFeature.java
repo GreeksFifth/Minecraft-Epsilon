@@ -88,7 +88,7 @@ public class LakeFeature extends Feature
                 for (int yy = 4; yy < 8; ++yy) {
                     if (grid[(xx * 16 + zz) * 8 + yy]) {
                         if (level.getTile(x + xx, y + yy - 1, z + zz) == Blocks.dirt.id && level.getBrightness(LightLayer.Sky, x + xx, y + yy, z + zz) > 0) {
-                            level.setTileNoUpdate(x + xx, y + yy - 1, z + zz, Blocks.grass.id);
+                            level.setTileNoUpdate(x + xx, y + yy - 1, z + zz, Blocks.dirtGrassy.id);
                         }
                     }
                 }
@@ -109,7 +109,7 @@ public class LakeFeature extends Feature
 
                         if (check) {
                             if ((yy < 4 || random.nextInt(2) != 0) && level.getMaterial(x + xx, y + yy, z + zz).isSolid()) {
-                                level.setTileNoUpdate(x + xx, y + yy, z + zz, Blocks.rock.id);
+                                level.setTileNoUpdate(x + xx, y + yy, z + zz, Blocks.stone.id);
                             }
                         }
                     }

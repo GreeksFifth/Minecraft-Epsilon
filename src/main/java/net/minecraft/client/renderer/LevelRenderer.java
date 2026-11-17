@@ -1108,7 +1108,7 @@ public class LevelRenderer implements LevelListener
                 final double xo = player.xOld + (player.x - player.xOld) * a;
                 final double yo = player.yOld + (player.y - player.yOld) * a;
                 final double zo = player.zOld + (player.z - player.zOld) * a;
-                if (block == null) block = Blocks.rock;
+                if (block == null) block = Blocks.stone;
 
                 glEnable(GL_ALPHA_TEST);
                 t.begin();
@@ -1287,9 +1287,9 @@ public class LevelRenderer implements LevelListener
         else if (name.equals("splash")) this.mc.particleEngine.add(new SplashParticle(this.level, x, y, z, xa, ya, za));
         else if (name.equals("largesmoke")) this.mc.particleEngine.add(new SmokeParticle(this.level, x, y, z, xa, ya, za, 2.5f));
         else if (name.equals("reddust")) this.mc.particleEngine.add(new RedDustParticle(this.level, x, y, z, (float) xa, (float) ya, (float) za));
-        else if (name.equals("snowballpoof")) this.mc.particleEngine.add(new BreakingItemParticle(this.level, x, y, z, Items.snowBall));
+        else if (name.equals("snowballpoof")) this.mc.particleEngine.add(new BreakingItemParticle(this.level, x, y, z, Items.snowball));
         else if (name.equals("snowshovel")) this.mc.particleEngine.add(new SnowShovelParticle(this.level, x, y, z, xa, ya, za));
-        else if (name.equals("slime")) this.mc.particleEngine.add(new BreakingItemParticle(this.level, x, y, z, Items.slimeBall));
+        else if (name.equals("slime")) this.mc.particleEngine.add(new BreakingItemParticle(this.level, x, y, z, Items.slimeball));
         else if (name.equals("heart")) this.mc.particleEngine.add(new HeartParticle(this.level, x, y, z, xa, ya, za));
     }
     

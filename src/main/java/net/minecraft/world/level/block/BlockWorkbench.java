@@ -19,7 +19,7 @@ public class BlockWorkbench extends Block
     @Override
     public int getTexture(final int face) {
         if (face == Facing.UP) return this.tex - 16;
-        if (face == Facing.DOWN) return Blocks.wood.getTexture(0);
+        if (face == Facing.DOWN) return Blocks.woodenPlanks.getTexture(0);
         if (face == Facing.NORTH || face == Facing.WEST) return this.tex + 1;
         return this.tex;
     }

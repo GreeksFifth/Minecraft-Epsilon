@@ -14,10 +14,10 @@ public class OreRecipes
 {
     private Object[][] map = new Object[][]
             {
-                    { Blocks.goldBlock, new ItemInstance(Items.goldIngot, 9) },
-                    { Blocks.ironBlock, new ItemInstance(Items.ironIngot, 9) },
+                    { Blocks.goldBlock, new ItemInstance(Items.ingotGold, 9) },
+                    { Blocks.ironBlock, new ItemInstance(Items.ingotIron, 9) },
                     { Blocks.diamondBlock, new ItemInstance(Items.diamond, 9) },
-                    { Blocks.lapisBlock, new ItemInstance(Items.dye_powder, 9, ItemDyePowder.BLUE) }
+                    { Blocks.lapisBlock, new ItemInstance(Items.dyePowder, 9, ItemDyePowder.BLUE) }
             };
     
     public void addRecipes(final Recipes recipes) {

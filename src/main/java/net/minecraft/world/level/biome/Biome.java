@@ -43,7 +43,7 @@ public class Biome
     public static final Biome sky = new SkyBiome().setColor(0x8080ff).setName("Sky").setNoRain();
     public String name;
     public int color;
-    public byte topMaterial = (byte) Blocks.grass.id;
+    public byte topMaterial = (byte) Blocks.dirtGrassy.id;
     public byte material = (byte) Blocks.dirt.id;
     public int leafColor = 0x4ee031;
     protected List<MobSpawnerData> enemies = new ArrayList<>();

@@ -11,10 +11,10 @@ import net.minecraft.world.level.block.Block;
 public class ItemPickaxe extends ItemSpecialMining
 {
     private static Block[] diggables = new Block[] {
-            Blocks.stoneBrick,
+            Blocks.cobblestone,
             Blocks.stoneSlab,
             Blocks.stoneSlabHalf,
-            Blocks.rock,
+            Blocks.stone,
             Blocks.sandStone,
             Blocks.mossStone,
             Blocks.ironOre,
@@ -25,13 +25,13 @@ public class ItemPickaxe extends ItemSpecialMining
             Blocks.diamondOre,
             Blocks.diamondBlock,
             Blocks.ice,
-            Blocks.hellRock,
+            Blocks.netherrack,
             Blocks.lapisOre,
             Blocks.lapisBlock,
             Blocks.dispenser,
             Blocks.furnace,
             Blocks.furnace_lit,
-            Blocks.lightGem, // Argent - new
+            Blocks.glowstone, // Argent - new
             Blocks.stairs_stone // Argent - new
     };
     
@@ -46,7 +46,7 @@ public class ItemPickaxe extends ItemSpecialMining
         if (block == Blocks.goldBlock || block == Blocks.goldOre) return this.tier.getLevel() >= 2;
         if (block == Blocks.ironBlock || block == Blocks.ironOre) return this.tier.getLevel() >= 1;
         if (block == Blocks.lapisBlock || block == Blocks.lapisOre) return this.tier.getLevel() >= 1;
-        if (block == Blocks.redStoneOre || block == Blocks.redStoneOre_lit) return this.tier.getLevel() >= 2;
+        if (block == Blocks.redstoneOre || block == Blocks.redstoneOreLit) return this.tier.getLevel() >= 2;
         if (block.material == Material.stone) return true;
         if (block.material == Material.metal) return true;
         return false;

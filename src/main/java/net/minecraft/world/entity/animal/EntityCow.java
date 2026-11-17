@@ -56,8 +56,8 @@ public class EntityCow extends EntityMobPassive
     @Override
     public boolean interact(final EntityPlayer player) {
         final ItemInstance item = player.inventory.getSelected();
-        if (item != null && item.id == Items.bucket_empty.id) {
-            player.inventory.setItem(player.inventory.selected, new ItemInstance(Items.milk));
+        if (item != null && item.id == Items.bucketEmpty.id) {
+            player.inventory.setItem(player.inventory.selected, new ItemInstance(Items.bucketMilk));
             return true;
         }
         return false;

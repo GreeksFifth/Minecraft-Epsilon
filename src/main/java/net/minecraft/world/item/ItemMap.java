@@ -119,7 +119,7 @@ public class ItemMap extends ItemComplex
                     ss = ss * ss * 31287121 + ss * 11;
 
                     if ((ss >> 20 & 0x1) == 0x0) count[Blocks.dirt.id] += 10;
-                    else count[Blocks.rock.id] += 10;
+                    else count[Blocks.stone.id] += 10;
                     hh = 100.0;
                 }
                 else {

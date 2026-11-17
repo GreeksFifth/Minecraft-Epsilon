@@ -26,7 +26,7 @@ public class BlockLog extends Block
     
     @Override
     public int getResource(final int data, final Random random) {
-        return Blocks.treeTrunk.id;
+        return Blocks.log.id;
     }
     
     @Override

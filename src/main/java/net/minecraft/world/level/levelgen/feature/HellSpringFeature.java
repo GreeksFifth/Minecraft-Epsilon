@@ -19,16 +19,16 @@ public class HellSpringFeature extends Feature
     
     @Override
     public boolean place(final Level level, final Random random, final int x, final int y, final int z) {
-        if (level.getTile(x, y + 1, z) != Blocks.hellRock.id) return false;
+        if (level.getTile(x, y + 1, z) != Blocks.netherrack.id) return false;
 
-        if (level.getTile(x, y, z) != 0 && level.getTile(x, y, z) != Blocks.hellRock.id) return false;
+        if (level.getTile(x, y, z) != 0 && level.getTile(x, y, z) != Blocks.netherrack.id) return false;
 
         int rockCount = 0;
-        if (level.getTile(x - 1, y, z) == Blocks.hellRock.id) rockCount++;
-        if (level.getTile(x + 1, y, z) == Blocks.hellRock.id) rockCount++;
-        if (level.getTile(x, y, z - 1) == Blocks.hellRock.id) rockCount++;
-        if (level.getTile(x, y, z + 1) == Blocks.hellRock.id) rockCount++;
-        if (level.getTile(x, y - 1, z) == Blocks.hellRock.id) rockCount++;
+        if (level.getTile(x - 1, y, z) == Blocks.netherrack.id) rockCount++;
+        if (level.getTile(x + 1, y, z) == Blocks.netherrack.id) rockCount++;
+        if (level.getTile(x, y, z - 1) == Blocks.netherrack.id) rockCount++;
+        if (level.getTile(x, y, z + 1) == Blocks.netherrack.id) rockCount++;
+        if (level.getTile(x, y - 1, z) == Blocks.netherrack.id) rockCount++;
 
         int holeCount = 0;
         if (level.isEmptyTile(x - 1, y, z)) holeCount++;

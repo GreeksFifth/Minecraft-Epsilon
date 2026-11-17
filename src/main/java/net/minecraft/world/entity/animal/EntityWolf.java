@@ -366,7 +366,7 @@ public class EntityWolf extends EntityMobPassive
                             if (item.count <= 0) {
                                 player.inventory.setItem(player.inventory.selected, null);
                             }
-                            this.heal(((ItemFood) Items.porkChop_raw).getNutrition());
+                            this.heal(((ItemFood) Items.porkChopRaw).getNutrition());
                             return true;
                         }
                     }

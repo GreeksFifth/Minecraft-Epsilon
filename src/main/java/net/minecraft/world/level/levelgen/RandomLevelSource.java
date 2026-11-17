@@ -141,7 +141,7 @@ public class RandomLevelSource implements ChunkSource
                                 }
 
                                 if (val > 0.0) {
-                                    tileId = Blocks.rock.id;
+                                    tileId = Blocks.stone.id;
                                 }
 
                                 blocks[offs] = (byte)tileId;
@@ -186,7 +186,7 @@ public class RandomLevelSource implements ChunkSource
                     final int offs = (z * 16 + x) * Level.MAX_HEIGHT + y;
 
                     if (y <= 0 + this.random.nextInt(5)) {
-                        blocks[offs] = (byte) Blocks.unbreakable.id;
+                        blocks[offs] = (byte) Blocks.bedrock.id;
                     }
                     else {
                         final byte old = blocks[offs];
@@ -194,11 +194,11 @@ public class RandomLevelSource implements ChunkSource
                         if (old == 0) {
                             run = -1;
                         }
-                        else if (old == Blocks.rock.id) {
+                        else if (old == Blocks.stone.id) {
                             if (run == -1) {
                                 if (runDepth <= 0) {
                                     top = 0;
-                                    material = (byte) Blocks.rock.id;
+                                    material = (byte) Blocks.stone.id;
                                 }
                                 else if (y >= waterHeight - 4 && y <= waterHeight + 1) {
                                     top = b.topMaterial;
@@ -509,7 +509,7 @@ public class RandomLevelSource implements ChunkSource
             int x = xo + this.random.nextInt(16);
             int y = this.random.nextInt(Level.MAX_HEIGHT / 8);
             int z = zo + this.random.nextInt(16);
-            OreFeature redStoneOreFeature = new OreFeature(Blocks.redStoneOre.id, 7);
+            OreFeature redStoneOreFeature = new OreFeature(Blocks.redstoneOre.id, 7);
             redStoneOreFeature.place(this.level, this.random, x, y, z);
         }
 
@@ -575,7 +575,7 @@ public class RandomLevelSource implements ChunkSource
             int x = xo + this.random.nextInt(16) + 8;
             int y = this.random.nextInt(Level.MAX_HEIGHT);
             int z = zo + this.random.nextInt(16) + 8;
-            TallGrassFeature grassFeature = new TallGrassFeature(Blocks.tallgrass.id, grassType);
+            TallGrassFeature grassFeature = new TallGrassFeature(Blocks.grass.id, grassType);
             grassFeature.place(this.level, this.random, x, y, z);
         }
 
@@ -585,7 +585,7 @@ public class RandomLevelSource implements ChunkSource
             int x = xo + this.random.nextInt(16) + 8;
             int y = this.random.nextInt(Level.MAX_HEIGHT);
             int z = zo + this.random.nextInt(16) + 8;
-            DeadBushFeature deadBushFeature = new DeadBushFeature(Blocks.deadBush.id);
+            DeadBushFeature deadBushFeature = new DeadBushFeature(Blocks.bushDead.id);
             deadBushFeature.place(this.level, this.random, x, y, z);
         }
 
@@ -668,7 +668,7 @@ public class RandomLevelSource implements ChunkSource
                         && this.level.isEmptyTile(x, y, z)
                         && this.level.getMaterial(x, y - 1, z).blocksMotion()
                         && this.level.getMaterial(x, y - 1, z) != Material.ice) {
-                    this.level.setTile(x, y, z, Blocks.topSnow.id);
+                    this.level.setTile(x, y, z, Blocks.snowLayer.id);
                 }
             }
         }

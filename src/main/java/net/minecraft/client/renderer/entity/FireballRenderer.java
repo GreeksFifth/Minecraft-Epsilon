@@ -20,7 +20,7 @@ public class FireballRenderer extends EntityRenderer<EntityProjectileFireballGha
         glEnable(GL_RESCALE_NORMAL);
         final float s = 2.0f;
         glScalef(s / 1.0f, s / 1.0f, s / 1.0f);
-        final int icon = Items.snowBall.getIcon(0);
+        final int icon = Items.snowball.getIcon(0);
         this.bindTexture("/gui/items.png");
         final Tesselator t = Tesselator.instance;
 

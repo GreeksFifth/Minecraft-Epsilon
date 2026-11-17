@@ -94,7 +94,7 @@ public class EntityRenderDispatcher
         this.renderers.put(Entity.class, new DefaultRenderer());
         this.renderers.put(EntityPainting.class, new PaintingRenderer());
         this.renderers.put(EntityProjectileArrow.class, new ArrowRenderer());
-        this.renderers.put(EntityProjectileSnowball.class, new ItemSpriteRenderer(Items.snowBall.getIcon(0)));
+        this.renderers.put(EntityProjectileSnowball.class, new ItemSpriteRenderer(Items.snowball.getIcon(0)));
         this.renderers.put(EntityProjectileEgg.class, new ItemSpriteRenderer(Items.egg.getIcon(0)));
         this.renderers.put(EntityProjectileFireballGhast.class, new FireballRenderer());
         this.renderers.put(EntityItem.class, new ItemRenderer());

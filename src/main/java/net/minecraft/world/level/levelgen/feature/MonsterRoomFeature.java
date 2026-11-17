@@ -55,7 +55,7 @@ public class MonsterRoomFeature extends Feature
                                 level.setTile(xx, yy, zz, Blocks.mossStone.id);
                             }
                             else {
-                                level.setTile(xx, yy, zz, Blocks.stoneBrick.id);
+                                level.setTile(xx, yy, zz, Blocks.cobblestone.id);
                             }
                         }
                     }
@@ -91,7 +91,7 @@ public class MonsterRoomFeature extends Feature
                 break;
             }
         }
-        level.setTile(x, y, z, Blocks.mobSpawner.id);
+        level.setTile(x, y, z, Blocks.spawnerMob.id);
         TileEntityMobSpawner entity = ((TileEntityMobSpawner)level.getTileEntity(x, y, z));
         entity.setEntityId(this.randomEntityId(random));
         return true;
@@ -100,16 +100,16 @@ public class MonsterRoomFeature extends Feature
     private ItemInstance randomItem(final Random random) {
         final int type = random.nextInt(11);
         if (type == 0) return new ItemInstance(Items.saddle);
-        if (type == 1) return new ItemInstance(Items.ironIngot, random.nextInt(4) + 1);
+        if (type == 1) return new ItemInstance(Items.ingotIron, random.nextInt(4) + 1);
         if (type == 2) return new ItemInstance(Items.bread);
         if (type == 3) return new ItemInstance(Items.wheat, random.nextInt(4) + 1);
         if (type == 4) return new ItemInstance(Items.sulphur, random.nextInt(4) + 1);
         if (type == 5) return new ItemInstance(Items.string, random.nextInt(4) + 1);
-        if (type == 6) return new ItemInstance(Items.bucket_empty);
-        if (type == 7 && random.nextInt(100) == 0) return new ItemInstance(Items.apple_gold);
-        if (type == 8 && random.nextInt(2) == 0) return new ItemInstance(Items.redStone, random.nextInt(4) + 1);
+        if (type == 6) return new ItemInstance(Items.bucketEmpty);
+        if (type == 7 && random.nextInt(100) == 0) return new ItemInstance(Items.appleGolden);
+        if (type == 8 && random.nextInt(2) == 0) return new ItemInstance(Items.redstone, random.nextInt(4) + 1);
         if (type == 9 && random.nextInt(10) == 0) return new ItemInstance(Item.items[Items.record_01.id + random.nextInt(2)]);
-        if (type == 10) return new ItemInstance(Items.dye_powder, 1, ItemDyePowder.BROWN);
+        if (type == 10) return new ItemInstance(Items.dyePowder, 1, ItemDyePowder.BROWN);
 
         return null;
     }

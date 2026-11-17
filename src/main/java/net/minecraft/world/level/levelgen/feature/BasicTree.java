@@ -293,17 +293,17 @@ public class BasicTree extends Feature
         final int z = this.origin[2];
         final int[] startCoord = { x, startY, z };
         final int[] endCoord = { x, topY, z };
-        this.limb(startCoord, endCoord, Blocks.treeTrunk.id);
+        this.limb(startCoord, endCoord, Blocks.log.id);
         if (this.trunkWidth == 2) {
             startCoord[0] += 1;
             endCoord[0] += 1;
-            this.limb(startCoord, endCoord, Blocks.treeTrunk.id);
+            this.limb(startCoord, endCoord, Blocks.log.id);
             startCoord[0] += 1;
             endCoord[0] += 1;
-            this.limb(startCoord, endCoord, Blocks.treeTrunk.id);
+            this.limb(startCoord, endCoord, Blocks.log.id);
             startCoord[0] -= 1;
             endCoord[0] -= 1;
-            this.limb(startCoord, endCoord, Blocks.treeTrunk.id);
+            this.limb(startCoord, endCoord, Blocks.log.id);
         }
     }
     
@@ -320,7 +320,7 @@ public class BasicTree extends Feature
             baseCoord[1] = coordValues[3];
             int localY = baseCoord[1] - this.origin[1];
             if (this.trimBranches(localY)) {
-                this.limb(baseCoord, endCoord, Blocks.treeTrunk.id);
+                this.limb(baseCoord, endCoord, Blocks.log.id);
             }
             idx++;
         }
@@ -400,7 +400,7 @@ public class BasicTree extends Feature
 
         // Check the location it is resting on
         final int baseMaterial = this.thisLevel.getTile(this.origin[0], this.origin[1] - 1, this.origin[2]);
-        if (baseMaterial != Blocks.grass.id && baseMaterial != Blocks.dirt.id) {
+        if (baseMaterial != Blocks.dirtGrassy.id && baseMaterial != Blocks.dirt.id) {
             return false;
         }
         final int allowedHeight = this.checkLine(startPosition, endPosition);

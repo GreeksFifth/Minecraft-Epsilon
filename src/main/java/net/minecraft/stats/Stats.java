@@ -150,14 +150,14 @@ public class Stats
     private static void remapIds(final Stat[] stats) {
         remapId(stats, Blocks.calmWater.id, Blocks.water.id);
         remapId(stats, Blocks.calmLava.id, Blocks.calmLava.id);
-        remapId(stats, Blocks.litPumpkin.id, Blocks.pumpkin.id);
+        remapId(stats, Blocks.pumpkinLit.id, Blocks.pumpkin.id);
         remapId(stats, Blocks.furnace_lit.id, Blocks.furnace.id);
-        remapId(stats, Blocks.redStoneOre_lit.id, Blocks.redStoneOre.id);
-        remapId(stats, Blocks.diode_on.id, Blocks.diode_off.id);
-        remapId(stats, Blocks.notGate_on.id, Blocks.notGate_off.id);
+        remapId(stats, Blocks.redstoneOreLit.id, Blocks.redstoneOre.id);
+        remapId(stats, Blocks.repeaterOn.id, Blocks.repeaterOff.id);
+        remapId(stats, Blocks.redstoneTorchLit.id, Blocks.redstoneTorchUnlit.id);
         remapId(stats, Blocks.mushroom2.id, Blocks.mushroom1.id);
         remapId(stats, Blocks.stoneSlab.id, Blocks.stoneSlabHalf.id);
-        remapId(stats, Blocks.grass.id, Blocks.dirt.id);
+        remapId(stats, Blocks.dirtGrassy.id, Blocks.dirt.id);
         remapId(stats, Blocks.farmland.id, Blocks.dirt.id);
     }
 

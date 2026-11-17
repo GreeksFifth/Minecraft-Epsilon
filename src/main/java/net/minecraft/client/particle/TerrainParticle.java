@@ -25,7 +25,7 @@ public class TerrainParticle extends Particle
     }
     
     public TerrainParticle init(final int x, final int y, final int z) {
-        if (this.block == Blocks.grass) return this;
+        if (this.block == Blocks.dirtGrassy) return this;
         final int col = this.block.getColor(this.level, x, y, z);
         this.rCol *= (col >> 16 & 0xFF) / 255.0f;
         this.gCol *= (col >> 8 & 0xFF) / 255.0f;

@@ -31,15 +31,15 @@ public class BlockFire extends Block
     }
     
     public void init() {
-        this.setFlammable(Blocks.wood.id, FLAME_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.woodenPlanks.id, FLAME_HARD, BURN_MEDIUM);
         this.setFlammable(Blocks.fence.id, FLAME_HARD, BURN_MEDIUM);
         this.setFlammable(Blocks.stairs_wood.id, FLAME_HARD, BURN_MEDIUM);
-        this.setFlammable(Blocks.treeTrunk.id, FLAME_HARD, BURN_HARD);
+        this.setFlammable(Blocks.log.id, FLAME_HARD, BURN_HARD);
         this.setFlammable(Blocks.leaves.id, FLAME_EASY, BURN_EASY);
         this.setFlammable(Blocks.bookshelf.id, FLAME_EASY, BURN_MEDIUM);
         this.setFlammable(Blocks.tnt.id, FLAME_MEDIUM, BURN_INSTANT);
-        this.setFlammable(Blocks.tallgrass.id, FLAME_INSTANT, BURN_INSTANT);
-        this.setFlammable(Blocks.cloth.id, FLAME_EASY, BURN_EASY);
+        this.setFlammable(Blocks.grass.id, FLAME_INSTANT, BURN_INSTANT);
+        this.setFlammable(Blocks.wool.id, FLAME_EASY, BURN_EASY);
     }
     
     private void setFlammable(final int id, final int flame, final int burn) {
@@ -79,7 +79,7 @@ public class BlockFire extends Block
     
     @Override
     public void tick(final Level level, final int x, final int y, final int z, final Random random) {
-        final boolean infiniBurn = level.getTile(x, y - 1, z) == Blocks.hellRock.id;
+        final boolean infiniBurn = level.getTile(x, y - 1, z) == Blocks.netherrack.id;
 
         if (!this.mayPlace(level, x, y, z)) {
             level.setTile(x, y, z, 0);
@@ -224,7 +224,7 @@ public class BlockFire extends Block
     @Override
     public void onPlace(final Level level, final int x, final int y, final int z) {
         if (level.getTile(x, y - 1, z) == Blocks.obsidian.id) {
-            if (Blocks.portalTile.trySpawnPortal(level, x, y, z)) {
+            if (Blocks.portalBlock.trySpawnPortal(level, x, y, z)) {
                 return;
             }
         }

@@ -45,7 +45,7 @@ public class BlockSugarcane extends Block
     public boolean mayPlace(final Level level, final int x, final int y, final int z) {
         final int below = level.getTile(x, y - 1, z);
         if (below == this.id) return true;
-        if (below != Blocks.grass.id && below != Blocks.dirt.id && below != Blocks.sand.id && below != Blocks.gravel.id) return false;
+        if (below != Blocks.dirtGrassy.id && below != Blocks.dirt.id && below != Blocks.sand.id && below != Blocks.gravel.id) return false;
         if (level.getMaterial(x - 1, y - 1, z) == Material.water) return true;
         if (level.getMaterial(x + 1, y - 1, z) == Material.water) return true;
         if (level.getMaterial(x, y - 1, z - 1) == Material.water) return true;
@@ -77,7 +77,7 @@ public class BlockSugarcane extends Block
     
     @Override
     public int getResource(final int data, final Random random) {
-        return Items.reeds.id;
+        return Items.sugarcane.id;
     }
     
     @Override

@@ -125,7 +125,7 @@ public class LargeHellCaveFeature extends LargeFeature
                         final double yd = (yy + 0.5 - yCave) / yRad;
                         if (yd > -0.7 && xd * xd + yd * yd + zd * zd < 1.0) {
                             final byte block = blocks[p];
-                            if (block == Blocks.hellRock.id || block == Blocks.dirt.id || block == Blocks.grass.id) {
+                            if (block == Blocks.netherrack.id || block == Blocks.dirt.id || block == Blocks.dirtGrassy.id) {
                                 blocks[p] = 0;
                             }
                         }

@@ -23,7 +23,7 @@ public class ItemBlock extends Item
     @Override
     public boolean useOn(final ItemInstance itemInstance, final EntityPlayer player, final Level level, int x, int y, int z, int face) {
         int currentTile = level.getTile(x, y, z);
-        if (currentTile == Blocks.topSnow.id) {
+        if (currentTile == Blocks.snowLayer.id) {
             face = Facing.DOWN; // Useless - LCE had this as Facing::UP, which is not what it is set to in b1.7.3, presumably this is just a b1.7.3 bug where the facing direction for this is just incorrect
         }
         else {

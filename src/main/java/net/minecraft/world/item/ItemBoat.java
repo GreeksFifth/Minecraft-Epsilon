@@ -51,7 +51,7 @@ public class ItemBoat extends Item
             int zt = hr.z;
 
             if (!level.isClientSide) {
-                if (level.getTile(xt, yt, zt) == Blocks.topSnow.id) yt--;
+                if (level.getTile(xt, yt, zt) == Blocks.snowLayer.id) yt--;
                 level.addEntity(new EntityBoat(level, xt + 0.5f, yt + 1.0f, zt + 0.5f));
             }
             itemInstance.count--;

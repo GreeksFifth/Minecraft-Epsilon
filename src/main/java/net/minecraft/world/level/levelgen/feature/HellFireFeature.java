@@ -17,7 +17,7 @@ public class HellFireFeature extends Feature
             final int y2 = y + random.nextInt(4) - random.nextInt(4);
             final int z2 = z + random.nextInt(8) - random.nextInt(8);
             if (!level.isEmptyTile(x2, y2, z2)) continue;
-            if (level.getTile(x2, y2 - 1, z2) != Blocks.hellRock.id) continue;
+            if (level.getTile(x2, y2 - 1, z2) != Blocks.netherrack.id) continue;
             level.setTile(x2, y2, z2, Blocks.fire.id);
         }
 

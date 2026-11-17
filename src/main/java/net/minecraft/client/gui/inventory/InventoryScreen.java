@@ -192,7 +192,7 @@ public class InventoryScreen extends AbstractContainerScreen
         for (int i = 0; i <  Item.items.length; i++) {
             if (Item.items[i] == null) continue;
             allItemsInGame.add(new ItemInstance(Item.items[i]));
-                if (Item.items[i].id == Blocks.cloth.id){
+                if (Item.items[i].id == Blocks.wool.id){
                     for (int j = 1; j < 16; j++) {
                         allItemsInGame.add(new ItemInstance(Item.items[i],1,j));
                 }

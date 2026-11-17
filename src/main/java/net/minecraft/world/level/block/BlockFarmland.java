@@ -79,7 +79,7 @@ public class BlockFarmland extends Block
         for (int xx = x - r; xx <= x + r; ++xx) {
             for (int zz = z - r; zz <= z + r; ++zz) {
                 int tile = level.getTile(xx, y + 1, zz);
-                if (tile == Blocks.crops.id) {
+                if (tile == Blocks.cropsWheat.id) {
                     return true;
                 }
             }

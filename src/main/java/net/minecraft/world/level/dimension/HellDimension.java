@@ -45,7 +45,7 @@ public class HellDimension extends Dimension
     @Override
     public boolean isValidSpawn(final int x, final int z) {
         final int topTile = this.level.getTopTile(x, z);
-        return topTile != Blocks.unbreakable.id && topTile != 0 && Block.solid[topTile];
+        return topTile != Blocks.bedrock.id && topTile != 0 && Block.solid[topTile];
     }
     
     @Override

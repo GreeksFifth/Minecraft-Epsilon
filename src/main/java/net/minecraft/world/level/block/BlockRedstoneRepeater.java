@@ -56,15 +56,15 @@ public class BlockRedstoneRepeater extends Block
         final int data = level.getData(x, y, z);
         final boolean sourceOn = this.getSourceSignal(level, x, y, z, data);
         if (this.on && !sourceOn) {
-            level.setTileAndData(x, y, z, Blocks.diode_off.id, data);
+            level.setTileAndData(x, y, z, Blocks.repeaterOff.id, data);
         }
         else if (!this.on) {
             // when off-diodes are ticked, they always turn on for one tick and
             // then off again if necessary
-            level.setTileAndData(x, y, z, Blocks.diode_on.id, data);
+            level.setTileAndData(x, y, z, Blocks.repeaterOn.id, data);
             if (!sourceOn) {
                 int delay = (data & DELAY_MASK) >> DELAY_SHIFT;
-                level.addToTickNextTick(x, y, z, Blocks.diode_on.id, BlockRedstoneRepeater.DELAYS[delay] * 2);
+                level.addToTickNextTick(x, y, z, Blocks.repeaterOn.id, BlockRedstoneRepeater.DELAYS[delay] * 2);
             }
         }
     }
@@ -149,13 +149,13 @@ public class BlockRedstoneRepeater extends Block
         int dir = data & DIRECTION_MASK;
         switch (dir) {
             case Direction.SOUTH:
-                return level.getSignal(x, y, z + 1, 3) || (level.getTile(x, y, z + 1) == Blocks.redStoneDust.id && level.getData(x, y, z + 1) > 0);
+                return level.getSignal(x, y, z + 1, 3) || (level.getTile(x, y, z + 1) == Blocks.redstoneDust.id && level.getData(x, y, z + 1) > 0);
             case Direction.NORTH:
-                return level.getSignal(x, y, z - 1, 2) || (level.getTile(x, y, z - 1) == Blocks.redStoneDust.id && level.getData(x, y, z - 1) > 0);
+                return level.getSignal(x, y, z - 1, 2) || (level.getTile(x, y, z - 1) == Blocks.redstoneDust.id && level.getData(x, y, z - 1) > 0);
             case Direction.EAST:
-                return level.getSignal(x + 1, y, z, 5) || (level.getTile(x + 1, y, z) == Blocks.redStoneDust.id && level.getData(x + 1, y, z) > 0);
+                return level.getSignal(x + 1, y, z, 5) || (level.getTile(x + 1, y, z) == Blocks.redstoneDust.id && level.getData(x + 1, y, z) > 0);
             case Direction.WEST:
-                return level.getSignal(x - 1, y, z, 4) || (level.getTile(x - 1, y, z) == Blocks.redStoneDust.id && level.getData(x - 1, y, z) > 0);
+                return level.getSignal(x - 1, y, z, 4) || (level.getTile(x - 1, y, z) == Blocks.redstoneDust.id && level.getData(x - 1, y, z) > 0);
         }
         return false;
     }
@@ -203,7 +203,7 @@ public class BlockRedstoneRepeater extends Block
     
     @Override
     public int getResource(final int data, final Random random) {
-        return Items.diode.id;
+        return Items.repeater.id;
     }
     
     @Override

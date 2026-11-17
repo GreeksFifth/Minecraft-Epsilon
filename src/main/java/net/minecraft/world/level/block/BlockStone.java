@@ -15,6 +15,6 @@ public class BlockStone extends Block
     
     @Override
     public int getResource(final int data, final Random random) {
-        return Blocks.stoneBrick.id;
+        return Blocks.cobblestone.id;
     }
 }

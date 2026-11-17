@@ -18,7 +18,7 @@ public class ItemBlockCloth extends ItemBlock
     
     @Override
     public int getIcon(final int auxValue) {
-        return Blocks.cloth.getTexture(Facing.NORTH, BlockWool.getTileDataForItemAuxValue(auxValue));
+        return Blocks.wool.getTexture(Facing.NORTH, BlockWool.getTileDataForItemAuxValue(auxValue));
     }
     
     @Override

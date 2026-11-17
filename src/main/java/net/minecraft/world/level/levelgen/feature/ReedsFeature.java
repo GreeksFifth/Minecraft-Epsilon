@@ -26,8 +26,8 @@ public class ReedsFeature extends Feature
                 {
                     int h = 2 + random.nextInt(random.nextInt(3) + 1);
                     for (int yy = 0; yy < h; ++yy) {
-                        if (Blocks.reeds.canSurvive(level, x2, y2 + yy, z2)) {
-                            level.setTileNoUpdate(x2, y2 + yy, z2, Blocks.reeds.id);
+                        if (Blocks.sugarcane.canSurvive(level, x2, y2 + yy, z2)) {
+                            level.setTileNoUpdate(x2, y2 + yy, z2, Blocks.sugarcane.id);
                         }
                     }
                 }

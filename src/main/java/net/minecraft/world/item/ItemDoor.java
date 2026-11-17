@@ -29,8 +29,8 @@ public class ItemDoor extends Item
 
         Block block;
 
-        if (this.material == Material.wood) block = Blocks.door_wood;
-        else block = Blocks.door_iron;
+        if (this.material == Material.wood) block = Blocks.doorWooden;
+        else block = Blocks.doorIron;
 
         if (!block.mayPlace(level, x, y, z)) return false;
 

@@ -28,11 +28,11 @@ public class ToolRecipes
               " #",
               " #" } };
     private Object[][] map = new Object[][] {
-            { Blocks.wood, Blocks.stoneBrick, Items.ironIngot, Items.diamond, Items.goldIngot },
-            { Items.pickAxe_wood, Items.pickAxe_stone, Items.pickAxe_iron, Items.pickAxe_diamond, Items.pickAxe_gold },
-            { Items.shovel_wood, Items.shovel_stone, Items.shovel_iron, Items.shovel_diamond, Items.shovel_gold },
-            { Items.hatchet_wood, Items.hatchet_stone, Items.hatchet_iron, Items.hatchet_diamond, Items.hatchet_gold },
-            { Items.hoe_wood, Items.hoe_stone, Items.hoe_iron, Items.hoe_diamond, Items.hoe_gold }
+            { Blocks.woodenPlanks, Blocks.cobblestone, Items.ingotIron, Items.diamond, Items.ingotGold},
+            { Items.pickaxeWood, Items.pickaxeStone, Items.pickaxeIron, Items.pickaxeDiamond, Items.pickaxeGold},
+            { Items.shovelWood, Items.shovelStone, Items.shovelIron, Items.shovelDiamond, Items.shovelGold},
+            { Items.axeWood, Items.axeStone, Items.axeIron, Items.axeDiamond, Items.axeGold},
+            { Items.hoeWood, Items.hoeStone, Items.hoeIron, Items.hoeDiamond, Items.hoeGold}
     };
     
     public void addRecipes(final Recipes recipes) {
@@ -49,6 +49,6 @@ public class ToolRecipes
                 " #",
                 "# ",
 
-                '#', Items.ironIngot);
+                '#', Items.ingotIron);
     }
 }

@@ -32,13 +32,13 @@ public class ResultSlot extends Slot
         carried.onCraftedBy(this.player.level, this.player);
 
         if (carried.id == Blocks.workBench.id) this.player.awardStat(Achievements.buildWorkbench, 1);
-        else if (carried.id == Items.pickAxe_wood.id) this.player.awardStat(Achievements.buildPickaxe, 1);
+        else if (carried.id == Items.pickaxeWood.id) this.player.awardStat(Achievements.buildPickaxe, 1);
         else if (carried.id == Blocks.furnace.id) this.player.awardStat(Achievements.buildFurnace, 1);
-        else if (carried.id == Items.hoe_wood.id) this.player.awardStat(Achievements.buildHoe, 1);
+        else if (carried.id == Items.hoeWood.id) this.player.awardStat(Achievements.buildHoe, 1);
         else if (carried.id == Items.bread.id) this.player.awardStat(Achievements.makeBread, 1);
         else if (carried.id == Items.cake.id) this.player.awardStat(Achievements.bakeCake, 1);
-        else if (carried.id == Items.pickAxe_stone.id) this.player.awardStat(Achievements.buildBetterPickaxe, 1);
-        else if (carried.id == Items.sword_wood.id) this.player.awardStat(Achievements.buildSword, 1);
+        else if (carried.id == Items.pickaxeStone.id) this.player.awardStat(Achievements.buildBetterPickaxe, 1);
+        else if (carried.id == Items.swordWood.id) this.player.awardStat(Achievements.buildSword, 1);
 
         for (int i = 0; i < this.craftSlots.getContainerSize(); ++i) {
             final ItemInstance item = this.craftSlots.getItem(i);

@@ -60,13 +60,13 @@ public class EntitySheep extends EntityMobPassive
     protected void dropDeathLoot() {
         if (!this.isSheared()) {
             // killing a non-sheared sheep will drop a single block of cloth
-            this.spawnAtLocation(new ItemInstance(Blocks.cloth.id, 1, this.getColor()), 0.0f);
+            this.spawnAtLocation(new ItemInstance(Blocks.wool.id, 1, this.getColor()), 0.0f);
         }
     }
     
     @Override
     protected int getDeathLoot() {
-        return Blocks.cloth.id;
+        return Blocks.wool.id;
     }
     
     @Override
@@ -77,7 +77,7 @@ public class EntitySheep extends EntityMobPassive
                 this.setSheared(true);
                 int count = 2 + this.random.nextInt(3);
                 for (int i = 0; i < count; ++i) {
-                    final EntityItem ie = this.spawnAtLocation(new ItemInstance(Blocks.cloth.id, 1, this.getColor()), 1.0f);
+                    final EntityItem ie = this.spawnAtLocation(new ItemInstance(Blocks.wool.id, 1, this.getColor()), 1.0f);
                     ie.yd += this.random.nextFloat() * 0.05f;
                     ie.xd += (this.random.nextFloat() - this.random.nextFloat()) * 0.1f;
                     ie.zd += (this.random.nextFloat() - this.random.nextFloat()) * 0.1f;

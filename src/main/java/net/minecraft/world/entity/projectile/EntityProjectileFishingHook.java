@@ -354,7 +354,7 @@ public class EntityProjectileFishingHook extends Entity
             dmg = 3;
         }
         else if (this.nibble > 0) {
-            final EntityItem ie = new EntityItem(this.level, this.x, this.y, this.z, new ItemInstance(Items.fish_raw));
+            final EntityItem ie = new EntityItem(this.level, this.x, this.y, this.z, new ItemInstance(Items.fishRaw));
             final double xa = this.owner.x - this.x;
             final double ya = this.owner.y - this.y;
             final double za = this.owner.z - this.z;

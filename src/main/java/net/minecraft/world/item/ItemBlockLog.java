@@ -17,7 +17,7 @@ public class ItemBlockLog extends ItemBlock
     
     @Override
     public int getIcon(final int auxValue) {
-        return Blocks.treeTrunk.getTexture(Facing.NORTH, auxValue);
+        return Blocks.log.getTexture(Facing.NORTH, auxValue);
     }
     
     @Override

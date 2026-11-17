@@ -17,7 +17,7 @@ public class ItemRedstoneDust extends Item
     
     @Override
     public boolean useOn(final ItemInstance itemInstance, final EntityPlayer player, final Level level, int x, int y, int z, final int face) {
-        if (level.getTile(x, y, z) != Blocks.topSnow.id) {
+        if (level.getTile(x, y, z) != Blocks.snowLayer.id) {
             if (face == Facing.DOWN) y--;
             if (face == Facing.UP) y++;
             if (face == Facing.NORTH) z--;
@@ -27,9 +27,9 @@ public class ItemRedstoneDust extends Item
 
             if (!level.isEmptyTile(x, y, z)) return false;
         }
-        if (Blocks.redStoneDust.mayPlace(level, x, y, z)) {
+        if (Blocks.redstoneDust.mayPlace(level, x, y, z)) {
             itemInstance.count--;
-            level.setTile(x, y, z, Blocks.redStoneDust.id);
+            level.setTile(x, y, z, Blocks.redstoneDust.id);
         }
 
         return true;
