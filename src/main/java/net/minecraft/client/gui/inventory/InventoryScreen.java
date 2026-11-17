@@ -29,6 +29,7 @@ public class InventoryScreen extends AbstractContainerScreen
     int BUTTON_PREVIOUS_PAGE = 2;
     int BUTTON_NEXT_PAGE = 3;
     int BUTTON_INVCLEAR = 4;
+    int BUTTON_CREATIVETOGGLE = 5;
     int currentPage = 1;
     int pagesTotal = 1;
     int endOfImage;
@@ -67,6 +68,7 @@ public class InventoryScreen extends AbstractContainerScreen
             this.buttons.add(new Button(BUTTON_NEXT_PAGE, (this.width - 32), 0, 32, 20, "Next"));
             if (Minecraft.DEBUG_MODE) {
                 this.buttons.add(new Button(BUTTON_INVCLEAR, 0, this.height-20, 96, 20, "Clear Inventory"));
+                this.buttons.add(new Button(BUTTON_CREATIVETOGGLE, 0, 0, 96, 20, "Toggle Creative"));
             }
             pagesTotal = ((int)Math.ceil(allItemsInGame.size() / (float)(slotsX*slotsY)));
             slotAnchorsXPos.clear();
@@ -180,6 +182,9 @@ public class InventoryScreen extends AbstractContainerScreen
 
             }
         }
+        if (button.id == BUTTON_CREATIVETOGGLE){
+            mc.player.isCreative = !mc.player.isCreative;
+        }
     }
 
     protected void pollAndPopulateGameItems(){
@@ -203,18 +208,18 @@ public class InventoryScreen extends AbstractContainerScreen
                 if (x > xStart && x < xStart + slotwidth) {
                     int yStart = slotsStartY + (i * slotheight);
                     if (y > yStart && y < yStart + slotheight) {
-                        int itemSlot = (i * slotsX + j)+pageOffset;
-                        if (itemSlot < allItemsInGame.size()) {
-                            if (mc.player.inventory.getCarried() == null){
+                        int itemSlot = (i * slotsX + j) + pageOffset;
+                        if (itemSlot >= allItemsInGame.size()) return;
+                            if (mc.player.inventory.getCarried() == null) {
                                 if (buttonNum == 0) {
-                                 mc.player.inventory.add(new ItemInstance(allItemsInGame.get(itemSlot).id,allItemsInGame.get(itemSlot).getMaxStackSize(),allItemsInGame.get(itemSlot).getAuxValue()));
-                              }
-                             else {
-                                 mc.player.inventory.add(new ItemInstance(allItemsInGame.get(itemSlot).id,1,allItemsInGame.get(itemSlot).getAuxValue()));
-                              }
+                                    mc.player.inventory.add(new ItemInstance(allItemsInGame.get(itemSlot).id, allItemsInGame.get(itemSlot).getMaxStackSize(), allItemsInGame.get(itemSlot).getAuxValue()));
+                                } else {
+                                    mc.player.inventory.add(new ItemInstance(allItemsInGame.get(itemSlot).id, 1, allItemsInGame.get(itemSlot).getAuxValue()));
+                                }
+                            } else {
+                                mc.player.inventory.setCarried(null);
                             }
-                            else{mc.player.inventory.setCarried(null);}
-                        }
+
                     }
                 }
             }

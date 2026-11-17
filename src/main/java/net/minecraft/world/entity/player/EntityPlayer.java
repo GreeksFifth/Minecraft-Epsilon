@@ -82,6 +82,7 @@ public abstract class EntityPlayer extends EntityMob
     protected boolean isInsidePortal = false;
     public float portalTime, oPortalTime;
     private int dmgSpill = 0;
+    public boolean isCreative = false;
     public EntityProjectileFishingHook fishing = null;
     
     public EntityPlayer(final Level level) {
@@ -345,6 +346,7 @@ public abstract class EntityPlayer extends EntityMob
     }
     
     public float getDestroySpeed(final Block block) {
+        if (isCreative) return 200;
         float speed = this.inventory.getDestroySpeed(block);
 
         if (this.isUnderLiquid(Material.water)) speed /= 5.0f;
@@ -354,6 +356,7 @@ public abstract class EntityPlayer extends EntityMob
     }
     
     public boolean canDestroy(final Block block) {
+        if (isCreative) return true;
         return this.inventory.canDestroy(block);
     }
     
@@ -410,6 +413,7 @@ public abstract class EntityPlayer extends EntityMob
     
     @Override
     public boolean hurt(final Entity source, int dmg) {
+        if (isCreative) return false;
         this.noActionTime = 0;
         if (this.health <= 0) return false;
 
@@ -522,6 +526,9 @@ public abstract class EntityPlayer extends EntityMob
     }
     
     public void attack(final Entity entity) {
+        if (isCreative) {
+            entity.hurt(this,Integer.MAX_VALUE);
+        }
         int dmg = this.inventory.getAttackDamage(entity);
         if (dmg > 0) {
             if (this.yd < 0.0) {
