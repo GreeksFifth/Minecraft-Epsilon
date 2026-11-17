@@ -17,7 +17,9 @@ public class ItemShovel extends ItemSpecialMining
             Blocks.topSnow,
             Blocks.snow,
             Blocks.clay,
-            Blocks.farmland };
+            Blocks.farmland,
+            Blocks.hellSand
+    };
     
     public ItemShovel(final int id, final Tier tier) {
         super(id, 1, tier, ItemShovel.diggables);

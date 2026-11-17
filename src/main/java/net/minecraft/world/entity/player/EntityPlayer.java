@@ -312,7 +312,7 @@ public abstract class EntityPlayer extends EntityMob
         if (item == null) return;
 
         final EntityItem thrownItem = new EntityItem(this.level, this.x, this.y - 0.3f + this.getHeadHeight(), this.z, item);
-        thrownItem.throwTime = SharedConstants.TICKS_PER_SECOND * 2;
+        thrownItem.throwTime = SharedConstants.TICKS_PER_SECOND * 1; // Argent - Formerly 2 seconds of wait time, now 1
 
         float pow = 0.1f;
         if (randomly) {

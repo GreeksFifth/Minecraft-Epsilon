@@ -83,7 +83,7 @@ public class BlockSnowLayer extends Block
         double yo = level.random.nextFloat() * s + (1.0f - s) * 0.5;
         double zo = level.random.nextFloat() * s + (1.0f - s) * 0.5;
         final EntityItem item = new EntityItem(level, x + xo, y + yo, z + zo, new ItemInstance(type, 1, 0));
-        item.throwTime = 10;
+        item.throwTime = 2; // Argent - reduced pickup cooldown for snow layers
         level.addEntity(item);
         level.setTile(x, y, z, 0);
         player.awardStat(Stats.blockMined[this.id], 1);

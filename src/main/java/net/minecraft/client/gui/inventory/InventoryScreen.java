@@ -190,12 +190,9 @@ public class InventoryScreen extends AbstractContainerScreen
                 if (Item.items[i].id == Blocks.cloth.id){
                     for (int j = 1; j < 16; j++) {
                         allItemsInGame.add(new ItemInstance(Item.items[i],1,j));
-
                 }
             }
-
         }
-
     }
 
     @Override
@@ -217,10 +214,8 @@ public class InventoryScreen extends AbstractContainerScreen
                             }
                         }
                     }
-
                 }
             }
         }
     }
-
 }

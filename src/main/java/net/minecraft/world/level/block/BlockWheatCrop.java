@@ -115,7 +115,7 @@ public class BlockWheatCrop extends BlockBush
             float yo = y + (level.random.nextFloat() * s + (1.0f - s) * 0.5f);
             float zo = z + (level.random.nextFloat() * s + (1.0f - s) * 0.5f);
             final EntityItem item = new EntityItem(level, xo, yo, zo, new ItemInstance(Items.seeds));
-            item.throwTime = 10;
+            item.throwTime = 2; // Argent - reduced cooldown on pickup for seed items
             level.addEntity(item);
         }
     }

@@ -64,7 +64,7 @@ public class BlockJukebox extends EntityBlock
         double yo = y + (level.random.nextFloat() * s + (1.0f - s) * 0.2 + 0.6);
         double zo = z + (level.random.nextFloat() * s + (1.0f - s) * 0.5);
         final EntityItem item = new EntityItem(level, xo, yo, zo, new ItemInstance(oldRecord, 1, 0));
-        item.throwTime = 10;
+        item.throwTime = 2; // Argent - reduced pickup cooldown for jukebox discs
         level.addEntity(item);
     }
     

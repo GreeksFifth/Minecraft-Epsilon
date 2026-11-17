@@ -207,7 +207,7 @@ public class Item implements Descriptive<Item> {
         WOOD(0, 59, 2.0f, 0),
         STONE(1, 131, 4.0f, 1),
         IRON(2, 250, 6.0f, 2),
-        DIAMOND(3, 1561, 8.0f, 3),
+        DIAMOND(3, 1561, 16.0f, 3), // Argent - doubled diamond tier speed
         GOLD(0, 32, 12.0f, 0);
 
         private final int level;

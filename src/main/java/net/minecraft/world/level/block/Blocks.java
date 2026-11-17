@@ -151,6 +151,7 @@ public class Blocks {
             .setDestroyTime(0.8f)
             .setDescriptionId("sandStone");
     public static final Block musicBlock = new BlockNoteblock(25)
+            .setSoundType(Block.SOUND_WOOD)
             .setDestroyTime(0.8f)
             .setDescriptionId("musicBlock")
             .sendTileData();
@@ -251,7 +252,7 @@ public class Blocks {
             .setSoundType(Block.SOUND_STONE)
             .setDescriptionId("stoneMoss");
     public static final Block obsidian = new BlockObsidian(49, 37)
-            .setDestroyTime(10.0f)
+            .setDestroyTime(4.0f)
             .setExplodeable(2000.0f)
             .setSoundType(Block.SOUND_STONE)
             .setDescriptionId("obsidian");
@@ -411,7 +412,7 @@ public class Blocks {
     public static final Block recordPlayer = new BlockJukebox(84, 74)
             .setDestroyTime(2.0f)
             .setExplodeable(10.0f)
-            .setSoundType(Block.SOUND_STONE)
+            .setSoundType(Block.SOUND_WOOD)
             .setDescriptionId("jukebox")
             .sendTileData();
     public static final Block fence = new BlockFence(85, 4)

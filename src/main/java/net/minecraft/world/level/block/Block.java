@@ -299,7 +299,7 @@ public class Block implements Descriptive<Block> {
         double yo = level.random.nextFloat() * s + (1.0f - s) * 0.5;
         double zo = level.random.nextFloat() * s + (1.0f - s) * 0.5;
         final EntityItem item = new EntityItem(level, x + xo, y + yo, z + zo, itemInstance);
-        item.throwTime = 10;
+        item.throwTime = 2; // Argent - Reduced the cooldown for dropping blocks
         level.addEntity(item);
     }
     

@@ -11,9 +11,12 @@ public class ItemAxe extends ItemSpecialMining
 {
     private static Block[] diggables = new Block[] {
             Blocks.wood,
-            Blocks.bookshelf,
             Blocks.treeTrunk,
-            Blocks.chest
+            Blocks.workBench, // Argent - new
+            Blocks.chest,
+            Blocks.bookshelf,
+            Blocks.musicBlock, // Argent - new
+            Blocks.recordPlayer // Argent - new
     };
     
     protected ItemAxe(final int id, final Tier tier) {
